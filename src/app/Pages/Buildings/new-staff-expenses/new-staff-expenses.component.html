@@ -1,0 +1,112 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 class="Pages_header">Add Staff Expenses</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> Staff/ Add Staff Expenses</span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard ">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="panel-title formlabel">Add Staff Expenses</h3>
+      </div>
+    </div>
+    <hr>
+    <form>
+
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">
+            Staff Name<span style="color: red;">*</span> </p>
+        </div>
+        <div class="col-lg-5">
+          <select class="dropdown form-control" [(ngModel)]="StaffExpenseEntity.StaffID" id="ddl_BuildingName"
+            name="BuildingName" required style="width:322px">
+            <option value="0">Select Staff</option>
+            <option *ngFor="let staff of Stafflist" value="{{staff.id}}">{{staff.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Date Of Birth</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="date" [(ngModel)]="StaffExpenseEntity.DOB" style="width: 322px;" name="datesawf"
+            class="form-control" id="ddl_Date" >
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">TIN No</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" [(ngModel)]="StaffExpenseEntity.TIN_NO" style="width: 322px;" name="TIN"
+            class="form-control" id="ddl_TIN">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Pigibig No</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" [(ngModel)]="StaffExpenseEntity.Pagbig_NO" style="width: 322px;" name="Pigibig"
+            class="form-control" id="ddl_Pigibig">
+        </div>
+      </div>
+
+      <div class="row ">
+        <!-- <div class=col-lg-1> </div> -->
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Employee Status</h5>
+        </div>
+        <div class="col-lg-6">
+          <select name="Rentformonth" [(ngModel)]="StaffExpenseEntity.EmploymentStatus" style="width: 322px;"
+            class="dropdown form-control " id="ddl_rentRentMonth" placeholder="Select Month">
+            <option value="none" class="" selected="selected">Select Employee Status</option>
+            <option value="Contract">Contract</option>
+            <option value="Full Time">Full Time</option>
+          </select>
+        </div>
+      </div>
+      <br>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Location</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" [(ngModel)]="StaffExpenseEntity.Location" style="width: 322px;" name="Location"
+            class="form-control" id="ddl_Location" placeholder="Location">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-2" *ngIf="StaffID==null">
+          <button class="savebutton" (click)="InsertStaffExpense()" id="btn_utilitySave" type="submit">Save</button>
+        </div>
+
+        <div class="col-lg-2" *ngIf="StaffID!=null">
+          <button class="savebutton" (click)="UpdateStaffExpense()" id="btn_utilitySave" type="submit">Update</button>
+        </div>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,196 @@
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+  .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  th{
+    border: 1px solid #dddddd;
+    text-align: center;
+    color:white;
+    padding: 10px;
+    background-color:#00b5d7;
+    font-size: 12px;
+    height: 30px;
+    width:10%;
+  
+  }
+  
+  
+  td {
+    border: 1px solid #00b5d7;
+    text-align: center;
+    color:black;
+    padding: 10px;
+    font-size: 12px;
+    /* height: 30px; */
+  } 
+
+  
+  .header {
+    font-weight: 700;
+    color: #666666;
+    float: left;
+    width: auto;
+    margin: 0;
+    /* margin-left: 35px; */
+    padding: 0;
+    font-size: 24px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-top: 30px;
+}
+ 
+.building{
+    color: #00b5d7;
+    font-size: 18px;
+}
+.dashbutton {
+    border-radius: 10px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 30px;
+    margin-bottom: 12px;
+}
+.mainrow{
+    float: right;
+    margin-top: 26px;
+}
+
+.maincard{
+    float: initial;
+    background: white;
+    margin-left: -33px;
+}
+
+.paneltitle {
+    font-weight: 400;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: #666666;
+}
+
+i{
+    color: #00b5d7;
+    background-color: black;
+}
+
+.tableheader {
+    padding: 10px;
+   
+    background-color: #00b5d7;
+    height: 25px;
+    width: 200px;
+    color: white;
+         /* line-height: 0.55;  */
+         font-size: 13px;
+}
+
+.table {
+    
+    margin-bottom: 0px;
+    background-color: transparent;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: table;
+    margin: 16px;
+    /* line-height: 0.5; */
+    font-size: 13px;
+}
+
+.table-bordered {
+    border: 1px solid #ddd;
+}
+.maindropdown{
+    width: 210px;
+    margin-left: 8px;
+    margin-top: 16px;
+}
+
+.excelbutton{
+    margin-left: auto;
+    margin-right: 20px;
+    background-color: #00b5d7;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.topdropdown{
+    width: 230px;
+    /* margin-top: 11px; */
+}
+.pg_headingsInCaps {
+    font-size: 14px;
+    text-align: left;
+    text-transform: uppercase;
+    color: black;
+    margin-left: -57px;
+    margin-top: 7px;
+    font-weight: 500;
+}
+p{
+    margin:3px;
+}
+.home{
+    margin-left: 19px;
+    margin-top: 25px;
+}
+.homeimg{
+    height: 50px;
+    width: 50px; 
+    padding:6px;
+}
+
+
+.profileimg{
+    width: 141px;
+    margin-top: 30px;
+    border-radius: 100px;
+    height: 141px;
+}
+
+
+/* Start of Mobile CSS */
+
+.Mobilecss{
+    margin-left: 0px;
+}
+
+
+@media screen and (min-width: 320px) {
+    .Mobilecss{
+        margin-left: 14px;
+    }
+    
+  }
+
+  @media screen and (min-width: 1900px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1600px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1400px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+
+  /*End of Mobile CSS*/

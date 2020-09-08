@@ -1,0 +1,150 @@
+<div class="breadchrumb">
+  <h2 style="margin-left: 12px;">{{branch}}</h2>
+  <ul class="breadcrumb">
+    <div>
+      <li *ngFor="let chrumb of breadchrumb">
+        <a (click)="gotospecificditectory(chrumb)">{{chrumb}}</a>
+      </li>
+    </div>
+    <!-- <li>{{currentfolder}}</li> -->
+  </ul>
+</div>
+
+<h3 style="margin-left: 17px;
+font-size: 16px;">{{currentfolder}}</h3>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card" style="width: 532px;border-color: #2293d6;">
+      <div class="container">
+        <h4 style="margin-left: 151px;">
+          <b>Add
+            <a (click)="showUploadFiles()" class="btn btn-info btn-lg">
+              <span class="glyphicon glyphicon-plus"></span> Files
+            </a>
+          </b>
+        </h4>
+        <p style="margin-left: 133px;">You can Add files to this folder</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card" style="width: 532px;border-color: #2293d6;">
+
+      <div class="container">
+        <h4 style="margin-left: 151px;">
+          <b>Add
+            <a (click)="showcreatefolder()" class="btn btn-info btn-lg">
+              <span class="glyphicon glyphicon-book"></span> Folder
+            </a>
+          </b>
+        </h4>
+        <p style="margin-left: 133px;">You can create new folder</p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="row " style="margin-top: 5%;" *ngIf="isnewfloder">
+  <div>
+    <div class="col-lg-10">
+      <input type="text" id="txtfoldername" placeholder="Folde Name" class="form-control">
+    </div>
+    <div class="col-lg-2">
+      <input type="button" value="Create" class="btn btn-primary" (click)="buildandcreate()">
+    </div>
+  </div>
+</div>
+
+<div class="row " style="margin-top: 5%;" *ngIf="isNewFilesUploads">
+  <div>
+
+    <div class="col-lg-9">
+      <input type="file" class="form-control" placeholder="PDF" [(ngModel)]="PDFDocument" multiple (change)="handleFileSelect2($event)">
+    </div>
+    <div class="col-lg-3" style="width: 243px;">
+      <input type="button" value="Upload PDF" class="btn btn-primary" (click)="buildandcreatePDF()">
+    </div>
+
+  </div>
+  <div *ngIf="isNewVideosUploads">
+
+    <div class="col-lg-9">
+      <input type="file" class="form-control" placeholder="Videos" [(ngModel)]="VideoURL" multiple (change)="handleFileSelect1($event)">
+    </div>
+    <div class="col-lg-3" style="width: 243px;">
+      <input type="button" value="Upload Videos" class="btn btn-primary" (click)="buildandcreateVideos()">
+    </div>
+
+  </div>
+</div>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-5">
+      <h2>Folders</h2>
+      <p>The below are the folders available in this folder, you can check in folder by clicking "go to folder"
+      </p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Folder name</th>
+            <th>Click Here</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let folder of esistingfolders">
+            <td>
+              <i class="fa fa-folder" aria-hidden="true" style="margin-right: 14px;"></i>{{folder}}</td>
+            <td>
+              <a (click)="gotofolder(folder)"> Go to Folder</a>
+            </td>
+            <td>
+              <a (click)="deletefolder(folder)">
+                <i class="far fa-trash-alt"></i>
+              </a>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-5">
+      <h2>Files</h2>
+
+      <input type="text" placeholder="search.." [(ngModel)]="abSearch" class="form-control" id="txt_searchBuilding">
+
+      <p>The below are the Files available in this folder, you can check in files by clicking "Open Files"</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>File name</th>
+            <th>Open Files</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let file of esistingfiles">
+            <td>
+              <i class="fa fa-file" aria-hidden="true" style="margin-right: 14px;"></i>{{file}}</td>
+            <td>
+              <a target="_blank" href="{{fmsService.fmsUrl}}/{{currentpath}}/{{file}}"> View</a>
+            </td>
+            <td>
+              <a (click)="deletefile(file)">
+                <i class="far fa-trash-alt"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

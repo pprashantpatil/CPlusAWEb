@@ -1,0 +1,77 @@
+<div class="container-fluid " style="background-color: #F0F3F4;">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">Project Progress Tracking</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="projectreqbc"> Buildings / Project Progress Tracking </span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 dashbutton">
+          <!-- <button type="button" class="newprojreq" routerLink="/NewProjectTracking"
+                      routerLinkActive="active-link" id="btn_button">New Project Schedule</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="shadow p-3 mb-5 bg-white rounded col-lg-12  maincard ">
+    <h6 class="paneltitle">Project Progress Tracking</h6>
+    <hr>
+    <div class="row">
+      <div class="col-lg-3">
+        <select class="form-control" (change)="GetBuildingID($event)" style="margin-left: 17px;"
+          [(ngModel)]="BuildingID" id="ddl_buildingplans">
+          <option value="0" selected="selected"> Select Building</option>
+          <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+        </select>
+      </div>
+      <!-- <div class="col-lg-3">
+        <select [(ngModel)]="ProjectID" name="ProjectID" (change)="Projecttasks($event.target.value)"
+          class="dropdown form-control" style="width: 230px;" required id="ddl_RemindIn">
+          <option value="0">Select Projects</option>
+          <option value="{{Project.projectID}}" *ngFor="let Project of Projectlist">
+            {{Project.request}}
+          </option>
+        </select>
+      </div> -->
+    </div>
+    <br>
+
+    <div class="container-fluid">
+      <accordion [closeOthers]="true">
+        <accordion-group class="card container-fluid shadow p-3 mb-5 bg-white rounded maincard panel"
+          *ngFor="let Project of ProjectProgressTrackingList">
+          <div accordion-heading class="accordion-headder progress " style=" border: 1px solid ;">
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+              [ngStyle]="{'width.%': Project.progressPercentage}" aria-valuenow="70" aria-valuemin="0"
+              aria-valuemax="100">
+              <span style="font-size: 14px; color: #000; "> Building {{Project.name}} has Progressed
+                {{Project.progressPercentage|number:'1.0-0'}}% </span>
+            </div>
+          </div>
+          <div>
+            Current Stage : {{Project.milestone}}
+          </div>
+          <div>
+          </div>
+        </accordion-group>
+      </accordion>
+    </div>
+
+
+  </div>
+</div>

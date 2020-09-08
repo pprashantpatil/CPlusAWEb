@@ -1,0 +1,198 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header">{{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> {{tenanthistory_BreadChrumb}} </span> </div>
+      </div>
+    </div>
+    <br>
+  </div>
+
+  <div class="row">
+    <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+      Export To Excel
+    </button>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <h4 class="paneltitle ">{{tenanthistory_PageTitle}}</h4>
+    <hr>
+    <div class="row p-2">
+      <div class="col-lg-4">
+        <ng-daterangepicker [options]="pickeroptions" id="datepicker_tenantHistory"></ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <input type="text" placeholder="Search" [(ngModel)]="Search" class="form-control" id="txt_tenantHistoryUnit">
+      </div>
+      <div class="col-lg-3">
+        <div class="form-group">
+          <select class="dropdown form-control " (change)="GetFloor($event)" id="ddl_tenantHistoryBuilding">
+            <option value="none">Select Building</option>
+            <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-lg-2">
+        <div class="form-group">
+          <select class="dropdown form-control " (change)="FilteredFloorList($event)" id="ddl_tenantHistoryFloor">
+            <option value="none">Select Floor</option>
+            <option value="{{floor.id}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <select id="TenentHistoryUnit" name="Unit"  class="dropdown form-control " style="margin-left: 41px;
+          width: 202px;">
+            <option value="0"  selected="selected">Select Unit</option>
+            <option *ngFor="let unit of unitList" value="{{unit.id}}">{{unit.unitID}}</option>
+          </select>
+        </div>
+      </div>
+      <!-- <div class="col-lg-3">
+        <div class="form-group">
+          <select class="dropdown form-control" id="ddl_tenantHistoryUnit">
+            <option value="" class="" selected="selected">Select Unit</option>
+            <option label="East" value="object:1265">East</option>
+            <option label="West" value="object:1266">West</option>
+            <option label="North" value="object:1267">North</option>
+            <option label="South" value="object:1268">South</option>
+          </select>
+        </div>
+      </div> -->
+    </div>
+    <div class="row" style="padding:20px">
+      <table class="table table-bordered table-hover table-condensed mainbuild">
+        <tbody>
+          <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color:white;">
+            <td>{{tenanthistory_TenantName}}</td>
+            <td>{{tenanthistory_Tenanttype}}</td>
+            <td>{{tenanthistory_Mobile}} </td>
+            <td>{{tenanthistory_Building}}</td>
+            <td width="100px">{{tenanthistory_Floor}}</td>
+            <td width="100px">{{tenanthistory_Unit}}</td>
+            <td width="100px">{{tenanthistory_StartDate}}</td>
+            <td width="100px">{{tenanthistory_EndDate}}</td>
+            <td width="200px">{{tenanthistory_Actions}}</td>
+          </tr>
+          <tr *ngFor="let Tenent of FilteredTenentList|filter:Search">
+            <td>{{Tenent.tenantName}}</td>
+            <td>{{Tenent.tenantType}}</td>
+            <td>{{Tenent.phoneNo}}</td>
+            <td>{{Tenent.buildingName}}</td>
+            <td>{{Tenent.floor}}</td>
+            <td>{{Tenent.unitID}}</td>
+            <td>{{Tenent.leaseStartDate|date}}</td>
+            <td>{{Tenent.leaseEndDate|date}}</td>
+            <td>
+              <div class="row">
+                <div class="col-lg-1">
+                  <a id="btn_infopopup" data-toggle="tooltip" title="Attachments">
+                    <i class="fa fa-paperclip" data-toggle="modal" data-target="#myModal"
+                      (click)="TenentAttachment(Tenent)" style="cursor:pointer;color:#00b5d7;"></i>
+                  </a>
+                </div>
+                <div class="col-lg-1">
+                  <a id="btn_infopopup" data-toggle="tooltip" title="Agreements">
+                    <i class="far fa-building" data-toggle="modal" data-target="#myModalOne"
+                      (click)="TenentAgreement(Tenent)" style="cursor:pointer;color:#00b5d7;"></i>
+                  </a>
+                </div>
+                <!-- <div class="col-lg-1">
+                  <a data-toggle="modal" (click)="DeleteTenent(Tenent)" data-target="#delete" id="btn_infopopup">
+                    <i class="far fa-trash-alt" data-toggle="tooltip" title="Delete"
+                      style="cursor:pointer;color:#00b5d7;"></i>
+                  </a>
+                </div> -->
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="margin-top: 102px;">
+          <div class="modal-header">
+            <h5>Attachments</h5>
+            <button type="button" class="close " data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+
+            <div class="row" *ngFor="let Attachments of Attachmentlist">
+              <div class="col-lg-6">
+                <img style="width: 100%; height: auto;" src="{{Attachments.attachment}}">
+                <!-- <div class="row">
+                  <div class="col-4">
+                    <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal"
+                      data-toggle="modal" data-target="#myModalTwo">Update</button>
+                  </div>
+                  <div class="col-4">
+                    <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal"
+                      (click)="Delete(Attachments)">Delete</button>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="NoImagesAvail">
+            <div class="col-lg-12">
+              <img src="assets/Login/noimage.jpg" style="width: 60%;height:auto;" data-dismiss="modal">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal one -->
+    <div id="myModalOne" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="margin-top: 102px;">
+          <div class="modal-header">
+            <h5>Agreements</h5>
+            <button type="button" class="close " data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="row" *ngFor="let Agreements of Agreementslist">
+              <div class="col-lg-6">
+                <img style="width: 100%; height: auto;" src="{{Agreements.attachment}}">
+                <!-- <div class="row">
+                  <div class="col-4">
+                    <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal"
+                      data-toggle="modal" data-target="#myModalTwo">Update</button>
+                  </div>
+                  <div class="col-4">
+                    <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal"
+                      (click)="Delete(Attachments)">Delete</button>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="NoImagesAvail">
+            <div class="col-lg-12">
+              <img src="assets/Login/noimage.jpg" style="width: 60%;height:auto;" data-dismiss="modal">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

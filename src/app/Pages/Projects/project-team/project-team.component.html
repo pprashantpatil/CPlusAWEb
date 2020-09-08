@@ -1,0 +1,134 @@
+<div class="container-fluid Pages_background Mobilecss" style="    margin-left: 4px;">
+    <div class="row">
+        <div class="col-lg-5">
+            <h4 style="margin-bottom: 25px;" class="Pages_header" style="    margin-left: -14px;" *ngIf="ProjectType==1">FIELD TEAM</h4>
+            <h4 style="margin-bottom: 25px;" class="Pages_header" style="    margin-left: -14px;" *ngIf="ProjectType==2">DESIGN TEAM</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+    </div>
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard " style="    margin-left: -14px;margin-top: 20px;">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-2">
+                        <h6>Project
+                            <span style="color: red;">*</span>
+                        </h6>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="form-group">
+                            <select name="ProjectID" [(ngModel)]="ProjectID" class="dropdown form-control " required id="ddl_updateassetsBuilding" (click)="GetProjectID($event)"
+                                disabled>
+                                <option value="0" selected="selected"> Project</option>
+                                <option value="{{build.id}}" *ngFor="let build of projectlist">{{build.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-2">
+                        <h6>Type
+                            <span style="color: red;">*</span>
+                        </h6>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="form-group">
+                            <select name="Type" [(ngModel)]="TypeofStaff" class="dropdown form-control" required id="TypeofStaff">
+                                <option value="0" selected="selected"> Type</option>
+                                <!-- <option value="0" > Client</option> -->
+                                <option value="Supplier"> Supplier</option>
+                                <option value="Contractor Staff"> Contractor Staff</option>
+                                <option value="Company Staff"> Company Staff</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-2">
+                        <h6>Staff Type
+                            <span style="color: red;">*</span>
+                        </h6>
+                    </div>
+                    <div class="col-lg-7">
+                        <select class="form-control" placeholder="Select Staff Type" [(ngModel)]="StaffTypeID" (change)="getStaffTypeID($event)"
+                            id="StaffType" name="StaffType" required>
+                            <option value="0"> Select Staff Type</option>
+                            <option value="{{Staff.id}}" *ngFor="let Staff of StaffTypelist">{{Staff.short}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-2">
+                        <h6>Staff
+                            <span style="color: red;">*</span>
+                        </h6>
+                    </div>
+                    <div class="col-lg-7">
+                        <select class="form-control" placeholder="Select Staff" [(ngModel)]="StaffID" (change)="getStaffID($event)" id="ddl_Staff"
+                            name="Staff" required>
+                            <option value="0"> Select Staff</option>
+                            <option value="{{Staff.id}}" *ngFor="let Staff of StaffList">{{Staff.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-2">
+                        <h6>Description
+                            <span style="color: red;">*</span>
+                        </h6>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="form-group">
+                            <textarea rows="3" [(ngModel)]="RoleID" name="RoleID" required id="RoleID" placeholder="Description" class="form-control"></textarea>
+
+                            <!-- <select class="dropdown form-control"  id="ddl_Role" name="Role" [(ngModel)]="RoleID" 
+                                (change)="getRoleID($event)" placeholder="Select Role">
+                                    <option value="0">Select Role</option>
+                                    <option value="{{Role.id}}" *ngFor="let Role of RoleList">{{Role.name}}
+                                    </option>
+                                </select> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="paramID==null" class="row">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <button type="submit" style="margin-left: 140px;" (click)="Save()" class="btn btn-block btn-md savebutton">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="paramID!=null" class="row">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <button type="submit" style="margin-left: 140px;" (click)="Update()" class="btn btn-block btn-md savebutton">Update</button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

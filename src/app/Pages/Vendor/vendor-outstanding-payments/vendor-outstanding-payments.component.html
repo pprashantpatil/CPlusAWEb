@@ -1,0 +1,96 @@
+<div class="container-fluid Pages_background ">
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="header">{{pageMenuTitle}}</h4>
+            </div>
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-4">
+                <div class="row mainrow">
+                    <div class="col-lg-12 BreadChrumbProperties">
+                        <span class="building"> {{vendor_BreadChrumb}} </span> </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-3">
+                <div class="row mainrow">
+                    <div class="col-lg-12">
+                        <!-- <button type="button" routerLink="/UpdateVendor" routerLinkActive="active-link" id="btn_button"
+                    class="dashbutton">New Vendor</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h6>{{vendor_SelectDate}}</h6>
+                    <ng-daterangepicker [options]="options"></ng-daterangepicker>
+                </div>
+                <div class="col-lg-3">
+                    <h6>{{vendor_SelectVendor}}</h6>
+                    <select class="dropdown form-control maindropdown" id="ddl_vendoroutstanding" (change)="FilterByVendorName($event)">
+                        <option value="none" selected="selected"> Select Vendor Type </option>
+                        <option value="{{vendor.vendorName}}" *ngFor="let vendor of VendorList">{{vendor.vendorName}}
+                        </option>
+                    </select>
+                </div>
+                <!-- <div class="col-lg-3 ">
+                    <label style="font-size:16px; margin-top: 30px; color: #5A5A5A;font-weight: 200; ">{{vendor_GrandTotal}}
+                        :
+                        <span>
+                            <i class="fa fa-dollar"></i>
+                        </span> 255550.00
+                    </label>
+                </div> -->
+            </div>
+        </div>
+    
+        <div class="row">
+            <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+                {{vendor_ExportToExcel}}
+            </button>
+        </div>
+    
+        <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+            <div>
+                <h6 class="paneltitle">{{vendor_Title}}
+                </h6>
+                <hr>
+                <div class="row">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr class="tableheader">
+                                <td>{{vendor_InvoiceNo}}</td>
+                                <td>{{vendor_Type}}</td>
+                                <td>{{vendor_InvoiceDate}}</td>
+                                <td>{{vendor_Vendor}} </td>
+                                <td>{{vendor_InvoiceAmount}}</td>
+                                <td>{{vendor_Aging}}</td>
+                                <td>{{vendor_Invoice}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let payments of VPaymentsList">
+                                <td>{{payments.invoiceNo}}</td>
+                                <td>{{payments.typename}}</td>
+                                <td>{{payments.date|date}}</td>
+                                <td>{{payments.vendorName}} </td>
+                                <td>{{payments.grandTotal}}</td>
+                                <td>{{payments.aging}}</td>
+                                <td>
+                                    <img style="height:50px;width:50px" src="{{payments.attachment}}">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,444 @@
+<div class="container-fluid Pages_background ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">{{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-5">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building">{{updateSheduleMantaince_breadchrumb}} </span> </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="shadow p-3 mb-5 bg-white col-lg-12 rounded maincard ">
+    <h6 class="paneltitle" *ngIf="SMID==null">{{updateSheduleMantaince_PageTitle}}
+    </h6>
+
+    <h6 class="paneltitle" *ngIf="SMID!=null">Edit Scheduled Maintenance Request
+    </h6>
+    <hr>
+    <div class="row">
+      <form class="col-lg-7">
+        <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_Request}}<span class="starspan">*</span></p>
+          </div>
+          <div class="col-lg-5 ">
+            <input type="text" name="Request" [(ngModel)]="ScheduledMaintainanceEntity.Request"
+              placeholder="{{updateSheduleMantaince_Request}}" class="form-control maindropdown" required
+              id="txt_updateScheduleRequest">
+            <span class="Validationlabels"
+              *ngIf='ScheduledMaintainanceEntity.Request=="" && Isempty ||ScheduledMaintainanceEntity.Request=="none"'>*
+              Please
+              Fill
+              {{updateSheduleMantaince_Request}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_RequestType}}<span class="starspan">*</span></p>
+          </div>
+          <div class="col-lg-5 ">
+            <select [(ngModel)]="ScheduledMaintainanceEntity.RequestTypeID" name="RequestTypeID"
+              class="dropdown form-control maindropdown" required id="ddl_updatescheduleRequestType">
+              <option value="0">Select Request Type</option>
+              <option value="{{Request.id}}" *ngFor="let Request of Reqlist">{{Request.short}}</option>
+            </select>
+
+            <span class="Validationlabels" *ngIf='ScheduledMaintainanceEntity.RequestTypeID==0 && Isempty'>* Please
+              Select
+              {{updateSheduleMantaince_RequestType}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_FrequencyRequestType}}<span class="starspan">*</span></p>
+          </div>
+          <div class="col-lg-5 ">
+            <select [(ngModel)]="ScheduledMaintainanceEntity.FrequencyTypeID" name="FrequencyTypeID"
+              class="dropdown form-control maindropdown" required id="ddl_updatescheduleFrequencyRequestType">
+              <option value="0">Select Frequency Request Type</option>
+              <option value="{{FRequest.id}}" *ngFor="let FRequest of Freqlist">{{FRequest.short}}</option>
+            </select>
+            <span class="Validationlabels" *ngIf='ScheduledMaintainanceEntity.FrequencyTypeID==0 && Isempty'>* Please
+              Select
+              {{updateSheduleMantaince_FrequencyRequestType}}</span>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_RequestRaisedBy}} <span class="starspan">*</span></p>
+          </div>
+          <div class="col-lg-5 ">
+            <input type="text" value="Admin" name="RaisedBy" disabled placeholder="admin"
+              class="form-control maindropdown" required id="txt_updateScheduleRequestRaised">
+          </div>
+        </div> -->
+        <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_Building}} <span class="starspan">*</span></p>
+          </div>
+          <div class="col-lg-5 ">
+            <select [(ngModel)]="ScheduledMaintainanceEntity.BuildingID" name="BuildingID"
+              (change)="GetBuildingAddress($event)" class="dropdown form-control maindropdown" required
+              id="ddl_updatescheduleBuilding">
+              <option value="0">Select Building</option>
+              <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+            </select>
+            <span class="Validationlabels" *ngIf='ScheduledMaintainanceEntity.BuildingID==0 && Isempty'>* Please
+              Select
+              {{updateSheduleMantaince_Building}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_Address}} </p>
+          </div>
+          <div class="col-lg-5 ">
+            <input value="{{BuildingAddress}}" name="address" type="text"
+              placeholder="{{updateSheduleMantaince_Address}}" class="form-control maindropdown" required
+              id="txt_updateScheduleAddress">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_Floor}} <span class="starspan">*</span></p>
+          </div>
+          <div class="col-lg-5 ">
+            <select [(ngModel)]="ScheduledMaintainanceEntity.Floor" name="Floor" (change)="UnitByID($event)"
+              class="dropdown form-control maindropdown" required id="txt_updateScheduleFloor">
+              <option value="0">Select Floor</option>
+              <option value="{{floor.id}}" *ngFor="let floor of FloorList">{{floor.floor}}</option>
+            </select>
+            <span class="Validationlabels" *ngIf='ScheduledMaintainanceEntity.Floor==0 && Isempty'>* Please
+              Select
+              {{updateSheduleMantaince_Floor}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_Unit}}<span class="starspan">*</span></p>
+          </div>
+          <div class="col-lg-5 ">
+            <!-- <input [(ngModel)]="ScheduledMaintainanceEntity.Unit" name="Unit" type="text"
+              placeholder="{{updateSheduleMantaince_Unit}}" class="form-control maindropdown" required
+              id="txt_updateScheduleUnit"> -->
+            <select [(ngModel)]="ScheduledMaintainanceEntity.Unit" name="Unit"
+              class="dropdown form-control maindropdown" id="ddl_updateassetsFloor">
+              <option value="0">Select Unit</option>
+              <option value="{{Units.id}}" *ngFor="let Units of Unitslist">{{Units.unitID}}</option>
+            </select>
+            <span class="Validationlabels" *ngIf='ScheduledMaintainanceEntity.Unit==0 && Isempty'>* Please
+                Select
+                {{updateSheduleMantaince_Unit}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_SelectAssets}}<span class="starspan">*</span></p>
+          </div>
+          <div class="col-lg-5 ">
+            <select [(ngModel)]="ScheduledMaintainanceEntity.EquipmentID" name="EquipmentID"
+              class="dropdown form-control maindropdown" required id="ddl_updatescheduleAssets">
+              <option value="0">Select Asset</option>
+              <option value="{{Asset.id}}" *ngFor="let Asset of Equipmentlist">{{Asset.equipmentname}}</option>
+            </select>
+            <span class="Validationlabels" *ngIf='ScheduledMaintainanceEntity.EquipmentID==0 && Isempty'>* Please
+              Select
+              {{updateSheduleMantaince_SelectAssets}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_DueDate}}
+            </p>
+          </div>
+          <div class="col-lg-5 ">
+            <input [(ngModel)]="ScheduledMaintainanceEntity.DueDate" name="DueDate" type="date"
+              class="form-control maindropdown" id="txt_updatescheduleDate" min="{{mindate}}">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_Description}}</p>
+          </div>
+          <div class="col-lg-5 ">
+            <textarea [(ngModel)]="ScheduledMaintainanceEntity.Description" name="Description"
+              placeholder="{{updateSheduleMantaince_Description}}" id="txt_updateScheduleDescription"
+              class="form-control maindropdown" rows="4"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_AssignedTo}}<span class="starspan">*</span></p>
+          </div>
+          <div class="col-lg-5 ">
+            <select [(ngModel)]="ScheduledMaintainanceEntity.AssignedTo" name="AssignedTo" (change)="AssignedTo($event)"
+              class="dropdown form-control maindropdown" required id="ddl_updatescheduleAssignedTo">
+              <option value="0" selected="selected">Select </option>
+              <option value="{{Assigned.id}}" *ngFor="let Assigned of Assignedlist">{{Assigned.short}}</option>
+            </select>
+            <span class="Validationlabels" *ngIf='ScheduledMaintainanceEntity.AssignedTo==0 && Isempty'>* Please
+              Select
+              {{updateSheduleMantaince_AssignedTo}}</span>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="ScheduledMaintainanceEntity.AssignedTo==4">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">Vendor Type
+            </p>
+          </div>
+          <div class="col-lg-5 ">
+            <select class="dropdown form-control maindropdown" [(ngModel)]="ScheduledMaintainanceEntity.VendorType"
+              name="VendorType" (change)="GetVendorTypeID($event)">
+              <option value="0" selected="selected">select</option>
+              <option *ngFor="let VendorType of VendorTypeList" value="{{VendorType.id}}">
+                {{VendorType.short}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="ScheduledMaintainanceEntity.AssignedTo==4">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">Vendor</p>
+          </div>
+          <div class="col-lg-5 ">
+            <select class="dropdown form-control maindropdown" (change)="Vendor($event)" required
+              id="ddl_updatescheduleAssignedTo" [(ngModel)]="SelectedVendorID" name="SelectedVendorID">
+              <option value="0">Select Vendor</option>
+              <option value="{{Vendors.id}}" *ngFor="let Vendors of Vlist">{{Vendors.vendorName}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="ScheduledMaintainanceEntity.AssignedTo==4">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">EmailID</p>
+          </div>
+          <div class="col-lg-5 ">
+            <input [(ngModel)]="ScheduledMaintainanceEntity.AssignedToEmailID" name="AssignedToEmailID" type="text"
+              value="{{vendorEmail}}" class="form-control maindropdown" id="txt_updatescheduleDate">
+            <span class="Validationlabels" *ngIf='EmailValid==false'>
+              Invalid Email ID
+            </span>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="ScheduledMaintainanceEntity.AssignedTo==4">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">Phone Number</p>
+          </div>
+          <div class="col-lg-5 ">
+            <input [(ngModel)]="ScheduledMaintainanceEntity.AssignedToPhoneNo" name="AssignedToPhoneNo" type="text"
+              value="{{vendorphno}}" class="form-control maindropdown" id="txt_updatescheduleDate">
+            <span class="Validationlabels" *ngIf='PhoneNumberValid==false'>
+              Invalid Phone Number
+            </span>
+          </div>
+        </div>
+        <div class="row" *ngIf="ScheduledMaintainanceEntity.AssignedTo==1">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">Name<span class="starspan">*</span></p>
+          </div>
+          <div class="col-lg-5 ">
+            <select [(ngModel)]="ScheduledMaintainanceEntity.AssignedToName" name="AssignedToName"
+              (change)="Users($event)" class="dropdown form-control maindropdown" required
+              id="ddl_updatescheduleAssignedTo">
+              <option value="0">Select User</option>
+              <option value="{{Users.name}}" *ngFor="let Users of Ulist">{{Users.name}}</option>
+            </select>
+            <span class="Validationlabels" *ngIf='ScheduledMaintainanceEntity.AssignedToName==0 && Isempty'>* Please
+              Select
+              Name</span>
+          </div>
+        </div>
+
+
+        <div class="row" *ngIf="ScheduledMaintainanceEntity.AssignedTo==2">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">Name<span class="starspan">*</span></p>
+          </div>
+          <div class="col-lg-5 ">
+            <input [(ngModel)]="ScheduledMaintainanceEntity.AssignedToName" name="AssignedToName" type="text"
+              class="form-control maindropdown" id="txt_updatescheduleDate">
+            <span class="Validationlabels"
+              *ngIf='ScheduledMaintainanceEntity.AssignedToName=="" && Isempty ||ScheduledMaintainanceEntity.AssignedToName=="none"'>*
+              Please
+              Fill
+              Name</span>
+          </div>
+        </div>
+        <div class="row" *ngIf="SMID==null">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_Photo}}
+            </p>
+          </div>
+          <div class="col-lg-5 ">
+            <ngx-dropzone [(ngModel)]="ScheduledMaintainanceEntity.PhotoURL" name="PhotoURL" [showPreviews]="true"
+              (filesAdded)="onFilesAdded($event)" class="dropzone_vendorinvoice" id="dropzone_Photos"></ngx-dropzone>
+          </div>
+        </div>
+        <div class="row" *ngIf="SMID==null">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_Attachment}}
+            </p>
+          </div>
+          <div class="col-lg-5 ">
+            <ngx-dropzone [(ngModel)]="ScheduledMaintainanceEntity.Attachment" name="Attachment" [showPreviews]="true"
+              (filesAdded)="onFilesAddedAttached($event)" class="dropzone_vendorinvoice" id="dropzone_Attachment">
+            </ngx-dropzone>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_Status}} <span class="starspan">*</span></p>
+          </div>
+          <div class="col-lg-5 ">
+            <select [(ngModel)]="ScheduledMaintainanceEntity.StatusID" name="StatusID"
+              class="dropdown form-control maindropdown" required id="ddl_updatescheduleFloor">
+              <option value="0">Select Status</option>
+              <option value="{{Status.id}}" *ngFor="let Status of Statuslist">{{Status.short}}</option>
+            </select>
+            <span class="Validationlabels" *ngIf='ScheduledMaintainanceEntity.StatusID==0 && Isempty'>* Please
+              Select
+              {{updateSheduleMantaince_Status}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_CheckList}}
+              <span class="starspan">*</span>
+            </p>
+          </div>
+          <div class="col-lg-5 ">
+            <select [(ngModel)]="ScheduledMaintainanceEntity.CheckListTypeID" name="CheckListTypeID"
+              class="dropdown form-control maindropdown" id="ddl_updatescheduleCheckList">
+              <option value="0">Select Check Lists</option>
+              <option value="{{Check.id}}" *ngFor="let Check of Checklist">{{Check.short}}</option>
+            </select>
+            <span class="Validationlabels" *ngIf='ScheduledMaintainanceEntity.CheckListTypeID==0 && Isempty'>* Please
+              Select
+              {{updateSheduleMantaince_CheckList}}</span>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2 ">
+            <p style="padding:5px">{{updateSheduleMantaince_Comments}}</p>
+          </div>
+          <div class="col-lg-5 ">
+            <textarea [(ngModel)]="ScheduledMaintainanceEntity.Comment" name="Comment"
+              placeholder="{{updateSheduleMantaince_Comments}}" id="txt_updateScheduleComments"
+              class="form-control maindropdown" rows="4"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+          </div>
+          <div class="col-lg-2" *ngIf="SMID==null">
+            <button class="savebutton" type="submit" (click)="InsertScheduledMaintenance()"
+              id="btn_updatescheduleSave">{{updateSheduleMantaince_button_save}}</button>
+          </div>
+          <div class="col-lg-2" *ngIf="SMID!=null">
+            <button class="savebutton" type="submit" (click)="UpdateScheduledMaintenance()"
+              id="btn_updatescheduleSave">Update</button>
+          </div>
+        </div>
+      </form>
+      <div class="col-lg-5">
+        <h4 *ngIf="Attachmentlist.length>0">Attachments</h4>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" *ngIf="Attachmentlist.length>0">
+          <div class="carousel-inner">
+            <div class="item active">
+              <img src="{{Attachmentlist[0].attachment}}" alt="">
+            </div>
+            <div class="item" *ngFor="let Attachments of Attachmentlist| slice:1">
+              <img src="{{Attachments.attachment}}" alt="">
+            </div>
+          </div>
+
+          <!-- Left and right controls -->
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        <h4 *ngIf="Photolist.length>0">Photos</h4>
+        <div id="myCarousel1" class="carousel slide" data-ride="carousel" *ngIf="Photolist.length>0">
+          <div class="carousel-inner">
+            <div class="item active">
+              <img src="{{Photolist[0].attachment}}" alt="">
+            </div>
+            <div class="item" *ngFor="let Photos of Photolist| slice:1">
+              <img src="{{Photos.attachment}}" alt="">
+            </div>
+          </div>
+
+          <!-- Left and right controls -->
+          <a class="left carousel-control" href="#myCarousel1" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel1" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

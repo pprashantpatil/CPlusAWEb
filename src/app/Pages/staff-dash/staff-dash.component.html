@@ -1,0 +1,304 @@
+<div class="container-fluid ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">Dashboard</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 buildings">
+          <!-- <span class="building">Dashboard /Dashboard</span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="shadow p-3 mb-5 rounded  maincard " style="margin-left: -14px;
+  margin-top: 33px;height: 520px;
+  overflow-y: auto;">
+
+    <label style="margin-left: 467px;
+  font-size: 26px;
+  font-weight: 800;
+  font-family: inherit;">Action Items</label>
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="row card" *ngIf="LoginTypeID==1"
+        style="padding: 21px;margin-bottom: 17px;  border-color: #9b8e8e;    width: 95%;  margin-left: 36px;">
+        <label *ngIf="LoginTypeID==1">To Do Lists</label>
+        <div class="row" *ngIf="LoginTypeID==1">
+          <div class="col-lg-12  table-responsive" style="overflow: auto;">
+            <table class="table table-bordered  table-condensed">
+              <tbody>
+                <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                  <td>Assigned date</td>
+                  <td>Due Date</td>
+                  <td>Project Name</td>
+                  <td>Action Item Type</td>
+                  <td>Subject</td>
+                  <td>Description</td>
+
+                  <td>Priority</td>
+                  <td>Status</td>
+                  <td>Ageing</td>
+                  <!-- <td *ngIf="LoginTypeID==2 || LoginTypeID==3 ||LoginTypeID==1">Actions</td> -->
+                </tr>
+                <tr *ngFor="let Actions of ActionItemsListsToDO | filter:Search" [class.bgOpen]="Actions.ageing>5">
+                  <td>{{Actions.modifieddate|date}}</td>
+                  <td>{{Actions.dueDate|date}}</td>
+                  <td>{{Actions.bname}}</td>
+                  <td>{{Actions.actionItemType}}</td>
+                  <td>{{Actions.subject}}</td>
+                  <td>{{Actions.description}}</td>
+
+                  <td>{{Actions.priority}}</td>
+                  <td>{{Actions.status}}</td>
+                  <td>{{Actions.ageing}}</td>
+                  <!-- <td style="text-align: center;">
+                    <i class="far fa-trash-alt" *ngIf="LoginTypeID==2 || LoginTypeID==3 " title="Delete" (click)="DeleteProject(Actions.id)"></i> &nbsp;&nbsp;
+                    <i class="fa fa-edit" *ngIf="LoginTypeID==2 || LoginTypeID==3 " title="Edit" [routerLink]="['/ActionItems',Actions.id]"></i>
+                    <i class="fa fa-paperclip" data-toggle="modal" data-target="#myModalAttachments" title="Attachments" (click)="GetActionItemsID(Actions)"></i>
+                    <br>
+                 
+                  </td> -->
+
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="row card" *ngIf="LoginTypeID==1" style="padding: 21px; margin-bottom: 17px;border-color: #9b8e8e; overflow-x: auto;
+      width: 95%;   margin-left: 36px;">
+        <label *ngIf="LoginTypeID==1">Doing Lists</label>
+
+        <div class="row" *ngIf="LoginTypeID==1">
+          <div class="col-lg-12  table-responsive" style="overflow: auto;">
+            <table class="table table-bordered  table-condensed">
+              <tbody>
+                <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                  <td>Assigned date</td>
+                  <td>Due Date</td>
+                  <td>Project Name</td>
+                  <td>Action Item Type</td>
+                  <td>Subject</td>
+                  <td>Description</td>
+
+                  <td>Priority</td>
+                  <td>Status</td>
+                  <td>Ageing</td>
+                  <!-- <td *ngIf="LoginTypeID==2 || LoginTypeID==3 ||LoginTypeID==1">Actions</td> -->
+                </tr>
+                <tr *ngFor="let Actions of ActionItemsListsDoing | filter:Search" [class.bgOpen]="Actions.ageing>5">
+                  <td>{{Actions.modifieddate|date}}</td>
+                  <td>{{Actions.dueDate|date}}</td>
+                  <td>{{Actions.bname}}</td>
+                  <td>{{Actions.actionItemType}}</td>
+                  <td>{{Actions.subject}}</td>
+                  <td>{{Actions.description}}</td>
+
+                  <td>{{Actions.priority}}</td>
+                  <td>{{Actions.status}}</td>
+                  <td>{{Actions.ageing}}</td>
+                  <!-- <td style="text-align: center;">
+                    <i class="far fa-trash-alt" *ngIf="LoginTypeID==2 || LoginTypeID==3 " title="Delete" (click)="DeleteProject(Actions.id)"></i> &nbsp;&nbsp;
+                    <i class="fa fa-edit" *ngIf="LoginTypeID==2 || LoginTypeID==3 " title="Edit" [routerLink]="['/ActionItems',Actions.id]"></i>
+                    <i class="fa fa-paperclip" data-toggle="modal" data-target="#myModalAttachments" title="Attachments" (click)="GetActionItemsID(Actions)"></i>
+                    <br>
+                   
+                  </td> -->
+
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="shadow p-3 mb-5 rounded  maincard " style="margin-left: -14px;
+    margin-top: 33px;height: 310px;">
+
+    <label style="margin-left: 467px;
+        font-size: 26px;
+        font-weight: 800;
+        font-family: inherit;">Staff Leaves</label>
+
+    <div>
+      <select class="form-control" id="MonthID" style="    width: 290px;
+            margin-left: 56px;
+            margin-top: 16px;" (change)="GetMonthID($event)" [(ngModel)]="MonthID" name="MonthID" required>
+        <option value="0">Select Month</option>
+        <option value="1">Jan</option>
+        <option value="2">Feb</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">Jully</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+    </div>
+
+
+
+
+
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="col-lg-3 card" style="height: 139px;    border-radius: 30px;
+        margin-right: 47px;
+        margin-left: 75px;
+        background: #00b5d7;">
+        <h4 style="text-align: center; margin-top: 47px;color: white;">Applied Leaves</h4>
+        <label style="text-align: center; font-size: 21px;color: white;">{{NoOfStaffLeavesCount}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="background: #00b5d7;    border-radius: 30px;
+          height: 139px;
+          margin-left: 22px;
+          margin-right: 71px;">
+        <h4 style="text-align: center; margin-top: 47px;color: white;">Approved Leaves</h4>
+        <label style="text-align: center; font-size: 21px;color: white;">{{ApprovedCount}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="background: #00b5d7;    border-radius: 30px;
+          height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;color: white;">Rejected Leaves</h4>
+        <label style="text-align: center; font-size: 21px;color: white;">{{RejectedCount}}</label>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- <div class="shadow p-3 mb-5 rounded  maincard " style="margin-left: -14px;
+    margin-top: 33px;height: 311px;">
+
+    <div style="margin-left: 61px;
+    /* margin-top: 1px; */
+    margin-bottom: -58px;
+    margin-top: 30px;">
+      <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions" (ngModelChange)="selectedDate($event)">
+      </ng-daterangepicker>
+    </div>
+
+    <label style="margin-left: 467px;
+    font-size: 26px;
+    font-weight: 800;
+    font-family: inherit;">Project Review</label>
+    <div class="row" style="margin-top: 45px;">
+
+
+
+
+      <div class="col-lg-3 card" style="height: 139px;    border-radius: 30px;
+      margin-right: 47px;
+      margin-left: 75px;
+      background: #00b5d7;">
+        <h4 style="text-align: center; margin-top: 47px;color: white;">Assigned Projects Reviews</h4>
+        <label style="text-align: center; font-size: 21px;color: white;">{{AssignedProjectsCounts}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="background: #00b5d7;    border-radius: 30px;
+        height: 139px;
+        margin-left: 22px;
+        margin-right: 71px;">
+        <h4 style="text-align: center; margin-top: 47px;color: white;">Inprogress Projects Reviews
+        </h4>
+        <label style="text-align: center; font-size: 21px;color: white;">{{AssignedProjectsCounts}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="background: #00b5d7;    border-radius: 30px;
+        height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;color: white;">Completed Projects Reviews
+        </h4>
+        <label style="text-align: center; font-size: 21px;color: white;">0</label>
+      </div>
+
+    </div>
+
+  </div> -->
+
+
+
+
+
+
+  <div class="shadow p-3 mb-5 rounded  maincard " style="margin-left: -14px;   
+  margin-top: 33px;height: 311px;">
+
+    <label style="margin-left: 467px;
+  font-size: 26px;
+  font-weight: 800;
+  font-family: inherit;">Work Assignments</label>
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="col-lg-3 card" style="height: 139px;    border-radius: 30px;
+      margin-right: 47px;
+      margin-left: 75px;
+      background: #00b5d7;">
+        <h4 style="text-align: center; margin-top: 47px;color: white;">Work Assignments </h4>
+        <label style="text-align: center; font-size: 21px;color: white;">{{WorkAssignCount}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="background: #00b5d7;    border-radius: 30px;
+        height: 139px;
+        margin-left: 22px;
+        margin-right: 71px;">
+        <h4 style="text-align: center; margin-top: 47px;color: white;">Completed Works</h4>
+        <label style="text-align: center; font-size: 21px;color: white;">{{workcomplete}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="background: #00b5d7;    border-radius: 30px;
+        height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;color: white;">Overdue Works</h4>
+        <label style="text-align: center; font-size: 21px;color: white;">{{workoverduecount}}</label>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="shadow p-3 mb-5 rounded  maincard " style="margin-left: -14px;   
+    margin-top: 33px;height: 311px;">
+
+    <label style="margin-left: 467px;
+    font-size: 26px;
+    font-weight: 800;
+    font-family: inherit;">Announcements</label>
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="col-lg-3 card" style="height: 139px; border-radius: 30px;
+      margin-right: 47px;
+      margin-left: 75px;
+      background: #00b5d7;">
+        <h4 style="text-align: center; margin-top: 47px;color: white;">No of Announcements
+        </h4>
+        <label style="text-align: center; font-size: 21px;color: white;">{{AnnouncemetsCount}}</label>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

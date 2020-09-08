@@ -1,0 +1,188 @@
+<div class="container-fluid Pages_background" style="    margin-left: -13px;">
+  <div>
+    <div class="row">
+      <div class="col-lg-12" style="margin-bottom: 30px;">
+        <h4 class="Pages_header">Completed Meetings Dashboard</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 dashbutton bttn">
+        <button *ngIf="LoginTypeID==3" id="exportButton" type="button" (click)="getglmasterexcel()">Export To Excel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Completed Meetings Dashboard</h6>
+      </div>
+    </div>
+
+    <div class="row p-4">
+      <div class="col-lg-4">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions" (ngModelChange)="selectedDate($event)">
+        </ng-daterangepicker>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive">
+          <table id="Doc" class="table table-bordered table-hover table-condensed" style="text-align: center;">
+            <tbody>
+              <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                <td>Meeting Date</td>
+                <td>Meeting Time</td>
+                <!-- <td *ngIf="this.LoginTypeID!='1'">Project Name</td> -->
+                <td *ngIf="this.LoginTypeID!='1'">Staff </td>
+                <td>Client</td>
+                <td>Meeting Name</td>
+                <!-- <td>Location</td> -->
+                <td>Meeting Type</td>
+                <td>Action</td>
+              </tr>
+              <tr *ngFor="let project of projectlist">
+                <td>{{project.meetingDate|date}}</td>
+                <td>{{project.meetingTime}}</td>
+                <!-- <td *ngIf="this.LoginTypeID!='1'">{{project.bname}}</td> -->
+                <td *ngIf="this.LoginTypeID!='1'"> {{project.name}}</td>
+                <td>{{project.firstName}}</td>
+                <td>{{project.meetingName}}</td>
+                <!-- <td>{{project.location}}</td> -->
+                <td>{{project.meetingType}}</td>
+                <td>
+                  <button *ngIf="project.mmadded==null ||project.mmadded==0 "
+                    class="btn btn-primary editable-table-button btn-xs" data-toggle="modal"
+                    (click)="GetMeetingmintuesdetails(project)" data-toggle="modal" data-target="#myModalAttachments"
+                    style="background-color: #00b5d7;">Add Meeting Minutes</button>
+                  <p *ngIf="project.mmadded==1" data-toggle="modal" data-target="#myModalAttachments1"
+                    (click)="GetAddedMeetingmintues(project)" class="form-control" style="background-color: orange;">
+                    View Meeting Minutes
+                  </p>
+                  <i *ngIf="project.mmadded==1" class="fa fa-video-camera" title="Videos" aria-hidden="true"
+                    data-toggle="modal" data-target="#myModalAttachments2" title="Meeting Video"
+                    (click)="GetVideos(project)"></i>&nbsp;
+                </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="myModalAttachments" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="margin-top: 100px; width: 800px;;">
+        <div class="modal-header">
+          <h4>Add Meeting Minutes</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-10">
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-3">
+                  <p style="padding:5px">Meeting Minutes
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <angular-editor [config]="editorConfig" [placeholder]="'Enter Meeting Minutes'" id="MeetingMinutes"
+                    name="MeetingMinutes" [(ngModel)]="MeetingMinutes"></angular-editor>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-3">
+                  <p style="padding:5px">Attachment
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="file" class="form-control" placeholder="Attachment"
+                    accept="image/x-png,image/gif,image/jpeg,application/pdf,.xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx"
+                    (change)="handleFileSelect2($event)" class="form-control">
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-3">
+                  <p style="padding:5px"> Meeting Video
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="file" class="form-control" placeholder="Meeting Video" accept="video/mp4"
+                    (change)="handleFileSelect3($event)" class="form-control">
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-5">
+                </div>
+                <div class="col-lg-2">
+                  <button class="btn btn-block btn-md"
+                    style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);"
+                    (click)="SaveMeetingMinutes()" data-dismiss="modal">Save</button>
+                </div>
+                <div class="col-lg-5">
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="myModalAttachments1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="margin-top: 100px; width: 800px;;">
+        <div class="modal-header">
+          <h4>Meeting Minutes</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-10">
+              <div class="row" style="margin-left: 8px;">
+                <div [innerHTML]="meetingMinutes1">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="myModalAttachments2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="margin-top: 100px;    width: 152%;    margin-left: -135px;">
+        <div class="modal-header">
+          <h4>Meeting Video</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="col-lg-6">
+            <br>
+            <video width="700" src="{{VedioOne}}" height="550" autoplay controls style=" margin-top: -89px;
+             ">
+              <!-- <source  type="video/mp4"> -->
+            </video>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

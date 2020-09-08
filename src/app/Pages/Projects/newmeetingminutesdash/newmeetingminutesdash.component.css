@@ -1,0 +1,60 @@
+/* Start of Mobile CSS */
+.Mobilecss{
+    margin-left: 0px;
+}
+
+
+@media screen and (min-width: 320px) {
+    .Mobilecss{
+        margin-left: 2px;
+    }
+    .mobsavebtn{
+        margin-left: 60px;
+    }
+    .bttn{
+        margin-left: -55px;
+    }
+    .btnnew{
+        float: right;
+    border-radius: 10px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 130px;
+    height: 30px;
+    margin-bottom: 12px;
+    }
+    
+   
+    
+  }
+
+  @media screen and (min-width: 1900px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1600px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1400px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    .bttn{
+        margin-left: -5px;
+    }
+    .mobsavebtn{
+        margin-left: 140px;
+    }
+    
+  }
+
+
+  /*End of Mobile CSS*/

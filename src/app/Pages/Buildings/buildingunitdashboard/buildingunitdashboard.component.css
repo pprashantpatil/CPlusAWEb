@@ -1,0 +1,195 @@
+.header {
+    font-weight: 700;
+    color: #666666;
+    float: left;
+    width: auto;
+    margin: 0;
+    /* margin-left: 35px; */
+    padding: 0;
+    font-size: 24px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-top: 30px;
+}
+
+.building {
+    color: #00b5d7;
+    font-size: 18px;
+}
+
+.dashbutton {
+    border-radius: 10px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 30px;
+    margin-bottom: 12px;
+}
+
+.mainrow {
+    float: right;
+    margin-top: 26px;
+}
+
+.maincard {
+    float: initial;
+    background: white;
+}
+
+.paneltitle {
+    font-weight: 400;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: #666666;
+}
+
+i {
+    color: #00b5d7;
+}
+
+.tableheader {
+    padding: 10px;
+    background-color: #00b5d7;
+    height: 25px;
+    width: 200px;
+    color: white;
+    /* line-height: 0.55;  */
+    font-size: 13px;
+}
+
+.table {
+    margin-bottom: 0px;
+    background-color: transparent;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: table;
+    margin: 16px;
+    /* line-height: 0.5; */
+    font-size: 13px;
+}
+
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+.maindropdown {
+    width: 210px;
+}
+
+.Slots {
+    padding: 20px;
+    font-size: 16px;
+    color: #666666;
+}
+
+.slots {
+    border: 10px solid #e2e2e2;
+    background: #ececec;
+    text-align: center;
+    border-radius: 8px;
+    color: #afafaf;
+    height: 58px;
+    width: 12%;
+    padding: 6px;
+    margin: 4px;
+}
+
+
+
+
+
+/* Start of Mobile CSS */
+
+
+.slots {
+    border: 10px solid #e2e2e2;
+    background: #ececec;
+    text-align: center;
+    border-radius: 8px;
+    color: #afafaf;
+    height: 58px;
+    width: 12%;
+    padding: 6px;
+    margin: 4px;
+}
+
+
+.Mobilecss{
+    margin-left: 20px;
+}
+
+@media screen and (min-width: 320px) {
+    .slots {
+        margin: -25px;
+        margin-top: 28px;
+    }
+    .Mobilecss{
+        margin-left: -25px;
+        margin-top: 27px;
+    }
+    
+  }
+
+  @media screen and (min-width: 1900px) {
+    .slots {
+        border: 10px solid #e2e2e2;
+        background: #ececec;
+        text-align: center;
+        border-radius: 8px;
+        color: #afafaf;
+        height: 58px;
+        width: 12%;
+        padding: 6px;
+        margin: 4px;
+    }
+    .Mobilecss{
+        margin-left: 20px;
+    }
+    
+  }
+
+  @media screen and (min-width: 1600px) {
+    .slots {
+        border: 10px solid #e2e2e2;
+        background: #ececec;
+        text-align: center;
+        border-radius: 8px;
+        color: #afafaf;
+        height: 58px;
+        width: 12%;
+        padding: 6px;
+        margin: 4px;
+    }
+    .Mobilecss{
+        margin-left: 20px;
+    }
+    
+    
+  }
+
+  @media screen and (min-width: 1400px) {
+    .slots {
+        border: 10px solid #e2e2e2;
+        background: #ececec;
+        text-align: center;
+        border-radius: 8px;
+        color: #afafaf;
+        height: 58px;
+        width: 12%;
+        padding: 6px;
+        margin: 4px;
+    }
+    .Mobilecss{
+        margin-left: 20px;
+    }
+    
+  }
+
+
+  /*End of Mobile CSS*/
+
+

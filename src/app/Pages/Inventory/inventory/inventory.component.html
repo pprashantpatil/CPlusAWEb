@@ -1,0 +1,405 @@
+<div class="Pages_background">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="Pages_header"> {{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <!-- <span class="building"> {{itemdashmaster_BreadChrumb}} </span> -->
+                </div>
+            </div>
+        </div>
+        <div class="row bttn" >
+            <div class="col-lg-12 dashbutton">
+                <button type="button" routerLink="/inventorytadd" routerLinkActive="active-link" id="btn_button"
+                    class="form-control">&nbsp;
+                 Add New</button>
+                <button type="button" (click)="exporttoexcel()">
+                    Export To Excel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+        <h4 class="paneltitle ">{{inventory_PageTitle}}</h4>
+        <hr>
+        <div class="row p-2">
+            <div class="col-lg-3">
+                <input type="text" placeholder="{{inventory_Search}}" [(ngModel)]="Search" class="form-control"
+                    id="ddl_inventorySearch">
+            </div>
+            <!-- <div class="col-lg-3 ">
+                <select class="form-control" id="ddl_InventoryBuilding" (change)="FilterByBuildingname($event)">
+                    <option value="none" selected="selected"> Select Property</option>
+                    <option value="{{build.name}}" *ngFor="let build of BuildingList">{{build.name}}</option>
+                </select>
+            </div> -->
+            <div class="col-lg-3 ">
+                <select class="form-control" id="Category" (change)="GetCategoryID($event)">
+                    <option value="0"> Select Category</option>
+                    <option value="{{category.category}}" *ngFor="let category of CategoryLists">{{category.category}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-lg-3">
+                <select class="dropdown form-control " (change)="FilterByInventory($event)" id="ddl_inventoryType">
+                    <option value="0">Select Type</option>
+                    <option value="{{Equip.short}}" *ngFor="let Equip of EquipmentTypeList">{{Equip.short}}</option>
+                </select>
+            </div>
+            <div class="col-lg-3 ">
+                <select class="dropdown form-control " (change)="FilterByItem($event)" id="DSd" name="DSd">
+                    <option value="0">Select Inventory</option>
+                    <option value="{{item.short}}" *ngFor="let item of InventoryLists">{{item.short}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 table-responsive">
+                <table class="table table-bordered table-hover table-condensed">
+                    <tbody>
+                        <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+                            <td>Inventory Category</td>
+                            <td>Inventory Type</td>
+                            <td>{{inventory_InventoryName}}</td>
+                            <td>Building</td>
+                            <td>Floor</td>
+                            <!-- <td>{{inventory_InventoryType}}</td> -->
+                            <td>Inventory Location</td>
+                            <td>Available Quantity</td>
+                            <td>{{inventory_Minimum}}</td>
+                            <td> {{inventory_UsedCount}}</td>
+                            <!-- <td>{{inventory_Price}}</td>
+                            <td>{{inventory_TotalInventory}}</td> -->
+                            <!-- <td>Authorised By</td> -->
+                            <td>Consumed Staff/Vendor</td>
+                            <td>Actions</td>
+                        </tr>
+                        <tr *ngFor="let Inventory of FilteredInventoryList | filter:Search">
+                            <td>{{Inventory.category}}</td>
+                            <td>{{Inventory.itemType}}</td>
+                            <td>{{Inventory.name}}</td>
+                            <td>{{Inventory.buildingName}}</td>
+                            <td>{{Inventory.floor}}</td>
+                            <!-- <td>{{Inventory.type}}</td> -->
+                            <td>{{Inventory.location}}</td>
+                            <td>{{Inventory.currentQty -Inventory.consumeCount }}</td>
+                            <td>{{Inventory.minimumQty}}</td>
+                            <td>{{Inventory.consumeCount}}</td>
+                            <!-- <td>{{Inventory.pricePerItem}}</td>
+                            <td>{{Inventory.inventoryCost}}</td> -->
+                            <!-- <td>{{Inventory.authorised}}</td> -->
+                            <td>{{Inventory.username}}</td>
+                            <td class="TableActions">
+                                <a (click)="Attachment(Inventory)" data-toggle="modal" data-target="#myModalAttachments"
+                                    style="background-color: white">
+                                    <i class="fa fa-paperclip" data-toggle="tooltip" title="Attachment"></i>
+                                </a>
+                                <a (click)="DeleteInventoryByID(Inventory)" style="background-color: white">
+                                    <i class="far fa-trash-alt" data-toggle="tooltip" title="Delete"></i>
+                                </a>
+                                <a *ngIf="Inventory.remainingCount!=0" (click)="InventoryConsume(Inventory)"
+                                    data-toggle="modal" data-target="#myModalInventoryConsume"
+                                    style="background-color: white">
+                                    <i class="fa fa-briefcase" data-toggle="tooltip" title="Consume"></i>
+                                </a>
+                                <button *ngIf="Inventory.remainingCount==0"
+                                    class="btn btn-primary editable-table-button btn-xs" data-toggle="modal"
+                                    (click)="Reorder(Inventory)" style="background-color: #00b5d7;">
+                                    Reorder</button>
+                                <!-- <a (click)="EditInvoice(Inventory)" style="background-color: white"> <i class="fa fa-edit"
+                                        data-toggle="tooltip" title="edit"></i></a> -->
+                            </td>
+                        </tr>
+                </table>
+            </div>
+
+            <div id="myModalAttachments" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content " style="margin-top: 113px;">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Attachments</h5>
+                            <div class="row" *ngFor="let Attachments of Attachmentlist">
+                                <div class="col-lg-6">
+                                    <img style="width: 100%; height: auto;" src="{{Attachments.attachment}}">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-default popupUpdatebutton"
+                                                data-dismiss="modal" data-toggle="modal"
+                                                data-target="#AttachmentsUpdate"
+                                                (click)="UpdateNewAttachments(Attachments)">Update</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-default popupUpdatebutton"
+                                                data-dismiss="modal"
+                                                (click)="DeleteOldAttachments(Attachments)">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="NoImagesAvail">
+                            <div class="col-lg-12">
+                                <img src="assets/Login/noimage.jpg" style="width: 60%;height:auto;"
+                                    data-dismiss="modal">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default popupUpdatebutton"
+                                data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="myModalInventoryConsume" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content inventorymodal">
+                        <div class="modal-header">
+                            <h4>
+                                Consume Inventory
+                            </h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h5>Item Category
+                                    </h5>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input type="text" value="{{Category}}" [(ngModel)]="InventoryEntity.Category"
+                                        id="test" class="form-control " disabled>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h5>Item Type
+                                    </h5>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input type="text" value="{{typename}}" [(ngModel)]="InventoryEntity.ItemType"
+                                        id="test" class="form-control " disabled>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h5> Item Name
+                                    </h5>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input type="text" value="{{Item}}" name="" id="txt_Item" class="form-control ">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h5>Available Count
+                                    </h5>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input type="text" value="{{AvailableCount}}" id="txt_AvailableCount"
+                                        class="form-control ">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h5>Consume Count
+                                    </h5>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input type="text" (input)="consumecountinput($event)"
+                                        [(ngModel)]="InventoryEntity.ConsumeCount" id="test" class="form-control ">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h5>Maintenance Request
+                                    </h5>
+                                </div>
+                                <div class="col-lg-8">
+                                    <select class="form-control" [(ngModel)]="InventoryEntity.MaintenanceRequestID"
+                                        name="MaintenanceRequestID">
+                                        <option value="0">Select Maintenance</option>
+
+                                        <option value="{{Maintainance.id}}"
+                                            *ngFor="let Maintainance of MaintainanceRequest">
+                                            {{Maintainance.request}}</option>
+                                        <option value="28">Installation</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h5>User Type
+                                    </h5>
+                                </div>
+                                <div class="col-lg-8">
+                                    <select class="form-control" [(ngModel)]="InventoryEntity.UserTypeID"
+                                        name="UserTypeID" (change)="UsersType($event)">
+                                        <option value="0">Select user Type</option>
+                                        <option value="{{Users.id}}" *ngFor="let Users of Userslist">
+                                            {{Users.short}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row" *ngIf="UserTypeID==1 || UserTypeID==2 ">
+                                <div class="col-lg-4">
+                                    <h5>User
+                                    </h5>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input type="text" [(ngModel)]="InventoryEntity.UserName" name="UserName" id=""
+                                        class="form-control ">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row" style="margin-top: -25px;" *ngIf="UserTypeID==4">
+                                <div class="col-lg-4">
+                                    <h5 class="formlabel">Vendor Type
+                                    </h5>
+                                </div>
+                                <div class="col-lg-8 ">
+                                    <select name="VendorType" (change)="VendorType($event)"
+                                        class="dropdown form-control" id="ddl_AssignedTo" placeholder="Search">
+                                        <option value="0">Select Type</option>
+                                        <option value="{{Vendor.id}}" *ngFor="let Vendor of vendorlist">{{Vendor.short}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row" style="margin-top: -25px;" *ngIf="UserTypeID==11">
+                                <div class="col-lg-4">
+                                    <h5 class="formlabel">Staff
+                                    </h5>
+                                </div>
+                                <div class="col-lg-8 ">
+                                    <select name="VendorType" [(ngModel)]="InventoryEntity.UserName"
+                                        (change)="GetStaff($event)" class="dropdown form-control" id="StaffID"
+                                        placeholder="Search">
+                                        <option value="0">Select Staff </option>
+                                        <option value="{{Vendor.name}}" *ngFor="let Vendor of StaffList">{{Vendor.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row" *ngIf="UserTypeID==4">
+                                <div class="col-lg-4">
+                                    <h5 class="formlabel">Vendor
+                                    </h5>
+                                </div>
+                                <div class="col-lg-8 ">
+                                    <select (change)="Vendor($event)" style="margin-top: 6px;"
+                                        [(ngModel)]="InventoryEntity.UserName" class="dropdown form-control"
+                                        placeholder="Search">
+                                        <option value="0">Select Type</option>
+                                        <option value="{{VNames.vendorName}}" *ngFor="let VNames of VendorNameslist">
+                                            {{VNames.vendorName}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h5>Comments
+                                    </h5>
+                                </div>
+                                <div class="col-lg-8">
+                                    <textarea placeholder="Comments" class="form-control" rows="5"
+                                        [(ngModel)]="InventoryEntity.Reason" name="Reason" id="comment"></textarea>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h5>Authorised By
+                                    </h5>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input type="text" [(ngModel)]="InventoryEntity.Authorised" name="Authorised"
+                                        id="Authorised" class="form-control ">
+                                </div>
+                            </div>
+                            <br>
+                            <!-- <div class="row">
+                                <div class="col-lg-6">
+                                </div>
+                                <div class="col-lg-2">
+                                    <p style="margin-top: 27px;font-size: 13px">Signature</p>
+                                </div>
+                                <div class="col-lg-4" Style="border-color: red;">
+                                    <signature-pad #sigPad></signature-pad>
+                                    <button (click)="sigPad.clear()">Clear</button>
+                                </div>
+                            </div> -->
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-4">
+
+                                </div>
+                                <div class="col-lg-8">
+                                    <button type="button" class="btn btn-default popupUpdatebutton"
+                                        (click)="InsertInventoryConsume()" data-dismiss="modal">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default popupUpdatebutton"
+                                data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Modal AttachmentsUpdate-->
+            <div id="AttachmentsUpdate" class="modal fade" role="dialog" style=" margin-top: 10%;">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content " style="margin-top: -31px;">
+                        <div class="modal-header">
+                            <button type="button" class="close " data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h5>Update Attachment
+                                    </h5>
+                                </div>
+                                <div class="col-lg-8">
+                                    <ngx-dropzone class="dropzone_vendorinvoice" [showPreviews]="true" name="Photos"
+                                        (filesAdded)="onFilesAdded($event)" id="dropzone_assetphoto"></ngx-dropzone>
+                                    <button type="button" (click)="Upload()" class="btn btn-default popupbuttonupdate"
+                                        data-dismiss="modal">Update </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default popupbutton"
+                                data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

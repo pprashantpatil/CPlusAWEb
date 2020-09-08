@@ -1,0 +1,70 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="Pages_header">Withholding Tax</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <span> Payrolls /Withholding Tax</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row breadCrumbHeadderProperties">
+      <div class="col-lg-12 dashbutton">
+        <button routerLink="/NewWithholdingTax" type="button" id="btn_button">Add Withholding Tax</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Withholding Tax Dashboard</h6>
+      </div>
+    </div>
+
+    <!-- <div class="row p-4">
+      <div class="col-lg-3">
+        <input type="text" placeholder="{{staff_Search}}" [(ngModel)]="searchtext" class="form-control"
+          id="txt_StaffsearchBuilding">
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control" id="ddl_BuildingName" (change)="filterbuilding($event)" required>
+          <option value="none" selected="selected">Select Project</option>
+          <option *ngFor="let Build of Buildinglist" value="{{Build.id}}">{{Build.name}}</option>
+
+        </select>
+      </div>
+    </div> -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive">
+          <table class="table table-bordered table-hover table-condensed">
+            <tbody>
+              <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+                <td>Tax Code</td>
+                <td>Salary Type</td>
+                <td>Base Tax</td>
+                <td>Base Salary</td>
+                <td>Tax Percentage</td>
+                <td>Actions</td>
+              </tr>
+              <tr>
+                <td>M</td>
+                <td>Monthly</td>
+                <td>0.00</td>
+                <td>20,000</td>
+                <td>0%</td>
+                <td><i class="fa fa-edit" title="Images"></i>&nbsp;
+                  <i class="far fa-trash-alt" title="Delete"></i></td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

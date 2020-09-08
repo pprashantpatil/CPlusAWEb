@@ -1,0 +1,502 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header">Owner</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="col-lg-12 BreadChrumbProperties">
+        <span class="building"> Owner/Owner </span> </div>
+    </div>
+  </div><br>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard ">
+    <div>
+      <div class="col-lg-3">
+        <h3 class="panel-title clearfix formlabel">Owner 
+        </h3>
+      </div>
+      <div class="col-lg-6"></div>
+      <div class="col-lg-3  dashbutton ">
+        <!-- <button type="button" style="margin-top: -11px;margin-right: -11px; " routerLink="/Tenant"
+          routerLinkActive="active-link" id="btn_button" class="">
+          {{updateTenant_button_Dashboard}}
+        </button> -->
+      </div>
+    </div>
+    <br>
+    <hr>
+    <form>
+      <!-- <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_Type}} </h5>
+        </div>
+        <div class="col-lg-4 ">
+          <select id="ddl_updatetenentType" class="dropdown form-control" placeholder="Select Type">
+            <option value="" class="" selected="selected">Select Type</option>
+            <option label="Tenant" value="object:1265">Tenant</option>
+            <option label="Owner" value="object:1265">Owner</option>
+          </select>
+        </div>
+      </div> -->
+      <br>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Building</h5>
+        </div>
+        <div class="col-lg-4 ">
+          <select id="ddl_updatetenentBuilding" class="dropdown form-control" placeholder="Select Building">
+            <option value="" class="" selected="selected">Select Building</option>
+            <option label="Tenant" value="object:1265">Tenant</option>
+            <option label="Owner" value="object:1265">Owner</option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Floor</h5>
+        </div>
+        <div class="col-lg-4 ">
+          <select id="ddl_updatetenentFloor" class="dropdown form-control" placeholder="Select Floor">
+            <option value="" class="" selected="selected">Select Floor</option>
+            <option label="Tenent" value="object:1265">Tenent</option>
+            <option label="Owner" value="object:1265">Owner</option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Unit</h5>
+        </div>
+        <div class="col-lg-4 ">
+          <select id="ddl_updatetenentUnit" class="dropdown form-control " placeholder="Select Unit">
+            <option value="" class="" selected="selected">Select Unit</option>
+            <option label="Tenant">Tenant</option>
+            <option label="Owner">Owner</option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Owner Name</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="text" id="txt_TenantName" class="form-control" placeholder="Owner Name">
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Owner Type</h5>
+        </div>
+        <div class="col-lg-4 ">
+          <select id="ddl_updatetenentTenantType" class="dropdown form-control " placeholder="Entrance">
+            <option value="" class="" selected="selected">Select Type</option>
+            <option label="Commercial" value="object:1265">Commercial</option>
+            <option label="Residential" value="object:1266">Residential</option>
+          </select>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Owner Contact Number</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="text" id="txt_TenantPrimaryContactName" class="form-control"
+            placeholder="">
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_NumberOfResidents}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantNoOfResidents" class="form-control"
+            placeholder="{{updateTenant_NumberOfResidents}}">
+        </div>
+      </div><br> -->
+      <!-- <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_NumberOfAdults}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantAdults" class="form-control" placeholder="{{updateTenant_NumberOfAdults}}">
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_NumberOfChildren}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantChildren" class="form-control"
+            placeholder="{{updateTenant_NumberOfChildren}}">
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_NumberOfPets}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantPets" class="form-control" placeholder="{{updateTenant_NumberOfPets}}">
+        </div>
+      </div><br> -->
+      <!-- <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_PhoneNumber}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantPhoneNumber" class="form-control"
+            placeholder="{{updateTenant_PhoneNumber}}">
+        </div>
+      </div><br> -->
+      <!-- <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_EmergencyContactNumber}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantEmergencyContactNumber" class="form-control"
+            placeholder="{{updateTenant_EmergencyContactNumber}}">
+        </div>
+      </div><br> -->
+      <!-- <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_Email}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="email" id="txt_TenantEmail" class="form-control" placeholder="{{updateTenant_Email}}">
+        </div>
+      </div><br> -->
+      <!-- <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_Address}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <textarea rows="5" id="txt_TenantAddress" class="form-control "
+            placeholder="{{updateTenant_Address}}"></textarea>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_LeasePeriod}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantLeasePeriod" class="form-control "
+            placeholder="{{updateTenant_LeasePeriod}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_Rent_Month}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantRent" class="form-control " placeholder="{{updateTenant_Rent_Month}}">
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_Security_Deposit}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantSecurityDeposit" class="form-control "
+            placeholder="{{updateTenant_Security_Deposit}}">
+        </div>
+      </div><br> -->
+      <!-- <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2">
+          <p style="padding:5px">{{updateTenant_Rent_Increase_Year}}</p>
+        </div>
+        <div class="col-lg-2">
+          <div class="form-group">
+            <input type="text" id="txt_TenantRentIncrease" class="form-control "
+              placeholder="{{updateTenant_Rent_Increase_Year}}">
+          </div>
+        </div>
+        <div class="col-lg-1">
+          <p>%</p>
+        </div>
+        <div class="col-lg-2">
+          <div class="form-group">
+            <select id="ddl_updatetenentYear" class="dropdown form-control ">
+              <option value="" class="" selected="selected">Select</option>
+              <option label="Once in a year" value="object:1968">{{updateTenant_Select_OnceInYear}}</option>
+              <option label="Two Years Once" value="object:1969">{{updateTenant_Select_TwoYearsOnce}}</option>
+              <option label="Three Years Once" value="object:1970">{{updateTenant_Select_ThreeYearsOnce}}</option>
+            </select>
+          </div>
+        </div>
+      </div> -->
+      <!-- <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_RentDueOn}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantRentDue" class="form-control " placeholder="{{updateTenant_RentDueOn}}">
+        </div>
+      </div><br> -->
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Maintenance Amount / Month
+          </h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantMaintainanceAmount" class="form-control "
+            placeholder=" ">
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Sinking Fund Amount
+          </h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantSinkingFund" class="form-control"
+            placeholder="">
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Other Fee
+          </h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantOtherFees" class="form-control" placeholder="">
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Inventory Provided By Owner
+          </h5>
+        </div>
+        <div class="col-lg-4">
+          <textarea rows="5" id="txt_TenantInventoryProvided" class="form-control "
+            placeholder=""></textarea>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Exit Terms
+          </h5>
+        </div>
+        <div class="col-lg-4">
+          <textarea rows="5" id="txt_TenantExitTerms" class="form-control "
+            placeholder=""></textarea>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Electricity Meter Number
+          </h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantElectricityMeter" class="form-control "
+            placeholder="">
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Water Meter Number
+          </h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantWaterMeter" class="form-control "
+            placeholder="">
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Gas Meter Number
+          </h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_TenantGasMater" class="form-control "
+            placeholder="">
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Attachment</h5>
+        </div>
+        <div class="col-lg-4">
+          <ngx-dropzone class="dropzone_vendorinvoice" id="dropzone_Attachment"></ngx-dropzone>
+        </div>
+      </div><br>
+      <!-- <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Agreement</h5>
+        </div>
+        <div class="col-lg-4">
+          <ngx-dropzone style="margin: 7px;" class="dropzone_vendorinvoice" id="dropzone_Aggrement"></ngx-dropzone>
+        </div>
+      </div><br> -->
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Profile Photo
+          </h5>
+        </div>
+        <div class="col-lg-4">
+          <ngx-dropzone  class="dropzone_vendorinvoice" id="dropzone_ProfilePhoto"></ngx-dropzone>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Comments
+          </h5>
+        </div>
+        <div class="col-lg-4">
+          <textarea rows="5" id="txt_TenantInventoryProvided" class="form-control "
+            placeholder=""></textarea>
+        </div>
+      </div>
+
+      <!-- <hr>
+      <h5>{{updateTenant_EBANKDETAILS}}:</h5>
+      <hr>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_BankName}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="text" style="margin: 7px;" id="txt_TenantBankName" class="form-control "
+            placeholder="{{updateTenant_BankName}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_AccountNumber}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" style="margin: 7px;" id="txt_TenantAccountNumber" class="form-control "
+            placeholder="{{updateTenant_AccountNumber}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_AccountType}}</h5>
+        </div>
+        <div class="col-lg-4 ">
+          <select class="dropdown form-control " style="margin: 7px;" id="ddl_updatetenentAccountType"
+            placeholder="Entrance">
+            <option value="" class="" selected="selected">Select Account Type</option>
+            <option label="Commercial" value="object:1265">Commercial</option>
+            <option label="Residential" value="object:1266">Residential</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_SwiftCode}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="text" style="margin: 7px;" id="txt_TenantSwiftCode" class="form-control"
+            placeholder="{{updateTenant_SwiftCode}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_Comments}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <textarea rows="5" style="margin: 7px;" id="txt_TenantComments" class="form-control"
+            placeholder="{{updateTenant_Comments}}"></textarea>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_Attachment}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <ngx-dropzone style="margin: 7px;" class="dropzone_vendorinvoice" id="dropzone_Attachment"></ngx-dropzone>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_Agreement}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <ngx-dropzone style="margin: 7px;" class="dropzone_vendorinvoice" id="dropzone_Aggrement"></ngx-dropzone>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">{{updateTenant_ProfilePhoto}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <ngx-dropzone style="margin: 7px;" class="dropzone_vendorinvoice" id="dropzone_ProfilePhoto"></ngx-dropzone>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel"> {{updateTenant_LeaseStartDate}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="date" style="margin: 7px;" id="txt_TenantLeaseStartDate" class="form-control "
+            placeholder="{{updateTenant_LeaseStartDate}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel"> {{updateTenant_LeaseEndDate}}</h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="date" style="margin: 7px;" id="txt_TenantLeaseEndDate" class="form-control "
+            placeholder="{{updateTenant_LeaseEndDate}}">
+        </div>
+      </div> -->
+
+
+      <div class="row">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-2">
+          <button class="savebutton" id="btn_maintainancesave" type="submit">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

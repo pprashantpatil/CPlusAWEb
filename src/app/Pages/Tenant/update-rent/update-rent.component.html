@@ -1,0 +1,346 @@
+<div class="container-fluid Pages_background">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="Pages_header"> {{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span class="building"> {{tenentUpdateRent_breadchrumb}} </span> </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard ">
+        <div>
+            <div class="col-lg-3" *ngIf="RentID==null">
+                <h3 class="panel-title clearfix formlabel">{{tenentUpdateRent_PageTitle}}
+                </h3>
+            </div>
+            <div class="col-lg-3" *ngIf="RentID!=null">
+                <h3 class="panel-title clearfix formlabel">EDIT RENT PAYMENTS
+                </h3>
+            </div>
+            <div class="col-lg-6"></div>
+            <div class="col-lg-3  dashbutton ">
+                <!-- <button type="button" style="margin-top: -11px;margin-right: -11px; " routerLinkActive="active-link"
+                    id="btn_button" class="">
+                    {{tenentUpdateRent_button_Dashboard}}
+                </button> -->
+            </div>
+        </div>
+        <br>
+        <hr>
+        <form>
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel ">{{tenentUpdateRent_Building}} <span class="starspan">*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select (change)="GetFloor($event)" [(ngModel)]="RentEntity.BuildingID" name="BuildingID"
+                        class="dropdown form-control " id="updaterentBuilding">
+                        <option value="0" selected="selected">Select Building</option>
+                        <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                    </select>
+                    <span class="Validationlabels" *ngIf='RentEntity.BuildingID==0 && Isempty'>* Please
+                        Select
+                        {{tenentUpdateRent_Building}}</span>
+                </div>
+            </div>
+            <br>
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{tenentUpdateRent_Floor}} <span class="starspan">*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select (change)="GetUnit($event)" [(ngModel)]="RentEntity.Floor" name="Floor"
+                        class="dropdown form-control" id="updaterentFloor" placeholder="Select Building">
+                        <option value="0" selected="selected">Select Floor</option>
+                        <option value="{{floor.id}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+                    </select>
+                    <span class="Validationlabels" *ngIf='RentEntity.Floor==0 && Isempty'>* Please
+                        Select
+                        {{tenentUpdateRent_Floor}}</span>
+                </div>
+            </div>
+            <br>
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{tenentUpdateRent_Unit}}<span class="starspan">*</span> </h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select class="dropdown form-control" [(ngModel)]="RentEntity.Unit" name="Unit" id="ddl_rentUnit"
+                        placeholder="Select Unit" (change)="UnitlistID($event)">
+                        <option value="0">Select Unit</option>
+                        <option value="{{Unit.id}}" *ngFor="let Unit of Unitlist">{{Unit.unitID}}</option>
+                    </select>
+                    <span class="Validationlabels" *ngIf='RentEntity.Unit==0 && Isempty'>* Please
+                        Select
+                        {{tenentUpdateRent_Unit}}</span>
+                </div>
+            </div>
+            <br>
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{tenentUpdateRent_TenantName}} <span class="starspan">*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control" [(ngModel)]="RentEntity.TenantNamelist" name="TenantNamelist"
+                        id="updaterentTenant" placeholder="Select Tenant">
+                        <option value="0">Select Tenent</option>
+                        <option value="{{tenent.id}}" *ngFor="let tenent of Tenentlist">{{tenent.tenantName}}</option>
+                    </select>
+                    <span class="Validationlabels" *ngIf='RentEntity.TenantNamelist==0 && Isempty'>* Please
+                        Select
+                        {{tenentUpdateRent_TenantName}}</span>
+                </div>
+            </div>
+            <br>
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{tenentUpdateRent_RentType}}<span class="starspan">*</span> </h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select class="dropdown form-control " [(ngModel)]="RentEntity.RentTypeID" name="RentTypeID"
+                        id="updaterentRentType" placeholder="Select Floor">
+                        <option value="0">Select Rent Type</option>
+                        <option value="{{Rent.id}}" *ngFor="let Rent of Rentlist">{{Rent.short}}</option>
+                    </select>
+                    <span class="Validationlabels" *ngIf='RentEntity.RentTypeID==0 && Isempty'>* Please
+                        Select
+                        {{tenentUpdateRent_RentType}}</span>
+                </div>
+            </div>
+            <br>
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> {{tenentUpdateRent_Dateofpayments}} </h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="date" [(ngModel)]="RentEntity.Rentpaymentdate" name="Rentpaymentdate"
+                        class="form-control " id="txt_DateofPayments" placeholder="Date" min="{{mindate}}">
+                </div>
+            </div>
+            <br>
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">Rent Amount <span class="starspan">*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <input type="text" class="form-control " [(ngModel)]="RentEntity.RentAmount" name="RentAmount"
+                        id="txt_RentAmount" placeholder="Rent Amount">
+                    <span class="Validationlabels" *ngIf='RentEntity.RentAmount==0&&Isempty '>* Please
+                        Fill
+                        {{tenentUpdateRent_RentAmount}}</span>
+                </div>
+            </div>
+            <br>
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">Rent For The Month</h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select [(ngModel)]="RentEntity.Rentformonth" (change)="GetRentPaymentMontn($event)"
+                        name="Rentformonth" class="dropdown form-control " id="ddl_rentRentMonth"
+                        placeholder="Select Month">
+                        <option value="" class="" selected="selected">Select Month</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="Penalty==true">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">Penalty Amount</h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control " [(ngModel)]="RentEntity.Penalty" name="Chequeno"
+                        id="txt_Cheque" placeholder="Penalty">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{tenentUpdateRent_Comments}} </h5>
+                </div>
+                <div class="col-lg-4">
+                    <textarea rows="5" [(ngModel)]="RentEntity.Comments" name="Comments" class="form-control"
+                        id="txt_rentComments" placeholder=" Comments"></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{tenentUpdateRent_PaymentType}} <span class="starspan">*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <select [(ngModel)]="RentEntity.PaymentType" (change)="getpaymenttype($event)" name="PaymentType"
+                        class="dropdown form-control " id="ddl_rentPaymentType">
+                        <option value="0">Select Payment Type</option>
+                        <option value="1">Cash</option>
+                        <option value="2">Online</option>
+                        <option value="3">Cheque</option>
+                        <option value="4">CreditCard</option>
+                        <option value="5">DebitCard</option>
+                        <!-- <option value="{{Payment.id}}" *ngFor="let Payment of Paymentlist">{{Payment.short}}</option> -->
+                    </select>
+                    <span class="Validationlabels" *ngIf='RentEntity.PaymentType==0 && Isempty'>* Please
+                        Select
+                        {{tenentUpdateRent_PaymentType}}</span>
+                </div>
+
+            </div>
+            <br>
+            <div class="row" *ngIf="cheque_show">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">Cheque No</h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <input type="text" class="form-control " [(ngModel)]="RentEntity.Chequeno" name="Chequeno"
+                        id="txt_Cheque" placeholder="Cheque no">
+                </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="cheque_show">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">Cheque Photo</h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <ngx-dropzone [showPreviews]="true" (filesAdded)="onFilesAddedPhoto($event)"
+                        [(ngModel)]="RentEntity.ChequePhoto" name="ChequePhoto" class="dropzone_vendorinvoice">
+                    </ngx-dropzone>
+                </div>
+                <div class="col-lg-4">
+                    <img src="{{showchequephoto}}">
+                </div>
+            </div>
+            <br>
+
+            <div class="row" *ngIf="showonlinecard">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> TransactionID </h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="number" id="txt_ChequeNo" name="Transaction" class="form-control"
+                        placeholder=" TransactionID ">
+                </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="showonlinecard">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> Date </h5>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <input type="date" name="RentDate" id="txt_RentDate" required placeholder="Date"
+                            class="form-control" min="{{mindate}}" value="{{mindate}}">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="showonlinecard">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> Bank Name </h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" id="txt_BankName" name="bankname" class="form-control" placeholder="Bank Name">
+                </div>
+            </div>
+
+
+            <div class="row" *ngIf="Card_show" style="margin-top: -55px;">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">Name On Card
+                    </h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <input type="text" class="form-control " [(ngModel)]="RentEntity.NameOnCard" name="Chequeno"
+                        id="txt_CardName" placeholder="Card Name">
+                </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="Card_show">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">Card Number(Last 4 Digits)
+                    </h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="number" class="form-control " [(ngModel)]="RentEntity.CardNumber" name="Card Number"
+                        id="txt_CardNumber" placeholder="Card Number">
+                </div>
+            </div>
+            <br>
+
+            <div class="row" *ngIf="Card_show">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">Valid Upto
+                    </h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <input type="number" class="form-control " [(ngModel)]="RentEntity.Validupto" name="Validupto"
+                        id="txt_Validupto" placeholder="Valid Upto">
+                </div>
+            </div>
+            <br>
+
+            <div class="row" *ngIf="Card_show">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">Card Type
+                    </h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select [(ngModel)]="RentEntity.CardType" name="CardType" class="dropdown form-control "
+                        id="ddl_rentCardType" placeholder="Select Card Type">
+                        <option value="0">Select Card Type</option>
+                        <option value="{{Card.id}}" *ngFor="let Card of Cardlist">{{Card.short}}</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-2" *ngIf="RentID==null">
+                    <button class="savebutton" (click)="InsertRent()" id="btn_rentsave"
+                        type="submit">{{tenentUpdateRent_button_save}}</button>
+                </div>
+
+                <div class="col-lg-2" *ngIf="RentID!=null">
+                    <button class="savebutton" (click)="UpdateRent()" id="btn_rentsave" type="submit">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>

@@ -1,0 +1,198 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header" style="   margin-left: -14px;">Staff Payments</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <!-- <span class="building"> Staff / Staff Payments</span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard " style="    margin-left: -14px;
+  margin-top: 29px;
+">
+    <div>
+      <div class="col-lg-3">
+        <!-- <h3 class="panel-title clearfix formlabel">STAFF PAYMENTS
+        </h3> -->
+      </div>
+      <!-- <div class="col-lg-3" *ngIf="RentID!=null">
+        <h3 class="panel-title clearfix formlabel">EDIT STAFF PAYMENTS
+        </h3>
+      </div> -->
+      <div class="col-lg-6"></div>
+      <div class="col-lg-3  dashbutton ">
+        <!-- <button type="button" style="margin-top: -11px;margin-right: -11px; " routerLinkActive="active-link"
+                    id="btn_button" class="">
+                    {{tenentUpdateRent_button_Dashboard}}
+                </button> -->
+      </div>
+    </div>
+    <br>
+    <hr>
+    <form>
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">
+            Staff Name
+            <span style="color: red;">*</span>
+          </p>
+        </div>
+        <div class="col-lg-5">
+          <select class="dropdown form-control" [(ngModel)]="StaffPaymentsEntity.staffID" id="ddl_BuildingName" name="BuildingName"
+            required style="width:322px">
+            <option value="0">Select Staff</option>
+            <option *ngFor="let staff of Stafflist" value="{{staff.id}}">{{staff.name}}</option>
+          </select>
+        </div>
+      </div>
+      <br>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Payment For</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" name="PaymentFor" [(ngModel)]="StaffPaymentsEntity.PaymentFor" id="PaymentFor" class="form-control" style="width: 322px;"
+            placeholder="PaymentFor">
+        </div>
+      </div>
+      <br>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Date</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="date" name="Date" [(ngModel)]="StaffPaymentsEntity.PaymentDate" class="form-control" id="ddl_Date" style="width: 322px;">
+        </div>
+      </div>
+      <br>
+
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Amount</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" name="Amount" [(ngModel)]="StaffPaymentsEntity.Amount" id="Amount" class="form-control" style="width: 322px; "
+            placeholder="Amount">
+        </div>
+      </div>
+      <br>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Comments</h5>
+        </div>
+        <div class="col-lg-5">
+          <textarea type="text" name="PaymentFor" [(ngModel)]="StaffPaymentsEntity.Comments" id="PaymentFor" class="form-control" style="width: 322px;height: 115px;"
+            placeholder="Comments"></textarea>
+        </div>
+      </div>
+      <br>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Payment Mode
+            <span class="starspan">*</span>
+          </h5>
+        </div>
+        <div class="col-lg-4">
+          <select (change)="getpaymenttype($event)" style="width: 322px;" [(ngModel)]="StaffPaymentsEntity.PaymentMode" name="PaymentMode" class="dropdown form-control "
+            id="ddl_PaymentMode">
+            <option value="none">Select Payment Mode</option>
+            <option value="1">Cash</option>
+            <option value="2">Online</option>
+            <option value="3">Cheque</option>
+            <!-- <option value="{{Payment.id}}" *ngFor="let Payment of Paymentlist">{{Payment.short}}</option> -->
+          </select>
+        </div>
+      </div>
+      <br>
+      <div class="row" *ngIf="cheque_show">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Cheque No</h5>
+        </div>
+        <div class="col-lg-4 ">
+          <input type="text" class="form-control" [(ngModel)]="StaffPaymentsEntity.ChequeNo" name="Chequeno" id="txt_Cheque" placeholder="Cheque no">
+        </div>
+      </div>
+      <br>
+
+      <div class="row" *ngIf="cheque_show">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel">Bank Name</h5>
+        </div>
+        <div class="col-lg-4 ">
+          <input type="text" class="form-control" [(ngModel)]="StaffPaymentsEntity.BankName" name="BankName" id="txt_BankName" placeholder="BankName">
+        </div>
+      </div>
+      <br>
+
+      <div class="row" *ngIf="showonlinecard">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel"> TransactionID </h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="number" id="txt_ChequeNo" [(ngModel)]="StaffPaymentsEntity.TransactionID" name="Transaction" class="form-control"
+            placeholder=" TransactionID ">
+        </div>
+      </div>
+      <br>
+      <div class="row" *ngIf="showonlinecard">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel"> Date </h5>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <input type="date" name="RentDate" [(ngModel)]="StaffPaymentsEntity.Chech_Trans_Date" id="txt_RentDate" required placeholder="Date"
+              class="form-control" min="{{mindate}}" value="{{mindate}}">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row" *ngIf="showonlinecard">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel"> Bank Name </h5>
+        </div>
+        <div class="col-lg-4">
+          <input type="text" id="txt_BankName" [(ngModel)]="StaffPaymentsEntity.BankName" name="bankname" class="form-control" placeholder="Bank Name">
+        </div>
+      </div>
+      <br>
+
+
+      <div class="row">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-2" *ngIf="StaffPaymentsID==null">
+          <button class="savebutton" (click)="InsertStaffPayments()" id="btn_rentsave" type="submit">Save</button>
+        </div>
+
+        <div class="col-lg-2" *ngIf="StaffPaymentsID!=null">
+          <button class="savebutton" (click)="UpdateStaff_Payment()" id="btn_rentsave" type="submit">Update</button>
+        </div>
+
+      </div>
+
+
+    </form>
+  </div>

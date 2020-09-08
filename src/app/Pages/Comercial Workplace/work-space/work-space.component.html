@@ -1,0 +1,225 @@
+<div class="container-fluid Pages_background">
+    <div class="row">
+        <div class="col-lg-5">
+            <h4 class="Pages_header">{{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-5">
+            <div class="mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span> {{workSpaceBooking_BreadChrumb}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+        <div class="row p-2 ">
+            <div class="col-lg-12 pannel">
+                <h4 class="paneltitle">Book New Workspace</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-8">
+                <br>
+                <br>
+                <div class="row ">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5>{{workSpaceBooking_Building}}<span class="starspan">*</span> </h5>
+                    </div>
+                    <div class="col-lg-8">
+                        <select (change)="GetFloor($event)" class="dropdown form-control " id="BuildingID"
+                            name="Building" required="" [(ngModel)]="workspaceBooking.BuildingID">
+                            <option value="0" selected="selected">Select Building</option>
+                            <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='workspaceBooking.BuildingID==0 && Isempty'>* Please
+                            Select
+                            {{workSpaceBooking_Building}}</span>
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5> {{workSpaceBooking_Floor}} <span class="starspan">*</span> </h5>
+                    </div>
+                    <div class="col-lg-8">
+                        <select (change)="GetWorkSpaceDetails($event)" [(ngModel)]="workspaceBooking.FloorID"
+                            class="dropdown form-control">
+                            <option value="0" selected="selected"> Select Floor</option>
+                            <option value="{{floor.id}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='workspaceBooking.FloorID==0 && Isempty'>* Please
+                            Select
+                            {{workSpaceBooking_Floor}}</span>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5> {{workSpaceBooking_Type}} <span class="starspan">*</span> </h5>
+                    </div>
+                    <div class="col-lg-8">
+                        <select (change)="filterbytype($event)" [(ngModel)]="workspaceBooking.WsType"
+                            class="dropdown form-control ">
+                            <option value="0" selected="selected">Select Type</option>
+                            <option value="{{Type.id}}" *ngFor="let Type of Typelist">{{Type.short}}</option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='workspaceBooking.WsType==0 && Isempty'>* Please
+                            Select
+                            {{workSpaceBooking_Type}}</span>
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5> {{workSpaceBooking_WorkStation}}<span class="starspan">*</span> </h5>
+                    </div>
+                    <div class="col-lg-8">
+                        <select [(ngModel)]="workspaceBooking.WorkstationID" name="WorkstationID" placeholder="Name"
+                            class="dropdown form-control" [(ngModel)]="workspaceBooking.WorkstationID">
+                            <option value="0">Select Workspace</option>
+                            <option value="{{workspace.wsid}}" *ngFor="let workspace of filteredwslist">
+                                {{workspace.workSpaceID}}</option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='workspaceBooking.WorkstationID==0 && Isempty'>* Please
+                            Select
+                            {{workSpaceBooking_WorkStation}}</span>
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5> {{workSpaceBooking_Name}} </h5>
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="form-control " [(ngModel)]="workspaceBooking.Name" placeholder="Name">
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5> {{workSpaceBooking_Mobile}} </h5>
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="form-control" [(ngModel)]="workspaceBooking.MobileNumber"
+                            placeholder="Mobile Number">
+                        <span class="Validationlabels" *ngIf='PhoneNumberValid==false'>
+                            Invalid Mobile Number
+                        </span>
+
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5> {{workSpaceBooking_Email}} </h5>
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="form-control" [(ngModel)]="workspaceBooking.Email" placeholder="Email">
+                        <span class="Validationlabels" *ngIf='EmailValid==false'>
+                            Invalid Email
+                        </span>
+                    </div>
+
+                </div>
+                <br>
+                <div class="row ">
+
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5> {{workSpaceBooking_Company}} </h5>
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="form-control" [(ngModel)]="workspaceBooking.Company" placeholder="Company">
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5> {{workSpaceBooking_StartDate}} </h5>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <input type="date" [(ngModel)]="workspaceBooking.startDate" class="form-control"
+                                min="{{mindate}}">
+
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5> {{workSpaceBooking_EndDate}} </h5>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <input type="date" [(ngModel)]="workspaceBooking.enddate" class="form-control "
+                                min="{{mindate}}">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5> {{workSpaceBooking_StartTime}}<span class="starspan">*</span> </h5>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <input type="time" [(ngModel)]="workspaceBooking.startTime" class="form-control ">
+                        </div>
+                        <span class="Validationlabels"
+                            *ngIf='workspaceBooking.startTime==""&&Isempty ||workspaceBooking.startTime=="none"'>*
+                            Please
+                            Fill
+                            {{workSpaceBooking_StartTime}}</span>
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5> {{workSpaceBooking_EndTime}}<span class="starspan">*</span> </h5>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <input type="time" [(ngModel)]="workspaceBooking.endTime" class="form-control">
+                        </div>
+
+                        <span class="Validationlabels"
+                            *ngIf='workspaceBooking.endTime==""&&Isempty ||workspaceBooking.endTime=="none"'>* Please
+                            Fill
+                            {{workSpaceBooking_EndTime}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-2"><button type="button" (click)="InsertWorkplaceRequest()"
+                            class="btn btn-block btn-md savebutton">{{workSpaceBooking_Save}}</button></div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+            </div>
+        </div>
+    </div>
+</div>

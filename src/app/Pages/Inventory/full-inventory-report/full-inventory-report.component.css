@@ -1,0 +1,43 @@
+.tableresposive{
+    padding: 22px;
+    margin-left: -4px;
+}
+.tableheaderfont{
+    color: white;
+}
+.tableheader{
+    border: black;
+    background-color: #00b5d7;;
+    text-align: center;
+    
+    }
+    .mainrow{
+        float: right;
+        margin-top: 26px;
+    }
+    .maincard{
+        float: initial;
+        background: white;
+    
+    }
+
+    .excelbutton{
+        margin-left: auto;
+        margin-right: 20px;
+        background-color: #00b5d7;
+        color: white;
+        margin-bottom: 8px;
+        margin-top: 16px;
+    }
+    
+@media screen and (max-width: 1024px) {
+    .Pages_header{
+        margin-top: 60px;
+    }
+    
+  
+    }
+    @media screen and (min-width: 1400px) {
+     
+      
+    }

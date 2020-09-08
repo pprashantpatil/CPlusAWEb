@@ -1,0 +1,204 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">New Project Schedule</h4>
+    </div>
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="newprbc"> Dashboard / New Project Schedule </span> </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div class="row">
+      <h3 class="paneltitle">Project Schedule</h3>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 ">
+        <p style="padding:5px">Project Name <span class="starspan">*</span></p>
+      </div>
+      <div class="col-lg-9">
+        <select [(ngModel)]="ProjectTasksEntity.ProjectID" name="ProjectID" (change)="tasks($event.target.value)"
+          class="dropdown form-control" style="width: 350px;" required id="ddl_RemindIn">
+          <option value="0">Select Projects</option>
+          <option value="{{Project.projectID}}" *ngFor="let Project of Projectlist">
+            {{Project.request}}
+          </option>
+        </select>
+
+        <span class="Validationlabels" *ngIf='ProjectTasksEntity.ProjectID==0 && Isempty'>* Please
+          Select
+          Project Name</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 ">
+        <p style="padding:5px"> Start Date <span class="starspan">*</span></p>
+      </div>
+      <div class="col-lg-9">
+        <input type="date" [(ngModel)]="ProjectTasksEntity.StartDate" name="StartDate" id="txt_PurchaseDate" required
+          placeholder="Date" class="form-control" style="width: 350px;" min="{{mindate}}">
+
+        <span class="Validationlabels"
+          *ngIf='ProjectTasksEntity.StartDate==""&&Isempty ||ProjectTasksEntity.StartDate=="none"'>* Please
+          Fill
+          Start Date </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 ">
+        <p style="padding:5px"> End Date</p>
+      </div>
+      <div class="col-lg-9">
+        <input type="date" [(ngModel)]="ProjectTasksEntity.EndDate" name="EndDate" id="txt_PurchaseDate" required
+          placeholder="Date" class="form-control" style="width: 350px;" min="{{mindate}}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 ">
+        <p style="padding:5px">Start Time <span class="starspan">*</span></p>
+      </div>
+      <div class="col-lg-9">
+        <input type="time" [(ngModel)]="ProjectTasksEntity.StartTime" name="StartTime" id="txt_PurchaseDate" required
+          placeholder="Start Time" class="form-control" style="width: 350px;" min={{mintime}}>
+        <span class="Validationlabels"
+          *ngIf='ProjectTasksEntity.StartTime==""&&Isempty ||ProjectTasksEntity.StartTime=="none"'>* Please
+          Fill
+          Start Time </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 ">
+        <p style="padding:5px">End Time</p>
+      </div>
+      <div class="col-lg-9">
+        <input type="time" [(ngModel)]="ProjectTasksEntity.EndTime" name="EndTime" id="txt_PurchaseDate" required
+          placeholder="End Time" class="form-control" style="width: 350px;" min={{mintime}}>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 ">
+        <p style="padding:5px">Tasks <span class="starspan">*</span></p>
+      </div>
+      <div class="col-lg-9">
+        <textarea rows="3" [(ngModel)]="ProjectTasksEntity.Tasks" name="Tasks" class="form-control" id="txt_Description"
+          required placeholder="Tasks" style="width: 350px;"></textarea>
+        <span class="Validationlabels"
+          *ngIf='ProjectTasksEntity.Tasks==""&&Isempty ||ProjectTasksEntity.Tasks=="none"'>* Please
+          Fill
+          Tasks</span>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 ">
+        <p style="padding:5px">Milestones</p>
+      </div>
+      <div class="col-lg-9">
+        <input name="HandicapBusRequired" (change)="OnMilestonecheck($event)" type="checkbox" class="maincheckbox"
+          required id="txt_Miletone">
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 ">
+        <!-- <p style="padding:5px">Milestones</p> -->
+      </div>
+      <div class="col-lg-9">
+        <button class="savebutton" type="button" (click)="AddTasks()">ADD</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div class="row">
+      <h3 class="paneltitle">Project Scheduled Details</h3>
+    </div>
+    <hr>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-condensed">
+        <tbody>
+          <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: white"  >
+            <td>Project Name</td>
+            <td>Tasks</td>
+            <td>Start Date</td>
+            <td>End Date</td>
+            <td>Start Time </td>
+            <td>End Time</td>
+            <td>Actions</td>
+          </tr>
+
+          <tr *ngFor="let Projects of ProjectDetails">
+            <td style="background-color: forestgreen" *ngIf="Projects.isMilestone==true">
+              {{Projects.projectName}}</td>
+            <td *ngIf="Projects.isMilestone==false">{{Projects.projectName}}</td>
+
+
+            <td style="background-color: forestgreen" *ngIf="Projects.isMilestone==true">{{Projects.tasks}}
+            </td>
+            <td *ngIf="Projects.isMilestone==false">{{Projects.tasks}}</td>
+
+
+            <td style="background-color: forestgreen" *ngIf="Projects.isMilestone==true">
+              {{Projects.startDate|date}}</td>
+            <td *ngIf="Projects.isMilestone==false">{{Projects.startDate|date}}</td>
+
+
+            <td style="background-color: forestgreen" *ngIf="Projects.isMilestone==true">
+              {{Projects.endDate|date}}</td>
+            <td *ngIf="Projects.isMilestone==false">{{Projects.endDate|date}}</td>
+
+
+            <td style="background-color: forestgreen" *ngIf="Projects.isMilestone==true">
+              {{Projects.startTime|date:"hh:mm:ss aa"}}</td>
+            <td *ngIf="Projects.isMilestone==false">{{Projects.startTime|date:"hh:mm:ss aa"}}</td>
+
+
+            <td style="background-color: forestgreen" *ngIf="Projects.isMilestone==true">
+              {{Projects.endTime|date:"hh:mm:ss aa"}}</td>
+            <td *ngIf="Projects.isMilestone==false">{{Projects.endTime|date:"hh:mm:ss aa"}}</td>
+
+            <td style="background-color: forestgreen" *ngIf="Projects.isMilestone==true">
+              <a><i class="far fa-trash-alt" data-toggle="tooltip" title="Delete"></i></a>
+            </td>
+
+            <td *ngIf="Projects.isMilestone==false">
+              <a><i class="far fa-trash-alt" data-toggle="tooltip" title="Delete"
+                  style="background-color: white"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+      </div>
+      <div class="col-lg-2">
+        <button class="savebutton" type="button" style="width: 263px;" (click)="SaveEntireProjectTasks()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

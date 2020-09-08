@@ -1,0 +1,173 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header">{{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <!-- <span class="building"> {{newItemMaster_BreadChrumb}} </span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <h4 class="paneltitle "> {{pageMenuTitle}}</h4>
+    <hr>
+    <form #loginForm="ngForm">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <p class="formlabel">Property
+                <span>*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <div class="form-group">
+                <select class="form-control " disabled [(ngModel)]="buildingid" name="buildingid" id="ddl_TypeID"
+                  (change)="GetbuldingID($event)">
+                  <option value="undefined">Select Property</option>
+                  <option *ngFor="let list of buildinglist" value="{{list.id}}">
+                    {{list.name}}</option>
+                </select>
+                <span class="Validationlabels" *ngIf="itemtypeID==undefined&&Isempty">
+                  Plaese Fill Item Name
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-4"></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <p class="formlabel"> Category
+                <span>*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <div class="form-group">
+                <select class="form-control " [(ngModel)]="Category" name="Category" id="Category">
+                  <option value="undefined">select</option>
+                  <option *ngFor="let category of CategoryLists" value="{{category.category}}">
+                    {{category.category}}</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="col-lg-4"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <p class="formlabel">Sub Category
+                <span>*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <div class="form-group">
+                <select class="form-control " [(ngModel)]="itemtypeID" name="contact" id="ddl_TypeID"
+                  (change)="GetItemTypeID($event)">
+                  <option value="undefined">select</option>
+                  <option *ngFor="let itemlist of itemtypelist" value="{{itemlist.id}}">
+                    {{itemlist.short}}</option>
+                </select>
+                <span class="Validationlabels" *ngIf="itemtypeID==undefined&&Isempty">
+                  Plaese Fill Item Name
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-4"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <p class="formlabel">{{newItemMaster_Item}}
+                <span>*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <div class="form-group">
+                <input type="text" class="form-control" name="itemname" [(ngModel)]="itemname"
+                  placeholder="{{newItemMaster_Item}}" required id="txt_ItemName">
+                <span *ngIf="itemname==undefined&&Isempty">
+                  Plaese Fill Item Name
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-4"></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <p class="formlabel">{{newItemMaster_Description}}
+                <span>*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <div class="form-group">
+                <textarea type="text" required name="itemdesc" [(ngModel)]="itemdesc" id=txt_ItemDescription
+                  class="form-control " placeholder="{{newItemMaster_Description}}" rows="4"></textarea>
+              </div>
+            </div>
+            <div class="col-lg-4"></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <p class="formlabel">Expiry Date
+                <span>*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <div class="form-group">
+                <input type="date" class="form-control" [(ngModel)]="ExpiryDate" name="ExpiryDate" required
+                  id="ExpiryDate" placeholder="Invoice Amount">
+              </div>
+            </div>
+            <div class="col-lg-4"></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <p class="formlabel">MRP
+                <span>*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <div class="form-group">
+                <input type="number" class="form-control" [(ngModel)]="mrp" name="mrp" required id="mrp"
+                  placeholder="Enter Price Of Item">
+              </div>
+            </div>
+            <div class="col-lg-4"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-2" *ngIf="this.NewItemID==null">
+              <div class="form-group">
+                <button type="submit" [disabled]="loginForm.form.invalid" (click)="insertitem()"
+                  class="btn btn-block btn-md savebutton">Save</button>
+              </div>
+            </div>
+            <div class="col-lg-2" *ngIf="this.NewItemID!=null">
+              <div class="form-group">
+                <button type="submit" [disabled]="loginForm.form.invalid" class="btn btn-block btn-md savebutton"
+                  (click)="Updateitem()">Update</button>
+              </div>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-4"></div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>

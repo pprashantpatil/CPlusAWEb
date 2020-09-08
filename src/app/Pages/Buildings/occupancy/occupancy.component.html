@@ -1,0 +1,255 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">OCCUPANCY</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> Buildings </span> / Occupancy</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-7">
+      <div class="container-fluid  shadow p-3 mb-5 bg-white rounded maincard">
+        <div class="row  p-2">
+          <div class="col-lg-12 pannel">
+            <h6 class="paneltitle" style="margin: 4px;
+            margin-left: 3px;">SPACE MGMT
+            </h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3">
+            <select (change)="GetFloor($event)" [(ngModel)]="BuildingID" class="dropdown form-control maindropdown"
+              name="Building" required="">
+              <option value="none">Select Building</option>
+              <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+            </select>
+          </div>
+          <div class="col-lg-2">
+          </div>
+          <div class="col-lg-3">
+            <select (change)="GetFloorID($event)" class="dropdown form-control maindropdown" name="Building"
+              required="">
+              <option value="none">Select Floor</option>
+              <option value="{{Floor.id}}" *ngFor="let Floor of Floorlist">{{Floor.floor}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3">
+            <input type="text" style="margin-left: 8px;
+            width: 210px;
+            margin-top: 19px;" placeholder="search.." [(ngModel)]="Search" class="form-control"
+              id="txt_searchBuilding">
+          </div>
+          <div class="c0l-lg-3" style="margin-left: 141px;
+          margin-top: 36px;">
+            <label class="switch">
+              <input type="checkbox" checked (change)="changeStatus($event)">
+              <span class="slider round"></span>
+            </label>
+          </div>
+          
+        </div>
+        <!-- 
+        <div class="row">
+          <div class="col-lg-3">
+            <select (change)="GetType($event)" class="dropdown form-control maindropdown" name="Building" required="">
+              <option value="none">Select Type</option>
+              <option value="0" selected="selected">Select</option>
+              <option *ngFor="let tenanttype of TenentTypelist" value="{{tenanttype.id}}">
+                {{tenanttype.short}}</option>
+            </select>
+          </div>
+        </div> -->
+
+        <div class="row">
+          <div class="col-lg-10" style=" padding: 24px;">
+            <span style="background-color:#90ee90 ;">
+              <span style="color:black ;width: 87px;
+              text-align: center;">Sold</span>
+            </span>
+            <span style="background-color:#f0e68c">
+              <span style="color:black ;width: 140px;
+              text-align: center;">Under Construction</span>
+            </span>
+            <span style="background-color:#010101">
+              <span style="color:white;width: 87px;
+              text-align: center;">Not Sold</span>
+            </span>
+          </div>
+          <!-- <div class="col-lg-2" style="padding: 24px;">
+            <h5 class="pg_headingsInCaps ng-binding"> Total: {{Total}}</h5>
+            <h5 class="pg_headingsInCaps ng-binding"> Tenant : {{TenantCount}}</h5>
+            <h5 class="pg_headingsInCaps ng-binding"> Owner : {{OwnerCount}}</h5>
+          </div> -->
+        </div>
+
+        <div class="row home">
+          <div class="col-lg-2" *ngFor="let pa of FilteredparkingAllotmentList|filter:Search">
+            <img src="http://14.192.17.225/Exchange106/assets/Login/home1.png" (click)="ParkingDetails(pa)"
+              *ngIf="pa.constructionStatusID==NULL" style="height: 80px;
+              width: 98px;
+              padding: 6px;">
+            <h6 style="text-align: center;margin-left: 32px;" *ngIf="pa.constructionStatusID==NULL">{{pa.unitID}}</h6>
+
+
+            <img src="http://14.192.17.225/Exchange106/assets/Login/home2.png" (click)="ParkingDetails(pa)"
+              *ngIf="pa.constructionStatusID==14" style="height: 80px;
+              width: 98px;
+              padding: 6px;">
+            <h6 style="text-align: center; margin-left: 32px;" *ngIf="pa.constructionStatusID==14">{{pa.unitID}}</h6>
+
+
+            <img src="http://14.192.17.225/Exchange106/assets/Login/home3.png" (click)="ParkingDetails(pa)"
+              *ngIf="pa.constructionStatusID==13" style="height: 80px;
+              width: 98px;
+              padding: 6px;">
+            <h6 style="text-align: center;margin-left: 32px;" *ngIf="pa.constructionStatusID==13">{{pa.unitID}}</h6>
+          </div>
+          <!-- <div class="col-lg-2">
+            <img src="http://14.192.17.225/fmslive/assets/img/home1.png" style="height: 50px;width: 50px; padding:6px">
+            <h6>F1-1001</h6>
+          </div>
+          <div class="col-lg-2">
+            <img src="http://14.192.17.225/fmslive/assets/img/home1.png" style="height: 50px;width: 50px; padding:6px">
+            <h6>F1-1001</h6>
+          </div>
+          <div class="col-lg-2">
+            <img src="http://14.192.17.225/fmslive/assets/img/home1.png" style="height: 50px;width: 50px; padding:6px">
+            <h6>F1-1001</h6>
+          </div>
+          <div class="col-lg-2">
+            <img src="http://14.192.17.225/fmslive/assets/img/home1.png" style="height: 50px;width: 50px; padding:6px">
+            <h6>F1-1001</h6>
+          </div>
+          <div class="col-lg-2">
+            <img src="http://14.192.17.225/fmslive/assets/img/home1.png" style="height: 50px;width: 50px; padding:6px">
+            <h6>F1-1001</h6>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5" *ngIf="ShowDetails">
+      <div class="container-fluid  shadow p-3 mb-12 bg-white rounded maincard">
+        <div class="row">
+          <div class="col-lg-4">
+            <h4>Details</h4>
+          </div>
+          <div class="col-lg-6">
+            <img class="profileimg" src="{{profilePhoto}}">
+          </div>
+          <div class="col-lg-4">
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-lg-12  table-responsive" style="padding: 31px;
+          margin-top: -53px;
+          margin-left: -17px;">
+            <table class="table table-bordered table-hover table-condensed">
+              <tbody>
+                <tr>
+                  <td>Name:</td>
+                  <td>{{tenantName}}</td>
+                </tr>
+                <tr>
+                  <td>Mobile Number :</td>
+                  <td>{{phoneNo}}</td>
+                </tr>
+                <tr>
+                  <td>Floor : </td>
+                  <td> {{floor}}</td>
+                </tr>
+                <tr>
+                  <td>Unit : </td>
+                  <td>{{unitID}}</td>
+                </tr>
+                <tr>
+                  <td>Type : </td>
+                  <td> Owner</td>
+                </tr>
+                <!-- <tr>
+                  <td>Number Of Residents :</td>
+                  <td> {{noOfResidents}}</td>
+                </tr>
+                <tr>
+                  <td>Number Of Pets : </td>
+                  <td>{{noOfPets}}</td>
+                </tr> -->
+                <tr>
+                  <td>Rent/Month :</td>
+                  <td> {{rentPerMonth}}</td>
+                </tr>
+                <tr>
+                  <td>Maintenance Amount/Month : </td>
+                  <td> {{maintenanceAmount}}</td>
+                </tr>
+                <tr>
+                  <td>Electricity Meter Number : </td>
+                  <td>{{electricMeterNo}}</td>
+                </tr>
+                <tr>
+                  <td>Water Meter Number :</td>
+                  <td>{{waterMeterNo}}</td>
+                </tr>
+                <!-- <tr>
+                  <td>Gas Meter Number:</td>
+                  <td> {{gasMeterNo}}</td>
+                </tr> -->
+                <tr>
+                  <td>Lease Start Date : </td>
+                  <td> {{leaseStartDate}}</td>
+                </tr>
+                <tr>
+                  <td>Lease End Date :</td>
+                  <td>{{leaseEndDate}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- <div class="col-lg-6">
+            <p>Name : {{tenantName}}</p>
+            <p>Mobile Number : {{phoneNo}} </p>
+
+
+            <p>Unit : {{unitID}}</p>
+            <p>Floor : {{floor}}</p>
+            <p>Type : {{short}}</p>
+            <p>Number Of Residents : {{noOfResidents}}</p>
+            <p>Number Of Pets : {{noOfPets}}</p>
+            <p>Rent/Month : {{rentPerMonth}}</p>
+            <p>Maintenance Amount/Month : {{maintenanceAmount}}</p>
+          </div>
+          <div class="col-lg-6">
+            <p>Electricity Meter Number : {{electricMeterNo}}</p>
+            <p>Water Meter Number : {{waterMeterNo}}</p>
+            <p>Gas Meter Number: {{gasMeterNo}}</p>
+            <p>Lease Start Date : {{leaseStartDate|date:'dd-mm-yyyy'}}</p>
+            <p>Lease End Date : {{leaseEndDate|date:'dd-mm-yyyy'}}</p>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

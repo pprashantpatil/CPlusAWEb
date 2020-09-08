@@ -1,0 +1,63 @@
+.bgOpen{
+    background-color:#29b1f0;
+}
+
+.bgred{
+    background-color: red
+}
+
+.bggreen{
+    background-color: rgb(26, 206, 26)
+}
+
+
+.Mobilecss{
+    padding: 24px;
+}
+
+.labels{
+    margin-left: -37px;
+  
+}
+
+@media screen and (min-width: 320px) {
+    .Mobilecss{
+        margin-left: 15px;
+    }
+    .labels{
+        margin-top: 43px;
+    }
+    
+  }
+
+  @media screen and (min-width: 1900px) {
+    .Mobilecss{
+        padding: 24px;
+    }
+    .labels{
+        margin-left: -37px;
+      
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
+    .Mobilecss{
+        padding: 24px;
+    }
+    .labels{
+        margin-left: -37px;
+      
+    }
+    
+  }
+
+  @media screen and (min-width: 1400px) {
+    .Mobilecss{
+        padding: 24px;
+    }
+    .labels{
+        margin-left: -37px;
+      
+    }
+    
+  }

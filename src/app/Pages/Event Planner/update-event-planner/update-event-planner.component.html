@@ -1,0 +1,367 @@
+<div class="container-fluid Pages_background ">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header">{{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-4">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span class="building">{{updateEventPlanner_breadchrumb}} </span> </div>
+            </div>
+        </div>
+    </div>
+    <div class="shadow p-3 mb-5 bg-white col-lg-12 rounded maincard ">
+        <h6 class="paneltitle" *ngIf="Eventsid==null">Event Planner
+        </h6>
+        <h6 class="paneltitle" *ngIf="Eventsid!=null">Edit Event Planner
+        </h6>
+        <hr>
+        <div class="row">
+            <form class="col-lg-7">
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Event_name}}<span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="EventPlannerEntity.EventName" name="EventName" type="text" required
+                            id="txt_EventName" placeholder="Enter Event name" class="form-control maindropdown">
+                        <span class="Validationlabels"
+                            *ngIf='EventPlannerEntity.EventName=="" && Isempty ||EventPlannerEntity.EventName=="none"'>*
+                            Please
+                            Fill
+                            {{updateEventPlanner_Event_name}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Building}}<span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select (change)="GetBuildingAddress($event)" [(ngModel)]="EventPlannerEntity.BuildingID"
+                            name="BuildingID" class="dropdown form-control maindropdown" required
+                            id="ddl_EventPlannerBuilding">
+                            <option value="0">Select Building</option>
+                            <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='EventPlannerEntity.BuildingID==0 && Isempty'>* Please
+                            Select
+                            {{updateEventPlanner_Building}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Address}} <span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input value="{{BuildingAddress}}" type="text" required id="txt_EventPlannerAddress"
+                            placeholder="{{updateEventPlanner_Address}}" class="form-control maindropdown" id="txt_usr">
+                        <span class="Validationlabels" *ngIf='BuildingAddress==""&&Isempty '>*
+                            Please
+                            Fill
+                            {{updateEventPlanner_Address}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Location}} <span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input type="text" [(ngModel)]="EventPlannerEntity.Unit" name="Unit" required id="txt_Location"
+                            placeholder="{{updateEventPlanner_Location}}" class="form-control maindropdown"
+                            id="txt_usr">
+                        <span class="Validationlabels"
+                            *ngIf='EventPlannerEntity.Unit=="" && Isempty ||EventPlannerEntity.Unit=="none"'>*
+                            Please
+                            Fill
+                            {{updateEventPlanner_Location}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Request_Raised_By}}<span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input value="Admin" type="text" required id="txt_requestraised" placeholder="Admin"
+                            class="form-control maindropdown" id="txt_usr">
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Resources}} </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select [(ngModel)]="EventPlannerEntity.ResourceID" name="ResourceID"
+                            class="dropdown form-control maindropdown" required id="ddl_Resources">
+                            <option value="0">Select Resource</option>
+                            <option value="{{Resource.id}}" *ngFor="let Resource of ResourceLocation">
+                                {{Resource.resourceName}}</option>
+                        </select>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Start_Date}} <span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="EventPlannerEntity.StartDate" name="StartDate" type="date"
+                            id="txt_StartDate" required class="form-control maindropdown" min={{mindate}}>
+                        <span class="Validationlabels"
+                            *ngIf='EventPlannerEntity.StartDate=="" && Isempty ||EventPlannerEntity.StartDate=="none"'>*
+                            Please
+                            Fill
+                            {{updateEventPlanner_Start_Date}}</span>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">End Date <span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="EventPlannerEntity.EndDate" name="EndDate" type="date" id="txt_EndDate1"
+                            required class="form-control maindropdown" min={{mindate}}>
+                        <span class="Validationlabels"
+                            *ngIf='EventPlannerEntity.EndDate=="" && Isempty ||EventPlannerEntity.EndDate=="none"'>*
+                            Please
+                            Fill
+                            End Date</span>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2">
+                        <p style="padding:5px">{{updateEventPlanner_All_Day}}</p>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="switch">
+                            <input type="checkbox" id="chk_AllDay" checked (change)="changeStatus($event)">
+                            <span class="slider round"></span>
+                        </label>
+                        <div class="col-lg-4">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Start_Time}} <span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="EventPlannerEntity.StartTime" name="StartTime" type="time"
+                            id="txt_StartTime" required class="form-control maindropdown">
+                        <span class="Validationlabels"
+                            *ngIf='EventPlannerEntity.StartTime=="" && Isempty ||EventPlannerEntity.StartTime=="none"'>*
+                            Please
+                            Fill
+                            {{updateEventPlanner_Start_Time}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_End_Time}} <span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="EventPlannerEntity.EndTime" name="EndTime" type="time" id="txt_EndTime"
+                            required class="form-control maindropdown">
+                        <span class="Validationlabels"
+                            *ngIf='EventPlannerEntity.EndTime=="" && Isempty ||EventPlannerEntity.EndTime=="none"'>*
+                            Please
+                            Fill
+                            {{updateEventPlanner_End_Time}}</span>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                            <div class="col-lg-1">
+                            </div>
+                            <div class="col-lg-2 ">
+                                <p style="padding:5px">{{updateEventPlanner_Repeat}}</p>
+                            </div>
+                            <div class="col-lg-5 ">
+                                <select [(ngModel)]="EventPlannerEntity.RepeatID" name="RepeatID"
+                                    class="dropdown form-control maindropdown" id="ddl_Repeat">
+                                    <option value="none">Select Repeat</option>
+                                    <option value="{{Repeat.id}}" *ngFor="let Repeat of RepeatList">{{Repeat.description}}</option>
+                                </select>
+                            </div>
+                        </div> -->
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Set_Up_Time}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="EventPlannerEntity.SetUpTime" name="SetUpTime" type="time" required
+                            id="txt_SetUpTime" class="form-control maindropdown">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Tear_Down_Time}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="EventPlannerEntity.TearDownTime" name="TearDownTime" type="time" required
+                            id="txt_TearDownTime" class="form-control maindropdown">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_OnBehalfOf}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="EventPlannerEntity.OnBehalfOf" name="OnBehalfOf" type="text"
+                            id="txt_OnBehalfof" placeholder="On Behalf Of" class="form-control maindropdown">
+                    </div>
+                </div>
+                <!-- <div class="row">
+                            <div class="col-lg-1">
+                            </div>
+                            <div class="col-lg-2 ">
+                                <p style="padding:5px">{{updateEventPlanner_Status}} <span class="starspan">*</span></p>
+                            </div>
+                            <div class="col-lg-5 ">
+                                <select [(ngModel)]="EventPlannerEntity.StatusID" name="StatusID"
+                                    class="dropdown form-control maindropdown" required id="ddl_Status">
+                                    <option value="none">Select Status</option>
+                                    <option value="{{Status.id}}" *ngFor="let Status of Statuslist">{{Status.short}}</option>
+                                </select>
+                            </div>
+                        </div> -->
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Food_Service}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="EventPlannerEntity.FoodService" name="FoodService" type="text"
+                            id="txt_FoodService" placeholder="Organization" class="form-control maindropdown">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Furniture}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <textarea [(ngModel)]="EventPlannerEntity.Furniture" name="Furniture" id="txt_Furniture"
+                            placeholder="{{updateEventPlanner_Furniture}}" class="form-control maindropdown"
+                            rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Technology}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <textarea [(ngModel)]="EventPlannerEntity.Technology" name="Technology"
+                            placeholder="{{updateEventPlanner_Technology}}" id="txt_Technology"
+                            class="form-control maindropdown" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Comment}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <textarea [(ngModel)]="EventPlannerEntity.Comment" name="Comment"
+                            placeholder="{{updateEventPlanner_Comment}}" id="txt_Comment"
+                            class="form-control maindropdown" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="row" *ngIf="Eventsid==null">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateEventPlanner_Attachment}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <ngx-dropzone [(ngModel)]="EventPlannerEntity.Attachment" (filesAdded)="onFilesAdded($event)"
+                            name="Attachment" [showPreviews]="true" class="dropzone_vendorinvoice"
+                            id="dropzone_Attachment">
+                        </ngx-dropzone>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-2" *ngIf="Eventsid==null">
+                        <button class="savebutton" id="btn_updateeventplanner" (click)="InsertScheduleRequest()"
+                            type="submit">{{updateEventPlanner_button_save}}</button>
+
+                    </div>
+                    <div class="col-lg-2" *ngIf="Eventsid!=null">
+                        <button class="savebutton" id="btn_updateeventplanner" (click)="UpdateScheduleRequest()"
+                            type="submit">Update</button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-lg-5" *ngIf="Eventsid!=null">
+                <h4 *ngIf="Attachmentlist.length>0">Attachments</h4>
+                <div id="myCarousel" *ngIf="Attachmentlist.length>0" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="{{Attachmentlist[0].attachment}}" alt="">
+                        </div>
+                        <div class="item" *ngFor="let Attachments of Attachmentlist| slice:1">
+                            <img src="{{Attachments.attachment}}" alt="">
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,159 @@
+.tableheaderfont{
+    color: white;
+}
+.tableheader{
+    border: black;
+    background-color: #00b5d7;;
+    text-align: center;
+    
+    }
+    .dashbutton button {
+        float: right;
+        border-radius: 10px;
+        background-color: #00b5d7;
+        color: white;
+        border: none;
+        width: 150px;
+        height: 30px;
+        margin-bottom: 12px;
+    }
+    .mainrow{
+        float: right;
+        margin-top: 26px;
+    }
+    .maincard{
+        float: initial;
+        background: white;
+    
+    }
+    .formlabel{
+        color:#666666;
+    }
+
+    .ng-daterangepicker[_ngcontent-tte-c2] {
+        width: 300px;
+        height: 50px;
+        background: #fff;
+        display: inline-block;
+        border: 1px solid #9da3a6;
+        border-radius: 7px;
+        position: relative;
+      
+    }
+
+    .popupbutton{
+        background-color: #00b5d7;
+        color: white;
+        /* margin: 11px; */
+    }
+    
+    .popupbuttonupdate{
+        background-color: #00b5d7;
+        color: white;
+        /* margin: 11px; */
+        margin-left: 20px;
+        margin: 10px;
+    }
+    
+    
+    
+    .popupUpdatebutton{
+        background-color: #00b5d7;
+        color: white;
+        margin: 11px;
+    }
+    .popupbuttonAcpt{ 
+        background-color: #00b5d7;
+        height: 35px;
+        width: 130px;
+        border-radius: 10px;
+        color: white;
+    }
+    .popupbuttonRej{
+        background-color: #00b5d7;
+        height: 35px;
+        width: 130px;
+        border-radius: 10px;
+        color: white;
+    }
+    .dropzone_vendorinvoice {
+        height: 66px;
+        border: 2px solid #717386;
+        max-width: 303px;
+        min-width: auto;
+    }
+
+.row{
+    display: contents;
+}
+
+
+
+.pobreadcrump{
+    margin-left: 65px;
+    margin-top: 10px;
+
+}
+
+.poddl{
+    margin-top: 1px;
+}
+
+.podashboardddl{
+    margin-top: 20px;
+}
+
+
+
+@media screen and (min-width: 1600px) {
+  
+.pobreadcrump{
+    margin-left: 65px;
+    margin-top: 10px;
+
+}
+.poddl{
+    margin-top: 1px;
+}
+.podashboardddl{
+    margin-top: 20px;
+}
+
+
+
+
+  }
+  @media screen and (min-width: 1900px) {
+    .pobreadcrump{
+        margin-left: 222px;
+        margin-top: 0px;
+    
+    }
+    .poddl{
+        margin-top: 20px;
+    }
+    .podashboardddl{
+        margin-top: auto;
+    }
+    
+    
+  }
+  
+@media screen and (max-width: 1280px) {
+    
+    .ddd{
+        margin-left: 310px;
+    margin-bottom: 36px;
+    }
+    .label1{
+        margin-left: 0px;
+    }
+  
+    }
+    @media screen and (min-width: 1400px) {
+        .label1{
+            margin-left: 420px;
+        }
+      
+    }
+    

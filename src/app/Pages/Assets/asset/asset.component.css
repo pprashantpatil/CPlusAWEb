@@ -1,0 +1,235 @@
+i {
+    color: #00b5d7;
+}
+.dropzone_vendorinvoice {
+    height: 66px;
+    border: 2px solid #717386;
+    width: 340px;
+}
+.BreadChrumbProperties{
+    font-size: 18px;
+    margin-left: 123px;
+}
+
+.dashbutton {
+    float: right;
+    margin-top: 2%;
+    margin-left: 47px;
+}
+
+.popupbutton{
+    background-color: #00b5d7;
+    color: white;
+    /* margin: 11px; */
+}
+
+.popupbuttonupdate{
+    background-color: #00b5d7;
+    color: white;
+    /* margin: 11px; */
+    margin-left: 20px;
+    margin: 10px;
+}
+
+
+
+.popupUpdatebutton{
+    background-color: #00b5d7;
+    color: white;
+    margin: 11px;
+}
+.popupbuttonAcpt{ 
+    background-color: #00b5d7;
+    height: 35px;
+    width: 130px;
+    border-radius: 10px;
+    color: white;
+}
+.popupbuttonRej{
+    background-color: #00b5d7;
+    height: 35px;
+    width: 130px;
+    border-radius: 10px;
+    color: white;
+}
+.dropzone_vendorinvoice {
+    height: 66px;
+    border: 2px solid #717386;
+    max-width: 303px;
+    min-width: auto;
+}
+
+
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+  }
+  
+  /* The search field */
+  #myInput {
+    box-sizing: border-box;
+    /* background-image: url('searchicon.png'); */
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* The search field when it gets focus/clicked on */
+  #myInput:focus {outline: 3px solid #ddd;}
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    border: 1px solid #ddd;
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;}
+
+
+
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+
+.excelbutton{
+    margin-left: auto;
+    margin-right: 20px;
+    background-color: #00b5d7;
+    color: white;
+    margin-bottom: 8px;
+}
+
+
+.assetbreadcrump{
+    margin-left: -18px;
+}
+
+
+@media screen and (min-width: 1600px) {
+    .assetbreadcrump{
+        margin-left: -18px;
+    }
+    
+  }
+  @media screen and (min-width: 1900px) {
+    .assetbreadcrump{
+        margin-left: 127px;
+    }
+    
+  }
+
+  
+@media screen and (max-width: 1024px) {
+    .header{
+        margin-top: 60px;
+        margin-left: 15px;
+    }
+    .maincard{
+       width: 790px;
+    }
+    .ddd{
+        margin-top: -26px;
+    }
+    .maincard{
+        margin-left: 10px;
+      }
+    .assetbreadcrump{
+        margin-left: -70px; 
+      }
+  
+    }
+  
+    @media screen and (min-width: 1400px) {
+      
+      .label1{
+          margin-left: 1117px;
+      }
+    
+      .ddd{
+          margin-top: 0px;
+      }
+      .excelbutton{
+        margin-right: 29px;
+      }
+      
+      .assetbreadcrump{
+        margin-left: 19px; 
+      }
+      .header{
+        margin-left: 15px;
+    }
+     
+      
+    }
+    @media screen and (max-width: 1280px){
+  
+      
+      .label1{
+          margin-left: 915px;
+      }
+    
+  
+  }

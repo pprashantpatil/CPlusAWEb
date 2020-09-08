@@ -1,0 +1,76 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="Pages_header">Absentees</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <!-- <span class="CommercialWorkspace" style="margin-left: 52px;"> Staff / Absentees</span> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 dashbutton">
+        <button (click)=exporttoexcel() type="button" id="btn_button">Export To Excel</button>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <!-- <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Absentees</h6>
+      </div>
+    </div> -->
+    <div class="row p-4">
+      <div class="col-lg-4">
+        <ng-daterangepicker [options]="options" (ngModelChange)="selectedDate($event)">
+        </ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <input type="text" placeholder="search.." [(ngModel)]="Searchabsent" name="Searchabsent" class="form-control" id="txt_searchBuilding">
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive">
+          <table class="table table-bordered table-hover table-condensed">
+            <tbody>
+              <tr class="tableheader tableheaderfont buildingtable" style="background-color: #00b5d7; color: White;">
+                <!-- <td>ID</td> -->
+                <!-- <td>Building</td> -->
+                <td>Employee Name</td>
+                <td>Email</td>
+                <td>Mobile Number </td>
+                <td>Supervisor</td>
+                <td>Emergency Contact No </td>
+                <!-- <td>Actions</td> -->
+              </tr>
+              <tr *ngFor="let Absentees of AbsenteesLists|filter:Searchabsent">
+                <!-- <td>{{Absentees.building}}</td> -->
+                <td>{{Absentees.name}}</td>
+                <td>{{Absentees.emailID}}</td>
+                <td>{{Absentees.phoneNo}}</td>
+                <td>{{Absentees.supervisor}}</td>
+                <td>{{Absentees.emergencyContactNo}}</td>
+                <!-- <td class="TableActions">
+                  <a (click)="Edit(Absentees)" style="background-color: white"> <i class="fa fa-edit"
+                      data-toggle="tooltip" title="edit"></i></a>
+
+                  <a (click)="Delete(Absentees)" style="background-color: white"><i class="far fa-trash-alt"
+                      data-toggle="tooltip" title="Delete"></i></a>
+                </td> -->
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

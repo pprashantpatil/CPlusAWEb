@@ -1,0 +1,559 @@
+<div class="container-fluid ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header" style="margin-left: -14px">Project Details Dashboard</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 buildings">
+          <!-- <span class="building">Project Progress /Project Progress</span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="ProjectType==2 && MobUI==0">
+    <div *ngIf="ProjectType==2 && MobUI==0">
+      <div class="row card col-lg-6">
+        <label class="label1">Project Progress</label>
+        <div class=" canvas ">
+          <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels1" [options]="barChartOptions_567"
+            [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+        </div>
+      </div>
+
+      <div class="row card col-lg-6">
+        <label class="label1">Budget Dashboard</label>
+        <div class="canvas1">
+          <canvas baseChart [datasets]="barChartData3" [colors]="lineChartColors" [labels]="barChartLabels1"
+            [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType1"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+    </div>
+    <div *ngIf="ProjectType==2 && MobUI==0">
+      <div class="row card regular">
+        <label class="label1"> Manhours Monthly Dashboard</label>
+        <div class="canvas1 col-lg-12">
+          <canvas baseChart [datasets]="barChartData4" height="100" [colors]="lineChartColors" [labels]="barChartLabels"
+            [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType1"></canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="ProjectType==2">
+    <div class="row card regular">
+      <label class="label1"> Expenses</label>
+      <div class="canvas1">
+        <canvas baseChart [datasets]="barChartData" height="100" [colors]="barChartColorsVisitors"
+          [labels]="barChartLabels" [options]="barChartOptions_5678" [legend]="barChartLegend"
+          [chartType]="barChartType"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="ProjectType==2 && MobUI==1">
+    <div *ngIf="ProjectType==2 && MobUI==1">
+      <div class="row card">
+        <label class="label1">Project Progress</label>
+        <div class=" canvas">
+          <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels1" [options]="barChartOptions_567"
+            [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="ProjectType==2 && MobUI==1">
+      <div class="row card regular">
+        <label class="label1">Budget Dashboard</label>
+        <div class="canvas1">
+          <canvas baseChart [datasets]="barChartData3" [colors]="lineChartColors" [labels]="barChartLabels1"
+            [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType1"></canvas>
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="ProjectType==2 && MobUI==1">
+      <div class="row card regular">
+        <label class="label1"> Manhours Monthly Dashboard</label>
+        <div class="canvas1">
+          <canvas baseChart [datasets]="barChartData4" [colors]="lineChartColors" [labels]="barChartLabels"
+            [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType1"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mainn">
+    <div *ngIf="ProjectType==2" class="container-fluid shadow p-3 mb-5 bg-white rounded maincard timeline ">
+      <div class="row">
+        <div class="col-lg-5 ">
+          <h6 class="paneltitle">Project Timeline</h6>
+        </div>
+        <div class="col-lg-3 ">
+        </div>
+        <div class="col-lg-4 dashbutton">
+          <button routerLink="/TimelinePlanDash"
+            *ngIf="LoginTypeID==2 || LoginTypeID==3 ||LoginTypeID==8||LoginTypeID==9" style="width: 172px;
+           " [routerLink]="['/TimelinePlanDash']" type="button" id="btn_button">View Timeline Excel
+          </button>
+          <br>
+        </div>
+      </div>
+      <hr>
+
+      <div class="row p-4">
+        <div class="col-lg-4">
+          <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions" (ngModelChange)="selectedDate($event)">
+          </ng-daterangepicker>
+        </div>
+        <div class="col-lg-4">
+          <select class="form-control ddd" id="ddl_buildingplans" (change)="GetStaffIDprojectTimelines($event)">
+            <option value="0" selected="selected"> Select Care Of</option>
+            <option value="{{staff.id}}" *ngFor="let staff of StaffLists">{{staff.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12  table-responsive" style="height: 325px;">
+            <table id="Doc" class="table table-bordered  table-condensed">
+              <tbody>
+                <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                  <td>Start Date</td>
+                  <td>End date</td>
+                  <td>Stage </td>
+                  <td>Process Check</td>
+                  <td>Care Of</td>
+                  <td>Comments</td>
+                  <!-- <td>Actions</td> -->
+                </tr>
+                <tr *ngFor="let project of architecturalLists"
+                  [class.bgred]="project.text=='0' && project.accomplishment!='100%'"
+                  [class.bggreen]="project.accomplishment=='100%'">
+                  <td>{{project.s_Date|date}}</td>
+                  <td>{{project.e_Date|date}}</td>
+                  <td>{{project.stage}}</td>
+                  <td>{{project.processCheck}}</td>
+                  <td>{{project.name}}</td>
+                  <td>{{project.description}}</td>
+                  <!-- <td>
+                      <i class="far fa-trash-alt" title="Delete" (click)="DeleteProject(project.id)"></i>
+                    </td> -->
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="ProjectType==2" class="container-fluid shadow p-3 mb-5 bg-white rounded maincard  timeline1">
+      <div class="row  p-2">
+        <div class="col-lg-12 pannel">
+          <h6 class="paneltitle" style="margin-bottom: 49px;">Action Items</h6>
+        </div>
+      </div>
+      <div class="row p-4">
+        <div class="col-lg-4">
+          <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions"
+            (ngModelChange)="selectedActionItemsDate($event)">
+          </ng-daterangepicker>
+        </div>
+        <div class="col-lg-4">
+          <select class="form-control ddd" id="ddl_Assigned" (click)=" GetStaffIDActionItems($event)"
+            [(ngModel)]="AssignedTo" name="Assigned">
+            <option value="none"> Staff</option>
+            <option value="{{Team.staffID}}" *ngFor="let Team of ProjectTeamList">{{Team.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row" *ngIf="LoginTypeID!=1">
+          <div class="col-lg-12  table-responsive" style="height: 353px;;">
+            <table id="Doc" class="table table-bordered  table-condensed">
+              <tbody>
+                <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: black;">
+                  <td>Assigned date</td>
+                  <td>Due Date</td>
+                  <!-- <td>Project Name</td> -->
+                  <td>Action Item Type</td>
+                  <td>Subject</td>
+                  <td>Description</td>
+                  <td>Assigned To</td>
+                  <td>Priority</td>
+                  <td>Status</td>
+                  <td>Ageing</td>
+                  <!-- <td *ngIf="LoginTypeID==2 || LoginTypeID==3 ||LoginTypeID==1">Actions</td> -->
+                </tr>
+                <tr *ngFor="let Actions of ActionItemsLists | filter:Search" [class.bgred]="Actions.ageing>5">
+                  <td>{{Actions.modifieddate|date}}</td>
+                  <td>{{Actions.dueDate|date}}</td>
+                  <!-- <td>{{Actions.bname}}</td> -->
+                  <td>{{Actions.actionItemType}}</td>
+                  <td>{{Actions.subject}}</td>
+                  <td>{{Actions.description}}</td>
+                  <td>{{Actions.name}}</td>
+                  <td>{{Actions.priority}}</td>
+                  <td>{{Actions.status}}</td>
+                  <td>{{Actions.ageing}}</td>
+                  <!-- <td style="text-align: center;">
+                      <i class="far fa-trash-alt" *ngIf="LoginTypeID==2 || LoginTypeID==3 " title="Delete" (click)="DeleteProject(Actions.id)"></i> &nbsp;&nbsp;
+                      <i class="fa fa-edit" *ngIf="LoginTypeID==2 || LoginTypeID==3 " title="Edit" [routerLink]="['/ActionItems',Actions.id]"></i>
+                      <i class="fa fa-paperclip" data-toggle="modal" data-target="#myModalAttachments" title="Attachments" (click)="GetActionItemsID(Actions)"></i>
+                      <br>
+                     
+                    </td> -->
+
+                </tr>
+            </table>
+          </div>
+        </div>
+
+
+
+
+
+
+
+        <div class="row card" *ngIf="LoginTypeID==1" style="padding: 21px;margin-bottom: 17px;">
+          <label *ngIf="LoginTypeID==1">To Do Lists</label>
+          <div class="row" *ngIf="LoginTypeID==1">
+            <div class="col-lg-12  table-responsive" style="overflow: auto;">
+              <table class="table table-bordered  table-condensed">
+                <tbody>
+                  <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                    <td>Assigned date</td>
+                    <td>Due Date</td>
+                    <!-- <td>Project Name</td> -->
+                    <td>Action Item Type</td>
+                    <td>Subject</td>
+                    <td>Description</td>
+                    <td>Assigned To</td>
+                    <td>Priority</td>
+                    <td>Status</td>
+                    <td>Ageing</td>
+                    <td *ngIf="LoginTypeID==2 || LoginTypeID==3 ||LoginTypeID==1">Actions</td>
+                  </tr>
+                  <tr *ngFor="let Actions of ActionItemsListsToDO | filter:Search" [class.bgOpen]="Actions.ageing>5">
+                    <td>{{Actions.modifieddate|date}}</td>
+                    <td>{{Actions.dueDate|date}}</td>
+                    <!-- <td>{{Actions.bname}}</td> -->
+                    <td>{{Actions.actionItemType}}</td>
+                    <td>{{Actions.subject}}</td>
+                    <td>{{Actions.description}}</td>
+                    <td>{{Actions.name}}</td>
+                    <td>{{Actions.priority}}</td>
+                    <td>{{Actions.status}}</td>
+                    <td>{{Actions.ageing}}</td>
+                    <td style="text-align: center;">
+                      <i class="far fa-trash-alt" *ngIf="LoginTypeID==2 || LoginTypeID==3 " title="Delete"
+                        (click)="DeleteProject(Actions.id)"></i> &nbsp;&nbsp;
+                      <i class="fa fa-edit" *ngIf="LoginTypeID==2 || LoginTypeID==3 " title="Edit"
+                        [routerLink]="['/ActionItems',Actions.id]"></i>
+                      <i class="fa fa-paperclip" data-toggle="modal" data-target="#myModalAttachments"
+                        title="Attachments" (click)="GetActionItemsID(Actions)"></i>
+                      <br>
+                      <!-- <button class="btn btn-primary editable-table-button btn-xs" data-toggle="modal"
+                              data-target="#my1ModalAttachments" style="background-color: #00b5d7;">Upload</button> -->
+                    </td>
+
+                  </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="row card" *ngIf="LoginTypeID==1" style="padding: 21px; margin-bottom: 17px;">
+          <label *ngIf="LoginTypeID==1">Doing Lists</label>
+
+          <div class="row" *ngIf="LoginTypeID==1">
+            <div class="col-lg-12  table-responsive" style="overflow: auto;">
+              <table class="table table-bordered  table-condensed">
+                <tbody>
+                  <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                    <td>Assigned date</td>
+                    <td>Due Date</td>
+                    <td>Project Name</td>
+                    <td>Action Item Type</td>
+                    <td>Subject</td>
+                    <td>Description</td>
+                    <td>Assigned To</td>
+                    <td>Priority</td>
+                    <td>Status</td>
+                    <td>Ageing</td>
+                    <td *ngIf="LoginTypeID==2 || LoginTypeID==3 ||LoginTypeID==1">Actions</td>
+                  </tr>
+                  <tr *ngFor="let Actions of ActionItemsListsDoing | filter:Search" [class.bgOpen]="Actions.ageing>5">
+                    <td>{{Actions.modifieddate|date}}</td>
+                    <td>{{Actions.dueDate|date}}</td>
+                    <td>{{Actions.bname}}</td>
+                    <td>{{Actions.actionItemType}}</td>
+                    <td>{{Actions.subject}}</td>
+                    <td>{{Actions.description}}</td>
+                    <td>{{Actions.name}}</td>
+                    <td>{{Actions.priority}}</td>
+                    <td>{{Actions.status}}</td>
+                    <td>{{Actions.ageing}}</td>
+                    <td style="text-align: center;">
+                      <i class="far fa-trash-alt" *ngIf="LoginTypeID==2 || LoginTypeID==3 " title="Delete"
+                        (click)="DeleteProject(Actions.id)"></i> &nbsp;&nbsp;
+                      <i class="fa fa-edit" *ngIf="LoginTypeID==2 || LoginTypeID==3 " title="Edit"
+                        [routerLink]="['/ActionItems',Actions.id]"></i>
+                      <i class="fa fa-paperclip" data-toggle="modal" data-target="#myModalAttachments"
+                        title="Attachments" (click)="GetActionItemsID(Actions)"></i>
+                      <br>
+                      <!-- <button class="btn btn-primary editable-table-button btn-xs" data-toggle="modal"
+                              data-target="#my1ModalAttachments" style="background-color: #00b5d7;">Upload</button> -->
+                    </td>
+
+                  </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="row card" *ngIf="LoginTypeID==1" style="padding: 21px;margin-bottom: 17px;">
+          <label *ngIf="LoginTypeID==1">Done Lists</label>
+          <div class="row" *ngIf="LoginTypeID==1">
+            <div class="col-lg-12  table-responsive" style="overflow: auto;">
+              <table class="table table-bordered  table-condensed">
+                <tbody>
+                  <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                    <td>Assigned date</td>
+                    <td>Due Date</td>
+                    <td>Project Name</td>
+                    <td>Action Item Type</td>
+                    <td>Subject</td>
+                    <td>Description</td>
+                    <td>Assigned To</td>
+                    <td>Priority</td>
+                    <td>Status</td>
+                    <td>Ageing</td>
+                    <td *ngIf="LoginTypeID==2 || LoginTypeID==3 ||LoginTypeID==1">Actions</td>
+                  </tr>
+                  <tr *ngFor="let Actions of ActionItemsListsDone | filter:Search" [class.bgOpen]="Actions.ageing>5">
+                    <td>{{Actions.modifieddate|date}}</td>
+                    <td>{{Actions.dueDate|date}}</td>
+                    <td>{{Actions.bname}}</td>
+                    <td>{{Actions.actionItemType}}</td>
+                    <td>{{Actions.subject}}</td>
+                    <td>{{Actions.description}}</td>
+                    <td>{{Actions.name}}</td>
+                    <td>{{Actions.priority}}</td>
+                    <td>{{Actions.status}}</td>
+                    <td>{{Actions.ageing}}</td>
+                    <td style="text-align: center;">
+                      <i class="far fa-trash-alt" *ngIf="LoginTypeID==2 || LoginTypeID==3 " title="Delete"
+                        (click)="DeleteProject(Actions.id)"></i> &nbsp;&nbsp;
+                      <i class="fa fa-edit" *ngIf="LoginTypeID==2 || LoginTypeID==3 " title="Edit"
+                        [routerLink]="['/ActionItems',Actions.id]"></i>
+                      <i class="fa fa-paperclip" data-toggle="modal" data-target="#myModalAttachments"
+                        title="Attachments" (click)="GetActionItemsID(Actions)"></i>
+                      <br>
+                      <!-- <button class="btn btn-primary editable-table-button btn-xs" data-toggle="modal"
+                              data-target="#my1ModalAttachments" style="background-color: #00b5d7;">Upload</button> -->
+                    </td>
+
+                  </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+  <!-- <div class="shadow p-3 mb-5  rounded  maincard " style="margin-left: -14px;
+    margin-top: 33px;">
+  
+      <div class="row p-4" style="margin-left: 28px;">
+        <div class="col-lg-4">
+          <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions" (ngModelChange)="SelectStaffDate($event)">
+          </ng-daterangepicker>
+        </div>
+        <div class="col-lg-3">
+          <select class="form-control" id="ddl_Assigned" (change)="GetStaffID($event)" [(ngModel)]="AssignedTo" name="Assigned" required>
+            <option value="none">Select Staff</option>
+            <option value="{{Team.staffID}}" *ngFor="let Team of ProjectTeamList">{{Team.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+  
+    </div> -->
+
+
+
+
+
+
+
+
+
+  <div class="row card smallcard regular">
+    <label class="label1">Meeting Details</label>
+    <div class="row">
+      <div class="col-lg-4" style="margin-left: 50px;">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions"
+          (ngModelChange)="SelectMeetingDetailsStaffDate($event)">
+        </ng-daterangepicker>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 card card1">
+        <h4 style="text-align: center; margin-top: 47px;">No Of Meetings</h4>
+        <label style="text-align: center; font-size: 21px">{{TotalNoOfMeetings}}</label>
+      </div>
+
+      <div class="col-lg-3 card card2">
+        <h4 style="text-align: center; margin-top: 47px;">Physical Meetings</h4>
+        <label style="text-align: center; font-size: 21px">{{PhysicalMeetingCount}}</label>
+      </div>
+
+      <div class="col-lg-3 card card3">
+        <h4 style="text-align: center; margin-top: 47px;">Virtual Meetings</h4>
+        <label style="text-align: center; font-size: 21px">{{VirtualMeetingCount}}</label>
+      </div>
+    </div>
+  </div>
+  <div class="card  bigcard regular">
+    <label class="label1">Design Team - {{ProjectName}}</label>
+    <div class="row">
+      <div class="col-lg-4" style="margin-left: 50px;">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions"
+          (ngModelChange)="SelectMeetingDetailsStaffDate($event)">
+        </ng-daterangepicker>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-lg-3 card1">
+        <h4 style="text-align: center; margin-top: 47px">Total Staff</h4>
+        <h4 style="text-align: center; font-size: 21px;">{{TotalNoOfStaffCount}}</h4>
+        <!-- <label style="text-align: center; font-size: 21px;">{{TotalNoOfStaffCount}}</label> -->
+      </div>
+
+      <div class="col-lg-3 card1">
+        <h4 style="text-align: center; margin-top: 47px;">Attendance</h4>
+        <h4 style="text-align: center; font-size: 21px">0</h4>
+      </div>
+
+      <div class="col-lg-3 card1">
+        <h4 style="text-align: center; margin-top: 47px;">Absentees</h4>
+        <h4 style="text-align: center; font-size: 21px">{{AbsenteesCount}}</h4>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-3 card1">
+        <h4 style="text-align: center; margin-top: 47px;">Applied Leaves</h4>
+        <h4 style="text-align: center; font-size: 21px">{{NoOfStaffLeavesCount}}</h4>
+      </div>
+
+      <div class="col-lg-3 card1">
+        <h4 style="text-align: center; margin-top: 47px;">Approved Leaves</h4>
+        <h4 style="text-align: center; font-size: 21px">{{ApprovedCount}}</h4>
+      </div>
+
+      <div class="col-lg-3 card1">
+        <h4 style="text-align: center; margin-top: 47px;">Rejected Leaves</h4>
+        <h4 style="text-align: center; font-size: 21px">{{RejectedCount}}</h4>
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+<div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<div id="myModalAttachments" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content" style="margin-top: 100px;">
+      <div class="modal-header">
+        <h4>Attachment</h4>
+        <!-- <div data-toggle="tooltip" title="Add Attachment" data-dismiss="modal">
+                        <i class=" i" style="margin-left: 235px;
+                                  margin-top: 10px;
+                                  font-size: 16px; " data-toggle="modal" data-target="#AddAttachment">Add
+                            Attachment</i>
+                    </div> -->
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="row" *ngFor="let Attachment of Attachmentlist">
+          <div class="col-lg-6">
+            <a href="{{Attachment.attachment}}" download>
+              <img src="{{Attachment.attachment}}" style="width: 100%; height: auto;">
+            </a>
+            <!-- <img style="width: 100%; height: auto;" src="{{Attachment.attachment}}"> -->
+            <!-- <div class="row">
+                              <div class="col-4">
+                                  <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal" data-toggle="modal" data-target="#AttachmentsUpdate"
+                                      (click)="UploadAttachments(Attachment)">Update</button>
+                              </div>
+                              <div class="col-4">
+                                  <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal" (click)="DeleteAttachment(Attachment)">Delete</button>
+                              </div>
+                          </div> -->
+          </div>
+        </div>
+        <!-- <div class="row" *ngIf="NoImagesAvail">
+                        <div class="col-lg-12">
+                            <img src="assets/Login/noimage.jpg" style="width: 60%;height:auto;"
+                                data-dismiss="modal">
+                        </div>
+                    </div> -->
+      </div>
+      <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-default popupUpdatebutton"
+                        data-dismiss="modal">Close</button>
+                </div> -->
+    </div>
+
+  </div>
+</div>

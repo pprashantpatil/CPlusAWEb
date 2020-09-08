@@ -1,0 +1,157 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 class="Pages_header">Add New Accounts</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> Staff/ Add New Accounts </span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard ">
+    <h6 class="paneltitle">Accounts</h6>
+    <hr>
+    <form>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Client Name</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" name="AccountName" [(ngModel)]="AccountsEntity.AccountName" id="AccountName"
+            class="form-control" placeholder="Client Name">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Client Industry</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" name="AccountIndustry" [(ngModel)]="AccountsEntity.Account_Industry" id="AccountIndustry"
+            class="form-control" placeholder="Client Industry">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Contact Name</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" name="ContactName" [(ngModel)]="AccountsEntity.Account_Contact_Name" id="ContactName"
+            class="form-control" placeholder="Contact Name">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Phone Number</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" name="PhoneNumber" [(ngModel)]="AccountsEntity.Phone_No" id="PhoneNumber"
+            class="form-control" placeholder="Phone Number">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Email</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="email" name="Email" [(ngModel)]="AccountsEntity.Email" id="Email" class="form-control"
+            placeholder="Email">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Address</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" name="Address" [(ngModel)]="AccountsEntity.Address" id="Address" class="form-control"
+            placeholder="Address">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Bank Name</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" name="BankName" [(ngModel)]="AccountsEntity.BankName" id="BankName" class="form-control"
+            placeholder="Bank Name">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Account Number</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" name="AccountNumber" [(ngModel)]="AccountsEntity.Bank_Account_no" id="AccountNumber"
+            class="form-control" placeholder="Account Number">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Account Type</h5>
+        </div>
+        <div class="col-lg-5">
+          <select  [(ngModel)]="AccountsEntity.Bank_Account_type" class="dropdown form-control updatebuildingddl" name="AccountTypeID" style="margin: 7px;"
+            id="ddl_updatetenentAccountType" >
+            <option value="0" class=""  selected="selected">Select Account Type</option>
+            <option *ngFor="let bankAccountType of bankAccountTypelist" value="{{bankAccountType.id}}">
+              {{bankAccountType.short}}</option>
+
+          </select>
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Swift Code</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" [(ngModel)]="AccountsEntity.ShiftCode" name="SwiftCode" id="SwiftCode" class="form-control"
+            placeholder="Swift Code">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Tax Identification</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" [(ngModel)]="AccountsEntity.TaxIdenficatoin" name="TaxIdentification"
+            id="TaxIdentification" class="form-control" placeholder="Tax Identification">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-2" *ngIf="AccountID==null">
+          <button class="savebutton" (click)="InsertAccount_Creation()" id="btn_utilitySave" type="submit">Save</button>
+        </div>
+        <div class="col-lg-2" *ngIf="AccountID!=null">
+          <button class="savebutton" (click)="UpdateAccount_Creation()" id="btn_utilitySave"
+            type="submit">Update</button>
+        </div>
+      </div>
+    </form>
+  </div>

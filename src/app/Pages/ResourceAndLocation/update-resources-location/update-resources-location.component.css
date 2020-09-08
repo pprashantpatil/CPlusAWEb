@@ -1,0 +1,18 @@
+:requiredspan span{
+    color: red
+}
+
+.starspan{
+    color: red;
+}
+.Headder{
+    background:  #f5f5f5;
+    border-bottom: 1px solid #d4cdcd;
+}
+
+.dropzone_vendorinvoice{
+    height: 66px;
+    border: 2px solid #717386;
+    width: 440px;
+    margin-top: 6px;
+}

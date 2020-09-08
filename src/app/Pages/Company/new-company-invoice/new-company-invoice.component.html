@@ -1,0 +1,132 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="Pages_header">COMPANY INVOICE</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <span class="CommercialWorkspace"> Company / Company Invoice</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card maincard">
+      <div class="row">
+        <div class="col-lg-8 reqriedspan">
+          <br>
+          <form #loginForm="ngForm">
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6>Company
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 form-group">
+                <select class="form-control" [(ngModel)]="CompanyID" id="ddl_Company" name="Company">
+                  <option value="none"> Select Company</option>
+                  <option value="{{country.id}}" *ngFor="let country of CompanyLists">{{country.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6>Invoice Date
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input type="date" class="form-control" [(ngModel)]="InvoiceDate" name="InvoiceDate" required id="txt_InvoiceDate" placeholder="InvoiceDate">
+              </div>
+            </div>
+
+
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6>For The Month Of
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input type="text" class="form-control" [(ngModel)]="ForTheMonthOf" name="ForTheMonthOf" required id="txt_ForTheMonthOf"
+                  placeholder="For The Month Of">
+              </div>
+            </div>
+
+
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6>Invoice Amount
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input type="number" class="form-control" [(ngModel)]="InvoiceAmount" name="InvoiceAmount" required id="txt_InvoiceAmount"
+                  placeholder="InvoiceAmount">
+              </div>
+            </div>
+
+
+
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6>Total Amount
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input type="number" class="form-control" [(ngModel)]="TotalAmount" name="TotalAmount" required id="txt_TotalAmount" placeholder="Total Amount">
+              </div>
+            </div>
+
+
+
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6>Descriptions
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 form-group">
+                <textarea type="number" rows="7" class="form-control" [(ngModel)]="Decriptions" name="Decriptions" required id="txt_Decriptions"
+                  placeholder="Description">
+                  </textarea>
+              </div>
+            </div>
+
+
+            <div>
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-2 ">
+                  <button type="submit" style="margin-bottom: 100px" (click)="Save()" class="btn btn-block btn-md savebutton">Save</button>
+                </div>
+              </div>
+            </div>
+
+            <br>
+            <div class="col-lg-4"></div>
+          </form>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+  </div>
+</div>

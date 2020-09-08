@@ -1,0 +1,344 @@
+<div class="container-fluid Pages_background Mobilecss">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header" >Supplier</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12"> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <!-- <button type="button" routerLink="/bookcommunityhall" routerLinkActive="active-link" id="btn_button"
+                        class="dashbutton">Add New Asset</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="shadow p-3 mb-5 bg-white col-lg-12 rounded maincard ">
+        <form #loginForm="ngForm">
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">Property
+                        <span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <!-- <select class="dropdown form-control maindropdown" [(ngModel)]="accounttypeID" name="accounttypeID"
+                            (change)="GetAccountTypeID($event)">
+                            <option value="0" selected="selected">Select Account Type</option>
+                            <option *ngFor="let AccountType of AccountTypeList" value="{{AccountType.id}}">
+                                {{AccountType.short}}</option>
+                        </select> -->
+                    <select id="ddl_Building" [(ngModel)]="BuildingID" disabled name="BuildingID" class="dropdown form-control " placeholder="Select Building">
+                        <option value="0" class="" selected="selected">Select Property</option>
+                        <option *ngFor="let building of buildinglist" value="{{building.id}}">{{building.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">Supplier Name
+                        <span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <input type="text" id="txt_VendorName" [(ngModel)]="vname" name="vname" required placeholder="Supplier" class="form-control ">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">Supplier Email
+                        <span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <input type="text" placeholder="Supplier Email" [(ngModel)]="EmailID" name="EmailID" class="form-control "
+                        id="txt_usr" required>
+                    <span class="Validationlabels" *ngIf='EmailValid==false'>
+                        Invalid Email
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">Supplier Phone No
+                        <span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <!-- <input type="number" id="txt_VendorPhoneNumber" [(ngModel)]="PhoneNo" required
+                            placeholder="{{vendor_Phone}}" name="PhoneNo" class="form-control maindropdown" id="txt_usr">
+                        <span class="Validationlabels" *ngIf='PhoneNumberValid==false'>
+                            Invalid Phone Number
+                        </span> -->
+
+
+                    <input class="form-control " type="text" [(ngModel)]="PhoneNo" onkeypress='return (event.charCode > 47 && event.charCode < 58)'
+                        maxlength="11" name="Phoneno" required placeholder=" Supplier Phone No">
+                    <span class="Validationlabels" *ngIf='Isempty &&(11>PhoneNo.length) '>* Please Fill Supplier Phone No
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">Supplier Service Area
+                        <span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <select class="dropdown form-control " required [(ngModel)]="serviceareaID" name="serviceareaID" (change)="GetserviceareaID($event)">
+                        <option value="0">Select Service Area</option>
+                        <option *ngFor="let servicearea of VendorServiceAreaList" value="{{servicearea.id}}">
+                            {{servicearea.short}}</option>
+                    </select>
+                    <span class="Validationlabels" *ngIf="serviceareaID==0&&Isempty">
+                        Plaese Fill Supplier Service Area
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">Supplier Address
+                        <span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <textarea placeholder="Supplier Address" required [(ngModel)]="Address" id="txt_VendorAddress" required class="form-control "
+                        name="Address" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">Supplier Website </p>
+                </div>
+                <div class="col-lg-5  ">
+                    <input type="text" style="margin-top: 9px;" [(ngModel)]="Website" id="txt_VendorWebsite" placeholder="Supplier Website "
+                        name="Website" class="form-control ">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">{{vendor_ContactName}}
+                        <span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <input type="text" id="txt_ContactName" required style="margin-top: 9px;" placeholder="{{vendor_ContactName}}" name="ContactName"
+                        [(ngModel)]="ContactName" class="form-control ">
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">Supplier Type 
+                        <span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <select class="dropdown form-control " required [(ngModel)]="vendortypeID" name="vendortypeID" (change)="GetVendorTypeID($event)">
+                        <option value="0" selected="selected">Select Supplier Type</option>
+                        <option *ngFor="let VendorType of VendorTypeList" value="{{VendorType.id}}">
+                            {{VendorType.short}}</option>
+                    </select>
+                    <span class="Validationlabels" *ngIf="vendortypeID==0&&Isempty">
+                        Plaese Fill Supplier Type
+                    </span>
+                </div>
+            </div>
+            <div class="row" *ngIf="VendorID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">{{vendor_BankName}} </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <select class="dropdown form-control " [(ngModel)]="banktypeID" name="banktypeID" (change)="GetBankTypeID($event)">
+                        <option value="0" selected="selected">Select Bank Type</option>
+                        <option *ngFor="let BankType of BankTypeList" value="{{BankType.id}}">
+                            {{BankType.short}}</option>
+                    </select>
+                    <span class="Validationlabels" *ngIf="banktypeID==0&&Isempty">
+                        Plaese Fill {{vendor_BankName}}
+                    </span>
+                </div>
+            </div>
+            <div class="row" *ngIf="VendorID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">{{vendor_AccountNumber}} </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <input type="text" style="margin-top: 9px;" id="txt_AccountNumber" placeholder="{{vendor_AccountNumber}}" name="AccountNumber"
+                        [(ngModel)]="AccountNumber" class="form-control ">
+                </div>
+            </div>
+            <div class="row" *ngIf="VendorID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">{{vendor_AccountType}}</p>
+                </div>
+                <div class="col-lg-5 ">
+                    <select class="dropdown form-control " [(ngModel)]="accounttypeID" name="accounttypeID" (change)="GetAccountTypeID($event)">
+                        <option value="0" selected="selected">Select Account Type</option>
+                        <option *ngFor="let AccountType of AccountTypeList" value="{{AccountType.id}}">
+                            {{AccountType.short}}</option>
+                    </select>
+                    <span class="Validationlabels" *ngIf="accounttypeID==0&&Isempty">
+                        Plaese Fill {{vendor_BankName}}
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="row" *ngIf="VendorID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">{{vendor_BankAddress}} </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <textarea placeholder="{{vendor_BankAddress}}" id="txt_BankAddress" class="form-control " name="BankAddress"
+                        [(ngModel)]="BankAddress" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="row" *ngIf="VendorID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">BTXN</p>
+                </div>
+                <div class="col-lg-5 ">
+                    <input type="text" id="txt_IFSCCode" [(ngModel)]="SwiftCode" style="margin-top: 9px;" placeholder="BTXN" name="SwiftCode"
+                        class="form-control ">
+                </div>
+            </div>
+            <div class="row" *ngIf="VendorID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">{{vendor_BranchName}} </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <input type="text" id="txt_BranchName" style="margin-top: 9px;" placeholder="{{vendor_BranchName}}" name="BranchName" [(ngModel)]="BranchName"
+                        class="form-control ">
+                </div>
+            </div>
+            <div class="row" *ngIf="VendorID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">{{vendor_Payment}} </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <textarea id="txt_PaymentTerms" placeholder="{{vendor_Payment}}" class="form-control " name="PaymentTerms" [(ngModel)]="PaymentTerms"
+                        rows="4"></textarea>
+                </div>
+            </div>
+            <div class="row" *ngIf="VendorID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">{{vendor_CreditLimit}} </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <input type="text" id="txt_CreditLimit" style="margin-top: 9px;" placeholder="{{vendor_CreditLimit}}" name="CreditLimit"
+                        [(ngModel)]="CreditLimit" class="form-control ">
+                </div>
+            </div>
+            <div class="row" *ngIf="VendorID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">{{vendor_CreditDays}}</p>
+                </div>
+                <div class="col-lg-5 ">
+                    <input type="text" id="txt_CreditDays" style="margin-top: 9px;" placeholder="{{vendor_CreditDays}}" name="CreditDays" [(ngModel)]="CreditDays"
+                        class="form-control ">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">Supplier Services
+                        <span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <select class="dropdown form-control " required [(ngModel)]="servicetypeID" name="servicetypeID" (change)="GetServiceTypeID($event)">
+                        <option value="0">Select Service</option>
+                        <option *ngFor="let ServiceType of ServiceTypeList" value="{{ServiceType.id}}">
+                            {{ServiceType.short}}</option>
+                    </select>
+                    <span class="Validationlabels" *ngIf="servicetypeID==0 && Isempty">
+                        Plaese Fill Supplier Services
+                    </span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p class="alllabels">Supplier Supplies 
+                        <span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <input type="text" style="margin-top: 9px;" required id="txt_VendorSupplies" placeholder="Supplier Supplies " name="SupplyID"
+                        [(ngModel)]="SupplyID" class="form-control ">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-2 mobsavebtn" *ngIf="VendorID==null">
+                    <button class="btn btn-block btn-md savebutton" [disabled]="loginForm.form.invalid" id="btn_updatevendorbutton" (click)="insertvendor()"
+                        type="submit">{{vendor_save}}</button>
+                </div>
+
+                <div class="col-lg-2 mobsavebtn" *ngIf="VendorID!=null">
+                    <button class="btn btn-block btn-md savebutton" [disabled]="loginForm.form.invalid" id="btn_updatevendorbutton" (click)="UpdateVendor()"
+                        type="submit">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

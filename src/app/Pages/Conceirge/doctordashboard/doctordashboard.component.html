@@ -1,0 +1,74 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header">Doctor Dashboard</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> Conceirge / Doctor Dashboard </span> </div>
+      </div>
+    </div>
+  </div>
+
+ 
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <h4 class="paneltitle ">Doctor Dashboard</h4>
+    <hr>
+    <div class="row p-2">
+      <div class="col-lg-4">
+        <ng-daterangepicker [options]="pickeroptions"></ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control " (change)="GetFloor($event)" id="ddl_doctorrequestBuilding">
+          <option value="none">Select Building</option>
+          <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control " id="ddl_doctorrequestFloor" (change)="FilteredFloorList($event)">
+          <option value="none">Select Floor</option>
+          <option value="{{floor.id}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3">
+        <input type="text" placeholder="Search" [(ngModel)]="Search" class="form-control"
+          id="txt_doctorrequestSearch">
+      </div>
+    </div>
+    <div class="row" style="padding:20px">
+      <table class="table table-bordered table-hover table-condensed mainbuild">
+        <tbody>
+          <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+            <td>Tenant</td>
+            <td>Building</td>
+            <td>Floor</td>
+            <td>Unit</td>
+            <td>Patient Name</td>
+            <td>Patient Age</td>
+            <td>Doctor</td>
+            <td>Reason</td>
+            <td>Status</td>
+          </tr>
+          <tr *ngFor="let Doctor of FilteredDoctorList|filter:Search">
+            <td>{{Doctor.requestBy}}</td>
+            <td>{{Doctor.building}}</td>
+            <td>{{Doctor.floor}}</td>
+            <td>{{Doctor.unit}}</td>
+            <td>{{Doctor.patientName}}</td>
+            <td>{{Doctor.patientAge}}</td>
+            <td>{{Doctor.doctor}}</td>
+            <td>{{Doctor.reason}}</td>
+            <td>
+              <div class="buttons">
+                <button class="btn btn-primary editable-table-button btn-xs">Visited</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

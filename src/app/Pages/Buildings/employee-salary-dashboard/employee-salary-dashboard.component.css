@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+
+.tableheader {
+    border: black;
+    background-color: #00b5d7;
+    ;
+    text-align: center;
+}
+
+.mainrow {
+    float: right;
+    margin-top: 26px;
+}
+
+i {
+    color: #00b5d7;
+}
+
+.tableheaderfont {
+    color: white;
+}
+
+.build {
+    padding-top: 13px;
+    padding-bottom: 27px;
+}
+
+.buildingimage {
+    width: 40%;
+    height: auto;
+}
+
+
+/* .mainbuild{
+    width: 100%;
+    margin-left: 16px;
+} */
+
+.maincard {
+    float: initial;
+    background: white;
+}

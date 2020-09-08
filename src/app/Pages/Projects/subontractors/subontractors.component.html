@@ -1,0 +1,215 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 style="margin-bottom: 25px; margin-left: 14px;" class="Pages_header"> CONTRACTOR</h4>
+    </div>
+  </div>
+  <div class="container-fluid Pages_background">
+    <div>
+      <div class="card maincard">
+        <div class="row">
+          <div class="col-lg-8 reqriedspan">
+            <br>
+            <form #loginForm="ngForm" style="padding: 25px;">
+              <!-- <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <p>Project
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <select name="ProjectID" [(ngModel)]="ProjectID" class="dropdown form-control " required id="ddl_updateassetsBuilding">
+                    <option value="0" selected="selected"> Project</option>
+                    <option value="{{build.id}}" *ngFor="let build of projectlist">{{build.project}}</option>
+                  </select>
+                </div>
+              </div> -->
+
+              <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <p>Company
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <input type="text" [(ngModel)]="Company" id="Company" name="Company" class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <p>Contact Person
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <input type="text" [(ngModel)]="ContactPerson" id="ContactPerson" name="ContactPerson" class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <p>Country
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <select class="form-control" [(ngModel)]="CountryID" id="ddl_BillType" (change)="getcountryID($event)" name="Country" required>
+                    <option value="none"> Select Country</option>
+                    <option value="{{country.id}}" *ngFor="let country of Countrylist">{{country.short}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row" *ngIf="paramID==null">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <p>State
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <select class="form-control" id="StateID" [(ngModel)]="stateID1" [disabled]="typeID==2" (change)="getstateID($event)" name="stateID1">
+                    <option value="none"> Select state</option>
+                    <option value="{{state.id}}" *ngFor="let state of Statelist">{{state.short}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row" *ngIf="paramID!=null">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <p>State
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <select class="form-control" id="StateID" [disabled]="typeID==2" [(ngModel)]="stateID1" (change)="getstateID($event)" name="stateID1"
+                    required>
+                    <option value="none"> Select state</option>
+                    <option value="{{state.id}}" *ngFor="let state of Statelist">{{state.short}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <p>City
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <select class="form-control" [(ngModel)]="CityID" id="CityID" name="CityID">
+                    <option value="none"> Select City</option>
+                    <option value="{{city.id}}" *ngFor="let city of citylist">{{city.short}}</option>
+                  </select>
+                </div>
+              </div>
+
+
+
+              <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <p>Phone Number
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <input type="text" [(ngModel)]="Phoneno" id="Phoneno" name="Phoneno" class="form-control">
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <p>Email
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <input type="text" [(ngModel)]="Email" id="Email" name="Email" class="form-control">
+
+                </div>
+              </div>
+              <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <p>Address
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <textarea rows="4" placeholder="Address" [(ngModel)]="Location" id="Location" name="Location" class="form-control"></textarea>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <p>Head Count
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <input type="text" [(ngModel)]="HeadCount" id="Head" name="Head" class="form-control">
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <p>Nature Of Work
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <input type="text" [(ngModel)]="NatureOfWork" id="NatureOfWork" name="NatureOfWork"
+                    class="form-control">
+                </div>
+              </div> -->
+              <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <p>Nature Of Work
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <select class="form-control" [(ngModel)]="NatureOfWork" id="NatureOfWork" name="NatureOfWork">
+                    <option value="0"> Select Nature Of Work</option>
+                    <option value="{{city.id}}" *ngFor="let city of NatureOfWorkList">{{city.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+
+
+
+
+              <div *ngIf="paramID==null" class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-2 ">
+                  <button type="submit" style="margin-bottom: 100px" class="btn btn-block btn-md savebutton" (click)="Insert_SubContractor()">Save</button>
+                </div>
+              </div>
+              <div *ngIf="paramID!=null" class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-2 ">
+                  <button type="submit" style="margin-bottom: 100px" class="btn btn-block btn-md savebutton" (click)="Update()">Update</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

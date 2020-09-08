@@ -1,0 +1,92 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="Pages_header">Building Stages Master</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <span class="CommercialWorkspace">Buildings / Add Stages Master</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card maincard">
+      <div class="row">
+        <div class="col-lg-8 reqriedspan">
+          <br>
+          <div class="row">
+            <form>
+              <div class="row">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-3 ">
+                  <p style="padding:5px">Code <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-7 ">
+                  <input type="text" [(ngModel)]="Entity.Code" style="width: 278px;" name="Code" required id="txt_Code"
+                    placeholder="Code" class="form-control">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-3">
+                  <p style="padding:5px">Stage Name <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="text" [(ngModel)]="Entity.Milestone" style="width: 278px;" name="Stage" required
+                    id="txt_Stage" placeholder="Stage" class="form-control">
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-3 ">
+                  <p style="padding:5px">Unit Wt<span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-7 ">
+                  <input type="text" name="Unit" [(ngModel)]="Entity.UnitWt" style="width: 278px;" required
+                    id="txt_Unit" placeholder="Unit Wt" class="form-control">
+                </div>
+              </div>
+
+
+              <div class="row" *ngIf="Assetid==null">
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-2">
+                  <button class="savebutton" (click)="InsertBuildingStagesMaster()" style="margin-bottom: 20px;"
+                    type="submit">Save</button>
+                </div>
+              </div>
+
+
+              <div class="row" *ngIf="Assetid!=null">
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-2">
+                  <button class="savebutton" (click)="UpdateBuildingStagesMaster()" style="margin-bottom: 20px;"
+                    type="submit">Update</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- 
+  pattern="^[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_]+)*@[a-z0-9]+(\-[a-z0-9]+)*(\.[a-z0-9]+(\-[a-z0-9]+)*)*\.[a-z]{2,4}$"
+  placeholder="{{addOrUpdateBuilding_Contact_Person_Email}}" -->

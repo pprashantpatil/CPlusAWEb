@@ -1,0 +1,128 @@
+<div class="container-fluid Pages_background Backgroundforipad">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 style="margin-bottom: 25px;" class="Pages_header"> NEW CLIENT CONTACT</h4>
+
+    </div>
+    <div class="col-lg-3">
+    </div>
+
+  </div>
+  <div class="container-fluid Pages_background">
+    <div>
+      <div class="card maincard" style="margin-left: -15px;">
+        <div class="row">
+          <div class="col-lg-8 reqriedspan" style="padding: 25px;">
+            <br>
+            <form #loginForm="ngForm">
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <p>Project
+                    <span style="color: red;"> *</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <select name="ProjectID" [(ngModel)]="projectID" disabled class="dropdown form-control " required id="ddl_updateassetsBuilding"
+                    (click)="GetProjectID($event)">
+                    <option value="0" selected="selected"> Project</option>
+                    <option value="{{build.id}}" *ngFor="let build of projectlist">{{build.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <br>
+
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <p>First Name
+                    <span style="color: red;">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="text" id="txt_FirstName" [(ngModel)]="FirstName" name="FirstName" class="form-control" [disabled]="typeID==2"
+                    placeholder="First Name">
+                </div>
+              </div>
+              <br>
+
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <p>Last Name </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="text" class="form-control" [(ngModel)]="LastName" id="txt_LastName" name="LastName" [disabled]="typeID==2" placeholder="Last Name">
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <p>Title </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="text" id="txt_Tittle" [(ngModel)]="Title" placeholder="Tittle" name="Tittle" class="form-control" [disabled]="typeID==2">
+                </div>
+              </div>
+              <br>
+              <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <p>Email
+                    <span style="color: red;">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="text" class="form-control" [(ngModel)]="emailID" name="emailID" required id="txt_emailID" placeholder="Email">
+                </div>
+              </div>
+              <br>
+
+              <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <p>Phone Number
+                    <span style="color: red;">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="text" class="form-control" [(ngModel)]="phoneno" name="phoneno" required id="txt_phoneno" placeholder="Phone Number">
+                </div>
+              </div>
+              <br>
+
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <p>Address
+                    <span style="color: red;">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <textarea rows="3" id="txt_Address" [(ngModel)]="Address" name="Address" class="form-control" placeholder="Address" required></textarea>
+                </div>
+              </div>
+              <br>
+
+              <div class="row" *ngIf="paramID==null">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-2 ">
+                  <button type="submit" style="margin-bottom: 100px" (click)="Save()" class="btn btn-block btn-md savebutton">Save</button>
+                </div>
+              </div>
+              <div class="row" *ngIf="paramID!=null">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-2 ">
+                  <button type="submit" style="margin-bottom: 100px" (click)="Update()" class="btn btn-block btn-md savebutton">Update</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+/* Start of Mobile CSS */
+
+.Mobilecss{
+    margin-left: 0;
+}
+
+
+
+
+  @media screen and (min-width: 1900px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1600px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1400px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    .mainn{
+      margin-left: -14px;
+    }
+    
+  }
+  @media screen and (max-width: 1280px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    .mainn{
+      margin-left: -16px;
+     
+    }
+    
+  }
+
+
+  /*End of Mobile CSS*/

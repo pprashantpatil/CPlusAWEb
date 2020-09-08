@@ -1,0 +1,154 @@
+.header {
+    font-weight: 700;
+    color: #666666;
+    float: left;
+    width: auto;
+    margin: 0;
+    /* margin-left: 35px; */
+    padding: 0;
+    font-size: 24px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-top: 30px;
+}
+
+.building {
+    color: #00b5d7;
+    font-size: 18px;
+}
+
+.dashbutton {
+    border-radius: 6px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 56px;
+    height: 36px;
+    margin-bottom: 12px;
+}
+
+.mainrow {
+    float: right;
+    margin-top: 26px;
+}
+
+.maincard {
+    float: none;
+    background: white;
+    margin-top: 30px;
+}
+
+.paneltitle {
+    font-weight: 400;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: #666666;
+}
+
+i {
+    color: #00b5d7;
+}
+
+.tableheader {
+    padding: 10px;
+    background-color: #00b5d7;
+    height: 25px;
+    width: 200px;
+    color: white;
+    /* line-height: 0.55;  */
+    font-size: 13px;
+}
+
+.table {
+    margin-bottom: 0px;
+    background-color: transparent;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: table;
+    margin-top: 2%;
+    /* margin: 16px; */
+    /* line-height: 0.5; */
+    font-size: 13px;
+}
+
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+.maindropdown {
+    width: 210px;
+}
+
+.buildings {
+    font-size: 18px;
+}
+
+.modal-title {
+    font-weight: 700;
+    color: #666666;
+    float: left;
+    width: auto;
+    margin: 0;
+    margin-left: 35px;
+    padding: 0;
+    font-size: 24px;
+    opacity: 0.9;
+    margin-top: 19px;
+}
+
+.paybutton {
+    color: #00b5d7;
+    font-size: 24px;
+}
+
+label {
+    font-weight: 400;
+    cursor: default;
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    color: #666666;
+}
+
+.paydropdown {
+    width: 314px;
+}
+
+.mainsal {
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #555;
+    background-color: #fff;
+    overflow: auto;
+    height: 104px;
+}
+
+.savebutton {
+    width: 146px;
+    margin-top: 13px;
+    border-radius: 6px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    height: 36px;
+}
+
+.closebutton {
+    margin-left: 106px;
+    border-radius: 6px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 56px;
+    height: 36px;
+}
+
+.modal {
+    top: -30px !important;
+}

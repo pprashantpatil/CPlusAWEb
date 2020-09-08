@@ -1,0 +1,312 @@
+<div class="container-fluid ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">Dashboard</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 buildings">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <div class="row card col-lg-6">
+        <label class="label1">Project Progress</label>
+        <div class=" canvas ">
+          <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels1" [options]="barChartOptions_567" [legend]="barChartLegend"
+            [chartType]="barChartType"></canvas>
+        </div>
+      </div>
+
+      <div class="row card col-lg-6">
+        <label class="label1">Budget Dashboard</label>
+        <div class="canvas1">
+          <canvas baseChart [datasets]="barChartData3" [colors]="lineChartColors" [labels]="barChartLabels1" [options]="barChartOptions"
+            [legend]="barChartLegend" [chartType]="barChartType1"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+    </div>
+    <div>
+      <div class="row card regular">
+        <label class="label1"> Manhours Monthly Dashboard</label>
+        <div class="canvas1 col-lg-12">
+          <canvas baseChart [datasets]="barChartData4" height="100" [colors]="lineChartColors" [labels]="barChartLabels" [options]="barChartOptions"
+            [legend]="barChartLegend" [chartType]="barChartType1"></canvas>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <div>
+    <div class="row card regular">
+      <label class="label1"> Expenses</label>
+      <div class="canvas1">
+        <canvas baseChart [datasets]="barChartData2" height="100" [colors]="barChartColorsVisitors" [labels]="barChartLabels" [options]="barChartOptions_5678"
+          [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row">
+
+
+
+
+
+
+
+
+
+
+    <div class="shadow p-3 mb-5 rounded  maincard col-lg-6 " *ngIf="ProjectType==1" style="margin-left: -14px;width: 50%;
+    margin-top: 33px;height: 332px;">
+
+      <label style="margin-left: 59px;
+        font-size: 26px;
+        font-weight: 800;
+        font-family: inherit;">Contractor Invoices</label>
+
+
+      <div class="col-lg-6" style="margin-left: 42px;">
+        <select class="form-control" id="ContractorID" style="    margin-top: 16px;" [(ngModel)]="Contractorid" (change)="GetContractorID($event)">
+          <option value="0" selected="selected"> Select Contractor</option>
+          <option value="{{build.id}}" *ngFor="let build of Contractorlist">{{build.company}}</option>
+        </select>
+      </div>
+
+      <div class="row" style="margin-top: 86px;">
+
+        <div class="col-lg-4 card" style="height: 139px;
+        margin-right: 47px;
+        margin-left: 75px;
+        background: #00b5d7;
+        border-radius: 30px;
+        color: white;    margin-top: 1px;">
+          <h4 style="text-align: center; margin-top: 47px;">Pending Invoices</h4>
+          <label style="text-align: center; font-size: 21px">{{PendingCount}}</label>
+        </div>
+
+        <div class=" card" style="background: #00b5d7;
+        border-radius: 30px;
+        color: white;
+          height: 139px;
+          margin-left: 22px;
+          margin-right: 71px;    width: 188px;    margin-top: 1px;">
+          <h4 style="text-align: center; margin-top: 47px;">Paid Invoices</h4>
+          <label style="text-align: center; font-size: 21px">{{PaidCount}}</label>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="shadow p-3 mb-5 rounded  maincard col-lg-6 " *ngIf="ProjectType==2" style="margin-left: -14px;width: 50%;
+    margin-top: 33px;height: 332px;">
+
+      <label style="margin-left: 59px;
+        font-size: 26px;
+        font-weight: 800;
+        font-family: inherit;">Client Invoices</label>
+
+
+      <!-- <div class="col-lg-6" style="margin-left: 42px;">
+        <select class="form-control" id="ContractorID" style="    margin-top: 16px;" [(ngModel)]="Contractorid" (change)="GetContractorID($event)">
+          <option value="0" selected="selected"> Select Contractor</option>
+          <option value="{{build.id}}" *ngFor="let build of Contractorlist">{{build.company}}</option>
+        </select>
+      </div> -->
+
+      <div class="row" style="    margin-top: 40px;">
+
+        <div class="col-lg-4 card" style="height: 139px;
+        margin-right: 47px;
+        margin-left: 75px;
+        background: #00b5d7;
+        border-radius: 30px;
+        color: white;    margin-top: 1px;">
+          <h4 style="text-align: center; margin-top: 47px;">Pending Invoices</h4>
+          <label style="text-align: center; font-size: 21px">{{pendingClientCount}}</label>
+        </div>
+
+        <div class=" card" style="background: #00b5d7;
+        border-radius: 30px;
+        color: white;
+          height: 139px;
+          margin-left: 22px;
+          margin-right: 71px;    width: 188px;    margin-top: 1px;">
+          <h4 style="text-align: center; margin-top: 47px;">Paid Invoices</h4>
+          <label style="text-align: center; font-size: 21px">{{PaidclientCount}}</label>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="shadow p-3 mb-5 rounded  maincard" style="margin-left: 11px;width: 49%;
+  margin-top: 33px;height: 333px;">
+
+      <label style="margin-left: 59px;
+      font-size: 26px;
+      font-weight: 800;
+      font-family: inherit;">Supplier Invoices</label>
+
+
+      <select class="dropdown form-control " id="ddl_Vendor" (change)="FilterByVendorName($event)" style="width: 260px;
+      margin-left: 58px;
+      margin-top: 10px;">
+        <option value="none" selected="selected"> Select Supplier </option>
+        <option value="{{vendor.vendorName}}" *ngFor="let vendor of VendorList">{{vendor.vendorName}}
+        </option>
+      </select>
+
+      <div class="row" style="margin-top: -41px;">
+
+        <div class="col-lg-4 card" style="height: 139px;
+      margin-right: 47px;
+      margin-left: 75px;
+      background: #00b5d7;
+      border-radius: 30px;
+      color: white;">
+          <h4 style="text-align: center; margin-top: 47px;">Pending Invoices</h4>
+          <label style="text-align: center; font-size: 21px">{{SupplierPendingInvoices}}</label>
+        </div>
+
+        <div class=" card" style="background: #00b5d7;
+        border-radius: 30px;
+        color: white;
+        height: 139px;
+        margin-left: 22px;
+        margin-right: 71px;    width: 188px;">
+          <h4 style="text-align: center; margin-top: 47px;">Paid Invoices</h4>
+          <label style="text-align: center; font-size: 21px">{{SupplierPaidInvoices}}</label>
+        </div>
+
+
+
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="shadow p-3 mb-5 rounded  maincard col-lg-6 " style="    margin-left: -14px;
+    width: 50%;
+    margin-top: -14px;
+    height: 298px;">
+
+      <label style="margin-left: 59px;
+        font-size: 26px;
+        font-weight: 800;
+        font-family: inherit;">Credit Notes</label>
+
+      <div class="row" style="margin-top: -12px;">
+
+        <div class="col-lg-4 card" style="height: 139px;
+        margin-right: 47px;
+        margin-left: 75px;
+        background: #00b5d7;
+        border-radius: 30px;
+        color: white;">
+          <h4 style="text-align: center; margin-top: 47px;">Credit Notes Count</h4>
+          <label style="text-align: center; font-size: 21px">{{CreditNotesCount}}</label>
+        </div>
+
+        <div class=" card" style="background: #00b5d7;
+        border-radius: 30px;
+        color: white;
+          height: 139px;
+          margin-left: 22px;
+          margin-right: 71px;    width: 188px;">
+          <h4 style="text-align: center; margin-top: 47px;">Credit Notes Amount</h4>
+          <label style="text-align: center; font-size: 21px">2305</label>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="shadow p-3 mb-5 rounded  maincard col-lg-6" style="margin-left: 10px;
+    width: 50%;
+    margin-top: -14px;
+    height: 298px;">
+
+      <label style="margin-left: 59px;
+        font-size: 26px;
+        font-weight: 800;
+        font-family: inherit;">Ready For Billing</label>
+
+      <div class="row">
+        <div class="col-lg-11  table-responsive" style="height: 237px;
+        margin-left: 37px;">
+          <table class="table table-bordered  table-condensed" style="text-align: center;">
+            <tbody>
+              <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                <td>Start Date</td>
+                <td>End date</td>
+                <td>Stage </td>
+                <td>Process Check</td>
+                <td>Care Of</td>
+                <td>Comments</td>
+                <td>Accomplishment</td>
+                <td>Status</td>
+              </tr>
+              <tr *ngFor="let project of projectlist10">
+                <td>{{project.s_Date|date}}</td>
+                <td>{{project.e_Date|date}}</td>
+                <td>{{project.stage}}</td>
+                <td>{{project.processCheck}}</td>
+                <td>{{project.name}}</td>
+                <td>{{project.description}}</td>
+                <td>{{project.accomplishment}}</td>
+                <td>
+                  Ready For Billing
+                </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

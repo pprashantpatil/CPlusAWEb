@@ -1,0 +1,262 @@
+/* button{
+    background-color: #b1d583;
+    background-image: linear-gradient(to bottom,#fff,#b14545) !important;
+} */
+
+
+
+.header {
+  font-weight: 700;
+  color: #666666;
+  float: left;
+  width: auto;
+  margin: 0;
+  /* margin-left: 35px; */
+  padding: 0;
+  font-size: 24px;
+  text-transform: uppercase;
+  opacity: 0.9;
+  margin-top: 30px;
+}
+
+.building{
+  color: #00b5d7;
+  font-size: 18px;
+}
+.dashbutton {
+  border-radius: 10px;
+  background-color: #00b5d7;
+  color: white;
+  border: none;
+  width: 150px;
+  height: 30px;
+  margin-bottom: 12px;
+}
+.mainrow{
+  float: right;
+  margin-top: 26px;
+}
+
+.maincard{
+  float: initial;
+  background: white;
+
+}
+
+.paneltitle {
+  font-weight: 400;
+  text-transform: uppercase;
+  opacity: 0.9;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: #666666;
+}
+
+i{
+  color: #00b5d7;
+}
+
+.tableheader {
+  padding: 10px;
+ 
+  background-color: #00b5d7;
+  height: 25px;
+  width: 200px;
+  color: white;
+       /* line-height: 0.55;  */
+       font-size: 13px;
+}
+
+.table {
+  
+  margin-bottom: 0px;
+  background-color: transparent;
+  border-spacing: 0;
+  border-collapse: collapse;
+  display: table;
+  margin: 16px;
+  /* line-height: 0.5; */
+  font-size: 13px;
+  margin-left: -9px;
+}
+
+.table-bordered {
+  border: 1px solid #ddd;
+}
+.maindropdown{
+  width: 210px;
+}
+
+.excelbutton{
+  margin-left: auto;
+  margin-right: 20px;
+  background-color: #00b5d7;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.topdropdown{
+  width: 230px;
+  /* margin-top: 11px; */
+}
+.switch {
+position: relative;
+display: inline-block;
+width: 50px;
+height: 25px;
+}
+
+.switch input { 
+opacity: 0;
+width: 0;
+height: 0;
+}
+
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #ccc;
+-webkit-transition: .4s;
+transition: .4s;
+}
+
+.slider:before {
+position: absolute;
+content: "";
+height: 18px;
+width: 18px;
+left: 4px;
+bottom: 4px;
+background-color: white;
+-webkit-transition: .4s;
+transition: .4s;
+}
+
+input:checked + .slider {
+background-color: #00b5d7;
+}
+
+input:focus + .slider {
+box-shadow: 0 0 1px #00b5d7;
+}
+
+input:checked + .slider:before {
+-webkit-transform: translateX(26px);
+-ms-transform: translateX(26px);
+transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+border-radius: 34px;
+}
+
+.slider.round:before {
+border-radius: 50%;
+}
+
+
+/* You can add global styles to this file, and also import other style files */
+.tableheader{
+border: black;
+background-color: #00b5d7;;
+text-align: center;
+
+
+}
+
+.mainrow{
+    float: right;
+    margin-top: 26px;
+}
+
+i{
+    color: #00b5d7;
+    margin-left: 4px;
+    margin-top: 6px;
+}
+
+
+
+.tableheaderfont{
+    color: white;
+}
+
+.build{
+    padding-top: 13px;
+    padding-bottom: 27px;   
+    
+}
+
+.buildingimage{
+width: 40%;
+height: auto;
+
+}
+
+/* .mainbuild{
+width: 100%;
+margin-left: 16px;
+} */
+
+
+.maincard{
+float: initial;
+background: white;
+
+}
+.completebutton{
+background-color:#fec501;
+color:white;
+width:25px;
+height:26px;
+border-radius:50%;
+border:none;
+}
+
+.popcard{
+color: #7d7d7d;
+margin: 0;
+line-height: 1.42857143;
+font-family: "Roboto", sans-serif;
+  width: 100%;
+  margin-top: 0;
+  font-size: 18px;
+  padding: 15px;
+
+}
+label{
+font-weight: 400;
+font-size: 15px;
+padding: 10px;
+}
+
+.plabel{
+width: 370px;
+}
+textarea{
+height: 98px;
+}
+.cancelbutton {
+width: 131px;
+background-color: #00b5d7;
+color: white;
+border-color: rgba(20, 21, 31, 0.20);
+}
+.closebutton{
+width: 66px;
+  /* padding: 7px; */
+  background-color: #00b5d7;
+  margin-bottom: 24px;
+  color: white;
+}
+
+
+.popupclose{
+  margin-bottom: 12px;
+}

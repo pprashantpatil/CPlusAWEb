@@ -1,0 +1,74 @@
+<div class="container-fluid Pages_background">
+    <div>
+        <div class="row">
+            <div class="col-lg-4">
+                <h4 class="Pages_header"  style="margin-left: -14px">Leave Master</h4>
+            </div>
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-4">
+                <div class="mainrow">
+                    <div class="col-lg-12">
+                        <!-- <span> Staff /Leave Leave Master</span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 dashbutton" style="margin-left: -14px">
+                <button routerLink="/LeaveMasterDetails" type="button" id="btn_button">Add New Leave </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard" style="margin-left: -14px">
+        <div class="row  p-2">
+            <div class="col-lg-12 pannel">
+                <h6 class="paneltitle">Leave Master Dashboard</h6>
+            </div>
+        </div>
+
+        <div class="row p-4">
+            <div class="col-lg-3">
+                <input type="text" placeholder="search" [(ngModel)]="Search" class="form-control" id="txt_StaffsearchBuilding">
+            </div>
+            <!-- <div class="col-lg-3">
+                <select class="dropdown form-control" id="ddl_BuildingName" required>
+                    <option value="none" selected="selected">Select Account</option>
+                </select>
+            </div> -->
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12  table-responsive">
+                    <table class="table table-bordered table-hover table-condensed">
+                        <tbody>
+                            <tr class="tableheader tableheaderfont">
+                                <td>Leave Type</td>
+                                <td>Leave Name</td>
+                                <td>Leave Description</td>
+                                <td>Type Of Leave</td>
+                                <td>Day Earned</td>
+                                <td>Max Days</td>
+                                <!-- <td>{{staff_IDattachment}}</td> -->
+                                <td>Start Of Leave</td>
+                                <td>Actions</td>
+                            </tr>
+                            <tr *ngFor="let leave of leavelist|filter:Search">
+                                <td>{{leave.leaveType}}</td>
+                                <td>{{leave.leaveName}}</td>
+                                <td>{{leave.leaveDescription}}</td>
+                                <td>{{leave.typeOfLeave}}</td>
+                                <td>{{leave.dayEarned}}</td>
+                                <td>{{leave.maxdays}}</td>
+                                <td>{{leave.startOfLeave}}</td>
+                                <td><i class="fa fa-edit" title="Edit"
+                                        [routerLink]="['/LeaveMasterDetails',leave.id]"></i>&nbsp;
+                                    <i class="far fa-trash-alt" title="Delete"
+                                        (click)="Deleteleave(leave.id, leave.leaveName)"></i></td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

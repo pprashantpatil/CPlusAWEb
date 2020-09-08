@@ -1,0 +1,95 @@
+.building{
+    color: #00b5d7;
+    font-size: 18px;
+}
+
+.dashbutton {
+    border-radius: 10px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 160px;
+    height: 40px;
+    margin-bottom: 12px;
+}
+
+.mainrow{
+    float: left;
+    margin-top: 25px;
+}
+.tableheaderfont{
+    color: white;
+}
+.tableheader{
+    border: black;
+    background-color: #00b5d7;;
+    text-align: center;
+    
+    }
+
+
+    .popupbutton{
+        background-color: #00b5d7;
+        color: white;
+        margin-top: 7px;
+        /* margin: 11px; */
+    }
+    
+    .popupbuttonupdate{
+        background-color: #00b5d7;
+        color: white;
+        /* margin: 11px; */
+        margin-left: 20px;
+        margin: 10px;
+    }
+    
+    
+    
+    .popupUpdatebutton{
+        background-color: #00b5d7;
+        color: white;
+        margin: 11px;
+    }
+    .popupbuttonAcpt{ 
+        background-color: #00b5d7;
+        height: 35px;
+        width: 130px;
+        border-radius: 10px;
+        color: white;
+        margin-top: 8px;
+    }
+    .popupbuttonRej{
+        background-color: #00b5d7;
+        height: 35px;
+        width: 130px;
+        border-radius: 10px;
+        color: white;
+    }
+    .dropzone_vendorinvoice {
+        height: 66px;
+        border: 2px solid #717386;
+        max-width: 404px;
+        min-width: auto;
+    }
+
+
+    .raisedby{
+        margin-left: auto;
+    }
+
+
+
+    @media screen and (min-width: 1600px) {
+        .raisedby{
+            margin-left: auto;
+        }
+    
+        
+      }
+      @media screen and (min-width: 1900px) {
+        .raisedby{
+            margin-left: 162px;
+        }
+    
+      }
+    

@@ -1,0 +1,119 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header"> Grocery Dashboard</h4>
+    </div>
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building">Conceirge / Grocery Dashboard </span> </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <h4 class="paneltitle ">Grocery Dashboard</h4>
+    <hr>
+    <div class="row p-2">
+      <div class="col-lg-4">
+        <ng-daterangepicker [options]="pickeroptions"></ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control" (change)="GetFloor($event)" id="ddl_groceryBuilding">
+          <option value="none">Select Building</option>
+          <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control " id="ddl_groceryFloor" (change)="FilteredFloorList($event)">
+          <option value="none">Select Floor</option>
+          <option value="{{floor.id}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3">
+        <input type="text" placeholder="Search" [(ngModel)]="Search" class="form-control"
+          id="txt_grocerySearch">
+      </div>
+    </div>
+    <div class="row" style="padding:20px">
+      <table class="table table-bordered table-hover table-condensed mainbuild">
+        <tbody>
+          <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+            <td>Date</td>
+            <td>Tenent</td>
+            <td>Building</td>
+            <td>Floor</td>
+            <td>Unit</td>
+            <td>Vendor Name</td>
+            <td>Grocery</td>
+            <td>Status</td>
+          </tr>
+          <tr *ngFor="let Grocery of FilteredGroceryList|filter:Search">
+            <td>{{Grocery.date|date}}</td>
+            <td>{{Grocery.name}}</td>
+            <td>{{Grocery.building}}</td>
+            <td>{{Grocery.floor}}</td>
+            <td>{{Grocery.unitID}}</td>
+            <td>{{Grocery.vendorName}}</td>
+            <td><img class="buildingimage" src="{{Grocery.groceryURL}}" (click)="getimage(Grocery.groceryURL)"
+                data-toggle="modal" data-target="#myModalupimage"></td>
+            <td style="width: 150px;">
+              <div>
+                <button class="btn btn-danger editable-table-button btn-xs">Delivered</button>
+               
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="modal fade" id="myModalupimage">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="margin-top: 15%;width: 503px;margin-left: 222px;">
+          <div class="modal-header">
+            <h4>Grocery</h4>
+            <!-- <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+                          <i class=" i" style="margin-left: 221px;
+                          margin-top: 10px;
+                          font-size: 16px;" data-toggle="modal" data-target="#AddAttachments">Add Attachments</i>
+                        </div> -->
+            <button type="button" class="close " data-dismiss="modal">&times;</button>
+          </div>
+          <div class="row" style="margin-top:5%;">
+            <div class="col-lg-12">
+              <div class="col-lg-2">
+
+              </div>
+              <div class="col-lg-8">
+                <!-- <a >
+                      <img src="{{pharmacyimg}}" style="width: 222px;">
+                    </a> -->
+                <div>
+                  <a href="{{groceryimg}}" download style="background-color:white">
+                    <img src="{{groceryimg}}" style="width: 222px;">
+                  </a>
+                </div>
+                <p style="margin-top: 15px;">(Note : Click on the image to download)</p>
+
+              </div>
+              <div class="col-lg-2">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-9"> </div>
+            <div class="col-lg-3">
+              <button class="dashbutton " style="width: 69px;
+                    margin-right: 12px;" type="submit" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

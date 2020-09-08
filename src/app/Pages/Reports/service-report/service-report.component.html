@@ -1,0 +1,113 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-5">
+        <h4 class="Pages_header">Receivable Report</h4>
+      </div>
+      <div class="col-lg-3">
+      </div>
+      <div class="col-lg-4">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <span class="announcementbc" style="margin-left: 80px;"> Reports /Receivable Report</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+</div>
+<div class="container-fluid Pages_background">
+  <div class="shadow p-2 mb-5 bg-white rounded   maincard ">
+    <h4 class="paneltitle">Receivable Report</h4>
+    <hr>
+    <div class="row">
+      <div class="col-lg-3">
+        <select class="dropdown form-control" [(ngModel)]="RentTypeID" (change)="FilterByRent($event)" name="RentTypeID"
+          id="updaterentRentType" placeholder="Select Floor">
+          <option value="0">Select Rent Type</option>
+          <option value="{{Rent.id}}" *ngFor="let Rent of Rentlist">{{Rent.short}}</option>
+        </select>
+      </div>
+
+      <div class="col-lg-3">
+        <select (change)="GetRentPaymentMontn($event)" [(ngModel)]="RentForTheMonth" style="width: 240px;"
+          name="Rentformonth" class="dropdown form-control " id="ddl_rentRentMonth" placeholder="Select Month">
+          <option value="" class="" selected="selected">Rent For The Month</option>
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+
+      </div>
+
+      <!-- <div class="col-lg-3">
+        <select style="width: 240px;" name="Rentformonth" class="dropdown form-control " id="ddl_rentRentMonth"
+          placeholder="Select Month">
+          <option value="" class="" selected="selected">Select Status</option>
+          <option value="Paid">Paid</option>
+          <option value="Pending">Pending</option>
+        </select>
+      </div> -->
+      <div class="col-lg-6">
+        <div class="col-lg-3" style="background: antiquewhite;margin: 3px;border: #0000002e solid;">
+          <h4 style="font-size: 16px;">Paid:{{TenantPaidCount}}</h4>
+        </div>
+        <div class="col-lg-3" style="background: antiquewhite;margin: 3px;border: #0000002e solid;">
+          <h4 style="font-size: 16px;">Unpaid:{{TenantsUnpaidCount}}</h4>
+        </div>
+      </div>
+
+    </div>
+    <br>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-condensed">
+        <tbody>
+          <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+            <td>Building</td>
+            <td>Floor</td>
+            <td>Unit</td>
+            <td>Tenant Name</td>
+            <td>Date Of Payment</td>
+            <td>Paid Amount</td>
+            <td>Penalty</td>
+            <td>Status</td>
+            <td>Ageing</td>
+          </tr>
+        </tbody>
+
+        <tr *ngFor="let Ageing of AgeingReport">
+          <td>{{Ageing.buildingName}}</td>
+          <td>{{Ageing.floor}}</td>
+          <td>{{Ageing.unitID}}</td>
+          <td>{{Ageing.tenantName}}</td>
+          <td>{{Ageing.date|date}}</td>
+          <td>{{Ageing.rentAmount}} </td>
+          <td>{{Ageing.penalty}}</td>
+          <td>{{Ageing.status}}</td>
+          <td>{{Ageing.rentAging}}</td>
+        </tr>
+        <tr *ngFor="let unpaid of UnpaidTenents">
+          <td>{{unpaid.buildingName}}</td>
+          <td>{{unpaid.floor}}</td>
+          <td>{{unpaid.unitID}}</td>
+          <td>{{unpaid.tenantName}}</td>
+          <td> - </td>
+          <td>{{unpaid.rentAmount}} </td>
+          <td> - </td>
+          <td>{{unpaid.status}}</td>
+          <td>{{unpaid.rentAging}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>

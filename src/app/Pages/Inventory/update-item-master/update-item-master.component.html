@@ -1,0 +1,56 @@
+<div class="container-fluid Pages_background">
+  <div class="col-lg-4">
+    <h4 class="Pages_header">ITEM MATSER </h4>
+  </div>
+  <br>
+  <div class="al-breadcrumb BreadChrumbProperties">
+    <span> Inventory</span> / Item Master
+  </div>
+  <hr>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <h4 class="paneltitle "> Item Master</h4>
+    <hr>
+    <form>      
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5>Item Name <span style="color: red;">*</span></h5>
+        </div>
+        <div class="col-lg-4 ">
+          <input type="text" id="txt_ItemName" required placeholder="Name">
+        </div>
+      </div>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5>Item Description <span style="color: red;">*</span></h5>
+        </div>
+        <div class="col-lg-4 ">
+          <input type="text" id="txt_ItemDescriptions" required placeholder="Description">
+        </div>
+      </div>
+      
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5>Item Type <span style="color: red;">*</span></h5>
+        </div>
+        <div class="col-lg-4 ">
+          <select  id="ddl_Itemtype" required placeholder="Select">
+            <option value="" class="" selected="selected">Select</option>
+            <option label="Exercise" value="object:1265">Exercise</option>
+            <option label="Shuttel bat" value="object:1266">Shuttel bat</option>
+            <option label="Bottles" value="object:1267">Bottles</option>
+            <option label="A4 sheets" value="object:1268">A4 sheets</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-1 savebutton">
+          <button type="submit" id="btn_updateitemmasterbutton">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

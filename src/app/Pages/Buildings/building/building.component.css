@@ -1,0 +1,145 @@
+/* You can add global styles to this file, and also import other style files */
+.tableheader{
+    border: black;
+    background-color: #00b5d7;;
+    text-align: center;
+    
+    }
+    i{
+        color: #00b5d7;
+    }
+
+    .tableheaderfont{
+        color: white;
+    }
+    .build{
+        padding-top: 13px;
+        padding-bottom: 27px;   
+        
+    }
+
+.buildingimage{
+    width: 40%;
+    height: auto;
+
+}
+
+/* .mainbuild{
+    width: 100%;
+    margin-left: 16px;
+} */
+
+
+.maincard{
+    float: initial;
+    background: white;
+    margin-left: -13px;
+}
+
+
+/* You can add global styles to this file, and also import other style files */
+.tableheader{
+    border: black;
+    background-color: #00b5d7;;
+    text-align: center;
+    
+    }
+ 
+    .mainrow{
+        float: right;
+        margin-top: 26px;
+    }
+    
+    i{
+        color: #00b5d7;
+    }
+   
+
+
+    .tableheaderfont{
+        color: white;
+    }
+
+    .build{
+        padding-top: 13px;
+        padding-bottom: 27px;   
+        
+    }
+.buildingimage{
+    width: 40%;
+    height: auto;
+
+}
+
+/* .mainbuild{
+    width: 100%;
+    margin-left: 16px;
+} */
+
+
+.maincard{
+    float: initial;
+    background: white;
+
+}
+
+.paneltitle {
+    font-weight: 400;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: #666666;
+}
+
+.closebutton{
+    /* margin-left: 106px; */
+    border-radius: 6px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 56px;
+    height: 36px;
+    margin-left: 599px;
+    margin-right: 20px;  
+  
+}
+.updatebutton{
+    border-radius: 6px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 56px;
+    height: 36px;
+    margin-left: 599px;
+    margin-right: 0px;
+}
+
+.buildingtable{
+    background-color: #00b5d7!important;
+    color: #ffffff!important;
+}
+
+
+
+.Backgroundforipad{
+    margin-left: 12px;
+   
+}
+
+@media screen and (max-width: 1024px) {
+    .Backgroundforipad{
+        margin-left: 50px;
+        margin-top: 16px;
+    }
+
+  }
+
+
+
+
+
+
+
+

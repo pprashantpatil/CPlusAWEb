@@ -1,0 +1,101 @@
+/* You can add global styles to this file, and also import other style files */
+
+.tableheader {
+    border: black;
+    background-color: #00b5d7;
+    ;
+    text-align: center;
+}
+
+.mainrow {
+    float: right;
+    margin-top: 26px;
+}
+
+i {
+    color: #00b5d7;
+}
+
+.tableheaderfont {
+    color: white;
+}
+
+.build {
+    padding-top: 13px;
+    padding-bottom: 27px;
+}
+
+.buildingimage {
+    width: 40%;
+    height: auto;
+}
+
+.divForm {
+    margin-top: 2%;
+}
+
+
+/* .mainbuild{
+    width: 100%;
+    margin-left: 16px;
+} */
+
+.maincard {
+    float: initial;
+    background: white;
+    margin-top: 2%;
+}
+
+h6 {
+    font-size: 14px;
+    color: #666666;
+}
+
+.dropzone_vendorinvoice {
+    height: 66px;
+    border: 2px solid #717386;
+    width: 397px;
+}
+
+/* Start of Mobile CSS */
+
+.Mobilecss{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+@media screen and (min-width: 320px) {
+    .Mobilecss{
+        margin-left: 33px;
+        margin-right: -16px;
+    }
+    
+  }
+
+  @media screen and (min-width: 1900px) {
+    .Mobilecss{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1600px) {
+    .Mobilecss{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1400px) {
+    .Mobilecss{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+  }
+
+
+  /*End of Mobile CSS*/

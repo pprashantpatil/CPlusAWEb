@@ -1,0 +1,460 @@
+<div class="container-fluid Pages_background">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="Pages_header"> {{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span class="building"> {{tenant_breadchrumb}} </span> </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12 dashbutton">
+                    <button type="button" routerLink="/Updatetenent" routerLinkActive="active-link" id="btn_button"
+                        class=""> {{tenant_button_New}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-9"></div>
+        <div class="col-lg-3">
+            <button type="button" style="margin-left: 105px;background-color: #00b5d7;color: white;"
+                class="btn  btn-md excelbutton">
+                Export To Excel
+            </button>
+        </div>
+
+    </div>
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+        <h4 class="paneltitle ">{{tenant_PageTitle}}</h4>
+        <hr>
+        <div class="row p-2">
+            <div class="col-lg-3">
+                <input type="text" [(ngModel)]="TenantSearch" placeholder="{{tenant_search}}" class="form-control"
+                    id="txt_tenantSearch">
+            </div>
+            <div class="col-lg-3 ">
+                <select id="ddl_tenantBuilding" class="dropdown form-control " (change)="filterbybuildingname($event)">
+                    <option value="none" class="" selected="selected">Select Building</option>
+                    <option *ngFor="let building of buildinglist" value="{{building.id}}">{{building.name}}</option>
+                </select>
+            </div><br>
+
+            <div class="col-lg-3 ">
+                <label style="padding: 11px;">Upload Photos</label>
+                <a data-toggle="modal" data-target="#CommonmyModalPhotos" (click)="GettenantID(0,0)" title="Upload"
+                    style="background-color: white"><i class="fa fa-upload" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <div class="row" style="padding:20px">
+            <table class="table table-bordered table-hover table-condensed mainbuild" id="Tenant_master">
+                <tbody>
+                    <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+                        <td>{{tenant_TenantName}}</td>
+                        <!-- <td>{{tenant_Tenanttype}}</td> -->
+                        <td>{{tenant_Phoneno}} </td>
+                        <td>{{tenant_Building}}</td>
+                        <td width="100px">{{tenant_Floor}}</td>
+                        <td width="100px">{{tenant_Unit}}</td>
+                        <td width="100px">Status</td>
+                        <td width="200px">{{tenant_Actions}}</td>
+                    </tr>
+                    <tr *ngFor="let tenents of filteredtenantlist | filter:TenantSearch">
+                        <td>{{tenents.tenantName}}</td>
+                        <!-- <td>{{tenents.tenantType}}</td> -->
+                        <td>{{tenents.phoneNo}}</td>
+                        <td>{{tenents.buildingName}}</td>
+                        <td>{{tenents.floor1}}</td>
+                        <td>{{tenents.unitID}}</td>
+                        <td>{{tenents.status}}</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-lg-1">
+                                    <a (click)="EditTenent(tenents)"> <i class="fa fa-edit"
+                                            style="cursor:pointer;color:#00b5d7;background-color: white"
+                                            data-toggle="tooltip" title="Edit"></i></a>
+                                </div>
+                                <div class="col-lg-1">
+                                    <a data-toggle="modal" data-target="#myModal" id="btn_infopopup"
+                                        (click)="TenentAttachments(tenents)">
+                                        <i class="fa fa-paperclip"
+                                            style="cursor:pointer;color:#00b5d7;background-color: white"
+                                            data-toggle="tooltip" title="Attachments"></i>
+                                    </a>
+                                </div>
+
+                                <div class="col-lg-1">
+                                    <a id="btn_infopopup" data-toggle="modal" data-target="#myModalThree"><i
+                                            (click)="TenentAgreements(tenents)" class="far fa-building"
+                                            style="cursor:pointer;color:#00b5d7;background-color: white"
+                                            data-toggle="tooltip" title="Agreements"></i></a>
+                                </div>
+
+                                <div class="col-lg-1">
+                                    <a id="btn_infopopup" (click)="DeleteTenent(tenents)">
+                                        <i class="far fa-trash-alt" data-toggle="tooltip" title="Delete"
+                                            style="cursor:pointer;color:#00b5d7"></i>
+                                    </a>
+
+                                </div>
+
+
+                                <div class="col-lg-1">
+                                    <a *ngIf="tenents.inspectionstatus!=2" data-toggle="modal"
+                                        data-target="#myModalPhotos" (click)="GettenantID(tenents.id,1)" title="Upload"
+                                        style="background-color: white"><i class="fa fa-upload"
+                                            aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+            </table>
+        </div>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content" style="margin-top: 102px;">
+                    <div class="modal-header">
+                        <h5>Attachments</h5>
+                        <button *ngIf="TenentAttachmentlist.length>0" type="button" class="close "
+                            data-dismiss="modal">&times;</button>
+                        <div *ngIf="TenentAttachmentlist.length==0" class="addnew" data-toggle="tooltip"
+                            title="Add Attachments" data-dismiss="modal">
+                            <i class="i" data-toggle="modal" data-target="#myModalTwo">Add Attachments</i>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div *ngIf="TenentAttachmentlist.length>0">
+                            <div class="row" *ngFor="let atachment of TenentAttachmentlist">
+                                <div class="col-lg-6">
+                                    <img style="width: 100%; height: auto;" src="{{atachment.attachment}}">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-default popupUpdatebutton"
+                                                data-dismiss="modal" data-toggle="modal" data-target="#myModalTwo"
+                                                (click)="isupdate(atachment)">Update</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-default popupUpdatebutton"
+                                                data-dismiss="modal"
+                                                (click)="DeleteTenantDocument(atachment)">Delete</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <!-- <button type="button" class="btn btn-default popupUpdatebutton"
+                                                data-dismiss="modal"
+                                                (click)="DeleteTenantDocument(atachment)">Delete</button> -->
+                                            <!-- <a href="{{atachment.attachment}}" download >
+                                                <i class="fa fa-download" aria-hidden="true" title="Download" style="margin-left: 19px;
+                                                margin-top: 18px;"></i>
+                                            </a> -->
+
+                                            <a href="{{atachment.attachment}}" download
+                                                style="background-color: white;">
+                                                <i class="fas fa-download" style="font-size: 29px;
+                                                    margin-top: 12px;
+                                                    margin-left: 14px;
+                                                    color: #00b5d7;
+                                                    background-color: white;" title="Download"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="TenentAttachmentlist.length==0">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <img style="width: 100%; height: auto;"
+                                        src="http://img.livebetsoccer.com/team/thumbnails/default.jpg">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Modal 2-->
+        <div id="myModalTwo" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content " style="margin-top: -31px;">
+                    <div class="modal-header">
+                        <button type="button" class="close " data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <h5>Update Attachment
+                                </h5>
+                            </div>
+                            <div class="col-lg-8">
+                                <ngx-dropzone [showPreviews]="true" [preserveFiles]="false" #dropzone_forUpdate
+                                    class="dropzone_vendorinvoice" id="dropzone_attachments"
+                                    (filesAdded)="TenantAgreementUpload($event)"></ngx-dropzone>
+                                <button class="btn btn-default close"
+                                    (click)="dropzone_forUpdate.reset()">Reset</button>
+                                <!-- <button (click)="dropzone_forUpdate.showFileSelector()">Show file selector</button> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <button type="button" class="btn btn-primary savebutton" (click)="updatedDocuments()"
+                                    data-dismiss="modal">Update </button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Modal 3-->
+        <div id="myModalThree" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content" style="margin-top: 102px;">
+                    <div class="modal-header">
+                        <h5>Agreements</h5>
+                        <button *ngIf="TenentlAgreementist.length>0" type="button" class="close "
+                            data-dismiss="modal">&times;</button>
+                        <div class="addnew" *ngIf="TenentlAgreementist.length==0" data-toggle="tooltip"
+                            title="Add Attachments" data-dismiss="modal">
+                            <i class=" i" data-toggle="modal" data-target="#myModalTwo">Add Attachments</i>
+                        </div>
+
+                    </div>
+                    <div class="modal-body">
+                        <div *ngIf="TenentlAgreementist.length>0">
+                            <div class="row" *ngFor="let TenentAgreements of TenentlAgreementist">
+                                <div class="col-lg-6">
+                                    <img style="width: 100%; height: auto;" src="{{TenentAgreements.attachment}}">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-default popupUpdatebutton"
+                                                data-dismiss="modal" data-toggle="modal" data-target="#myModalTwo"
+                                                (click)="isupdate(TenentAgreements)">Update</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-default popupUpdatebutton"
+                                                data-dismiss="modal"
+                                                (click)="DeleteTeanantAttachment(TenentAgreements)">Delete</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <a href="{{TenentAgreements.attachment}}" download
+                                                style="background-color: white;">
+                                                <i class="fas fa-download" style="font-size: 29px;
+                                                        margin-top: 12px;
+                                                        margin-left: 14px;
+                                                        color: #00b5d7;
+                                                        background-color: white;" title="Download"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="TenentlAgreementist.length==0">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <img style="width: 100%; height: auto;"
+                                        src="http://img.livebetsoccer.com/team/thumbnails/default.jpg">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="myModalPhotos" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="margin-top: 100px;">
+            <div class="modal-header">
+                <h4>Upload Photos</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="row">
+
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-3">
+                                <h6>Date</h6>
+                            </div>
+                            <div class="col-lg-7 form-group">
+                                <div class="form-group">
+                                    <input type="date" class="form-control" [(ngModel)]="date" name="date" id="date"
+                                        placeholder="date">
+                                </div>
+
+
+                            </div>
+                            <div class=col-lg-1> </div>
+                        </div>
+
+
+                        <div class="row ">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-3">
+                                <h6>Description</h6>
+                            </div>
+                            <div class="col-lg-7 form-group">
+                                <textarea rows="8" [(ngModel)]="Description" id="Description" name="Description"
+                                    required class="form-control" placeholder="Description" required></textarea>
+                            </div>
+                            <div class=col-lg-1> </div>
+                        </div>
+
+                        <div class="row ">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-3">
+                                <h6>Photo</h6>
+                            </div>
+                            <div class="col-lg-7 form-group">
+                                <input type="file" class="form-control" placeholder="Photo"
+                                    accept="image/x-png,image/gif,image/jpeg,application/pdf" multiple
+                                    (change)="handleFileSelect1($event)">
+                            </div>
+                            <div class=col-lg-1> </div>
+                        </div>
+
+
+                        <div class="row ">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-3">
+                                <h6>Video</h6>
+                            </div>
+                            <div class="col-lg-7 form-group">
+                                <input type="file" class="form-control" placeholder="videos" multiple
+                                    (change)="handleFileSelect2($event)">
+                            </div>
+                            <div class=col-lg-1> </div>
+                        </div>
+
+                        <div class="row">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-2 ">
+                                <button type="submit" style="margin-bottom: 100px" data-dismiss="modal"
+                                    (click)="SaveTenentInspection()"
+                                    class="btn btn-block btn-md savebutton">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="CommonmyModalPhotos" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="margin-top: 100px;">
+            <div class="modal-header">
+                <h4>Upload Photos</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-3">
+                                <h6>Date </h6>
+                            </div>
+                            <div class="col-lg-7 form-group">
+                                <div class="form-group">
+                                    <input type="date" class="form-control" [(ngModel)]="date" name="date" id="date"
+                                        placeholder="date">
+                                </div>
+                            </div>
+                            <div class=col-lg-1> </div>
+                        </div>
+                        <div class="row ">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-3">
+                                <h6>Description</h6>
+                            </div>
+                            <div class="col-lg-7 form-group">
+                                <textarea rows="8" [(ngModel)]="Description" id="Description" name="Description"
+                                    required class="form-control" placeholder="Description" required></textarea>
+                            </div>
+                            <div class=col-lg-1> </div>
+                        </div>
+                        <div class="row ">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-3">
+                                <h6>Photo</h6>
+                            </div>
+                            <div class="col-lg-7 form-group">
+                                <input type="file" class="form-control" placeholder="Photo"
+                                    accept="image/x-png,image/gif,image/jpeg,application/pdf" multiple
+                                    (change)="handleFileSelect1($event)">
+                            </div>
+                            <div class=col-lg-1> </div>
+                        </div>
+                        <div class="row ">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-3">
+                                <h6>Video</h6>
+                            </div>
+                            <div class="col-lg-7 form-group">
+                                <input type="file" class="form-control" placeholder="videos" multiple
+                                    (change)="handleFileSelect2($event)">
+                            </div>
+                            <div class=col-lg-1> </div>
+                        </div>
+                        <div class="row">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-2 ">
+                                <button type="submit" style="margin-bottom: 100px" data-dismiss="modal"
+                                    (click)="SaveTenentInspection()"
+                                    class="btn btn-block btn-md savebutton">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

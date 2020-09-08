@@ -1,0 +1,15 @@
+.mainrow {
+    float: right;
+    margin-top: 26px;
+}
+
+.tableheaderfont {
+    color: white;
+}
+
+.tableheader {
+    border: black;
+    background-color: #00b5d7;
+    ;
+    text-align: center;
+}

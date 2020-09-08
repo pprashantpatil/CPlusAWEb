@@ -1,0 +1,61 @@
+.mainrow {
+    float: right;
+    margin-top: 26px;
+}
+
+.maincard {
+    float: initial;
+    background: white;
+}
+
+.formlabel {
+    color: #666666;
+}
+
+.dropzone_vendorinvoice {
+    height: 66px;
+    border: 2px solid #717386;
+    width: 317px;
+}
+
+.profilepic {
+    width: 60%;
+    height: auto;
+}
+
+.updatetenentattachments{
+    width: 511px;
+}
+
+.updatebuildingddl{
+    width: 326px;
+}
+
+
+@media screen and (min-width: 1600px) {
+    .updatetenentattachments{
+        width: auto;
+    }
+    .updatebuildingddl{
+        width: 288px;
+    }
+    .dropzone_vendorinvoice {
+        height: 66px;
+        border: 2px solid #717386;
+        width: 317px;
+    }
+    
+  }
+  @media screen and (min-width: 1900px) {
+    .updatetenentattachments{
+        width: 511px;
+    }
+    .updatebuildingddl{
+        width: 442px;
+    }
+    .dropzone_vendorinvoice {
+        height: 66px;
+        border: 2px solid #717386;
+        width: 438px;
+    }
+  }

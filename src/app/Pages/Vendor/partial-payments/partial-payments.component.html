@@ -1,0 +1,172 @@
+<div class="container-fluid Pages_background ">
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="header">PARTIAL PAYMENTS </h4>
+            </div>
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-4">
+                <div class="row mainrow">
+                    <div class="col-lg-12 BreadChrumbProperties">
+                        <span class="building"> {{partialPayments_BreadChrumb}} </span> </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-3">
+                <div class="row mainrow">
+                    <div class="col-lg-12">
+                        <!-- <button type="button" routerLink="/UpdateVendor" routerLinkActive="active-link" id="btn_button"
+                      class="dashbutton">New Vendor</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+            <h6 class="paneltitle">VENDOR PAYMENT DETAILS
+            </h6>
+            <hr>
+    
+            <div class="row">
+                <div class="col-lg-4">
+                    <h6>{{partialPayments_SelectDate}}</h6>
+                    <ng-daterangepicker [options]="options"></ng-daterangepicker>
+                </div>
+                <div class="col-lg-3">
+                    <h6>{{partialPayments_SelectVendor}}</h6>
+                    <select class="dropdown form-control maindropdown" id="ddl_partialpaymentsVendor"
+                        (change)="vendorCredits($event,VendorPurchase)">
+                        <option value="none">Search </option>
+                        <option value="{{VendorP.id}}" *ngFor="let VendorP of VendorPurchase">{{VendorP.short}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 ">
+                    <h6>{{partialPayments_SelectCredits}}</h6>
+                    <input type="number" value="{{Credits}}" id="txt_partialpaymentsCredits" class="form-control"
+                        placeholder="0" readonly="readOnly">
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr class="tableheader">
+                            <td>{{partialPayments_InvoiceNumber}}</td>
+                            <td>{{partialPayments_VendorName}}</td>
+                            <td>{{partialPayments_Date}}</td>
+                            <td>{{partialPayments_Total}}</td>
+                            <td>{{partialPayments_Paid}}</td>
+                            <td>{{partialPayments_Amount}}</td>
+                            <td>{{partialPayments_Status}} </td>
+                            <td>{{partialPayments_Pay}}</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let VendorPayments of VendorPartialPaymentsList">
+                            <td>{{VendorPayments.invoiceNo}}</td>
+                            <td>{{VendorPayments.vendorName}}</td>
+                            <td>{{VendorPayments.date|date}} </td>
+                            <td>{{VendorPayments.totalAmount}}</td>
+                            <td>{{VendorPayments.paidAmount}}</td>
+                            <td>{{VendorPayments.grandTotal}}</td>
+                            <td>{{VendorPayments.status}}</td>
+                            <td><label class="checkbox-inline custom-checkbox nowrap">
+                                    <input type="radio" name="PartialPayments"
+                                        (click)="CheckedForPartialPayments(VendorPayments)" id="inlineCheckbox02">
+                                    <span></span>
+                                </label></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+                    <h6 class="paneltitle">{{partialPayments_PageTitle}}
+                    </h6>
+                    <hr>
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-1">
+                            </div>
+                            <div class="col-lg-5 ">
+                                <p class="disablebutton">{{partialPayments_PaymentType}} <span class="starspan">*</span></p>
+                            </div>
+                            <div class="col-lg-6 ">
+                                <select [(ngModel)]="partialpaymentEntity.PaymentTypeID" name="PaymentTypeID"  class="dropdown form-control maindropdown" required id="ddl_paymenttype" (change)="PaymentBasedTextBox($event)">
+                                    <option value="0">Select Type </option>
+                                    <option value="{{payments.id}}" *ngFor="let payments of PaymentTypelist">{{payments.short}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+    
+    
+                        <div class="row" *ngIf="ChequeID==3">
+                            <div class="col-lg-1">
+                            </div>
+                            <div class="col-lg-5 ">
+                                <p class="disablebutton">Cheque No
+                                </p>
+                            </div>
+                            <div class="col-lg-6 ">
+                                <input type="text"  [(ngModel)]="partialpaymentEntity.Chequeno" name="Chequeno"  id="txt_NetAmount" class="form-control"
+                                    placeholder="Cheque No" >
+                            </div>
+                        </div>
+    
+    
+                        <div class="row" *ngIf="ChequeID==3">
+                            <div class="col-lg-1">
+                            </div>
+                            <div class="col-lg-5 ">
+                                <p class="disablebutton">Bank Name
+                                </p>
+                            </div>
+                            <div class="col-lg-6 ">
+                                <input type="text"  [(ngModel)]="partialpaymentEntity.BankName" name="BankName"  id="txt_NetAmount" class="form-control"
+                                    placeholder="Bank Name" >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1">
+                            </div>
+                            <div class="col-lg-5 ">
+                                <p class="disablebutton">{{partialPayments_SectionTotal}}</p>
+                            </div>
+                            <div class="col-lg-6 ">
+                                <input type="number" value="{{totalAmount}}" id="txt_TotalAmount" class="form-control"
+                                    placeholder="{{partialPayments_SectionTotal}}" readonly="readOnly">
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-lg-1">
+                            </div>
+                            <div class="col-lg-5 ">
+                                <p class="disablebutton">{{partialPayments_SectionPayable}}</p>
+                            </div>
+                            <div class="col-lg-6 ">
+                                <input [(ngModel)]="partialpaymentEntity.PaidAmount" name="PaidAmount"  class="form-control" id="txt_PaymentAmount"
+                                    placeholder="{{partialPayments_SectionPayable}}">
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-lg-4">
+                            </div>
+                            <div class="col-lg-2">
+                                <button type="submit" (click)="UpdatePurchasePayment()" class="btn btn-block btn-md savebutton"
+                                    >{{partialPayments_SectionPay}}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

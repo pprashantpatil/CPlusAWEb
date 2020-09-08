@@ -1,0 +1,438 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-12">
+        <h4 class="Pages_header" *ngIf="LoginTypeID!=1">Review Reports</h4>
+        <h4 class="Pages_header" *ngIf="LoginTypeID==1"> Review Reports</h4>
+      </div>
+
+    </div>
+    <!-- <div class="row breadCrumbHeadderProperties">
+      <div class="col-lg-12 dashbutton">
+        <button routerLink="/ProjectTrackings" style="margin-right: 20px;" type="button" id="btn_button">Project Tracking</button>
+      </div>
+    </div> -->
+    <!-- <div class="row breadCrumbHeadderProperties">
+              <div class="col-lg-12 dashbutton">
+                  <button (click)=export() type="button" id="btn_button">export</button>
+              </div>
+          </div> -->
+  </div>
+
+  <div class="row" *ngIf="CountVis">
+    <!-- <div class="col-lg-3">
+      <h5 class="formlabel">Percentage Completed : </h5>
+    </div> -->
+    <div class="col-lg-12">
+      <!-- <div class="container-fluid"> -->
+      <accordion [closeOthers]="false">
+        <accordion-group *ngFor="let Project of ProjectProgressTrackingList">
+          <div accordion-heading class="accordion-headder progress " style=" border: 1px solid ;">
+            <div class="progress-bar progress-bar-striped  bg-info" role="progressbar" aria-valuenow="70"
+              aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width.%': Project.progressPercentage}">
+              <span style="font-size: 11px; color: #000; "> Property {{Project.name}} has Progressed
+                {{Project.progressPercentage|number:'1.0-0'}}% </span>
+            </div>
+          </div>
+          <div>
+            Current Stage : {{Project.milestone}}
+          </div>
+          <div>
+          </div>
+        </accordion-group>
+      </accordion>
+      <!-- </div> -->
+    </div>
+  </div>
+
+  <!-- <div class="row">
+    <div class="col-lg-3">
+      <h5 class="formlabel">Current Stage : </h5>
+    </div>
+    <div class="col-lg-9">
+      <h5 class="formlabel" style="margin-left: 18px;">{{CurMilestone}} </h5>
+    </div>
+  </div> -->
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard" style="margin-left: -10px;
+  margin-top: 45px;margin-right: -37px;">
+    <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Review Reports</h6>
+        <h6 *ngIf="CountVis" style="text-align: end;
+        font-size: 15px;">No of Stages Completed : {{CompletedStages}} </h6>
+      </div>
+    </div>
+    <div class="row p-4">
+
+      <div class="col-lg-4">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions" (ngModelChange)="selectedDate($event)">
+        </ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <input type="text" placeholder="search.." [(ngModel)]="ProjectSearch" class="form-control"
+          id="txt_searchBuilding">
+      </div>
+
+      <!-- <div class="col-lg-3" *ngIf="LoginTypeID!=1">
+        <select class="dropdown form-control" id="ddl_BuildingName" (change)="getbuildingID($event)" required>
+          <option value="0" selected="selected">Select Property</option>
+          <option *ngFor="let Building of BuildingList" value="{{Building.id}}">{{Building.name}}</option>
+        </select>
+      </div> -->
+      <!-- <div class="col-lg-3" *ngIf="LoginTypeID!=1">
+        <select class="dropdown form-control " (click)="GetFloorID($event)" name="FloorID" [(ngModel)]="FloorID" id="FloorID" required="">
+          <option value="0"> Select Floor</option>
+          <option *ngFor="let vendor of FloorList" value="{{vendor.id}}">{{vendor.floor}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3" *ngIf="LoginTypeID!=1">
+        <select class="dropdown form-control" id="UnitID" name="UnitID" required (click)="GetUnitID($event)">
+          <option value="0" selected="selected">Select Unit</option>
+          <option *ngFor="let details of UserRoleList" value="{{details.unitID}}">{{details.unitID}}</option>
+        </select>
+      </div> -->
+
+
+
+      <div class="col-lg-3">
+        <select class="dropdown form-control" id="ddl_BuildingName" (change)="getstage($event)" required>
+          <option value selected="selected">Select Stages</option>
+          <option *ngFor="let stage of Buildingstageslist" value="{{stage.milestone}}">{{stage.milestone}}</option>
+        </select>
+      </div>
+      <div class="col-lg-4"></div>
+      <div class="col-lg-3">
+        <select class="form-control" id="ContractorID" [(ngModel)]="Contractorid">
+          <option value="0" selected="selected"> Select Contractor</option>
+          <option value="{{build.id}}" *ngFor="let build of Contractorlist">{{build.company}}</option>
+        </select>
+      </div>
+
+      <div class="col-lg-3" *ngIf="LoginTypeID!=1" style="margin-top: 5px;">
+        <select class="dropdown form-control" id="ddl_BuildingName" (change)="getstatusID($event)" required>
+          <option value selected="selected">Select Status</option>
+          <!-- <option *ngFor="let status of StatusTypelist" value="{{status.statusName}}">{{status.statusName}}</option> -->
+          <option value="Completed">Completed</option>
+          <option value="Inprogress">Inprogress</option>
+          <option value="Not Started">Not Started</option>
+        </select>
+      </div>
+
+
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive" style="overflow: auto;">
+          <table class="table table-bordered table-hover table-condensed" style="font-size: 13px;">
+            <tbody>
+              <tr class="tableheader tableheaderfont buildingtable" style="background-color: #00b5d7; color: White;">
+                <td>Date</td>
+                <td>Property </td>
+                <td>Floor</td>
+                <td>Units </td>
+                <td>Stage Name</td>
+                <td>Contractor</td>
+                <td>Engineer</td>
+                <!-- <td>Review Date</td> -->
+                <td>Engineer Comments</td>
+                <td>Engineer Status</td>
+                <td>QC Assigned</td>
+                <td>QC Approval Status</td>
+                <td>QC Comments</td>
+                <td *ngIf="LoginTypeID!=1">Finance Status</td>
+                <td *ngIf="LoginTypeID!=1">Date Of Payment</td>
+                <td *ngIf="LoginTypeID!=1">Paid Amount</td>
+                <td>Action</td>
+              </tr>
+              <tr *ngFor="let proj of FilteredProjectList|filter:stageID|filter:statusID|filter:ProjectSearch">
+                <td>{{proj.modifiedDate|date}}</td>
+                <td>{{proj.buildingName}}</td>
+                <td>Floor 1</td>
+                <td>{{proj.units}}</td>
+                <td>{{proj.milestone}}</td>
+                <td>{{proj.contractor}}</td>
+                <td>{{proj.staffName}}</td>
+                <!-- <td>{{proj.workScheduleDate|date}}</td> -->
+                <td>{{proj.projectComment}}</td>
+                <td *ngIf="proj.apProvalBIT==1 && proj.rejectBIT==0">Approved</td>
+                <td *ngIf="proj.apProvalBIT==0 && proj.rejectBIT==1">Rejected</td>
+                <td>Aadam</td>
+                <td *ngIf="proj.qcApproval==1 && proj.qcReject==0">Approved</td>
+                <td *ngIf="proj.qcApproval==0 && proj.qcReject==1">Rejected</td>
+                <td *ngIf="proj.qcApproval==0 && proj.qcReject==0">-</td>
+                <td>{{proj.qcNotes}}</td>
+                <td *ngIf="proj.financeApproval==0 && LoginTypeID!=1">-</td>
+                <td *ngIf="proj.financeApproval==1 && LoginTypeID!=1">Approved</td>
+                <td *ngIf="proj.financeApproval==2 && LoginTypeID!=1">Rejected</td>
+                <td *ngIf="LoginTypeID!=1">{{proj.date|date}}</td>
+                <td *ngIf="LoginTypeID!=1">{{proj.amount}}</td>
+
+                <td class="TableActions">
+
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <i *ngIf="proj.videoBit=='1'" class="fa fa-file-video-o" title="Engineer Videos"
+                        aria-hidden="true" data-toggle="modal" data-target="#myModaladd1New" title="Video"
+                        (click)="getVideo(proj.id)"></i>&nbsp;
+                    </div>
+                    <div class="col-lg-4" style="margin-left: -17px;">
+                      <i *ngIf="proj.photoBit=='1'" class="fa fa-image" title="Engineer Photos" aria-hidden="true"
+                        data-toggle="modal" data-target="#myModaladdNew" title="Photo"
+                        (click)="getphpto(proj.id)"></i>&nbsp;
+                    </div>
+                  </div>
+
+
+                  <i class=" i" *ngIf="proj.statusID==2 && proj.approval!='Approved'" (click)="Approve(proj.id)"
+                    data-toggle="modal" data-target="#myApprovalComments" title="Approve">A</i>
+
+
+                  <i class=" i" *ngIf="proj.statusID==2 && proj.approval!='Approved' && proj.apProvalBIT!=3"
+                    (click)="Reject(proj.id)" data-toggle="modal" data-target="#myRejectedComments" title="Reject">R</i>
+
+                  <i *ngIf="proj.statusID==2" class="fa fa-info" title="Invoice" aria-hidden="true" data-toggle="modal"
+                    data-target="#myModaladdInvoice" (click)="GetInvoice(proj.invoiceURL)"></i>
+
+
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <i class="fa fa-image" title="Add Photos" aria-hidden="true" data-toggle="modal"
+                        data-target="#myModaladd22222" title="QC Photo" (click)="getQCphpto(proj.id)"></i>
+                    </div>
+                    <div class="col-lg-4" style="margin-left: -17px;">
+                      <i class="fa fa-file-video-o" title="Add Video" aria-hidden="true" data-toggle="modal"
+                        data-target="#myModaladd11111" title="QC Video" (click)="getQCVideo(proj.qcVideoURL)"></i>
+                    </div>
+                  </div>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModaladd">
+  <div class="modal-dialog modal-lg">
+    <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+    <div class="modal-content" style="margin-top: 64px;
+    width: 73%;margin-left: 108px;">
+      <div class="modal-header">
+        <h4>Photos</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="row" style="padding: 39px;">
+        <img src="{{photo}}" style="width: 42%;">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModaladdInvoice">
+  <div class="modal-dialog modal-lg">
+    <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+    <div class="modal-content" style="margin-top: 64px;
+    width: 73%;margin-left: 108px;">
+      <div class="modal-header">
+        <h4>Invoice</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="row" style="padding: 39px;">
+        <img src="{{Invoicephoto}}" style="width: 42%;">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModaladd1">
+  <div class="modal-dialog modal-lg">
+    <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+    <div class="modal-content" style="margin-top: 64px;
+    width: 73%;margin-left: 108px;">
+      <div class="modal-header">
+        <h4>Videos</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="row" *ngFor="let vid1 of video" style="padding: 39px;">
+        <video width="500" height="300" controls>
+          <source src="{{vid1}}" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myApprovalComments">
+  <div class="modal-dialog modal-lg">
+    <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+    <div class="modal-content" style="margin-top: 64px;
+    width: 73%;margin-left: 108px;">
+      <div class="modal-header">
+        <h4>Approve</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="row" style="padding: 39px;">
+        <div class="col-lg-3">
+          <h6>Comments</h6>
+        </div>
+        <div class="col-lg-7 form-group">
+          <textarea rows="3" id="txt_Comments" [(ngModel)]="ApprovalComments" name="Comments" required
+            class="form-control " placeholder="Comments" required></textarea>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="UpdateBuildingProjectProgressApproval()" class="btn btn-default popupbutton"
+          style="background-color: #00b5d7;" data-dismiss="modal">Approve</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myRejectedComments">
+  <div class="modal-dialog modal-lg">
+    <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+    <div class="modal-content" style="margin-top: 64px;
+    width: 73%;margin-left: 108px;">
+      <div class="modal-header">
+        <h4>Reject</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="row" style="padding: 39px;">
+        <div class="col-lg-3">
+          <h6>Comments</h6>
+        </div>
+        <div class="col-lg-7 form-group">
+          <textarea rows="3" id="txt_Comments" [(ngModel)]="RejectComments" name="Comments" required
+            class="form-control " placeholder="Comments" required></textarea>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="UpdateBuildingProjectProgressReject()" class="btn btn-default popupbutton"
+          style="background-color: #00b5d7;" data-dismiss="modal">Reject</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModaladd22222">
+  <div class="modal-dialog modal-lg">
+    <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+    <div class="modal-content" style="margin-top: 64px;
+    width: 73%;margin-left: 108px;">
+      <div class="modal-header">
+        <h4>QC Photos</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="row" style="padding: 39px;">
+        <div class="col-lg-6" *ngFor="let pic of qcphotos">
+          <br>
+          <img src="{{pic.photoURL}}" style="width:80%">
+          <br>
+        </div>
+        <br>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModaladdNew">
+  <div class="modal-dialog modal-lg">
+    <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+    <div class="modal-content" style="margin-top: 64px;
+    width: 73%;margin-left: 108px;">
+      <div class="modal-header">
+        <h4>Engineer Photos</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="row" style="padding: 39px;">
+
+        <div class="col-lg-6" *ngFor="let pic of photos">
+          <br>
+          <img src="{{pic.photoURL}}" style="width:80%">
+          <br>
+        </div>
+        <br>
+        <br>
+      </div>
+      <br>
+    </div>
+    <br>
+  </div>
+  <br>
+</div>
+<br>
+<br>
+<br>
+
+<div class="modal fade" id="myModaladd1New">
+  <div class="modal-dialog modal-lg">
+    <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+    <div class="modal-content" style="margin-top: 64px;
+    width: 73%;margin-left: 108px;">
+      <div class="modal-header">
+        <h4>Engineer Videos</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="row" *ngFor="let vid1 of videos" style="padding: 39px;">
+        <video width="500" height="300" controls>
+          <source src="{{vid1.videoURL}}" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModaladd11111">
+  <div class="modal-dialog modal-lg">
+    <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+    <div class="modal-content" style="margin-top: 64px;
+    width: 73%;margin-left: 108px;">
+      <div class="modal-header">
+        <h4>QC Videos</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="row" *ngFor="let vid1 of video1" style="padding: 39px;">
+        <video width="500" height="300" controls>
+          <source src="{{vid1}}" type="video/mp4">
+
+        </video>
+      </div>
+
+
+    </div>
+  </div>
+</div>

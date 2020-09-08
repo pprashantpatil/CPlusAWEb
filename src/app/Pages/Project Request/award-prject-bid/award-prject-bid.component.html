@@ -1,0 +1,243 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-5">
+        <h4 class="Pages_header">{{pageMenuTitle}}</h4>
+      </div>
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-5">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <span class="CommercialWorkspace" style="margin-left: 111px;"> {{awardProjectBid_breadchrumb}} </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+<div class="container-fluid Pages_background">
+  <div class="shadow p-2 mb-5 bg-white rounded   maincard ">
+    <h4 class="paneltitle">{{awardProjectBid_PageTitle}}</h4>
+    <hr>
+    <div class="row">
+      <div class="col-lg-3">
+        <input type="text" placeholder="search.." [(ngModel)]="searchaward" class="form-control" id="txt_usr">
+      </div>
+      <div class="col-lg-3 ">
+        <select class="dropdown form-control maindropdown" (change)="onselectbuilding($event)" name="Building"
+          required="">
+          <option value="none"> Select Building</option>
+          <option *ngFor="let building of buildingList" value="{{building.id}}">{{building.name}}</option>
+
+        </select>
+      </div>
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-3 ">
+        <select class="dropdown form-control maindropdown" name="requesttype" required=""
+          (change)="onchangeProjectrequesttype($event)">
+          <option value="none"> Select Request Type</option>
+          <option *ngFor="let requesttype of requestTypeList" value="{{requesttype.id}}">{{requesttype.short}}</option>
+        </select>
+      </div>
+    </div>
+    <br>
+    <div>
+      <table class="table table-bordered table-hover table-condensed">
+        <thead style="background-color:#00b5d7">
+          <tr>
+            <td>{{awardProjectBid_Request}}</td>
+            <td>{{awardProjectBid_Request_Type}}</td>
+            <td>{{awardProjectBid_Building}}</td>
+            <td>Floor</td>
+            <td>Unit</td>
+            <td>{{awardProjectBid_RaisedBy}}</td>
+            <td>{{awardProjectBid_ProjectBidDate}}</td>
+            <td>{{awardProjectBid_Project_Start_Date}}</td>
+            <td>{{awardProjectBid_Status}}</td>
+            <td>{{awardProjectBid_NoOfBidsSubmitted}}</td>
+            <td>{{awardProjectBid_BidAwarded_To}}</td>
+            <td>{{awardProjectBid_Action}}</td>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let Awards of filteredAwardsList | filter:searchaward">
+            <td>{{Awards.request}}</td>
+            <td>{{Awards.proreqType}}</td>
+            <td>{{Awards.name}}</td>
+            <td>{{Awards.floor}}</td>
+            <td>{{Awards.units}}</td>
+            <td>{{Awards.raisedBy}}</td>
+            <td>{{Awards.bidSubmissionDate|date}}</td>
+            <td>{{Awards.startDate|date}}</td>
+            <td>{{Awards.statusType}}</td>
+            <td>{{Awards.noOfBids}}</td>
+            <td>{{Awards.assignedToName}}</td>
+            <td class="TableActions">
+              <!-- <a data-toggle="modal"  title="Notify" (click)="getawardbiddetails(Awards)" data-target="#saveVendorAttachment" style="background-color: white"><i
+                  class="fa fa-plus-square"></i></a> -->
+              <a data-toggle="modal" title="Info" (click)="getawardbidlist(Awards)" data-target="#projectrequestRaised"
+                style="background-color: white"><i class="fa fa-info-circle"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div id="saveVendorAttachment" class="modal fade" role="dialog">
+    <div class="modal-dialog ">
+      <!-- Modal content-->
+      <div class="modal-content awardprojectmodal" style="width: 710px;">
+        <div class="modal-header ">
+          <h4 class="modal-title">Save vendor Attachment</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-6">
+                <p>Project Request</p>
+              </div>
+              <div class="col-lg-6">
+                <input type="text" [(ngModel)]="ProjectRequest" class="form-control" id="txt_projectrequest">
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <p>Vendor Name</p>
+              </div>
+              <div class="col-lg-6">
+                <select class="form-control" id="ddl_vendor" [(ngModel)]="vendorId" name="vendorId"
+                  (change)="GetVendorByID($event)">
+                  <option value="0"> Select vendor</option>
+                  <option *ngFor="let vendor of VendorList" value="{{vendor.id}}">{{vendor.name}}</option>
+
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-6">
+                <p>Vendor Phone</p>
+              </div>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" [(ngModel)]="vendorPhone" id="txt_vendorphone">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-6">
+                <p>Vendor Email</p>
+              </div>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" [(ngModel)]="vendorEmail" id="txt_vendoremail">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-6">
+                <p>Date</p>
+              </div>
+              <div class="col-lg-6">
+                <input type="date" class="form-control" [(ngModel)]="vendordate" id="txt_vendordate" min="{{mindate}}">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-6">
+                <p>Comment</p>
+              </div>
+              <div class="col-lg-6">
+                <textarea [(ngModel)]="awardbidComments" name="awardbidComments" class="form-control"
+                  id="txt_awardbidComments"></textarea>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-6">
+                <p>Document</p>
+              </div>
+              <div class="col-lg-6">
+                <ngx-dropzone [(ngModel)]="awardbidAttachment" name="awardbidAttachment" [showPreviews]="true"
+                  (filesAdded)="onFilesAddedAttached($event)" class="dropzone_vendorinvoice form-control">
+                </ngx-dropzone>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primari savebutton" (click)="uploadvendorProjectbidattachment()"
+            data-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div id="projectrequestRaised" class="modal fade" role="dialog" style=" margin-top: 10%;">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content awardprojheadermodal" style="width: 650px;">
+        <div class="modal-header">
+          <h4 class="modal-title">PROJECT REQUEST RAISED</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover table-condensed">
+              <thead style="background-color:#00b5d7">
+                <tr>
+                  <td>Sl No</td>
+                  <td>Project</td>
+                  <td>Vendor Name</td>
+                  <td>Attachment</td>
+                  <td>Comments</td>
+                  <td>Date</td>
+                  <td>Award Bid</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let Awards of awardbidList ; let i=index">
+                  <td>{{i + 1}}</td>
+                  <td>{{Awards.project}}</td>
+                  <td>{{Awards.vendorname}}</td>
+                  <td>
+                    <!-- <img src="{{Awards.attachment}}" style="width: 50%;height: auto;"> -->
+                    <a href="{{Awards.attachment}}" download>
+                      <img src="{{Awards.attachment}}" style="width: 50%;height: auto;">
+                    </a>
+                  </td>
+                  <td>{{Awards.comment}}</td>
+                  <td>{{Awards.modifiedDate|date}}</td>
+                  <td>
+                    <input type="button" [disabled]="isdisableall==true" value="{{Label}}"
+                      class="btn btn-primary savebutton" data-dismiss="modal" (click)="closeProjectRequest(Awards)">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

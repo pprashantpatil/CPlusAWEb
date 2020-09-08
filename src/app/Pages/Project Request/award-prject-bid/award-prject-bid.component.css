@@ -1,0 +1,63 @@
+.dropzone_vendorinvoice {
+    height: 66px;
+    border: 2px solid #717386;
+    width: 212px;
+    margin-top: 6px;
+}
+
+
+/* 
+#projectrequestRaised {
+    width: 700px;
+    max-width: 700px;
+} */
+
+.awardprojectmodal{
+    width: 674px;
+}
+
+.maindropdown {
+    width: 225px;
+}
+
+.awardprojheadermodal{
+    width: auto;
+}
+
+@media screen and (min-width: 1600px) {
+    .maindropdown {
+        width: 225px;
+    }
+    .awardprojectmodal{
+        width: auto;
+    }
+    .dropzone_vendorinvoice {
+        height: 66px;
+        border: 2px solid #717386;
+        width: 212px;
+        margin-top: 6px;
+    }
+
+    .awardprojheadermodal{
+        width: auto;
+    }
+
+    
+  }
+  @media screen and (min-width: 1900px) {
+    .maindropdown {
+        width: 317px;
+    }
+    .awardprojectmodal{
+        width: 674px;
+    }
+    .dropzone_vendorinvoice {
+        height: 66px;
+        border: 2px solid #717386;
+        width: 293px;
+        margin-top: 6px;
+    }
+    .awardprojheadermodal{
+        width: 780px;
+    }
+  }

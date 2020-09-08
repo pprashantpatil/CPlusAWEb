@@ -1,0 +1,132 @@
+<p>
+  edit-job-post works!
+</p>
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-4">
+        <h4 class="Pages_header">Job Postings</h4>
+      </div>
+      <div class="col-lg-4">
+      </div>
+      <div class="col-lg-4"> d 
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <span> Account / Job Postings</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card maincard">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="panel-title formlabel">Job Postings</h3>
+      </div>
+
+    </div>
+    <hr>
+    <div class="row divForm">
+      <div class="col-lg-8 reqriedspan">
+        <form #loginForm="ngForm">
+          <div class="row ">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Date <span>*</span> </h6>
+            </div>
+            <div class="col-lg-7 ">
+              <input type="text" [(ngModel)]="date" name="date" class="form-control">
+            </div>
+          </div><br>
+          <div class="row ">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Job Title <span>*</span> </h6>
+            </div>
+            <div class="col-lg-7 ">
+              <input type="text" class="form-control" name="jobtitle" [(ngModel)]="jobtitle" placeholder="Job Title">
+            </div>
+          </div><br>
+
+          <div class="row ">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Job Description <span>*</span> </h6>
+            </div>
+            <div class="col-lg-7 ">
+              <textarea rows="4" cols="30" class="form-control" name="jobdescription"
+                [(ngModel)]="jobdescription"></textarea>
+            </div>
+          </div><br>
+
+          <div class="row ">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Years Of Experience <span>*</span> </h6>
+            </div>
+            <div class="col-lg-7 ">
+              <input type="text" class="form-control" name="yearsofexp" [(ngModel)]="yearsofexp">
+            </div>
+          </div><br>
+
+          <div class="row ">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Department <span>*</span> </h6>
+            </div>
+            <div class="col-lg-7 ">
+              <input type="text" class="form-control" name="department" [(ngModel)]="department">
+            </div>
+          </div><br>
+
+          <div class="row ">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Work Location <span>*</span> </h6>
+            </div>
+            <div class="col-lg-7 ">
+              <input type="text" class="form-control" name="worklocation" [(ngModel)]="worklocation">
+            </div>
+          </div><br>
+
+          <div class="row ">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Work Timings <span>*</span> </h6>
+            </div>
+            <div class="col-lg-7 ">
+              <input type="text" class="form-control" name="worktimings" [(ngModel)]="worktimings">
+            </div>
+          </div><br>
+
+          <div class="row ">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Addtional Requirements<span>*</span> </h6>
+            </div>
+            <div class="col-lg-7 ">
+              <input type="text" class="form-control" [(ngModel)]="requirements" name="requirements">
+            </div>
+          </div><br>
+
+          <div class="row">
+            <div class="col-lg-5">
+            </div>
+            <div class="col-lg-2">
+              <button class="btn btn-primary" style="background-color: #00b5d7;"
+                (click)="updatedetails()">Update</button>
+            </div>
+            <div class="col-lg-5">
+            </div>
+          </div>
+
+
+          <br>
+        </form>
+
+      </div>
+      <div class="col-lg-4"></div>
+    </div>
+  </div>
+
+</div>

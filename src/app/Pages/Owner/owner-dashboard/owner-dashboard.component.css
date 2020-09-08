@@ -1,0 +1,13 @@
+.building{
+    color: #00b5d7;
+    font-size: 18px;
+    margin-left: 101px;
+    /* margin: 18px; */
+    margin-top: 16px;
+}
+
+.dropzone_vendorinvoice {
+    height: 66px;
+    border: 2px solid #717386;
+    width: 317px;
+}

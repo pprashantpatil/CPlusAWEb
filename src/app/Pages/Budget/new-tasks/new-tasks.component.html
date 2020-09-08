@@ -1,0 +1,92 @@
+<div class="container-fluid Pages_background Backgroundforipad">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 style="margin-bottom: 25px;" class="Pages_header"> NEW TASK</h4>
+
+    </div>
+    <div class="col-lg-3">
+    </div>
+
+  </div>
+  <div class="container-fluid Pages_background">
+    <div>
+      <div class="card maincard" style="margin-left: -15px;">
+        <div class="row">
+          <div class="col-lg-8 reqriedspan" style="padding: 25px;">
+            <br>
+            <form #loginForm="ngForm">
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-3">
+                  <p>Start Date
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="date" name="StartDate" [(ngModel)]="StartDate" id="StartDate" required
+                    class="form-control">
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-3">
+                  <p>End Date
+                    <span>*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="date" name="EndDate" [(ngModel)]="EndDate" id="EndDate" required class="form-control">
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-3">
+                  <p>Task Name
+                    <span style="color: red;">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="text" class="form-control" [(ngModel)]="TaskName" id="TaskName" name="TaskName"
+                    placeholder="Task Name">
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-3">
+                  <p>Description
+                    <span style="color: red;">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <textarea rows="4" id="Description" [(ngModel)]="Description" name="Description" class="form-control"
+                    placeholder="Description" required></textarea>
+                </div>
+              </div>
+              <br>
+
+              <div class="row" *ngIf="paramID==null">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-2 ">
+                  <button type="submit" style="margin-bottom: 100px" (click)="Save()"
+                    class="btn btn-block btn-md savebutton">Save</button>
+                </div>
+              </div>
+              <div class="row" *ngIf="paramID!=null">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-2 ">
+                  <button type="submit" style="margin-bottom: 100px" (click)="Update()"
+                    class="btn btn-block btn-md savebutton">Update</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

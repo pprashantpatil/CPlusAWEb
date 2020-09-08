@@ -1,0 +1,260 @@
+<div class="container-fluid Pages_background">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="Pages_header">{{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span class="building"> {{tenantParkingAllocation_BreadChrumb}} </span> </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+        <h4 class="paneltitle "> {{tenantParkingAllocation_PageTitle}}</h4>
+        <hr>
+        <div class="row p-2">
+            <div class=" dashbutton">
+                <button type="button" style="width: 190px;
+                    margin-left: 18px;" *ngIf="!newparking" (click)="newparkingallocation()" class="btn btn-default"
+                    id="btn_tenantNewParking">{{tenantParkingAllocation_Button}}</button>
+            </div>
+
+            <div class=" dashbutton">
+                <button type="button" style="width: 190px;
+                        margin-left: 18px;" *ngIf="newparking" (click)="newparkingallocation()" class="btn btn-default"
+                    id="btn_tenantNewParking">Parking Dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="!newparking">
+        <div class="col-lg-9">
+            <div ba-panel="" ba-panel-title="Allotted Parking Slots" ba-panel-class="with-scroll"
+                ng-show="Parking.dashboard==0" class="">
+                <div class="panel with-scroll animated zoomIn" zoom-in="">
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title formlabel">{{tenantParkingAllocation_ALLOTTED}}</h3>
+                    </div>
+                    <hr>
+                    <div class="panel-body" ng-transclude="">
+                        <div class="row ng-scope">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <select class="dropdown form-control " id="ddl_tenantparkingBuilding"
+                                        (change)="getparkingslotsbybuildingid($event)">
+                                        <option value="none" selected="selected">Select Building</option>
+                                        <option value="{{building.id}}" *ngFor="let building of buildinglist">
+                                            {{building.name}}</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <select class="dropdown form-control" name="floor" id="tenantparkingBuilding"
+                                        (change)="getfloorid($event)">
+                                        <option value="none" selected="selected">Select Floor</option>
+                                        <option value="{{list.floor}}" *ngFor="let list of floorlist">
+                                            {{list.floor}}</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="width: 100%;">
+                        <div class="col-lg-2" *ngFor="let parkingslot of filteredparkinglist" style="text-align:center">
+                            <a (click)="getslotdetails(parkingslot)">
+                                <p>{{parkingslot.floor}}</p>
+                                <div class="slots">
+                                    <span>{{parkingslot.slot}} {{parkingslot.tenantName}}</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3" *ngIf="slotdetails">
+            <div ba-panel="" ba-panel-title="Allotted Parking Slots" ba-panel-class="with-scroll"
+                ng-show="Parking.dashboard==0" class="">
+                <div class="panel with-scroll animated zoomIn" zoom-in="">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <img src="{{selectedtenantImage}}" class="imageresponsive">
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-12  table-responsive">
+                                <table class="table table-bordered table-hover table-condensed">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Name :
+                                            </td>
+                                            <td>
+                                                {{selectedtenantName}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Mobile Number :
+                                            </td>
+                                            <td>
+                                                {{selectedtenantPhoneNumber}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Unit :
+                                            </td>
+                                            <td>
+                                                {{selectedtenantunit}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Floor :
+                                            </td>
+                                            <td>
+                                                {{selectedtenantfloor}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Parking Slot :
+                                            </td>
+                                            <td>
+                                                {{selectedtenantslot}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="row">
+                            <div class="col-lg12">
+                                <p>Name : {{selectedtenantName}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg12">
+                                <p>Mobile Number : {{selectedtenantPhoneNumber}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg12">
+                                <p>Unit : {{selectedtenantunit}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg12">
+                                <p>Floor : {{selectedtenantfloor}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg12">
+                                <p>Slot : {{selectedtenantslot}}</p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard" *ngIf="newparking">
+    <h4 class="paneltitle "> {{tenantParkingAllocation_ALLOTTED}}</h4>
+    <hr>
+    <form>
+        <div class="row p-2">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <select class="dropdown form-control " id="ddl_NewtenantparkingBuilding"
+                        (change)="getFloorlist($event)">
+                        <option value="none">Select Building</option>
+                        <option value="{{building.id}}" *ngFor="let building of buildinglist">{{building.name}}</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <select class="dropdown form-control " id="ddl_NewtenantparkingFloor"
+                        (change)="GetSlotListByID($event)">
+                        <option value="none">Select Floor</option>
+                        <option value="{{floor.floorID}}" *ngFor="let floor of floorlist">{{floor.floorname}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <select class="dropdown form-control" name="facing" [(ngModel)]="facing"
+                        id="ddl_NewtenantparkingFacing" (change)="GetfacingtypeID($event)">
+                        <option value>Select Facing</option>
+                        <option value="{{face.facing}}" *ngFor="let face of fascinglist">{{face.facing}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <!-- <select id="ddl_updatetenentUnit" class="dropdown form-control "
+                    (change)="getunitid($event.target.value)" placeholder="Select Unit">
+                    <option value="none" class="" selected="selected">Select Unit</option>
+                    <option *ngFor="let unit of unitList" value="{{unit.id}}">{{unit.unitID}}</option>
+                </select> -->
+
+                <!-- <input type="text" placeholder="Unit" [(ngModel)]="tenantunit" name="tenantunit" class="form-control"
+                        id="txt_tenantparkingUnit"> -->
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <select class="dropdown form-control" id="ddl_NewtenantparkingTenantName"
+                        (change)="gettenatphonumber($event)">
+                        <option value="none" selected="selected">Select Tenant</option>
+                        <option value="{{Tenant.id}}" *ngFor="let Tenant of TenentNamesList">{{Tenant.tenantName}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <input type="text" [(ngModel)]="tenantPhonenumber" name="tenantPhonenumber"
+                    id="txt_tenantparkingPhoneNumber" disabled="disabled" placeholder="Mobile Number"
+                    class="form-control" id="txt_searchBuilding">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12" *ngIf="SlotList">
+                <div *ngFor="let slot of SlotList | filter:facing">
+                    <div class="col-lg-2" *ngIf="slot.kkk==0">
+                        <div class="col-lg-12" style="border: 3px solid #4b49c8;margin-top: 5px;border-radius: 10px">
+                            <input type="checkbox" style="margin: 4px 0 0 -13px;"
+                                (change)="onslotselect($event,slot)"><span
+                                style="margin-left: 5px">{{slot.slot}}</span><span
+                                style="margin-left: 5px">{{slot.facing}}</span>
+                            <!-- <p >{{slot.facing}}</p>  -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="button" style="    margin-left: 25px;
+            " class="btn btn-primary savebutton" id="btn_tenantNewParkingAllocate"
+                (click)="allocateParking()">{{tenantParkingAllocation_Allocate}}</button>
+
+        </div>
+    </form>
+
+
+</div>

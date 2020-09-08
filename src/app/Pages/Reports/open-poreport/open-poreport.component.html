@@ -1,0 +1,82 @@
+<div class="container-fluid Pages_background ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">{{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="purchasereport"> {{openPoReport_BreadChrumb}} </span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <!-- <button type="button" routerLink="/UpdateVendor" routerLinkActive="active-link" id="btn_button"
+                  class="dashbutton">New Vendor</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+      <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+        Export To Excel
+      </button>
+    </div>
+
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div class="row">
+      <div class="col-lg-4">
+        <h6>{{openPoReport_SelectDate}}</h6>
+        <ng-daterangepicker [options]="options"></ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <h6>{{openPoReport_SelectVendor}}</h6>
+        <select class="dropdown form-control maindropdown" name="Building" required=" "  (change)="Vendor($event)">
+          <option value="none" selected="selected"> Select Vendor</option>
+          <option value="{{VendorPurchase.short}}" *ngFor="let VendorPurchase of VendorPurchaseList">
+            {{VendorPurchase.short}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div>
+      <h6 class="paneltitle">{{openPoReport_PageTitle}}
+      </h6>
+      <hr>
+      <div class="row">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr class="tableheader">
+              <td>{{openPoReport_PO}}</td>
+              <td>{{openPoReport_Type}}</td>
+              <td>{{openPoReport_User}}</td>
+              <td>{{openPoReport_Vendor}} </td>
+              <td>{{openPoReport_Raised}}</td>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let PO of FilteredPOList">
+                <td>{{PO.poid}}</td>
+                <td>{{PO.poType}}</td>
+                <td>{{PO.poBy}}</td>
+                <td>{{PO.vendor}}</td>
+                <td>{{PO.date|date}}</td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

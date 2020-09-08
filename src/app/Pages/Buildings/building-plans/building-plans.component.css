@@ -1,0 +1,48 @@
+.subheader {
+    margin-bottom: 1%;
+}
+
+.borderdiv {
+    border: 1px solid darkblue;
+    width: 100%;
+}
+
+.tableheader {
+    border: black;
+    background-color: #00b5d7;
+    ;
+    text-align: center;
+}
+
+.mainrow {
+    float: right;
+    margin-top: 26px;
+}
+
+i {
+    color: #00b5d7;
+}
+
+.tableheaderfont {
+    color: white;
+}
+
+.tabledivproperties {
+    margin-top: 2%;
+}
+
+
+
+
+.Backgroundforipad{
+    margin-left: 14px;
+    margin: auto;
+}
+
+@media screen and (max-width: 1024px) {
+    .Backgroundforipad{
+        margin-left: 50px;
+        margin-top: 16px;
+    }
+
+  }

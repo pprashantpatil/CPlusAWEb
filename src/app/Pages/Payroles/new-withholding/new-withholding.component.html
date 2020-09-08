@@ -1,0 +1,83 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 class="Pages_header">Add Withholding Tax</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> Staff/ Add Withholding Tax</span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard ">
+    <h5>ADD WITHHOLDING TAX</h5>
+    <hr>
+    <form>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Tax Code</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" name="TaxCode" id="TaxCode" class="form-control" placeholder="Tax Code">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px;">Select Salary Type</h5>
+        </div>
+        <div class="col-lg-6">
+          <select name="Rentformonth" style="width: 413px;"  class="dropdown form-control " id="ddl_rentRentMonth"
+            placeholder="Select Month">
+            <option value="0" class="" selected="selected">Select Salary Type</option>
+            <option *ngFor="let salary of SalaryList" value="{{salary.id}}">
+              {{salary.short}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Base Tax</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" name="BaseTax" id="BaseTax" class="form-control" placeholder="Base Tax">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Base Sal</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" name="BaseSal" id="BaseSal" class="form-control" placeholder="Base Sal">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Tax Pecentage</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" name="TaxPecentage" id="TaxPecentage" class="form-control" placeholder="Tax Pecentage">
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-2">
+          <button class="savebutton" id="btn_utilitySave" type="submit">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>

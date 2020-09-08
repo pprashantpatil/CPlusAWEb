@@ -1,0 +1,50 @@
+/* Start of Mobile CSS */
+
+.Mobilecss{
+    margin-left: 0px;
+}
+
+
+@media screen and (min-width: 320px) {
+    .Mobilecss{
+        margin-left: 14px;
+    }
+    
+  }
+
+  @media screen and (min-width: 1900px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1600px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1400px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+  @media screen and (max-width: 1024px) {
+    .Pages_header{
+        margin-top: 60px;
+        
+    }
+    .maincard{
+        margin-left: 20px;
+    }
+    .ddd{
+      margin-left: 55px;
+    }
+    
+  
+    }
+  
+  /*End of Mobile CSS*/

@@ -1,0 +1,215 @@
+<div class="container-fluid Pages_background Mobilecss">
+  <div>
+    <div class="row">
+      <div class="col-lg-12">
+        <h4 class="Pages_header">Closed Support Tickets</h4>
+      </div>
+
+
+    </div>
+    <div class="row ">
+      <div class="col-lg-12 dashbutton">
+        <!-- <button routerLink="/Support" type="button" id="btn_button">New Support Ticket
+          </button> -->
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard" style="margin-left: -14px;">
+    <div class="row subheader">
+      <div class="col-lg-12">
+        <h4 class="paneltitle">Closed Support Tickets</h4>
+      </div>
+    </div>
+    <hr>
+
+    <div class="row" style="margin-top: 15px;">
+      <div class="col-lg-4">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions" (ngModelChange)="selectedDate($event)">
+        </ng-daterangepicker>
+      </div>
+      <div class="col-lg-3 ddd">
+        <input type="search" id="txt_Search" [(ngModel)]="Search" placeholder="Search..." class="form-control">
+      </div>
+      <div class="col-lg-3">
+      </div>
+    </div>
+    <br>
+    <div class="row tabledivproperties">
+      <div class="col-lg-12 table-responsive">
+        <table class="table table-bordered table-hover table-condensed ng-scope" style="text-align: center;">
+          <thead class="tableheader tableheaderfont">
+            <tr>
+              <th>Date</th>
+              <th>Issue</th>
+              <th>Description</th>
+              <th>Raised By</th>
+              <th>Status</th>
+              <!-- <th>Actions</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Project of supportlist| filter:Search">
+              <td>{{Project.date|date}}</td>
+              <td>{{Project.short}}</td>
+              <td>{{Project.description}}</td>
+              <td>{{Project.roleType}}</td>
+              <td *ngIf="Project.unit==0">Open</td>
+              <td *ngIf="Project.unit==1">Accepted</td>
+              <td *ngIf="Project.unit==2">Completed</td>
+              <td *ngIf="Project.unit==3">Closed</td>
+
+
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- <div id="myModalAttachments" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+         
+          <div class="modal-content" style="margin-top: 100px;">
+            <div class="modal-header">
+              <h4>Issue Photos</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <img style="width: 100%; height: auto;" src="{{photourl}}">
+                  <br>
+                  <br>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+   -->
+    <!-- <div id="Assign" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        
+          <div class="modal-content" style="margin-top: 100px;">
+            <div class="modal-header">
+              <h4>Assign To</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-lg-4">
+                  <h5 style="padding: 6px;">Staff Type</h5>
+                </div>
+                <div class="col-lg-8">
+                  <select name="StaffType" style="width: 247px;
+                              margin-left: 1px;" class="dropdown form-control " id="ddl_rentRentMonth">
+                    <option value="" class="" selected="selected">Select Staff Type</option>
+                    <option value="1">Security</option>
+                    <option value="2">Gardener</option>
+                    <option value="3">Electrician</option>
+                    <option value="4">Plumber</option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-lg-4">
+                  <h5 style="padding: 6px;">Staff </h5>
+                </div>
+                <div class="col-lg-8">
+                  <select class="dropdown form-control" [(ngModel)]="StaffID" id="ddl_BuildingName" style=" width: 247px;"
+                    required>
+                    <option value="0" selected="selected">Select Staff</option>
+                    <option *ngFor="let details of stafflist" value="{{details.name}}">{{details.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="row">
+                <button type="button" data-dismiss="modal"
+                  style="background-color: #00b5d7; color: white; margin-left: 242px;"
+                  class="btn btn-default popupUpdatebutton" data-dismiss="modal"
+                  (click)="AssignSupportticket()">Assign</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    <!-- <div id="my1ModalAttachments" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <div class="modal-content" style="margin-top: 100px;">
+            <div class="modal-header">
+              <h4>Add Work</h4>
+            
+  
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body col-lg-12">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="row">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-2">
+                      <p style="padding:3px">Date
+                        <span class="starspan">*</span>
+                      </p>
+                    </div>
+                    <div class="col-lg-7">
+                      <input type="date" class="form-control" placeholder="Date" name="WorkDate" [(ngModel)]="WorkDate">
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-2">
+                      <p style="padding:3px">Attachments
+                        <span class="starspan">*</span>
+                      </p>
+                    </div>
+                    <div class="col-lg-7">
+                      <input type="file" class="form-control" placeholder="Attachments"
+                        (change)="handleFileSelect1($event)" accept="image/*" multiple>
+                    </div>
+                    <p style="margin-top: -16px;
+                        margin-left: 136px;"><b>Hold control button to select
+                        multiple photos</b> </p>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-2">
+                      <p style="padding:3px">Comments
+                        <span class="starspan">*</span>
+                      </p>
+                    </div>
+                    <div class="col-lg-7">
+                      <textarea rows="4" cols="100" required name="Comments" class="form-control" placeholder="Comments"
+                        [(ngModel)]="Comments"> </textarea>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-5">
+                    </div>
+                    <div class="col-lg-2">
+                      <button class="btn btn-block btn-md" data-dismiss="modal"
+                        style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);"
+                        (click)="CompleteTicket()">Save</button>
+                    </div>
+                    <div class="col-lg-5">
+                    </div>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+  </div>
+</div>

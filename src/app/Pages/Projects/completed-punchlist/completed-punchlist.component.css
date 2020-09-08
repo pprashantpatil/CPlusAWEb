@@ -1,0 +1,30 @@
+.excelbuttoncss{
+    margin-right: -32px;
+ }
+
+
+ .Mobilecss{
+    margin-top: 0px;
+ }
+
+ @media screen and (max-width: 1280px){
+    .Mobilecss{
+        margin-left: 3px;
+        margin-top: 16px;
+    }
+    .excelbuttoncss{
+        margin-right: -159px;
+     }
+    .label1{
+        margin-left: 58px; 
+     }
+
+}
+@media screen and (min-width: 1400px) {
+    .excelbuttoncss{
+        margin-right: -190px;
+     }
+     .label1{
+        margin-left: 70px; 
+     }
+}

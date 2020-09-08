@@ -1,0 +1,177 @@
+<div class="container-fluid Pages_background">
+
+    <div class="row">
+        <div class="col-lg-3">
+            <h4 class="Pages_header">{{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-3">
+            <div class="mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span> {{updateUser_breadchrumb}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard ">
+        <h6 class="paneltitle">{{updateUser_PageTitle}}</h6>
+        <hr>
+        <form #loginForm="ngForm">
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{updateUser_User_Role}} <span class="redstar">*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select [(ngModel)]="UsersEntity.UserRoleID" name="UserRoleID" class="dropdown form-control"
+                        id="ddl_UserRole" required placeholder="User Role">
+                        <option value="none">Select Role Type </option>
+                        <option value="{{Role.id}}" *ngFor="let Role of RoleTypeList">{{Role.short}}</option>
+                    </select>
+
+                    <span class="Validationlabels"
+                        *ngIf='UsersEntity.UserRoleID==undefined && Isempty || UsersEntity.UserRoleID=="none" && Isempty '>*
+                        Please
+                        Fill
+                        {{upadteMaintanceRequest_Status}}</span>
+
+
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{updateUser_Name}}<span class="redstar">*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input [(ngModel)]="UsersEntity.Name" name="Name" type="text" id="txt_Name" required
+                        class="form-control" placeholder="{{updateUser_Name}}">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> {{updateUser_Email}}<span class="redstar">*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input [(ngModel)]="UsersEntity.EmailID" name="EmailID" type="email" id="txt_Email" required
+                        class="form-control" placeholder="{{updateUser_Email}}"
+                        pattern="^[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_]+)*@[a-z0-9]+(\-[a-z0-9]+)*(\.[a-z0-9]+(\-[a-z0-9]+)*)*\.[a-z]{2,4}$">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> {{updateUser_Phone}}<span class="redstar">*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input [(ngModel)]="UsersEntity.PhoneNo" name="PhoneNo" type="text" id="txt_phone" required
+                        maxlength="10" class="form-control" placeholder="{{updateUser_Phone}}"
+                        onkeypress='return (event.charCode > 47 && event.charCode < 58)'>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> {{usernameid}}<span class="redstar">*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input [(ngModel)]="UsersEntity.UsernameID" name="userid" type="text" id="txt_userid" required
+                        class="form-control" placeholder="{{usernameid}}">
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> {{userpassword}}<span class="redstar">*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input [(ngModel)]="UsersEntity.Password" name="password" type="text" id="txt_password" required
+                        class="form-control" placeholder="{{userpassword}}">
+                </div>
+            </div>
+            <br>
+
+
+
+            <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{updateUser_Module}}<span class="redstar">*</span> </h5>
+                </div>
+                <div class="col-lg-4" id='multidropdownlistitems'>
+                    <!-- <ng-multiselect-dropdown [placeholder]="" [data]="UserRoleList" [(ngModel)]="UsersEntity.UserRoleID"
+                        [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                        (onSelectAll)="onSelectAll($event)" (onDeSelect)="onItemDeSelect($event)">
+                    </ng-multiselect-dropdown> -->
+                    <ng-multiselect-dropdown [placeholder]="'Modules'" [data]="UserRoleList" name='sel'
+                        [(ngModel)]="selecteditemsModule" [settings]="dropdownSettings"
+                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+                        (onDeSelect)="onItemDeSelect($event)">
+                    </ng-multiselect-dropdown>
+
+                    <!-- <span class="Validationlabels"
+                    *ngIf='selecteditemlist==undefined && Isempty || selecteditemlist=="none" && Isempty '>* Please
+                    Fill
+                    {{updateUser_Module}}</span> -->
+
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{updateUser_Description}}<span class="redstar">*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input [(ngModel)]="UsersEntity.Description" name="Description" type="text" id="txt_descriptions"
+                        class="form-control" required placeholder="{{updateUser_Description}} ">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h6>{{updateUser_User_Photo}}<span class="redstar">*</span> </h6>
+                </div>
+                <div class="col-lg-4 ">
+                    <!-- <ngx-dropzone (filesAdded)="onFilesAddedAttached($event)" [(ngModel)]="UsersEntity.PhotoURL"
+                        name="PhotoURL" [showPreviews]="true" class="dropzone_vendorinvoice" id="dropzone_UserPhoto">
+                    </ngx-dropzone> -->
+                    <input type="file" class="form-control" placeholder="Photo" accept="image/*"
+                        (change)="handleFileSelect($event)">
+                </div>
+                <img *ngIf="paramID!=null" src="{{Images}}" style="width: 100px">
+                <span class="Validationlabels"
+                    *ngIf='FileType1==undefined && Isempty || FileType1=="none" && Isempty '>* Please
+                    Fill
+                    {{updateUser_User_Photo}}</span>
+            </div>
+            <br>
+            <div class="row" *ngIf="paramID==null">
+                <div class="col-lg-3"></div>
+                <div>
+                    <button type="submit" class="btn btn-block btn-md savebutton" [disabled]="loginForm.form.invalid"
+                        (click)="InsertUsers()" id="btn_updateuserbutton">{{updateUser_button_Save}}</button>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="paramID!=null">
+                <div class="col-lg-3"></div>
+                <div>
+                    <button type="submit" class="btn btn-block btn-md savebutton" [disabled]="loginForm.form.invalid"
+                        (click)="UpdateUsers()" id="btn_updateuserbutton">update</button>
+                </div>
+            </div>
+
+        </form>
+    </div>

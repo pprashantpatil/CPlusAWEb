@@ -1,0 +1,43 @@
+.mainrow{
+    float: right;
+    margin-top: 26px;
+}
+.maincard{
+    float: initial;
+    background: white;
+
+}
+.tableheaderfont{
+    color: white;
+}
+.tableheader{
+    border: black;
+    background-color: #00b5d7;;
+    text-align: center;
+    
+    }
+    button.btn.btn-primary {
+        background: #fec501;
+        border-color: #fec501;
+    }
+    /* .spacing{
+        margin-right: -72px;
+    } */
+
+    .buildingimage{
+        /* width: 16%; */
+        height: 111px;
+
+        width: 155px;
+    
+    }
+
+    .dashbutton {
+        border-radius: 10px;
+        background-color: #00b5d7;
+        color: white;
+        border: none;
+        width: 150px;
+        height: 30px;
+        margin-bottom: 12px;
+    }

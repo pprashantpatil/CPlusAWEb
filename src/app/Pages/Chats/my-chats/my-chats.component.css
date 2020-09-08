@@ -1,0 +1,71 @@
+.required{
+    color:red;
+}.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+    .headerspace{
+        margin-top:20px;
+
+    }
+    .divspacee{
+        margin-top:10px;
+        height: calc(70% - 44px);
+    }
+    .tablecss{
+        background-color: #f18235;
+        color:white;
+    }
+    .headerrspace{
+        color: #251156;
+        height:70px;
+        margin-top:20px;
+    }
+    .nextbtncolor{
+        background: #444a48;
+        color:white;
+       }
+       body {
+        margin: 0 auto;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+      
+   
+      
+      /* .container img {
+        float: left;
+        max-width: 60px;
+        width: 100%;
+        margin-right: 20px;
+        border-radius: 50%;
+      }
+      
+      .container img.right {
+        float: right;
+        margin-left: 20px;
+        margin-right:0;
+      } */
+
+      /* .time-right {
+        float: right;
+        color: #aaa;
+      }
+      
+      .time-left {
+        float: left;
+        color: #999;
+      } */
+
+      .chatdoc{
+        background-color: white;
+        border-radius: 5px;
+      }
+
+
+
+      

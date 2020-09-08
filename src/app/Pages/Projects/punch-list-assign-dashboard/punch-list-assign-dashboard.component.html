@@ -1,0 +1,129 @@
+<div class="container-fluid Pages_background Mobilecss">
+    <div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="Pages_header">Punch List </h4>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-10 dashbutton">
+                <button type="button" class="btn  btn-md excelbutton excelbuttoncss" (click)="exporttoexcel()">
+                    Export To Excel
+                </button>
+
+            </div>
+
+            <div class="col-lg-2 dashbutton">
+                <button routerLink="/punchlistassign" *ngIf="LoginTypeID==2 || LoginTypeID==3 ||LoginTypeID==8"
+                    type="button" id="btn_button">Add New</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+        <div class="row  p-2">
+            <div class="col-lg-12 pannel">
+                <h6 class="paneltitle">Punch List </h6>
+            </div>
+        </div>
+
+        <div class="row p-4">
+            <div class="col-lg-4">
+                <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions"
+                    (ngModelChange)="selectedDate($event)">
+                </ng-daterangepicker>
+            </div>
+            <div class="col-lg-3" *ngIf="LoginTypeID!=1">
+                <select class="dropdown form-control" id="ddl_Status" name="Status" [(ngModel)]="Status"
+                    (click)="GetStatus($event)" required>
+                    <option value="0" selected="selected">Select Status</option>
+                    <option value="Assigned">Assigned</option>
+                    <option value="Accepted">Accepted</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+
+            <div class="col-lg-3" *ngIf="LoginTypeID!=1">
+                <select name="StaffId" [(ngModel)]="StaffId" class="dropdown form-control " name="hgd" required
+                    id="StaffId" (click)="GetMemberID($event)">
+                    <option value="0" selected="selected"> Staff</option>
+                    <option value="{{build.name}}" *ngFor="let build of memberlist">
+                        {{build.name}}</option>
+                </select>
+            </div>
+            <div class="col-lg-2">
+                <label class="label1">Count : {{Count}}</label>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12  table-responsive">
+                    <table class="table table-bordered table-hover table-condensed" style="text-align: center;">
+                        <tbody>
+                            <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                                <!-- <td>Project Name</td> -->
+                                <td>Punch List Name</td>
+                                <td *ngIf='LoginTypeID!=1'>Assigned To</td>
+                                <td> Start Date</td>
+                                <td>End Date</td>
+                                <td>Remarks</td>
+                                <td *ngIf='LoginTypeID!=1'>Status</td>
+                                <td *ngIf="LoginTypeID==2 || LoginTypeID==3 ||LoginTypeID==1">Actions</td>
+                            </tr>
+                            <tr *ngFor="let project of projectlist|filter:Search|filter:StaffName|filter:Status"
+                                [class.bgred]="project.text=='1'">
+                                <!-- <td>{{project.bname}}</td> -->
+                                <td>{{project.name}}</td>
+                                <td *ngIf='LoginTypeID!=1'>{{project.staffName}}</td>
+                                <td>{{project.date|date}}</td>
+                                <td>{{project.endDate|date}}</td>
+                                <td>{{project.remarks}}</td>
+                                <td *ngIf='LoginTypeID!=1'>{{project.status}}</td>
+                                <td *ngIf="LoginTypeID==2 || LoginTypeID==3 ||LoginTypeID==1 ">
+                                    <i *ngIf="LoginTypeID==2 || LoginTypeID==3 " class="fa fa-edit" title="edit"
+                                        [routerLink]="['/punchlistassign',project.id]"></i>&nbsp;
+                                    <i *ngIf="LoginTypeID==2 || LoginTypeID==3" class="far fa-trash-alt" title="Delete"
+                                        (click)="DeleteProject(project.id)"></i>
+                                    <i *ngIf="LoginTypeID==1" class="fa fa-image" title="Photos" aria-hidden="true"
+                                        data-toggle="modal" data-target="#myModalAttachments1" title="Photos"
+                                        (click)="GetPhotos(project)"></i>&nbsp;
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModalAttachments1" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" style="margin-top: 100px;">
+                <div class="modal-header">
+                    <h4>Attachments</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="myCarouselPhotos1" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="{{ImagesOne}}" alt="">
+                            </div>
+                            <div class="item" *ngFor="let Attachment of supportlist1| slice:1">
+                                <img src="{{Attachment.attachment}}" alt="">
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#myCarouselPhotos1" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarouselPhotos1" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

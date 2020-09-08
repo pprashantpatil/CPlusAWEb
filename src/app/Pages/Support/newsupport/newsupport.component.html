@@ -1,0 +1,149 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="Pages_header" style="font-size: 21px;">{{support_PageTitle}}</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <!-- <div class="col-lg-12 BreadChrumbProperties">
+            <span class="CommercialWorkspace" style="font-size: 13px;">{{support_BreadChrumb}} </span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <!-- <div class="col-lg-12 dashbutton">
+        <button class="savebutton" routerLink="/Supportdash" id="btn_utilitySave" type="submit"
+          style="margin-left: 224px;margin-top: -8px;">Dashboard</button>
+      </div> -->
+    </div>
+
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <div class="row">
+      <div class="row subheader">
+        <!-- <div class="col-lg-12">
+          <h4 class="paneltitle">{{support_BreadChrumb}}</h4>
+        </div> -->
+      </div>
+    </div>
+    <br>
+
+
+    <div class="row ">
+      <div class=col-lg-1> </div>
+      <div class="col-lg-2">
+        <h5 class="formlabel" style="padding: 5px">{{support_Date}} </h5>
+      </div>
+      <div class="col-lg-5">
+        <input type="date" [(ngModel)]="SupportEntity.date" name="date" class="form-control" id="date">
+      </div>
+    </div>
+    <!-- <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Project
+            <span>*</span>
+          </h5>
+        </div>
+        <div class="col-lg-5">
+          <select (change)="GetFloor($event)" name="BuildingID" [(ngModel)]="SupportEntity.BuildingID" class="dropdown form-control"
+            id="ddl_NewsupportBuildinglist" required>
+            <option value="0">Select Project</option>
+            <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+          </select>
+          <span class="Validationlabels" *ngIf='SupportEntity.BuildingID==0&&Isempty'>* Please Select {{support_Building}}
+          </span>
+        </div>
+      </div> -->
+    <!-- <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">{{support_Floor}}
+          
+          </h5>
+        </div>
+        <div class="col-lg-5">
+          <select class="dropdown form-control" [(ngModel)]="SupportEntity.Floor" name="floor" id="ddl_NewsupportFloorlist" (change)="getunitlist($event)"
+            required>
+            <option value=0>Select Floor</option>
+            <option value="{{floor.id}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+          </select>
+          <span class="Validationlabels" *ngIf='SupportEntity.Floor==0&&Isempty'>* Please Select Floor
+          </span>
+        </div>
+      </div> -->
+    <!-- <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">{{support_Unit}}
+          
+          </h5>
+        </div>
+        <div class="col-lg-5">
+          <select name="unit" class="dropdown form-control" [(ngModel)]="SupportEntity.unit" required id="ddl_unit">
+            <option value=0>Select Unit</option>
+            <option value="{{unit.id}}" *ngFor="let unit of unitlist">{{unit.unitID}}</option>
+          </select>
+          <span class="Validationlabels" *ngIf='SupportEntity.unit==0&&Isempty'>* Please Select Unit
+          </span>
+        </div>
+      </div> -->
+    <div class="row">
+      <div class="col-lg-1"> </div>
+      <div class="col-lg-2">
+        <h5 class="formlabel" style="padding: 5px">Issue
+          <span>*</span>
+        </h5>
+      </div>
+      <div class="col-lg-5">
+        <textarea rows="5" name="Short" [(ngModel)]="SupportEntity.Short" class="form-control" id="txt_supportNotes"
+          placeholder="Issue"></textarea>
+        <span class="Validationlabels" *ngIf='SupportEntity.Short==""&&Isempty ||SupportEntity.Short=="none"'>* Please
+          Fill issue
+        </span>
+      </div>
+    </div>
+    <br>
+    <form>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Description</h5>
+        </div>
+        <div class="col-lg-5">
+          <textarea type="text" rows="5" name="Description" [(ngModel)]="SupportEntity.Description" id="txt_supportName"
+            class="form-control" placeholder=" Description"></textarea>
+          <span class="Validationlabels"
+            *ngIf='SupportEntity.Description==""&&Isempty ||SupportEntity.Description=="none"'>* Please Fill issue
+          </span>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Issue Photos</h5>
+        </div>
+        <div class="col-lg-5">
+          <ngx-dropzone [showPreviews]="true" [multiple]="false" (filesAdded)="onFilesAdded($event)" name="PhotoURL"
+            class="dropzone_vendorinvoice" id="dropzone_newsupportAttachment"></ngx-dropzone>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-2">
+          <button class="savebutton" (click)="InsertSupport()" id="btn_utilitySave"
+            type="submit">{{support_Save}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+</div>

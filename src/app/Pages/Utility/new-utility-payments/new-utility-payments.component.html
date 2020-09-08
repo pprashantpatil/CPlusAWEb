@@ -1,0 +1,170 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header"> {{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> {{utilityPayments_BreadChrumb}} </span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard ">
+    <div>
+      <div class="col-lg-3">
+        <h3 class="panel-title clearfix formlabel"> {{utilityPayments_PageTitle}}
+        </h3>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <form>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel">{{utilityPayments_BillType}} <span>*</span></h5>
+        </div>
+        <div class="col-lg-5">
+          <select class="dropdown form-control" [(ngModel)]="UtilityEntity.BillType" name="BillType" required
+            id="txt_utilitypaymentsBillType">
+            <option value="0">Select BillType</option>
+            <option value="{{billtype.id}}" *ngFor="let billtype of BillTypeList">{{billtype.short}}</option>
+          </select>
+          <span class="Validationlabels" *ngIf='UtilityEntity.BillType==0 && Isempty'>* Please
+            Select
+            {{utilityPayments_BillType}}</span>
+        </div>
+      </div>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel" style="padding: 5px">{{utilityPayments_Date}} </h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="date" [(ngModel)]="UtilityEntity.BillDate" name="BillDate" class="form-control "
+            id="txt_utilitypaymentsDate" min="{{mindate}}"  placeholder="Date">
+        </div>
+      </div>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel">{{utilityPayments_Month}}</h5>
+        </div>
+        <div class="col-lg-5">
+          <select class="dropdown form-control" [(ngModel)]="UtilityEntity.Month" name="Month"
+            id="ddl_utilitypaymentsMonth" placeholder="Select Month">
+            <option value="0" class="" selected="selected">Select Month</option>
+            <option label="January" value="January">January</option>
+            <option label="February" value="February">February</option>
+            <option label="March" value="March">March</option>
+            <option label="April" value="April">April</option>
+            <option label="May" value="May">May</option>
+            <option label="June" value="June">June</option>
+            <option label="July" value="July">July</option>
+            <option label="August" value="August">August</option>
+            <option label="September" value="September">September</option>
+            <option label="October" value="October">October</option>
+            <option label="November" value="November">November</option>
+            <option label="December" value="December">December</option>
+          </select>
+        </div>
+      </div>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel">{{utilityPayments_Building}} <span>*</span></h5>
+        </div>
+        <div class="col-lg-5">
+          <select (change)="GetFloor($event)" name="BuildingID" [(ngModel)]="UtilityEntity.BuildingID"
+            class="dropdown form-control" required id="ddl_utilitypaymentsBuilding" placeholder="Select Building">
+            <option value="0">Select Building</option>
+            <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+          </select>
+          <span class="Validationlabels" *ngIf='UtilityEntity.BuildingID==0 && Isempty'>* Please
+            Select
+            {{utilityPayments_Building}}</span>
+        </div>
+      </div>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel" style="padding: 5px"> {{utilityPayments_Floor}} <span>*</span></h5>
+        </div>
+        <div class="col-lg-5">
+          <select class="dropdown form-control  " [(ngModel)]="UtilityEntity.Floor" name="Floor"
+            id="ddl_utilitypaymentsFloor" placeholder="Select Floor" (change)="UnitByID($event)">
+            <option value="0">Select Floor</option>
+            <option value="{{floor.id}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+          </select>
+          <span class="Validationlabels" *ngIf='UtilityEntity.Floor==0 && Isempty'>* Please
+            Select
+            {{utilityPayments_Floor}}</span>
+        </div>
+      </div>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel" style="padding: 5px"> {{utilityPayments_Unit}} <span>*</span> </h5>
+        </div>
+        <div class="col-lg-5">
+          <select [(ngModel)]="UtilityEntity.Unit" name="Unit" class="dropdown form-control" id="ddl_updateassetsFloor">
+            <option value="0">Select Unit</option>
+            <option value="{{Units.id}}" *ngFor="let Units of Unitslist">{{Units.unitID}}</option>
+          </select>
+          <span class="Validationlabels" *ngIf='UtilityEntity.Unit==0 && Isempty'>* Please
+            Select
+            {{utilityPayments_Unit}}</span>
+
+          <!-- <input type="text" class="form-control " [(ngModel)]="UtilityEntity.Unit" name="Unit"
+            id="txt_utilitypaymentsUnit" placeholder="{{utilityPayments_Unit}}"> -->
+        </div>
+      </div>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel" style="padding: 5px">{{utilityPayments_Tenant}}<span>*</span> </h5>
+        </div>
+        <div class="col-lg-5">
+          <select class="dropdown form-control " [(ngModel)]="UtilityEntity.TenantID" name="TenantID"
+            id="ddl_utilitypaymentsTenantName" placeholder="Select Tenant">
+            <option value="0">Select Tenent Name</option>
+            <option value="{{tenent.id}}" *ngFor="let tenent of Tenentlist">{{tenent.tenantName}}</option>
+          </select>
+          <span class="Validationlabels" *ngIf='UtilityEntity.TenantID==0 && Isempty'>* Please
+            Select
+            {{utilityPayments_Tenant}}</span>
+        </div>
+      </div>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel" style="padding: 5px">{{utilityPayments_Amount}} </h5>
+        </div>
+        <div class="col-lg-5 ">
+          <input type="number" class="form-control " [(ngModel)]="UtilityEntity.Amount" name="Amount"
+            id="txt_utilitypaymentsAmount" placeholder="{{utilityPayments_Amount}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1"> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel">{{utilityPayments_Attachment}} </h5>
+        </div>
+        <div class="col-lg-5">
+          <ngx-dropzone [showPreviews]="true" (filesAdded)="onFilesAdded($event)" class="dropzone_vendorinvoice"
+            id="dropzone_utilityAttachment"></ngx-dropzone>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-2">
+          <button class="savebutton" (click)="InsertUtilities()" id="btn_utilitySave"
+            type="submit">{{utilityPayments_Save}}</button>
+        </div>
+      </div>
+    </form>
+  </div>

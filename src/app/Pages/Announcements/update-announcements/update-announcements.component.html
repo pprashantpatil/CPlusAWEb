@@ -1,0 +1,188 @@
+<div class="container-fluid " style="background-color: #F0F3F4;">
+    <div class="row">
+        <div class="col-lg-4">
+            <h4 class="Pages_header">ANNOUNCEMENTS</h4>
+        </div>
+        <div class="col-lg-4">
+        </div>
+
+        <div class="col-lg-4">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <div class="shadow p-3 mb-5 bg-white rounded col-lg-12  maincard ">
+        <h6 class="paneltitle" *ngIf="!AnnouncementID">ANNOUNCEMENTS
+        </h6>
+        <h6 class="paneltitle" *ngIf="AnnouncementID">EDIT ANNOUNCEMENTS
+        </h6>
+        <hr>
+        <div class="row">
+            <form class="col-lg-7">
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-4">
+                        <p style="margin-left: -5px;">Project
+                            <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-7">
+                        <select disabled class="form-control" [(ngModel)]="ProjectID" id="ProjectID"
+                            [(ngModel)]="ProjectId" name="Project" required>
+                            <option value="0">Select Project</option>
+                            <option value="{{Project.id}}" *ngFor="let Project of Buildinglist">{{Project.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-4">
+                        <p style="margin-left: -5px;">Announcement For
+                            <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-7">
+                        <input type="radio" [value]="1" name="AnnouncementForID"
+                            [(ngModel)]="AnnouncementEntity.AnnouncementForID">Staff
+                        &nbsp;&nbsp;
+                      
+                        <input type="radio" [value]="3" name="AnnouncementForID"
+                            [(ngModel)]="AnnouncementEntity.AnnouncementForID">All
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-4">
+                        <p style="padding:5px ; margin: -11px;">Announcement
+                            <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-7">
+                        <input type="text" [(ngModel)]="AnnouncementEntity.Name" name="Name" required
+                            id="txt_announcements" class="form-control" placeholder="Announcement">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-4">
+                        <h5>Description </h5>
+                    </div>
+                    <div class="col-lg-7 ">
+                        <textarea rows="3" [(ngModel)]="AnnouncementEntity.Description" name="Description"
+                            id="txt_announcementsDescriptions" class="form-control "
+                            placeholder="Description"></textarea>
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-4">
+                        <h5>Date </h5>
+                    </div>
+                    <div class="col-lg-7">
+                        <input type="date" min="{{mindate}}" [(ngModel)]="AnnouncementEntity.DateTime" name="DateTime"
+                            id="txt_announcementsDate" class="form-control" placeholder="date">
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-4">
+                        <h5>Time </h5>
+                    </div>
+                    <div class="col-lg-7 ">
+                        <div class="form-group">
+                            <input type="time" format="HH:mm:ss" [(ngModel)]="AnnouncementEntity.Time" name="Time"
+                                id="txt_announcementsTime" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-4">
+                        <h5 style="margin: -11px">Announcement Details
+                            <span class="starspan">*</span>
+                        </h5>
+                    </div>
+                    <div class="col-lg-7 ">
+                        <textarea rows="3" [(ngModel)]="AnnouncementEntity.Reason" name="Reason" class="form-control "
+                            placeholder="Announcement Details" id="txt_announcementsDetails"></textarea>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-4">
+                        <p style="padding:5px">Venue</p>
+                    </div>
+                    <div class="col-lg-7">
+                        <input type="text" [(ngModel)]="AnnouncementEntity.Venue" name="Venue"
+                            id="txt_announcementsVenue" class="form-control" placeholder="Venue">
+                    </div>
+                </div>
+                <br>
+                <div class="row" *ngIf="!AnnouncementID">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-4">
+                        <h5>Attachment </h5>
+                    </div>
+                    <div class="col-lg-7 ">
+                        <ngx-dropzone [showPreviews]="true" name="AnnouncementAttachments"
+                            class="dropzone_vendorinvoice" id="dropzone_Attachment" (filesAdded)="onFilesAdded($event)">
+                        </ngx-dropzone>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+
+                    <div class="col-lg-2" *ngIf="!AnnouncementID">
+                        <button class="savebutton" type="submit" (click)="InsertAnnouncement()">Save</button>
+                    </div>
+
+                    <div class="col-lg-2" *ngIf="AnnouncementID">
+                        <button class="savebutton" type="submit" (click)="UpdateAnnouncement()">Update</button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-lg-4">
+                <h4 *ngIf="Attachmentlist.length>0">Attachments</h4>
+                <div id="myCarouselPhotos" *ngIf="Attachmentlist.length>0" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" *ngIf="Attachmentlist">
+                        <div class="item active">
+                            <img src="{{Attachmentlist[0].attachment}}" alt="">
+                        </div>
+                        <div class="item" *ngFor="let attachment of Attachmentlist| slice:1">
+                            <img src="{{attachment.attachment}}" alt="">
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarouselPhotos" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarouselPhotos" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

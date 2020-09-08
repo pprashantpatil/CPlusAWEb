@@ -1,0 +1,190 @@
+<div class="container-fluid Pages_background Mobilecss" style="    margin-left: -11px;">
+  <div>
+    <div class="row">
+      <div class="col-lg-12">
+        <h4 class="Pages_header">Work Assign Dashboard</h4>
+      </div>
+
+    </div>
+    <div class=" row">
+      <div class="col-lg-12 dashbutton" style="margin-left: -14px;">
+        <button *ngIf="LoginTypeID==3" routerLink="/ProjectworkAssign" style="margin-left: -14px;" type="button"
+          id="btn_button">Add New
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Work Assign Dashboard</h6>
+      </div>
+    </div>
+
+    <div class="row p-4">
+      <div class="col-lg-4">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions" (ngModelChange)="selectedDate($event)">
+        </ng-daterangepicker>
+      </div>
+      <div class="col-lg-3 btt">
+        <select class="dropdown form-control " name="StageID" (change)="GetStages($event)" [(ngModel)]="StageID"
+          id="StageID" required>
+          <option value="0"> Select Stage</option>
+          <option value="{{build.id}}" *ngFor="let build of StageList">{{build.stage}}</option>
+        </select>
+      </div>
+
+      <div class="col-lg-3" *ngIf="LoginTypeID==3">
+        <select class="form-control" placeholder="Select Staff Type" [(ngModel)]="StaffTypeID"
+          (change)="getStaffTypeID($event)" id="StaffTypeID" name="StaffTypeID" required>
+          <option value="0"> Select Staff Type</option>
+          <option value="{{Staff.id}}" *ngFor="let Staff of StaffTypelist">{{Staff.short}}
+          </option>
+        </select>
+      </div>
+      <div class="col-lg-3" *ngIf="LoginTypeID==3">
+        <select class="dropdown form-control" id="StaffName" [(ngModel)]="StaffName" name="StaffName"
+          (change)="GetStaff($event)" required>
+          <option value="0" selected> Select Staff</option>
+          <option value="{{build.name}}" *ngFor="let build of StaffList">{{build.name}}</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-lg-9">
+      </div>
+      <div class="col-lg-3" style="text-align: end;">
+        <label style="margin-right: 20px;">Count: {{Count}}</label>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive">
+          <table class="table table-bordered table-condensed" style="text-align: center;">
+            <tbody>
+              <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                <td>Start Date</td>
+                <td>End Date</td>
+                <td *ngIf="LoginTypeID!='1'">Staff Type</td>
+                <td *ngIf="LoginTypeID!='1'">Staff</td>
+                <td>Stage </td>
+                <td>Work Description</td>
+                <td *ngIf="LoginTypeID!=9">Actions</td>
+              </tr>
+              <tr *ngFor="let project of projectlist |filter: StaffTypeID" [class.bgred]="project.text=='1'">
+                <td>{{project.startDate|date}}</td>
+                <td>{{project.endDate|date}}</td>
+                <td *ngIf="LoginTypeID!='1'">{{project.staffType}}</td>
+                <td *ngIf="LoginTypeID!='1'">{{project.staffName}}</td>
+                <td>{{project.stage}}</td>
+                <td>{{project.comments}}</td>
+                <td *ngIf="LoginTypeID!=9">
+                  <i *ngIf="LoginTypeID==3" class="fa fa-edit" title="Edit"
+                    [routerLink]="['/ProjectworkAssign',project.id]"></i>&nbsp;
+                  <i *ngIf="LoginTypeID==3" class="far fa-trash-alt" title="Delete"
+                    (click)="DeleteProject(project.id)"></i>
+                  <button *ngIf="LoginTypeID==1" class="btn btn-primary editable-table-button btn-xs"
+                    data-toggle="modal" (click)="GetProjectWork(project)" data-toggle="modal"
+                    data-target="#myModalAttachments" style="background-color: #00b5d7;">Add Work Update</button>
+                </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="myModalAttachments" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="margin-top: 100px; width: 800px;;">
+        <div class="modal-header">
+          <h4>Add Work Update</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-10">
+              <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-3">
+                  <p style="padding:3px">Photos
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="file" class="form-control" placeholder="Photos" (change)="handleFileSelect1($event)"
+                    accept="image/*" multiple>
+                </div>
+                <p style="margin-top: 7px;
+                margin-left: 327px;">
+                  <b>Hold control button to select multiple </b>
+                </p>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-3">
+                  <p style="padding:3px">Videos
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="file" class="form-control" placeholder="Videos" (change)="handleFileSelect($event)"
+                    accept="video/*" multiple>
+                </div>
+                <p style="margin-top: 7px;
+                margin-left: 327px;
+                 ">
+                  <b>Hold control button to select multiple </b>
+                </p>
+              </div>
+              <br>
+
+              <div class="row">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-3">
+                  <p style="padding:5px">Description
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <textarea placeholder=" Description" name="Description" [(ngModel)]="Description" id="Description"
+                    rows="4" required class="form-control"></textarea>
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-3">
+                  <p style="padding:5px">Attachment <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="file" class="form-control" placeholder="Attachment"
+                    accept="image/x-png,image/gif,image/jpeg,application/pdf,.xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx"
+                    (change)="handleFileSelect2($event)" class="form-control">
+                </div>
+              </div> -->
+              <br>
+              <div class="row">
+                <div class="col-lg-5">
+                </div>
+                <div class="col-lg-2">
+                  <button class="btn btn-block btn-md"
+                    style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);"
+                    (click)="SaveProjectUpdate()" data-dismiss="modal">Save</button>
+                </div>
+                <div class="col-lg-5">
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>

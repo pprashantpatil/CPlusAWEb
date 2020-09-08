@@ -1,0 +1,158 @@
+<div class="container-fluid Pages_background">
+    <div>
+        <div class="row">
+            <div class="col-lg-4">
+                <h4 class="Pages_header">Leave Master</h4>
+            </div>
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-4">
+                <div class="mainrow">
+                    <div class="col-lg-12">
+                        <!-- <span> Account / Leave Master</span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card maincard" style="margin-right: 20px;margin-top: 30px;">
+        <!-- <div class="row">
+            <div class="col-lg-12">
+                <h3 class="panel-title formlabel">LEAVE MASTER DETAILS</h3>
+            </div>
+
+        </div>
+        <hr> -->
+        <form #leaveForm="ngForm">
+            <div class="row divForm" style="    margin-top: 30px;">
+                <div class="col-lg-8 reqriedspan">
+                    <div class="row ">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-2">
+                            <h6 style="font-size: 14px;">Leave Type
+                                <span>*</span>
+                            </h6>
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="text" class="form-control" required id="txt_SatffDetails_email" placeholder="Leave Type" [(ngModel)]="leavetype"
+                                name="leavetype">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row ">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-2">
+                            <h6 style="font-size: 14px;">Leave Name
+                                <span>*</span>
+                            </h6>
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="text" class="form-control" required id="txt_SatffDetails_email" placeholder="Leave Name" [(ngModel)]="leavename"
+                                name="leavename">
+                        </div>
+                    </div>
+                    <br>
+
+
+
+                    <!-- <div class="row">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-2">
+                        <h6>{{staffDetails_BuildingAddress}}<span>*</span> </h6>
+                    </div>
+                    <div class="col-lg-9">
+                        <textarea rows="3" id="txt_SatffDetails_BuildingAddress" class="form-control " required placeholder="Address"></textarea>
+                    </div>
+                </div> -->
+
+                    <div class="row ">
+
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-2">
+                            <h6 style="font-size: 14px;"> Leave Description
+                                <span>*</span>
+                            </h6>
+                        </div>
+                        <div class="col-lg-7">
+                            <textarea rows="3" id="txt_SatffDetails_address" class="form-control" placeholder="Leave Description" [(ngModel)]="leavedescription"
+                                name="leavedescription" required></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row ">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-2">
+                            <h6 style="font-size: 14px;">Type Of Leave
+                                <span>*</span>
+                            </h6>
+                        </div>
+                        <div class="col-lg-7">
+                            <select class="dropdown form-control" required (change)=GetTypeofLeave($event) [(ngModel)]="typeofleave" name="typeofleave">
+                                <option selected="selected">Select</option>
+                                <option value="paid">Paid</option>
+                                <option value="Unpaid">Unpaid</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row ">
+
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-2">
+                            <h6 style="font-size: 14px;"> Day Earned </h6>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="text" class="form-control" required id="txt_SatffDetails_email" placeholder="Day Earned" [(ngModel)]="dayearned"
+                                name="dayearned">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row ">
+
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-2">
+                            <h6 style="font-size: 14px;">Max Days
+                                <span>*</span>
+                            </h6>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="text" class="form-control" required id="txt_SatffDetails_email" placeholder="Max Days" [(ngModel)]="maxdays"
+                                name="maxdays">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row ">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-2">
+                            <h6 style="font-size: 14px;">Start Of Leave
+                                <span>*</span>
+                            </h6>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="date" class="form-control" required id="txt_SatffDetails_email" placeholder="Start Of Leave" [(ngModel)]="starofleave"
+                                name="starofleave">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row" style="margin-bottom: 50%" *ngIf="id==undefined">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-2">
+                            <button type="submit" [disabled]="leaveForm.form.invalid" (click)="insertdetails()" class="btn btn-block savebutton">Save</button>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 50%" *ngIf="id!=null">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-2">
+                            <button type="submit" [disabled]="leaveForm.form.invalid" (click)="Updatedetails()" class="btn btn-block savebutton">Update</button>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </form>
+    </div>
+
+</div>

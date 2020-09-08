@@ -1,0 +1,132 @@
+<div class="container-fluid Pages_background">
+    <div class="row">
+        <div class="col-lg-5">
+            <h4 style="margin-bottom: 25px;" class="Pages_header">SITE VISIT ASSIGN</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+
+    </div>
+    <div class="container-fluid Pages_background">
+        <div>
+            <div class="card maincard">
+                <div class="row">
+                    <div class="col-lg-8 reqriedspan">
+                        <br>
+                        <form #loginForm="ngForm">
+                            <div class="row" >
+                                <div class=col-lg-2> </div>
+                                <div class="col-lg-3">
+                                    <h6>Project<span>*</span> </h6>
+                                </div>
+                                <div class="col-lg-7 form-group">
+                                    <select name="projectID" [(ngModel)]="projectID" class="dropdown form-control " required
+                                        id="ddl_updateassetsBuilding" (click)="GetProjectID($event)">
+                                        <option value="0" selected="selected">Select Project</option>
+                                        <option value="{{build.id}}" *ngFor="let build of projectlist">{{build.project}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row" >
+                                <div class=col-lg-2> </div>
+                                <div class="col-lg-3">
+                                    <h6>Staff<span>*</span> </h6>
+                                </div>
+                                <div class="col-lg-7 form-group">
+                                    <select name="ProjectID" [(ngModel)]="StaffId" class="dropdown form-control " required
+                                        id="ddl_updateassetsBuilding" (click)="GetMemberID($event)">
+                                        <option value="0" selected="selected"> Staff</option>
+                                        <option value="{{build.staffID}}" *ngFor="let build of memberlist">
+                                            {{build.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class=col-lg-2> </div>
+                                <div class="col-lg-3">
+                                    <h6>Site Visit Name<span>*</span> </h6>
+                                </div>
+                                <div class="col-lg-7 form-group">
+                                    <input type="text" [(ngModel)]="SiteVisitName" name="SiteVisitName"
+                                        class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class=col-lg-2> </div>
+                                <div class="col-lg-3">
+                                    <h6>Date<span>*</span> </h6>
+                                </div>
+                                <div class="col-lg-7 form-group">
+                                    <input [(ngModel)]="Date" name="Date" type="date" placeholder=" Date" required
+                                        class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class=col-lg-2> </div>
+                                <div class="col-lg-3">
+                                    <h6 style="font-size: 14px;">Time<span>*</span> </h6>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="form-group">
+                                        <input type="time" [(ngModel)]="Time" name="Time" class="form-control"
+                                            placeholder="Time" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class=col-lg-2> </div>
+                                <div class="col-lg-3">
+                                    <h6>Location<span>*</span> </h6>
+                                </div>
+                                <div class="col-lg-7 form-group">
+                                    <input type="text" [(ngModel)]="Location" name="Location" class="form-control"
+                                       >
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class=col-lg-2> </div>
+                                <div class="col-lg-3">
+                                    <h6>Remarks<span>*</span> </h6>
+                                </div>
+                                <div class="col-lg-7 form-group">
+                                    <textarea rows="3" class="form-control" name="Remarks" [(ngModel)]="Remarks"
+                                        placeholder="Remarks" required></textarea>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <div class="row" *ngIf="paramID==null">
+                                <div class=col-lg-1> </div>
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-2 ">
+                                    <button type="submit" style="margin-bottom: 100px"
+                                        class="btn btn-block btn-md savebutton" (click)="Save()">Save</button>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="paramID!=null">
+                                <div class=col-lg-1> </div>
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-2 ">
+                                    <button type="submit" style="margin-bottom: 100px"
+                                        class="btn btn-block btn-md savebutton" (click)="Update()">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

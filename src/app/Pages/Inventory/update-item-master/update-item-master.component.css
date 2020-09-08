@@ -1,0 +1,19 @@
+.dashbutton button {
+    float: right;
+    border-radius: 10px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 30px;
+    margin-bottom: 12px;
+}
+.mainrow{
+    float: right;
+    margin-top: 26px;
+}
+.maincard{
+    float: initial;
+    background: white;
+
+}

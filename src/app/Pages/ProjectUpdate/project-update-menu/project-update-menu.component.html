@@ -1,0 +1,186 @@
+<div class="container-fluid Pages_background Mobilecss" style="    margin-left: -12px;">
+  <div>
+    <div class="row">
+      <div class="col-lg-12">
+        <h4 class="Pages_header">Project Update Dashboard</h4>
+      </div>
+
+    </div>
+    <div class=" row">
+      <div class="col-lg-12 dashbutton" style="margin-left: -14px;">
+        <button style="margin-left: -14px;" type="button" id="btn_button" (click)="exporttoexcel()">Export To Excel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Project Update Dashboard</h6>
+      </div>
+    </div>
+
+    <div class="row p-4">
+      <div class="col-lg-4">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions">
+        </ng-daterangepicker>
+      </div>
+      <div class="col-lg-3 btt">
+        <select class="dropdown form-control" id="StageName" [(ngModel)]="StageName" name="StageName" (change)="GetStageID($event)"
+          required>
+          <option value="0" selected> Select Stage</option>
+          <option value="{{build.stage}}" *ngFor="let build of StageList">{{build.stage}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control" id="StaffName" [(ngModel)]="StaffName" name="StaffName" (change)="GetStaff($event)"
+          required>
+          <option value="0" selected> Select Staff</option>
+          <option value="{{build.name}}" *ngFor="let build of ProjectTeamList">{{build.name}}</option>
+        </select>
+      </div>
+      <label class="label1">Count : {{Count}}</label>
+
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive">
+          <table class="table table-bordered  table-condensed" style="text-align: center;">
+            <tbody>
+              <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                <td>Date</td>
+                <td *ngIf="LoginTypeID!='1'">Staff Type</td>
+                <td *ngIf="LoginTypeID!='1'">Staff</td>
+                <td>Stage </td>
+                <td>Work Description</td>
+                <td>No Of Hours Worked</td>
+                <td>Actions</td>
+              </tr>
+              <tr *ngFor="let project of projectlist">
+                <td>{{project.date|date}}</td>
+                <td *ngIf="LoginTypeID!='1'">{{project.staffType}}</td>
+                <td *ngIf="LoginTypeID!='1'">{{project.staffName}}</td>
+                <td>{{project.stage}}</td>
+                <td>{{project.notes}}</td>
+                <td>{{project.noOfHoursWorked}}</td>
+                <td style="width: 102px;">
+                  <i class="fa fa-image" title="Photos" aria-hidden="true" data-toggle="modal" data-target="#myModalAttachments1" title="Photos"
+                    (click)="GetPhotos(project)"></i>&nbsp;
+                  <i class="fa fa-file-pdf-o" title="Attachment" aria-hidden="true" data-toggle="modal" data-target="#myModalAttachments3"
+                    title="Attachment" (click)="GetPhotos(project)"></i>&nbsp;
+                  <i class="fa fa-video-camera" title="Videos" aria-hidden="true" data-toggle="modal" data-target="#myModalAttachments2" title="Videos"
+                    (click)="GetVideos(project)"></i>&nbsp;
+                  <i class="far fa-trash-alt" title="Delete" (click)="DeleteProject(project.id)"></i>
+                </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="myModalAttachments1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content" style="margin-top: 100px;">
+        <div class="modal-header">
+          <h4>Photos</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div id="myCarouselPhotos1" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="item active">
+                <img src="{{ImagesOne}}" alt="">
+              </div>
+              <div class="item" *ngFor="let Attachment of supportlist1| slice:1">
+                <img *ngIf="Attachment.frame==0" src="{{Attachment.photos}}" alt="">
+                <img *ngIf="Attachment.frame==1" src="assets/Login/pdfimage.png" alt="">
+              </div>
+            </div>
+            <a class="left carousel-control" href="#myCarouselPhotos1" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarouselPhotos1" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- <div id="myModalAttachments2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content" style="margin-top: 100px;">
+        <div class="modal-header">
+          <h4>Videos</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+      
+        <div class="modal-body">
+          <div class="col-lg-6" *ngFor="let vid1 of Newlistq">
+            <br>
+            <video width="700" height="550" autoplay controls style=" margin-top: -89px;
+            ">
+              <source src="{{vid1.videos}}" type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div> -->
+
+
+
+  <div id="myModalAttachments2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="margin-top: 100px;    width: 152%;    margin-left: -135px;">
+        <div class="modal-header">
+          <h4>Videos</h4>
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="col-lg-6" *ngFor="let vid1 of Newlistq">
+            <br>
+            <video width="700" height="550" autoplay controls style=" margin-top: -89px;
+            ">
+              <source src="{{vid1.videos}}" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div id="myModalAttachments3" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content" style="margin-top: 100px;">
+        <div class="modal-header">
+          <h4>Attachment</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row" *ngFor="let Attachment of supportlist1">
+            <div class="col-lg-6">
+              <!-- <img *ngIf="Attachment.frame==0" src="{{Attachment.photos}}" style="width: 100%; height: auto;"> -->
+              <img *ngIf="Attachment.frame==1" src="assets/Login/pdfimage.png">
+              <br>
+              <a *ngIf="Attachment.frame==1" style="margin-left: 400px;" href="{{Attachment.photos}}" target="_blank" download>
+                <i class="fa fa-download" aria-hidden="true" title="Download"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

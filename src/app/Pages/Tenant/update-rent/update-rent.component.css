@@ -1,0 +1,43 @@
+.mainrow {
+    float: right;
+    margin-top: 26px;
+}
+
+.maincard {
+    float: initial;
+    background: white;
+}
+
+.formlabel {
+    color: #666666;
+}
+
+.updaterentbuildingss{
+    margin-left: 1px;
+    width: 1px;
+}
+.buildinglabelss{
+    margin-left: auto;
+}
+
+
+@media screen and (min-width: 1600px) {
+    .updaterentbuildingss{
+        margin-left: 1px;
+        width: 1px;
+    }
+    .buildinglabelss{
+        margin-left: auto;
+    }
+    
+  }
+  @media screen and (min-width: 1900px) {
+    .updaterentbuildingss{
+        margin-left: 101px;
+        width: 497px;
+    }
+    .buildinglabelss{
+        margin-left: 32px;
+    }
+    
+  }

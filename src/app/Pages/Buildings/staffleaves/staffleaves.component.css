@@ -1,0 +1,308 @@
+
+  .header {
+    font-weight: 700;
+    color: #666666;
+    float: left;
+    width: auto;
+    margin: 0;
+    /* margin-left: 35px; */
+    padding: 0;
+    font-size: 24px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-top: 30px;
+}
+ 
+.building{
+    color: #00b5d7;
+    font-size: 18px;
+}
+.dashbutton {
+    border-radius: 10px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 30px;
+    margin-bottom: 12px;
+}
+.mainrow{
+    float: right;
+    margin-top: 26px;
+}
+
+.maincard{
+    float: initial;
+    background: white;
+
+}
+
+.paneltitle {
+    font-weight: 400;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: #666666;
+}
+
+i{
+    color: #00b5d7;
+}
+
+.tableheader {
+    padding: 10px;
+   
+    background-color: #00b5d7;
+    height: 25px;
+    width: 200px;
+    color: white;
+         /* line-height: 0.55;  */
+         font-size: 13px;
+}
+
+.table {
+    
+    margin-bottom: 0px;
+    background-color: transparent;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: table;
+    margin: 16px;
+    /* line-height: 0.5; */
+    font-size: 13px;
+    margin-left: -14px;
+}
+
+.table-bordered {
+    border: 1px solid #ddd;
+    
+}
+.maindropdown{
+    width: 210px;
+}
+
+.excelbutton{
+    margin-left: auto;
+    margin-right: 20px;
+    background-color: #00b5d7;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.topdropdown{
+    width: 230px;
+    /* margin-top: 11px; */
+}
+.maindropdown{
+    width: 406px;
+    margin-left: -85px;
+}
+.cancelbutton {
+    width: 145px;
+    background-color: #00b5d7;
+    color: white;
+    border-color: rgba(20, 21, 31, 0.20);
+    margin-top: 12px;
+    height: 39px;
+    border-radius: 10px;
+  }
+
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #00b5d7;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #00b5d7;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+
+/* Rounded sliders */
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+i{
+    color: green;
+    font-size: 33px;
+}
+
+
+.event_1 {
+    color: #333;
+    background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+    /* background: linear-gradient(to bottom left, #33ccff 0%, #ffffcc 100%); */
+    border-radius: 5px;
+    font-size: 11px;
+}
+
+.event_2 {
+    color: #333;
+    background: linear-gradient(110deg, #63d82c 60%, #56ff4b 60%);
+    /* background: linear-gradient(to bottom left, #33ccff 0%, #ffffcc 100%); */
+    border-radius: 5px;
+    font-size: 11px;
+}
+
+.event_5 {
+    color: #333;
+    background: linear-gradient(110deg, #63d82c 60%, #56ff4b 60%);
+    /* background: linear-gradient(to bottom left, #33ccff 0%, #ffffcc 100%); */
+    border-radius: 5px;
+    font-size: 11px;
+}
+
+.event_7 {
+    color: #333;
+    background: linear-gradient(110deg, #fd413b 60%, #fd413b 60%);
+    /* background: linear-gradient(to bottom left, #33ccff 0%, #ffffcc 100%); */
+    border-radius: 5px;
+    font-size: 11px;
+}
+.eventcontinue {
+    width: 128%;
+    margin-left: -11%;
+    border-radius: 0px !important;
+}
+
+.callenderdiv {
+    width: 100%;
+    margin-left: 1px;
+}
+
+.callenderboxes {
+    width: 100%;
+    min-height: 100px;
+    background: white;
+    border: 1px solid antiquewhite;
+}
+
+.callenderboxes:hover {
+    /* background: greenyellow; */
+    border: 1px solid #00addf;
+}
+
+.todayDate {
+    /* background-color: #71c6c1; */
+    background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+    width: 100%;
+    height: 500px;
+    text-align: center;
+}
+
+.datenumber {
+    color: white;
+    margin-top: 38%;
+    font-size: 100px;
+}
+
+.dateday {
+    color: white;
+    font-size: -webkit-xxx-large;
+}
+
+.callendernavButtons {
+    text-align: center;
+    font-size: xx-large;
+    margin-bottom: 2%;
+}
+
+.callendernavButtons a {
+    color: white;
+}
+
+
+/* for callender End*/
+
+
+.i{
+    margin-left: 137px;
+    padding-top: 23px;
+}
+
+@media screen and (max-width: 1024px) {
+  .header{
+      margin-top: 60px;
+      margin-left: 15px;
+  }
+  .maincard{
+      margin-left: 10px;
+  }
+  .ddd{
+      margin-top: -26px;
+  }
+  
+
+  }
+  @media screen and (min-width: 1400px) {
+    .ddd{
+        margin-top: -26px;
+    }
+    .label1{
+        margin-left: 1052px;
+    }
+    
+  }
+  @media screen and (max-width: 1280px){
+    .Pages_header{
+        margin-top: 60px;
+        margin-left: 30px;
+    }
+    
+    .label1{
+        margin-left: 863px;
+    }
+  
+
+}
+
+

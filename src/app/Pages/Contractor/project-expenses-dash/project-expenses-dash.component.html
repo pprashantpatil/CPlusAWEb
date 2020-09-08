@@ -1,0 +1,116 @@
+<div class="container-fluid Pages_background" style="    margin-left: -8px;">
+  <div>
+    <div class="row">
+      <div class="col-lg-12">
+        <h4 class="Pages_header">Material Expense Dashboard</h4>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-lg-12 dashbutton" style="margin-left: -10px;">
+        <button id="exportButton" style="margin-left: 5px;" type="button" (click)="getglmasterexcel()">Export To Excel
+        </button>
+        <button routerLink="/ProjectExpenses" *ngIf="LoginID==3 || LoginID==5" type="button" id="btn_button">Add Expense
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard" style="margin-left: -5px;">
+    <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Material Expense Dashboard</h6>
+      </div>
+    </div>
+
+    <div class="row p-4">
+      <div class="col-lg-4">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions" (ngModelChange)="selectedDate($event)">
+        </ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <!-- <select class="form-control" id="ExpenseType" name="ExpenseType" [(ngModel)]="ExpenseType" (change)="GetExpenseType($event)">
+          <option value="0" selected="selected"> Select Expense Type</option>
+          <option value="Service"> Labour</option>
+          <option value="Inventory"> Material</option>
+        </select> -->
+      </div>
+      <div class="col-lg-3">
+      </div>
+
+    </div>
+    <div class="row p-4">
+      <div class="col-lg-3 ">
+        <select class="form-control" id="Category" name="Category" (change)="GetCategoryID($event)">
+          <option value="0" selected="selected"> Select Category</option>
+          <option value="{{category.category}}" *ngFor="let category of CategoryLists">{{category.category}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3 ">
+        <select class="form-control" id="SubCategory" name="SubCategory" (change)="GetSubCategoryID($event)">
+          <option value="0" selected="selected"> Select Subcategory</option>
+          <option value="{{equip.short}}" *ngFor="let equip of EquipmentList">{{equip.short}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3 ">
+        <select class="form-control" id="StaffID" name="StaffID" (change)="GetItemID($event)">
+          <option value="0" selected="selected"> Select Item</option>
+          <option value="{{Equipment.short}}" *ngFor="let Equipment of EquipmentNameList">{{Equipment.short}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3" style="text-align: end;">
+        <label style="font-size:16px;"> Total Expenses : {{Grandtotal}}</label>
+      </div>
+    </div>
+    <!-- <div class="row p-4">
+      <div class="col-lg-3">
+        <select class="form-control" id="GetStaffID" name="GetStaffID" (change)="GetStaffID($event)">
+          <option value="0" selected="selected"> Select Staff</option>
+          <option value="{{Staff.id}}" *ngFor="let Staff of StaffList">{{Staff.name}}
+        </select>
+      </div>
+    </div> -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive">
+          <table id="Doc" class="table table-bordered table-hover table-condensed" style="text-align: center;">
+            <tbody>
+              <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                <td>Date</td>
+                <!-- <td>Expense Type</td> -->
+                <!-- <td>Staff Type</td>
+                <td>Staff</td> -->
+                <!-- <td>No. Of Hours</td>
+                <td>Rate Per Hour</td> -->
+                <td>Item Category</td>
+                <td>Item SubCategory</td>
+                <td>Item</td>
+                <td>MRP</td>
+                <td>Quantity</td>
+                <td>TotalExpense</td>
+                <td>Actions</td>
+              </tr>
+              <tr *ngFor="let project of ExpenseList">
+                <td>{{project.expenseDate|date}}</td>
+                <!-- <td>{{project.expenseType}}</td> -->
+                <!-- <td>{{project.staffType}}</td>
+                <td>{{project.staffName}}</td> -->
+                <!-- <td>{{project.noofhrs}}</td>
+                <td>{{project.rateperhour}}</td> -->
+                <td>{{project.itemCategory}}</td>
+                <td>{{project.itemSubCategory}}</td>
+                <td>{{project.item}}</td>
+                <td>{{project.mrp}}</td>
+                <td>{{project.quantity}}</td>
+                <td>{{project.totalExpense}}</td>
+                <td style="text-align: center;">
+                  <i class="far fa-trash-alt" title="Delete" (click)="DeleteProject(project.id)"></i> &nbsp;&nbsp;
+                  <i class="fa fa-edit" title="Edit" (click)="Edit(project.id)"></i>
+                </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

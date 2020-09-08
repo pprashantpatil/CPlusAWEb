@@ -1,0 +1,213 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 style="margin-bottom: 25px;" class="Pages_header">DAILY ACTIVITY REPORTS</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+
+  </div>
+  <div class="container-fluid Pages_background">
+    <div>
+      <div class="card maincard">
+        <div class="row">
+          <div class="col-lg-8 reqriedspan">
+            <br>
+            <form #loginForm="ngForm">
+              <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <h6>Project
+                    <span>*</span>
+                  </h6>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <select name="BuildingID" class="dropdown form-control " [(ngModel)]="BuildingID" required id="BuildingID" disabled>
+                    <option value="0" selected="selected"> Project</option>
+                    <option value="{{project.id}}" *ngFor="let project of projectlist">{{project.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+
+              <br>
+              <div class="row">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-3">
+                  <p style="padding:5px">Floor
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <select class="dropdown form-control " (click)="GetFloorID($event)" name="FloorID" [(ngModel)]="FloorID" id="FloorID" required="">
+                    <option value="0"> Select Floor</option>
+                    <option *ngFor="let vendor of FloorList" value="{{vendor.id}}">{{vendor.floor}}</option>
+                  </select>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-3 ">
+                  <p style="padding:5px">Unit
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 ">
+                  <select name="UnitID" class="dropdown form-control " required id="ddl_updateassetUnitID" (click)="GetUnits($event)">
+                    <option value="0" selected="selected">Select Unit</option>
+                    <option value="{{Unit.id}}" *ngFor="let Unit of UserRoleList">{{Unit.unitID}}</option>
+                  </select>
+                  <!-- <ng-multiselect-dropdown [placeholder]="'Select Units'" [data]="UserRoleList" name='Units' [(ngModel)]="UnitID" [settings]="dropdownSettings"
+                    (onDeSelect)="onItemDeSelect($event)" (onSelect)="onItemSelect($event)">
+                  </ng-multiselect-dropdown> -->
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-3 ">
+                  <p style="padding:5px">Project Stage
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7 ">
+                  <select class="form-control" id="StageID" name="StageID" [(ngModel)]="StageID" required id="ddl_updateassetsBuilding">
+                    <option value="0" selected="selected"> Select Stage</option>
+                    <option value="{{build.id}}" *ngFor="let build of StageList">{{build.stageName}}</option>
+                  </select>
+                </div>
+              </div>
+              <br>
+
+              <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <h6>Date
+                    <span>*</span>
+                  </h6>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <input [(ngModel)]="Date" name="JoiningDate" type="date" id="txt_JoiningDate" required class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <h6>Status
+                    <span>*</span>
+                  </h6>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <select name="Status" id="StatusID" class="dropdown form-control " required id="ddl_updateassetsBuilding">
+                    <option value="0" selected="selected"> Select Status</option>
+                    <option value="0" > Approved</option>
+                    <option value="0" > Rejected</option>
+                    <option value="0" > Inprogress</option>
+
+                  </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <h6>Comments
+                    <span>*</span>
+                  </h6>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <angular-editor [placeholder]="'Enter text here...'" [config]="editorConfig" id="Observation" name="Observation" [(ngModel)]="Observation"></angular-editor>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-3">
+                  <p style="padding:3px">Photos
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="file" class="form-control" placeholder="Photos" (change)="handleFileSelect1($event)" accept="image/*" multiple>
+                </div>
+                <p style="margin-top: 7px;
+                margin-left: 327px;">
+                  <b>Hold control button to select multiple </b>
+                </p>
+              </div>
+
+              <!-- <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <h6>Description
+                  </h6>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <angular-editor [placeholder]="'Enter text here...'" id="Description" name="Description"
+                    [(ngModel)]="Description"></angular-editor>
+                </div>
+              </div> -->
+
+
+              <!-- <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <h6>Equipment Observations
+                   
+                  </h6>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <angular-editor [placeholder]="'Enter text here...'" id="Equipment" name="Equipment"
+                    [(ngModel)]="Equipment"></angular-editor>
+                </div>
+              </div> -->
+              <!-- <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <h6>Sub Contractor Observations
+                    <span>*</span>
+                  </h6>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <angular-editor [placeholder]="'Enter text here...'" id="Contractor1" name="Contractor1"
+                    [(ngModel)]="SubContractor"></angular-editor>
+                </div>
+              </div> -->
+
+              <!-- <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <h6>Inventory Observations
+                    <span>*</span>
+                  </h6>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <angular-editor [placeholder]="'Enter text here...'" id="Contractor" name="Contractor"
+                    [(ngModel)]="InventoryObservation"></angular-editor>
+                </div>
+              </div> -->
+
+              <div *ngIf="paramID==null" class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-2 ">
+                  <button type="submit" style="margin-bottom: 100px" class="btn btn-block btn-md savebutton" (click)="Save()">Save</button>
+                </div>
+              </div>
+              <div *ngIf="paramID!=null" class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-2 ">
+                  <button type="submit" style="margin-bottom: 100px" class="btn btn-block btn-md savebutton" (click)="Update()">Update</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

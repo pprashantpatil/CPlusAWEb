@@ -1,0 +1,300 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-5">
+        <h4 class="Pages_header" *ngIf="LoginTypeID!=1">Assign Staff For Review</h4>
+        <h4 class="Pages_header" *ngIf="LoginTypeID==1"> Review Tasks</h4>
+      </div>
+      <div class="col-lg-3">
+      </div>
+      <div class="col-lg-4">
+        <div class="mainrow">
+          <!-- <div class="col-lg-12 BreadChrumbProperties">
+            <span> Project / Project Review</span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-10">
+        <div class="col-lg-4">
+          <label class="switch">
+            <input type="checkbox" checked (change)="changeStatus($event)">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="col-lg-4">
+        </div>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-lg-12 dashbutton" style="margin-left: -5px;">
+        <button routerLink="/Staffwork" *ngIf="LoginTypeID==2 || LoginTypeID==3 ||LoginTypeID==8" style="height: 42px;" type="button"
+          id="btn_button">Add Assign Staff For Review </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="row" [hidden]="showorhidecontent">
+    <div class="col-lg-10" style=" padding: 24px;">
+      <span style="background-color:#fff48f ;">
+        <span style="color:black ;width: 87px;
+          text-align: center;">Security</span>
+      </span>
+      <span style="background-color:rgb(30, 179, 238)">
+        <span style="color:black ;width: 87px;
+          text-align: center;">Electrician</span>
+      </span>
+      <span style="background-color:#F90">
+        <span style="color:white;width: 87px;
+          text-align: center;">Plumber</span>
+      </span>
+      <span style="background-color:rgb(43, 192, 175)">
+        <span style="color:white;width: 87px;
+          text-align: center;">Gardener</span>
+      </span>
+    </div>
+  </div> -->
+
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard" style="margin-left: -3px;">
+
+    <div class="row p-4" [hidden]="!showorhidecontent">
+
+      <div class="col-lg-4">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions" (ngModelChange)="selectedDate($event)">
+        </ng-daterangepicker>
+      </div>
+
+
+      <div class="col-lg-3">
+        <input type="text" class="form-control" id="txt_StaffsearchBuilding" [(ngModel)]="term" placeholder="Search">
+      </div>
+      <div class="col-lg-3" *ngIf="LoginTypeID!=1">
+        <select class="dropdown form-control" id="ddl_BuildingName" required (change)="GetScheduleNameID($event)">
+          <option value="0" selected="selected">Select Staff</option>
+          <option *ngFor="let details of stafflist" value="{{details.name}}">{{details.name}}</option>
+        </select>
+      </div>
+      <div class="col-lg-4"></div>
+      <!-- <div class="col-lg-3">
+          <input type="date" name="searchdate" class="form-control" [(ngModel)]="searchdate">
+        </div> -->
+      <div class="col-lg-3" *ngIf="LoginTypeID!=1">
+        <select class="dropdown form-control " (click)="GetFloorID($event)" name="FloorID" [(ngModel)]="FloorID"
+          id="FloorID" required="">
+          <option value="0"> Select Floor</option>
+          <option *ngFor="let vendor of FloorList" value="{{vendor.id}}">{{vendor.floor}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3" *ngIf="LoginTypeID!=1">
+        <select class="dropdown form-control" id="UnitID" name="UnitID" required (click)="GetUnitID($event)">
+          <option value="0" selected="selected">Select Unit</option>
+          <option *ngFor="let details of UserRoleList" value="{{details.unitID}}">{{details.unitID}}</option>
+        </select>
+      </div>
+
+
+      <!-- <div class="col-lg-3">
+        <select class="form-control" id="ddl_buildingplans" [(ngModel)]="buildingid" (change)="fliterbuilding($event)">
+          <option value="0" selected="selected"> Select Property</option>
+          <option value="{{build.id}}" *ngFor="let build of BuildingList">{{build.name}}</option>
+        </select>
+      </div> -->
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive" [hidden]="!showorhidecontent">
+          <table class="table table-bordered table-hover table-condensed">
+            <tbody>
+              <tr>
+                <th *ngIf="LoginTypeID!=1">Project</th>
+                <th>Floor</th>
+                <th>Unit</th>
+                <th>Stage</th>
+                <th *ngIf="LoginTypeID!=1">Staff Type</th>
+                <th *ngIf="LoginTypeID!=1">Staff</th>
+
+                <!-- <th>Stage</th> -->
+                <th>Start Date</th>
+                <th>End Date</th>
+                <!-- <th>Start Time</th>
+                  <th>End Time</th> -->
+                <th>Work Description</th>
+                <!-- <th *ngIf="LoginTypeID!=1">Review Comments</th>
+                <th *ngIf="LoginTypeID!=1">Status</th> -->
+                <th *ngIf="LoginTypeID==2 || LoginTypeID==3 ">Actions</th>
+              </tr>
+              <tr *ngFor="let details of detailslist|filter:schedulename|filter:term">
+                <td *ngIf="LoginTypeID!=1">{{details.buildingName}}</td>
+                <td>{{details.floor}}</td>
+                <td>{{details.unitID}}</td>
+                <td>{{details.milestone}}</td>
+                <td *ngIf="LoginTypeID!=1">{{details.short}}</td>
+                <td *ngIf="LoginTypeID!=1">{{details.name}}</td>
+
+                <!-- <td>{{details.milestone}}</td> -->
+                <td>{{details.date}}</td>
+                <td>{{details.endDate}}</td>
+                <!-- <td>{{details.startTime}}</td>
+                  <td>{{details.endTime}}</td> -->
+                <td>{{details.workDescription}}</td>
+                <!-- <td *ngIf="LoginTypeID!=1">{{details.projectComment}}</td>
+                <td *ngIf="LoginTypeID!=1">
+                  <label *ngIf="details.statusID==3">Completed</label>
+                  <label *ngIf="details.statusID==0">Pending</label>
+                </td> -->
+                <td *ngIf="LoginTypeID==2 || LoginTypeID==3 ">
+                  <!-- <i class="fa fa-file-video-o" title="Add Video" aria-hidden="true" data-toggle="modal"
+                      data-target="#myModaladd1" title="Video" (click)="getVideo(details.staffWorkScheduleID)"></i>&nbsp;
+                    <i class="fa fa-image" title="Add Photos" aria-hidden="true" data-toggle="modal"
+                      data-target="#myModaladd" title="Photo" (click)="getphpto(details.staffWorkScheduleID)"></i>&nbsp; -->
+                  <i class="fa fa-edit" title="Edit" [routerLink]="['/EditStaffWork',details.id]"></i>&nbsp;
+                  <i class="far fa-trash-alt" title="Delete" (click)="DeleteSchdule(details.id)"></i>
+                </td>
+              </tr>
+          </table>
+        </div>
+
+        <div class="col-lg-12" [hidden]="showorhidecontent">
+          <!-- <ngx-fullcalendar defaultView="month" [events]="events" [options]="options">
+            </ngx-fullcalendar> -->
+
+          <div class="row callendernavButtons">
+            <div class="col-lg-4">
+              <a (click)="previousmonth()">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+              </a>
+            </div>
+
+            <div class="col-lg-4">
+              <summary>
+                <strong>{{callenderMonth}}</strong> {{callenderyear}}</summary>
+            </div>
+            <div class="col-lg-4">
+              <a (click)="nextmonth()">
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+              </a>
+            </div>
+
+          </div>
+          <div class="row callenderdiv">
+            <!-- <div class="col-lg-4 todayDate">
+                                      <div class="datenumber">
+                                          {{todaydate}}
+                                      </div>
+                                      <div class="dateday">
+                                          {{todayDay}}
+                                      </div>
+                                  </div> -->
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-2 callenderboxes" *ngFor="let calday of callenderdaysdount;let i = index">
+                  {{calday.date}} {{calday.day}}
+                  <div *ngIf="calday.StaffName" class="event_Pending" (click)="ShowStaffDetails($event)"
+                    innerHtml='{{calday.mantainenceHtml}}'
+                    style="overflow-y: auto;height: 150px; background-color: white;">
+
+                    <!-- Request : {{calday.request}}
+                                Floor:{{calday.Floor}}
+                                Unit :{{calday.unitID}}
+                                Status:{{calday.Status}}
+                                Vendor Name :{{calday.vendorName}}
+                                Phone :{{calday.Phone}} -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div id="StaffDetails" class="modal fade" role="dialog" style=" margin-top: 10%;">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" style="height: 73px;">
+            <h4 class="modal-title">Add Attachments</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ngx-dropzone [showPreviews]="true" class="dropzone_vendorinvoice" id="dropzone_Attachment">
+                  </ngx-dropzone>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-3">
+                  <button data-toggle="modal" data-dismiss="modal" class="savebutton" type="button">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="modal fade" id="myModaladd">
+    <div class="modal-dialog modal-lg">
+      <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+      <div class="modal-content" style="margin-top: 64px;
+        width: 73%;margin-left: 108px;">
+        <div class="modal-header">
+          <h4>Photos</h4>
+          <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+          </div>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="row" style="padding: 39px;">
+
+          <div class="col-lg-6" *ngFor="let pic of photos">
+            <br>
+            <img src="{{pic.photoURL}}" style="width:80%">
+            <br>
+          </div>
+          <br>
+          <br>
+        </div>
+        <br>
+      </div>
+      <br>
+    </div>
+    <br>
+  </div>
+  <br>
+  <br>
+  <br>
+
+  <div class="modal fade" id="myModaladd1">
+    <div class="modal-dialog modal-lg">
+      <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+      <div class="modal-content" style="margin-top: 64px;
+        width: 73%;margin-left: 108px;">
+        <div class="modal-header">
+          <h4>Videos</h4>
+          <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+          </div>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="row" *ngFor="let vid1 of videos" style="padding: 39px;">
+          <video width="500" height="300" controls>
+            <source src="{{vid1.videoURL}}" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>

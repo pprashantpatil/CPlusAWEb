@@ -1,0 +1,129 @@
+.bgOpen{
+    background-color:red;
+}
+
+.bg{
+    background-color:white;
+}
+
+/* Start of Mobile CSS */
+
+.Mobilecss{
+    margin-right: -24px;
+    margin-left: -11px; 
+}
+.overflowcss{
+    /* height: 296px;
+    overflow-y: auto; */
+    margin-left: 0px;
+}
+.tablecss{
+    /* width: 298px;
+    overflow-x: auto; */
+    margin-left: 0px;
+}
+
+
+@media screen and (min-width: 320px) {
+    .Mobilecss{
+        margin-left: 14px;
+    }
+    .overflowcss{
+        height: 296px;
+        overflow-y: auto;
+       
+    }
+
+    .tablecss{
+        width: 298px;
+        overflow-x: auto;
+      
+    }
+    
+    
+  }
+
+  @media screen and (min-width: 1900px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    .overflowcss{
+        /* height: 296px;
+        overflow-y: auto; */
+        margin-left: 0px;
+        height: 100%;
+    }
+    .tablecss{
+        /* width: 298px;
+        overflow-x: auto; */
+        margin-left: 0px;
+    }
+    
+  }
+
+  @media screen and (min-width: 1600px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    .overflowcss{
+        /* height: 296px;
+        overflow-y: auto; */
+        margin-left: 0px;
+        height: 100%;
+    }
+    .tablecss{
+        /* width: 298px;
+        overflow-x: auto; */
+        margin-left: 0px;
+    }
+  }
+
+
+  @media screen and (max-width: 1024px) {
+   
+    .maincard{
+        width: 780px;
+    }
+    .btt{
+        margin-left: 55px;;
+    }
+  }
+  @media screen and (max-width: 1280px){
+  
+    .maincard{
+        width: 990px;
+       
+    }
+    .bttn{
+        margin-left: -19px;
+    }
+    .overflowcss{
+        height: 300px;
+        overflow-y: auto;
+       
+    }
+    .label1{
+        margin-left: 300px;
+    }
+
+}
+@media screen and (min-width: 1400px) {
+    .maincard{
+        height: auto;
+      
+    }
+    .bttn{
+        margin-left: -31px;
+    }
+    .overflowcss{
+        height: 400px;
+        overflow-y: auto;
+       
+    }
+    .label1{
+        margin-left: 114px;
+    }
+}
+
+
+  /*End of Mobile CSS*/

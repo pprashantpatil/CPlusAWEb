@@ -1,0 +1,132 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="Pages_header">Project Progress</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <span class="CommercialWorkspace">Building / Project Progress</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row breadCrumbHeadderProperties">
+      <div class="col-lg-12 dashbutton">
+        <button routerLink="/NewProjectProgress" type="button" id="btn_button">Add New</button>
+        <button routerLink="/ProjectProgressDashborad" style="margin-right: 12px;" type="button" id="btn_button">Dashboard</button>
+      </div>
+
+      <!-- <div class="col-lg-12 dashbutton">
+        <button routerLink="/ProjectProgressDashborad" type="button" id="btn_button">Dashboard</button>
+      </div> -->
+    </div>
+    <!-- <div class="row breadCrumbHeadderProperties">
+              <div class="col-lg-12 dashbutton">
+                  <button (click)=export() type="button" id="btn_button">export</button>
+              </div>
+          </div> -->
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Project Progress</h6>
+      </div>
+    </div>
+    <div class="row p-4">
+      <div class="col-lg-3">
+        <input type="text" placeholder="search.." class="form-control" id="txt_searchBuilding">
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive">
+          <table class="table table-bordered table-hover table-condensed">
+            <tbody>
+              <tr class="tableheader tableheaderfont buildingtable" style="background-color: #00b5d7;color:white;">
+                <td>Building </td>
+                <td>Floor </td>
+                <td>Unit </td>
+                <td>Stages </td>
+                <td>Comments </td>
+                <td>Action </td>
+              </tr>
+              <tr *ngFor="let Process of ProcessList">
+                <td>{{Process.buildingName}}</td>
+                <td>{{Process.floor}}</td>
+                <td>{{Process.unitID}}</td>
+                <td>{{Process.stages}}</td>
+                <td>{{Process.comments}}</td>
+                <td> <i class="fa fa-image" style="margin: 10px;" title="Images" data-toggle="modal"
+                    data-target="#myModal" (click)="getimage(Process.id)"></i>
+
+                  <i class="fa fa-file-video-o" aria-hidden="true" title="Videos" data-toggle="modal"
+                    data-target="#myModal1" (click)="getvideo(Process.id)"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-lg" style="margin-top: 10%">
+    <div class="modal-content" style="margin-left: 110px;">
+      <div class="modal-header">
+        <h4>Photos</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="col-lg-4" style="margin-top: 10px; margin-bottom: 10px" *ngFor="let image of photolist">
+            <a>
+              <img src="{{image.attachment}}" style="width: 100%;height: 200px;">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="NoImagesAvail">
+        <div class="col-lg-12">
+          <img src="assets/Login/noimage.jpg" style="width: 45%;height:auto;" data-dismiss="modal">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal1">
+  <div class="modal-dialog modal-lg" style="margin-top: 10%">
+    <div class="modal-content" style="margin-left: 110px;">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="modal-header">
+            <h4>Videos</h4>
+            <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+            </div>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="col-lg-4" style="margin-top: 10px; margin-bottom: 10px" *ngFor="let video of videolist">
+            <a>
+              <video width="750" controls>
+                <source src="{{video.videoUrl}}" type="video/mp4" style="width: 100%;">
+              </video>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

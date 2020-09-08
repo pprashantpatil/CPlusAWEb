@@ -1,0 +1,30 @@
+.maincheckbox{
+    margin-left: 2px;
+    height: 34px;
+}
+
+.starspan{
+    color: red;
+}
+
+.newprbc{
+    width: 295px
+}
+
+
+
+
+@media screen and (min-width: 1600px) {
+    .newprbc{
+        width: 295px
+    }
+    
+  }
+  @media screen and (min-width: 1900px) {
+    .newprbc{
+        width: 295px;
+        margin-left: 220px;
+    }
+    
+    
+  }

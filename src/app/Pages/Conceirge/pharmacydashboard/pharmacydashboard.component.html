@@ -1,0 +1,77 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header"> Pharmacy Dashboard</h4>
+    </div>
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> Conceirge/Pharmacy Dashboard </span> </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <h4 class="paneltitle ">Pharmacy Dashboard</h4>
+    <hr>
+    <div class="row p-2">
+      <div class="col-lg-4">
+        <ng-daterangepicker [options]="pickeroptions"></ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control" (change)="GetFloor($event)" id="ddl_pharmacyRequestBuilding">
+          <option value="none">Select Building</option>
+          <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control " (change)="FilteredFloorList($event)"  id="ddl_pharmacyRequestFloor">
+          <option value="none">Select Floor</option>
+          <option value="{{floor.id}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+        </select>
+      </div>
+      <div class="col-lg-2">
+        <input type="text" placeholder="Search.." [(ngModel)]="Search" class="form-control" id="txt_pharmacyrequestSearch">
+      </div>
+    </div>
+    <div class="row" style="padding:20px">
+      <table class="table table-bordered table-hover  mainbuild">
+        <tbody>
+          <tr class="tableheader tableheaderfont"  style="background-color: #00b5d7; color: White;">
+            <td>Date</td>
+            <td>Tenant</td>
+            <td>Building</td>
+            <td>Floor</td>
+            <td>Unit</td>
+            <td>Vendor Name</td>
+            <td>Prescription</td>
+            <td>Status</td>
+          </tr>
+          <tr *ngFor="let Pharmacy of FilteredPharmacyList|filter:Search">
+            <td>{{Pharmacy.date|date}}</td>
+            <td>{{Pharmacy.name}}</td>
+            <td>{{Pharmacy.building}}</td>
+            <td>{{Pharmacy.floor}}</td>
+            <td>{{Pharmacy.unitID}}</td>
+            <td>{{Pharmacy.vendorName}}</td>
+            <td><img class="buildingimage"  src="{{Pharmacy.prescriptionURL}}"></td>
+            <td style="width: 150px;">
+              <div>
+                <a href="http://14.192.17.225//FMSTestingApi\Images\Inventory\Invoice\201903191416451.png"
+                  target="_blank" class="btn btn-primary editable-table-button btn-xs dashbutton"
+                  style="background-color: #fec501" id="download" download>Download</a>
+                <button class="btn btn-danger editable-table-button btn-xs" >Delivered</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    
+
+  </div>
+</div>

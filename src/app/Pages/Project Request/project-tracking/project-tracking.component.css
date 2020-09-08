@@ -1,0 +1,28 @@
+
+.projectreqbc{
+    margin-left: -18px;
+}
+
+.newprojreq{
+    margin-left: 59px;
+}
+
+@media screen and (min-width: 1600px) {
+    .projectreqbc{
+        margin-left: -18px;
+    }
+    .newprojreq{
+        margin-left: 59px;
+    }
+    
+    
+  }
+  @media screen and (min-width: 1900px) {
+    .projectreqbc{
+        margin-left: 148px;
+    }
+    .newprojreq{
+        margin-left: 216px;
+    }
+    
+  }

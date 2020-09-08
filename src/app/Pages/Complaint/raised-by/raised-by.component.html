@@ -1,0 +1,318 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-5">
+        <h4 class="Pages_header">{{pageMenuTitle}}</h4>
+      </div>
+      <div class="col-lg-4">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <span class="raisedby"> {{complaintdashboard_breadchrumb}} </span>
+          </div>
+        </div>
+        <div class="row mainrow">
+          <button type="button" style="background-color:#00b5d7; color: white; margin-left: 100px;"
+            class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+            Export To Excel
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <br>
+
+</div>
+<div class="container-fluid Pages_background">
+  <div class="shadow p-2 mb-5 bg-white rounded   maincard ">
+    <h4 class="paneltitle">{{complaintdashboard_PageTitle}}</h4>
+    <hr>
+    <div class="row">
+      <div class="col-lg-4">
+        <ng-daterangepicker [options]="pickeroptions"></ng-daterangepicker>
+      </div>
+      <div class="col-lg-3 ">
+        <select class="dropdown form-control " id="ddl_raisedbyBuilding" (change)="FilteredByBuilding($event)">
+          <option value="none">Select Building</option>
+          <option value="{{build.name}}" *ngFor="let build of BuildingList">{{build.name}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3 ">
+        <select class="dropdown form-control" id="ddl_raisedbyStatus" (change)="FilteredBystatus($event)">
+          <option value="none">Select Status</option>
+          <option value="{{Status.short}}" *ngFor="let Status of StatusList">{{Status.short}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3">
+        <input type="text" placeholder="{{complaintdashboard_Search}}" [(ngModel)]="Search" class="form-control"
+          id="txt_raisedbySearch" style="width: auto;">
+      </div>
+    </div>
+    <br>
+    <div>
+      <table class="table table-bordered table-hover table-condensed">
+        <tbody>
+          <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: white;">
+            <td>{{complaintdashboard_RequestName}}</td>
+            <td>{{complaintdashboard_Building}} </td>
+            <td>{{complaintdashboard_Floor}}</td>
+            <td>{{complaintdashboard_Unit}}</td>
+            <td>Raised By</td>
+            <td >Internal Users</td>
+            <td >Vendor Name</td>
+            <td>{{complaintdashboard_Status}}</td>
+            <td>{{complaintdashboard_Photo}}</td>
+            <td>{{complaintdashboard_Actions }}</td>
+          </tr>
+        </tbody>
+        <tr *ngFor="let maintainance of FilteredMaintainanceList|filter:Search">
+          <td style="width: 200px;">{{maintainance.request}}</td>
+          <td>{{maintainance.buildingname}}</td>
+          <td>{{maintainance.floor}}</td>
+          <td>{{maintainance.unit}}</td>
+          <td>{{maintainance.raisedby}}</td>
+          <td >{{maintainance.assignedToName}}</td>
+          <td >{{maintainance.assignedToNamesss}}</td>
+          <td>{{maintainance.status}}</td>
+          <td>
+            <!-- <a (click)="Attachment(maintainance)" data-toggle="modal" data-target="#myModalAttachments"><i
+                class="fa fa-paperclip " style=" color: #00b5d7; background-color: white" data-toggle="tooltip"
+                title="Attachments"></i></a> -->
+            <!-- {{maintainance.attachment}} -->
+            <img src="{{maintainance.attachment}}" style="height: 100px; width: 100px;">
+          </td>
+          <td class="TableActions">
+            <div class="col-lg-1" data-toggle="tooltip" title="Assign"
+              *ngIf="!maintainance.assignedTo &&!maintainance.internalUserID || maintainance.statusID==7">
+              <i class=" i" (click)="Maintainance(maintainance)" data-toggle="modal" data-target="#myModalOne">A</i>
+            </div>
+            <div>
+              <!-- <button class="btn btn-primary editable-table-button btn-xs"
+                *ngIf="maintainance.assignedTo==null && maintainance.statusID!=2"
+                (click)="UserCompleted(maintainance)">Pending</button> -->
+
+              <!-- <button class="btn btn-primary editable-table-button btn-xs"
+                *ngIf="maintainance.statusID==2">Completed</button> -->
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="myModalOne" class="modal fade" role="dialog" style=" margin-top: 10%;">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content " style="margin-top: -31px;">
+          <div class="modal-header">
+            <h4>Assign To</h4>
+            <button type="button" class="close " data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-4">
+                <h5 style="padding: 6px;">Assigned To</h5>
+              </div>
+              <div class="col-lg-8">
+                <select (change)="AssignedTo($event)" class="dropdown form-control maindropdown" required
+                  id="ddl_updatescheduleAssignedTo">
+                  <option value="0">Select </option>
+                  <option value="1">Internal Users</option>
+                  <option value="4">Vendor</option>
+                  <!-- <option value="{{Assigned.id}}" *ngFor="let Assigned of Assignedlist">{{Assigned.short}}</option> -->
+                </select>
+              </div>
+            </div>
+            <div class="row" *ngIf="Assigned==1">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <h5 style="padding: 6px;">Date</h5>
+                  </div>
+                  <div class="col-lg-8">
+                    <input type="date" [(ngModel)]="Date" name="StartDate" id="txt_StartDate" class="form-control"
+                      min="{{mindate}}" style="width: 247px;
+                      margin-left: 1px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br>
+            <div class="row" *ngIf="Assigned==1">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <h5 style="padding: 6px;">Time</h5>
+                  </div>
+                  <div class="col-lg-8">
+                    <input type="time" [(ngModel)]="StartTime" name="StartTime" id="txt_StartTime" class="form-control"
+                      min="{{mindate}}" style="width: 247px;
+                      margin-left: 1px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <div class="row" *ngIf="Assigned==1">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <h5 style="padding: 6px;">Staff Type</h5>
+                  </div>
+                  <div class="col-lg-8">
+                    <select name="StaffType" style="width: 247px;
+                    margin-left: 1px;" [(ngModel)]="StaffTypeID" (change)="FilterByStaffType($event)"
+                      class="dropdown form-control " id="ddl_rentRentMonth">
+                      <option value="" class="" selected="selected">Select Staff Type</option>
+                      <option value="1">Security</option>
+                      <option value="2">Gardener</option>
+                      <option value="3">Electrician</option>
+                      <option value="4">Plumber</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="Assigned==1">
+              <div class="col-lg-4">
+                <h5>Name</h5>
+              </div>
+              <div class="col-lg-8">
+                <select (change)="UserName($event)" [(ngModel)]="Entity.AssignedToName"
+                  class="dropdown form-control maindropdown" required id="ddl_updatescheduleAssignedTo">
+                  <option value="none">Select User</option>
+                  <option value="{{Users.id}}" *ngFor="let Users of StaffListsByDate">{{Users.name}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="Assigned==4">
+              <div class="col-lg-4">
+                <h5>Vendor Type
+                </h5>
+              </div>
+              <div class="col-lg-8">
+                <select (change)="VendorByID($event)" class="dropdown form-control maindropdown" required
+                  id="ddl_updatescheduleAssignedTo">
+                  <option value="none">Select Vendor</option>
+                  <option value="{{Vendor.id}}" *ngFor="let Vendor of Vendlist">{{Vendor.short}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <!-- <div class="row" *ngIf="Assigned==1">
+              <div class="col-lg-4">
+                <h5>EmailID</h5>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" value="{{emailid}}" id="txt_EventBooked" style="  width: 250px;"
+                  class="form-control ">
+              </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="Assigned==1">
+              <div class="col-lg-4">
+                <h5>Phone No.
+                </h5>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" value="{{phn}}" id="txt_EventStart" style="  width: 250px;" class="form-control ">
+              </div>
+            </div> -->
+
+
+            <div class="row" *ngIf="Assigned==4">
+              <div class="col-lg-4">
+                <h5>Vendor
+                </h5>
+              </div>
+              <div class="col-lg-8">
+                <select (change)="VendorName($event)" class="dropdown form-control maindropdown" required
+                  id="ddl_updatescheduleAssignedTo">
+                  <option value="none">Select </option>
+                  <option value="{{VendorID.id}}" *ngFor="let VendorID of VendorsByIDList">{{VendorID.vendorName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="Assigned==4">
+              <div class="col-lg-4">
+                <h5>Vendor Name</h5>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" value="{{vendorname}}" [(ngModel)]="Entity.AssignedToName" style="  width: 250px;"
+                  id="txt_EventBooked" class="form-control ">
+              </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="Assigned==4">
+              <div class="col-lg-4">
+                <h5>Vendor PhoneNo</h5>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" value="{{vendorphno}}" style="  width: 250px;" id="txt_EventBooked"
+                  class="form-control ">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-4">
+              </div>
+              <div class="col-lg-4">
+                <button type="button" (click)="UpdateComplaintsAssignedTo()" data-dismiss="modal"
+                  class="popupbuttonAcpt">Assign</button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="myModalAttachments" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="margin-top: 100px;">
+          <div class="modal-header">
+            <h4>Attachments</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="row" *ngFor="let Attachment of Attachmentlist">
+              <div class="col-lg-6">
+                <img style="width: 100%; height: auto;" src="{{Attachment.attachment}}">
+                <br>
+                <br>
+                <!-- <div class="row">
+                              <div class="col-4">
+                                  <button type="button" class="btn btn-default popupUpdatebutton"
+                                      data-dismiss="modal" data-toggle="modal" data-target="#AttachmentsUpdate"
+                                      (click)="UploadAssetsAttachments(Attachment)">Update</button>
+                              </div>
+                              <div class="col-4">
+                                  <button type="button" class="btn btn-default popupUpdatebutton"
+                                      data-dismiss="modal" (click)="DeleteAttachment(Attachment)">Delete</button>
+                              </div>
+                          </div> -->
+              </div>
+            </div>
+            <div class="row" *ngIf="NoImagesAvail">
+              <div class="col-lg-12">
+                <img src="assets/Login/noimage.jpg" style="width: 60%;height:auto;" data-dismiss="modal">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>

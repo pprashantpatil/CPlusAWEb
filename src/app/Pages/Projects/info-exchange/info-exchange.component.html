@@ -1,0 +1,119 @@
+<div class="container-fluid Pages_background Mobilecss">
+  <div class="row emailbtn">
+    <div class="col-lg-5">
+      <h4 style="margin-bottom: 25px;" class="Pages_header" style="margin-left: -11px;">Email</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+  </div>
+
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard mobmain">
+
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="row">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6>Project
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <div class="form-group">
+              <select name="ProjectID" [(ngModel)]="projectID" class="dropdown form-control " required id="projectID" (click)="GetProjectID($event)"
+                disabled>
+                <option value="0" selected="selected">Select Project</option>
+                <option value="{{build.id}}" *ngFor="let build of projectlist">{{build.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <div class="row">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6>From
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <input type="text" id="Username" [(ngModel)]="Username" name="Username" class="form-control" disabled>
+            <!-- <select name="From" class="dropdown form-control" [(ngModel)]="From" required id="From" (click)="GetMemberID($event)">
+              <option value="0" selected="selected"> Select Staff</option>
+              <option value="{{build.staffID}}" *ngFor="let build of memberlist">{{build.name}}</option>
+            </select> -->
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6>Client Contact
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <select name="ContactID" class="dropdown form-control" [(ngModel)]="ContactID" required id="ContactID" (click)="GetContactID($event)">
+              <option value="0" selected="selected">Select Contact</option>
+              <option value="{{build.id}}" *ngFor="let build of ClientContacts">{{build.firstName}}</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6> Message Body
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <angular-editor [config]="editorConfig" [placeholder]="'Enter Message Body'" id="Body" name="Body" [(ngModel)]="Body"></angular-editor>
+          </div>
+        </div>
+        <br>
+
+        <div *ngIf="paramID==null" class="row">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <p style="padding:5px">Attachment
+              <span class="starspan">*</span>
+            </p>
+          </div>
+          <div class="col-lg-7">
+            <input type="file" class="form-control" placeholder="Attachment" accept="image/*" (change)="handleFileSelect2($event)" class="form-control">
+            <!-- <div class="row">
+                <p style="margin-top: 10px;margin-left: 15px;"><b>Hold control button to select
+                    multiple photos</b> </p>
+              </div> -->
+          </div>
+        </div>
+        <br>
+        <div *ngIf="paramID==null" class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-2">
+          </div>
+          <div class="col-lg-2 ">
+            <div class="form-group">
+              <button type="submit" (click)="Save()" class="btn btn-block btn-md savebutton mobsavebtn">Save</button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="paramID!=null" class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-2">
+          </div>
+          <div class="col-lg-2 ">
+            <div class="form-group">
+              <button type="submit" (click)="Update()" class="btn btn-block btn-md savebutton mobsavebtn">Update</button>
+            </div>
+          </div>
+        </div>
+        <br>
+
+
+      </div>
+    </div>
+  </div>
+</div>

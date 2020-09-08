@@ -1,0 +1,382 @@
+<div class="container-fluid " style="background-color: #F0F3F4;">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header">{{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <span class="building"> {{updateVisitorLanguage_breadchrumb}} </span> </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <!-- <button type="button" routerLink="/bookcommunityhall" routerLinkActive="active-link" id="btn_button"
+                    class="dashbutton">Book</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shadow p-3 mb-5 bg-white rounded col-lg-12  maincard formlabel">
+        <h6 class="paneltitle" *ngIf="!visitorEdit">{{updateVisitorLanguage_PageTitle}} </h6>
+        <h6 class="paneltitle" *ngIf="visitorEdit">Edit Visitor
+        </h6>
+        <hr>
+        <div class="row">
+            <div class="col-lg-8">
+                <form>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateVisitorLanguage_VisitorName}}<span class="starspan">*</span>
+                            </h5>
+                        </div>
+                        <div class="col-lg-7">
+                            <input class="form-control" type="text" [(ngModel)]="VisitorEntity.VisitorName"
+                                name="VisitorName" placeholder="Visitor Name" required
+                                id="txt_updatevisitor_visitorName">
+                            <span class="Validationlabels" *ngIf='VisitorEntity.VisitorName==""&&Isempty'>* Please
+                                Fill
+                                {{updateVisitorLanguage_VisitorName}}</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateVisitorLanguage_PhoneNumber}}<span class="starspan">*</span>
+                            </h5>
+                        </div>
+                        <div class="col-lg-7">
+                            <input [(ngModel)]="VisitorEntity.VisitorPhoneNo" name="VisitorPhoneNo"
+                                id="txt_updatevisitor_phonenumber" required class="form-control"
+                                placeholder="Phone Number">
+                            <span class="Validationlabels" *ngIf='VisitorEntity.VisitorPhoneNo==""&&Isempty'>* Please
+                                Fill
+                                {{updateVisitorLanguage_PhoneNumber}}</span>
+                            <span class="Validationlabels" *ngIf='PhoneNumberValid==false'>
+                                Invalid Phone Number
+                            </span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-1">
+                        </div>
+                        <div class="col-lg-3 ">
+                            <p>{{updateVisitorLanguage_VisitorType}} <span class="starspan">*</span></p>
+                        </div>
+                        <div class="col-lg-7">
+                            <select [(ngModel)]="VisitorEntity.Visitortype" name="Visitortype"
+                                class="dropdown form-control" required id="ddl__updatevisitor_visitorType">
+                                <option value="0" selected="selected">Select Visitor Type</option>
+                                <option value="{{Visitor.id}}" *ngFor="let Visitor of Visitorlist">{{Visitor.short}}
+                                </option>
+                            </select>
+                            <span class="Validationlabels" *ngIf='VisitorEntity.Visitortype==0 && Isempty'>* Please
+                                Select
+                                {{updateVisitorLanguage_VisitorType}}</span>
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-1">
+                        </div>
+                        <div class="col-lg-3 ">
+                            <p>{{updateVisitorLanguage_VisitorIDType}} <span class="starspan">*</span></p>
+                        </div>
+                        <div class="col-lg-7">
+                            <select [(ngModel)]="VisitorEntity.VisitorIDType" name="VisitorIDType"
+                                class="dropdown form-control" id="ddl_updatevisitor_VisitorID" required>
+                                <option value="0">Select VisitorID Type</option>
+                                <option value="{{VisitorID.id}}" *ngFor="let VisitorID of VisitorIDTypeList">
+                                    {{VisitorID.short}}
+                                </option>
+                            </select>
+                            <span class="Validationlabels" *ngIf='VisitorEntity.VisitorIDType==0 && Isempty'>* Please
+                                Select
+                                {{updateVisitorLanguage_VisitorIDType}}</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateVisitorLanguage_IDNumber}}<span class="starspan">*</span></h5>
+                        </div>
+                        <div class="col-lg-7">
+                            <input class="form-control" [(ngModel)]="VisitorEntity.IDNumber" name="IDNumber"
+                                type="number" placeholder="{{updateVisitorLanguage_IDNumber}}"
+                                id="txt_updatevisitor_IdNumber" required>
+
+                            <span class="Validationlabels" *ngIf='VisitorEntity.IDNumber==0 &&Isempty '>* Please
+                                Fill
+                                {{updateVisitorLanguage_IDNumber}}</span>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">Laptop Serial No</h5>
+                        </div>
+                        <div class="col-lg-7">
+                            <input class="form-control" [(ngModel)]="VisitorEntity.LaptopSerialNo" name="LaptopSerialNo"
+                                type="number" id="txt_LaptopSerialNo">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateVisitorLanguage_NumberofVisitors}}<span
+                                    class="starspan">*</span></h5>
+                        </div>
+                        <div class="col-lg-7">
+                            <input [(ngModel)]="VisitorEntity.NoOfVisitors" name="NoOfVisitors" class="form-control"
+                                type="{{updateVisitorLanguage_NumberofVisitors}}"
+                                id="txt_updatevisitor_NumberOfVisitors" placeholder="Number of Visitors" required>
+                            <span class="Validationlabels" *ngIf='VisitorEntity.NoOfVisitors==0 &&Isempty '>* Please
+                                Fill
+                                {{updateVisitorLanguage_NumberofVisitors}}</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-1">
+                        </div>
+                        <div class="col-lg-3 ">
+                            <p>{{updateVisitorLanguage_Building}} <span class="starspan">*</span></p>
+                        </div>
+                        <div class="col-lg-7">
+                            <select [(ngModel)]="VisitorEntity.Building" name="Building" (change)="GetFloor($event)"
+                                class="dropdown form-control" id="ddl__updatevisitor_Building" required>
+                                <option value="0">Select Building</option>
+                                <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                            </select>
+
+                            <span class="Validationlabels" *ngIf='VisitorEntity.Building==0 && Isempty'>* Please
+                                Select
+                                {{updateVisitorLanguage_Building}}</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-1">
+                        </div>
+                        <div class="col-lg-3 ">
+                            <p>{{updateVisitorLanguage_Floor}} <span class="starspan">*</span></p>
+                        </div>
+                        <div class="col-lg-7">
+                            <select [(ngModel)]="VisitorEntity.Floor" name="Floor" class="dropdown form-control"
+                                id="ddl_updatevisitor_Floor" (change)="UnitByID($event)" required>
+                                <option value="0">Select Floor</option>
+                                <option value="{{flr.id}}" *ngFor="let flr of Floorlist">{{flr.floor}}</option>
+                            </select>
+                            <span class="Validationlabels" *ngIf='VisitorEntity.Floor==0 && Isempty'>* Please
+                                Select
+                                {{updateVisitorLanguage_Floor}}</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-1">
+                        </div>
+                        <div class="col-lg-3">
+                            <p>{{updateVisitorLanguage_Unit}} <span class="starspan">*</span></p>
+                        </div>
+                        <div class="col-lg-7">
+                            <!-- <input [(ngModel)]="VisitorEntity.Unit" name="Unit" type="text" id="txt_updatevisitor_unit"
+                                    class="form-control" placeholder="Unit" required> -->
+                            <select [(ngModel)]="VisitorEntity.Unit" name="Unit" class="dropdown form-control"
+                                id="ddl_updateassetsFloor">
+                                <option value="0">Select Unit</option>
+                                <option value="{{Units.id}}" *ngFor="let Units of Unitslist">{{Units.unitID}}</option>
+                            </select>
+                            <span class="Validationlabels" *ngIf='VisitorEntity.Unit==0 && Isempty'>* Please
+                                Select
+                                {{updateVisitorLanguage_Unit}}</span>
+                        </div>
+                    </div>
+                    <br>
+
+
+                    <div class="row">
+                        <div class="col-lg-1">
+                        </div>
+                        <div class="col-lg-3">
+                            <p>TagID<span class="starspan">*</span></p>
+                        </div>
+                        <div class="col-lg-7">
+                            <input [(ngModel)]="VisitorEntity.TagID" name="TagID" type="text" id="txt_TagID"
+                                class="form-control" placeholder="TagID">
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h6>{{updateVisitorLanguage_Remarks}} </h6>
+                        </div>
+                        <div class="col-lg-7">
+                            <textarea [(ngModel)]="VisitorEntity.Remarks" name="Remarks" rows="3" class="form-control"
+                                placeholder="{{updateVisitorLanguage_Remarks}}"
+                                id="txt__updatevisitor_Remarks"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row ">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5> {{updateVisitorLanguage_EntryDate}} <span class="starspan">*</span> </h5>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <input [(ngModel)]="VisitorEntity.EntryDate" name="EntryDate" type="date"
+                                        class="form-control" id="txt_updatevisitor_entryDate" min={{mindate}}>
+
+                                    <span class="Validationlabels" *ngIf='VisitorEntity.EntryDate==""&&Isempty '>*
+                                        Please
+                                        Fill
+                                        {{updateVisitorLanguage_EntryDate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5>{{updateVisitorLanguage_EntryTime}} <span class="starspan">*</span></h5>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="form-group">
+                                <input [(ngModel)]="VisitorEntity.EntryTime" name="EntryTime" type="time"
+                                    id="txt__updatevisitor_entryTime" class="form-control" required>
+                                <span class="Validationlabels" *ngIf='VisitorEntity.EntryTime==""&&Isempty '>* Please
+                                    Fill
+                                    {{updateVisitorLanguage_EntryTime}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row ">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5> {{updateVisitorLanguage_ExitDate}} </h5>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <input [(ngModel)]="VisitorEntity.ExitDate" name="ExitDate" type="date"
+                                        class="form-control" id="txt__updatevisitor_ExitDate" min={{mindate}}>
+                                    <!-- <span class="Validationlabels" *ngIf='VisitorEntity.ExitDate==""&&Isempty '>* Please
+                                            Fill
+                                            {{updateVisitorLanguage_ExitDate}}</span> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row ">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5>Exit Time </h5>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <input [(ngModel)]="VisitorEntity.ExitTime" name="ExitTime" type="time"
+                                        class="form-control" id="txt__updatevisitor_ExitTime" required>
+                                    <!-- <span class="Validationlabels" *ngIf='VisitorEntity.ExitTime==""&&Isempty '>* Please
+                                            Fill
+                                            Exit Time</span> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5>{{updateVisitorLanguage_VisitorAddress}} <span class="starspan">*</span> </h5>
+                        </div>
+                        <div class="col-lg-7 ">
+                            <textarea [(ngModel)]="VisitorEntity.AddressOfVisitor" name="AddressOfVisitor" rows="3"
+                                class="form-control" id="txt_updatevisitor_visitorAddress" placeholder="Visitor Address"
+                                required></textarea>
+                            <span class="Validationlabels" *ngIf='VisitorEntity.AddressOfVisitor==""&&Isempty '>* Please
+                                Fill
+                                {{updateVisitorLanguage_VisitorAddress}}</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row" *ngIf="!visitorEdit">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5>Attachment</h5><span class="starspan">*</span>
+                        </div>
+                        <div class="col-lg-7">
+                            <ngx-dropzone [(ngModel)]="VisitorEntity.Photo" name="Photo" [showPreviews]="true"
+                                (filesAdded)="onFilesAdded($event)" class="dropzone_vendorinvoice"></ngx-dropzone>
+                            <span class="Validationlabels" *ngIf='Photos.length==0 && Isempty'>* Please
+                                Select Attachments</span>
+                        </div>
+
+
+                    </div>
+                    <br>
+
+                    <!-- <div>
+                        <webcam [height]="500" [width]="500" [trigger]="triggerObservable"
+                            (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+                            [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+                            [videoOptions]="videoOptions" [imageQuality]="1"
+                            (cameraSwitched)="cameraWasSwitched($event)" (initError)="handleInitError($event)"></webcam>
+                        <br />
+                        <button class="actionBtn" (click)="triggerSnapshot();">Take A Snapshot</button>
+                        <button class="actionBtn" (click)="toggleWebcam();">Toggle Webcam</button>
+                        <br />
+                        <button class="actionBtn" (click)="showNextWebcam(true);"
+                            [disabled]="!multipleWebcamsAvailable">Next Webcam</button>
+                        <input id="cameraSwitchCheckbox" type="checkbox" [(ngModel)]="allowCameraSwitch"><label
+                            for="cameraSwitchCheckbox">Allow Camera Switch</label>
+                        <br />
+                        DeviceId: <input id="deviceId" type="text" [(ngModel)]="deviceId" style="width: 500px">
+                        <button (click)="showNextWebcam(deviceId);">Activate</button>
+                    </div> -->
+                    <div class="row">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-7">
+                            <button *ngIf="!visitorEdit" (click)="InsertVisitor()" type="submit"
+                                class="btn btn-block  savebutton ">{{updateVisitorLanguage_button_save}}</button>
+
+                            <button *ngIf="visitorEdit" (click)="UpdateVisitor()" type="submit"
+                                class="btn btn-block savebutton ">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- <div class="col-lg-4" *ngIf="visitorpic">
+                    <img src="{{visitorpic}}" style="width: 100%;height: auto;">
+                </div> -->
+        </div>
+    </div>
+</div>

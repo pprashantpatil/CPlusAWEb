@@ -1,0 +1,463 @@
+<div class="container-fluid Pages_background ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">{{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-5">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> {{scheduleMaintenance_breadchrumb}} </span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-10">
+      <div class="col-lg-4">
+        <label class="switch">
+          <input type="checkbox" checked (change)="changeStatus($event)">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="col-lg-4">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <button type="button" routerLink="/UpdateSheduleMantaince" routerLinkActive="active-link" id="btn_button"
+            class="dashbutton">New Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+      Export To Excel
+    </button>
+  </div>
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div class="row">
+      <div class="col-lg-12" [hidden]="showorhidecontent">
+        <!-- <ngx-fullcalendar defaultView="month" [events]="events" [options]="options">
+        </ngx-fullcalendar> -->
+        <div class="row callendernavButtons">
+
+          <div class="col-lg-4">
+            <a (click)="previousmonth()"><i class="fa fa-chevron-left i_Arrows" aria-hidden="true"></i></a>
+          </div>
+
+          <div class="col-lg-4">
+            <summary><strong>{{callenderMonth}}</strong> {{callenderyear}}</summary>
+          </div>
+          <div class="col-lg-4">
+            <a (click)="nextmonth()"><i class="fa fa-chevron-right i_Arrows" aria-hidden="true"></i></a>
+          </div>
+
+        </div>
+        <div class="row callenderdiv">
+          <!-- <div class="col-lg-4 todayDate">
+                <div class="datenumber">
+                    {{todaydate}}
+                </div>
+                <div class="dateday">
+                    {{todayDay}}
+                </div>
+            </div> -->
+            
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-2 callenderboxes" *ngFor="let calday of callenderdaysdount;let i = index">
+                {{calday.date}} {{calday.day}}
+                <div *ngIf="calday.statusID==1">
+                  <div *ngIf="calday.request  ||calday.c||calday.floor||calday.unit" class="event_1"  (click)="ScheduledMaintenance($event)"  [innerHtml]='calday.schedulehtml'>
+                    <!-- Request Name : {{calday.request}}<br>
+                    Buidling Name : {{calday.c}}<br>
+                    Floor : {{calday.floor}}<br> -->
+                    <!-- Unit : {{calday.unit}}<br> -->
+                  </div>
+                </div>
+
+                <div *ngIf="calday.statusID==2|| calday.statusID==5 ||calday.statusID==6">
+                  <div *ngIf="calday.request  ||calday.c||calday.floor||calday.unit" class="event_2" (click)="ScheduledMaintenance($event)"  [innerHtml]='calday.schedulehtml'>
+                    <!-- Request Name : {{calday.request}}<br>
+                    Buidling Name : {{calday.c}}<br>
+                    Floor : {{calday.floor}}<br> -->
+                    <!-- Unit : {{calday.unit}}<br> -->
+                  </div>
+                </div>
+
+                <div *ngIf="calday.statusID==5">
+                  <div *ngIf="calday.request  ||calday.c||calday.floor||calday.unit" class="event_5"  (click)="ScheduledMaintenance($event)"  [innerHtml]='calday.schedulehtml'>
+                    <!-- Request Name : {{calday.request}}<br>
+                    Buidling Name : {{calday.c}}<br>
+                    Floor : {{calday.floor}}<br> -->
+                    <!-- Unit : {{calday.unit}}<br> -->
+                  </div>
+                </div>
+
+                <div *ngIf="calday.statusID==7">
+                  <div *ngIf="calday.request  ||calday.c||calday.floor||calday.unit" class="event_7"  (click)="ScheduledMaintenance($event)"  [innerHtml]='calday.schedulehtml'>
+                    <!-- Request Name : {{calday.request}}<br>
+                    Buidling Name : {{calday.c}}<br>
+                    Floor : {{calday.floor}}<br> -->
+                    <!-- Unit : {{calday.unit}}<br> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12" [hidden]="!showorhidecontent">
+        <h6 class="paneltitle">{{scheduleMaintenance_PageTitle}}
+        </h6>
+        <hr>
+        <div class="container-fluid " id="ddl_maintainanceBuilding">
+          <div class="row">
+            <div class="col-lg-3">
+              <select class="form-control" (change)="FilterByBuildingname($event)">
+                <option value="none">Select Building</option>
+                <option value="{{build.name}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+              </select>
+            </div>
+            <div class="col-lg-3">
+              <select class="form-control" id="ddl_maintainanceStatus" (change)="FilteredByStatus($event)">
+                <option value="none">Select Status</option>
+                <option value="{{Status.short}}" *ngFor="let Status of Statuslist">{{Status.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">
+              <input style=" margin-top: 12px;" type="text" placeholder="{{scheduleMaintenance_search}}"
+                class="form-control" id="txt_scheduleSearch" [(ngModel)]="Search">
+            </div>
+          </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12  table-responsive">
+                <table class="table table-bordered table-hover table-condensed">
+                  <tbody>
+                    <tr class="tableheader tableheaderfont" style="background-color: #fdcd3b; color: white">
+                      <td>{{scheduleMaintenance_RequestName}} </td>
+                      <td>{{scheduleMaintenance_FrequencyRequestType}} </td>
+                      <td>{{scheduleMaintenance_Building}}</td>
+                      <td>{{scheduleMaintenance_RaisedBy}} </td>
+                      <td>{{scheduleMaintenance_RaisedTo}}</td>
+                      <td>{{scheduleMaintenance_DueDate}}</td>
+                      <td>{{scheduleMaintenance_Status}}</td>
+                      <td>{{scheduleMaintenance_Comments}}</td>
+                      <td>{{scheduleMaintenance_Action}}</td>
+                    </tr>
+                    <tr *ngFor="let Schedule of FilteredScheduleList|filter:Search">
+                      <td>{{Schedule.request}} </td>
+                      <td>{{Schedule.frequencyType}} </td>
+                      <td>{{Schedule.c }}</td>
+                      <td>{{Schedule.raisedBy}} </td>
+                      <td>{{Schedule.assignedToName }}</td>
+                      <td style="width: 95px;">{{Schedule.dueDate|date}} </td>
+                      <td>{{Schedule.status}}</td>
+                      <td>{{Schedule.comment}} </td>
+                      <td>
+                        <div class="row">
+                          <div class="col-lg-3">
+                            <i class="fa fa-edit" (click)="EditSC(Schedule)" data-toggle="tooltip" title="Edit"></i>
+                          </div>
+                          <div class="col-lg-3" data-toggle="tooltip" title="Attachments">
+                            <i class="fa fa-paperclip" (click)="Attachments(Schedule)" aria-hidden="true"
+                              data-toggle="modal" data-target="#myModal"></i>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-3" data-toggle="tooltip" title="Delete">
+                            <i class="far fa-trash-alt " (click)="DeleteSC(Schedule)"></i>
+                          </div>
+                          <div class="col-lg-3" data-toggle="tooltip" title="Photos">
+                            <i class="fa fa-picture-o" aria-hidden="true" data-toggle="modal" data-target="#myModalOne"
+                              (click)="Photos(Schedule)"></i>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-3">
+                            <i class="far fa-copyright" data-toggle="tooltip" title="Cancel"
+                              (click)="Cancel(Schedule)"></i>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- Modal -->
+          <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content" style="margin-top: 102px;">
+                <div class="modal-header">
+                  <h4>Attachments</h4>
+                  <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+                    <i class=" i" data-toggle="modal" data-target="#AddAttachments">Add Attachments</i>
+                  </div>
+                  <button type="button" class="close " data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="row" *ngFor="let Attachments of Attachmentlist">
+                    <div class="col-lg-6">
+                      <img style="width: 100%; height: auto; margin-left: 9px;" src="{{Attachments.attachment}}">
+                      <div class="row">
+                        <div class="col-4">
+                          <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal"
+                            data-toggle="modal" data-target="#myModalattach"
+                            (click)="getattchment(Attachments.id)">Update</button>
+                        </div>
+                        <div class="col-4">
+                          <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal"
+                            (click)="Deleteattach(Attachments.id)">Delete</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="NoImagesAvail">
+                    <div class="col-lg-12">
+                      <img src="assets/Login/noimage.jpg" style="width: 60%;height:auto;" data-dismiss="modal">
+
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal one -->
+          <div id="myModalOne" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content" style="margin-top: 102px;">
+                <div class="modal-header">
+                  <h4>Photos</h4>
+                  <div data-toggle="tooltip" title="Add Photos" data-dismiss="modal">
+                    <i class=" i_1" data-toggle="modal" data-target="#AddPhotos">Add Photos</i>
+                  </div>
+                  <button type="button" class="close " data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="row" *ngFor="let Photos of Photolist">
+                    <div class="col-lg-6">
+                      <img style="width: 100%; height: auto;margin-left: 9px; " src="{{Photos.attachment}}">
+                      <div class="row">
+                        <div class="col-4">
+                          <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal"
+                            data-toggle="modal" data-target="#myModalphoto"
+                            (click)="getphotoID(Photos.id)">Update</button>
+                        </div>
+                        <div class="col-4">
+                          <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal"
+                            (click)="DeletePhotos(Photos.id)">Delete</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row" *ngIf="NoImagesAvailPhotos">
+                    <div class="col-lg-12">
+                      <img src="assets/Login/noimage.jpg" style="width: 60%;height:auto;" data-dismiss="modal">
+
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div id="AddAttachments" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header" style="height: 73px;">
+                  <h4 class="modal-title">Add Attachment</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <ngx-dropzone [showPreviews]="true" (filesAdded)="onFilesAdded($event)"
+                          class="dropzone_vendorinvoice" id="dropzone_Attachment"></ngx-dropzone>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <button data-toggle="modal" data-dismiss="modal" (click)="AddAttachments()" class="savebutton"
+                          type="button">Add</button>
+                      </div>
+                      <!-- <div class="col-lg-3">
+                          <button class="savebutton" type="button">delete</button>
+                        </div> -->
+                    </div>
+                  </div>
+
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div> -->
+              </div>
+
+            </div>
+          </div>
+
+
+          <div id="AddPhotos" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header" style="height: 73px;">
+                  <h4 class="modal-title">Add Photos</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <ngx-dropzone [showPreviews]="true" (filesAdded)="onFilesAddedPhotos($event)"
+                          class="dropzone_vendorinvoice" id="dropzone_Attachment"></ngx-dropzone>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <button data-toggle="modal" data-dismiss="modal" (click)="AddPhotos()" class="savebutton"
+                          type="button">Add</button>
+                      </div>
+                      <!-- <div class="col-lg-3">
+                            <button class="savebutton" type="button">delete</button>
+                          </div> -->
+                    </div>
+                  </div>
+
+                </div>
+                <!-- <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div> -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div id="myModalphoto" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+   
+    <div class="modal-content" style="margin-top: 102px;">
+      <div class="modal-header">
+        <button type="button" class="close " data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h5>Photos</h5>
+        <div class="row" *ngFor="let Photos of Photolist">
+          <div class="col-lg-6">
+            <img style="width: 100%; height: auto;" src="{{Photos.attachment}}">
+            <div class="row">
+              <div class="col-4">
+                <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal"
+                  data-toggle="modal" data-target="#myModalTwo">Update</button>
+              </div>
+              <div class="col-4">
+                <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal"
+                  (click)="Delete(Attachments)">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="modal fade" id="myModalphoto">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="row" style="margin-top: 120px;padding-top: 20px;">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2">
+          <p style="padding:5px">Update Attachment</p>
+        </div>
+        <div class="col-lg-7">
+          <div class="form-group">
+            <input type="file" class="form-control" placeholder="Photo" accept="image/*" multiple
+              (change)="handleFileSelect($event)">
+            <div class="col-lg-4">
+              <div class="form-group"></div>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="form-group">
+              <button type="submit" class="btn btn-block btn-md"
+                style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);"
+                (click)="Updateschedulephoto();" data-dismiss="modal">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModalattach">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="row" style="margin-top: 120px;padding-top: 20px;">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2">
+          <p style="padding:5px">Update Attachment</p>
+        </div>
+        <div class="col-lg-7">
+          <div class="form-group">
+            <input type="file" class="form-control" placeholder="Photo" accept="image/*" multiple
+              (change)="handleFileSelect($event)">
+            <div class="col-lg-4">
+              <div class="form-group"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-12">
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-block btn-md"
+                style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);"
+                (click)="UpdateScheduledMaintenanceAttachment();" data-dismiss="modal">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

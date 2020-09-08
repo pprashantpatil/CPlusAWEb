@@ -1,0 +1,263 @@
+<div class="container-fluid Pages_background" >
+        <div class="row">
+                <div class="col-lg-8">
+                    <h4 class="Pages_header">BOOK BOARD ROOM</h4>
+                </div>
+               
+                <div class="col-lg-4">
+                    <div class="mainrow">
+                        <div class="col-lg-12 BreadChrumbProperties">
+                            <span>Building/Book Board Room</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div class="container-fluid Pages_background" style="background-color: #ffffff;margin-top: 5%;">
+        <div class="row">   
+                <div class="col-lg-8">
+                        <h6 class="Pages_header" style="font-size: 8;">BOOK BOARD ROOM DASHBOARD</h6>
+                    </div>
+          </div>
+<br>
+  <div class="row">
+      <div class="col-lg-3">
+          <input type="text" placeholder="search.." [(ngModel)]="BuildingSearch" class="form-control"
+              id="txt_bookcommunitySearch">
+      </div>
+      <div class="col-lg-3">
+        
+      </div>
+  </div>
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-12  table-responsive">
+              <table class="table table-bordered table-hover table-condensed">
+                  <tbody>
+                      <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: white">
+                          <td>Building</td>
+                          <td>Hall</td>
+                          <td>Booked By </td>
+                          <td>Event</td>
+                          <td style="width: 100px;">Start Date</td>
+                          <td style="width: 100px;">End Date</td>
+                          <td>Total Amount</td>
+                      
+                          <td>Action</td>
+                      </tr>
+                      <tr *ngFor="let hall of BookCommunityHallList|filter:BuildingSearch">
+                          <td>{{hall.buildingName}}</td>
+                          <td>{{hall.hallName}}</td>
+                          <td>{{hall.tenantName}}</td>
+                          <td>{{hall.typeOfParty}}</td>
+                          <td>{{hall.date|date}}</td>
+                          <td>{{hall.enddate|date}}</td>
+                          <td>{{hall.totalAmount}}</td>
+                     
+                          <td class="TableActions">
+                              <div class="row">
+                                
+                                  <div class="col-lg-2 ">
+                                      <button type="button" class="completebutton" (click)="GetBooking(hall.id)"
+                                          title="Cancel" id="btn_button" data-toggle="modal" data-target="#myModal">
+                                          C
+                                      </button>
+                                  </div>
+                              </div>
+                          </td>
+                      </tr>
+
+
+                      <div class="modal fade" id="myModal" style="margin-top:80px;">
+                          <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                      <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="text-align: end;
+                                      margin-right: 34px;
+                                      margin-top: 23px;"></i>
+                                  <h2 class="modal-title popcard">Cancel Request</h2>
+                                  <div class="row">
+                                      <div class="col-lg-1">
+                                      </div>
+                                      <div class="col-lg-3">
+                                          <label>Select Request</label>
+                                      </div>
+                                      <div class="col-lg-8">
+                                          <input type="text" placeholder="Select Request" [(ngModel)]="requestlist"
+                                              class="form-control plabel" id="txt_usr">
+                                      </div>
+
+                                      <span class="Validationlabels"
+                              *ngIf='requestlist==undefined && Isempty'>* Please
+                              Fill
+                              Request</span>
+
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-lg-1">
+                                      </div>
+                                      <div class="col-lg-3">
+                                          <label>Reason For Cancellation</label>
+                                      </div>
+                                      <div class="col-lg-8">
+                                          <textarea class="plabel" [(ngModel)]="cancelreason" 
+                                              placeholder="Reason "></textarea>
+
+                                             <div class="row">
+                                              <span class="Validationlabels"
+                                              *ngIf='cancelreason==undefined && Isempty'>* Please
+                                              Fill
+                                              Reason</span>
+                                             </div>
+
+                                      </div>
+                                     
+                                  </div>
+
+                                  <div class="row">
+                                      <div class="col-lg-1">
+                                      </div>
+                                      <div class="col-lg-3">
+                                          <label>Withheld Amount</label>
+                                      </div>
+                                      <div class="col-lg-8">
+                                          <input type="text" placeholder="Withheld Amount" (ngModelChange)="witheld($event)"
+                                              [(ngModel)]="withheldamount" onkeypress='return (event.charCode > 47 && event.charCode < 58)'
+                                              name="withheldamount" class="form-control plabel" id="txt_usr">
+
+                                             
+                                      </div>
+                                  </div>
+
+                                  <div class="row">
+                                      <div class="col-lg-1">
+                                      </div>
+                                      <div class="col-lg-3">
+                                          <label>Amount Refund</label>
+                                      </div>
+                                      <div class="col-lg-8">
+                                          <input type="text" placeholder="30000" [(ngModel)]="amountrefund"
+                                              class="form-control plabel" id="txt_usr" >
+
+                                              <span class="Validationlabels"
+                              *ngIf='amountrefund==undefined && Isempty'>* Please
+                              Fill
+                              Refund Amount</span>
+
+                                      </div>
+                                  </div>
+
+                                  <div class="row">
+                                      <div class="col-lg-1">
+                                      </div>
+                                      <div class="col-lg-3">
+                                          <label>Refund Mode</label>
+                                      </div>
+                                      <div class="col-lg-8">
+                                          <select class="dropdown form-control plabel" (change)="getmode($event)"
+                                              required="">
+                                              <option> Select Refund Mode</option>
+                                              <option label="Cash" value="Cash">Cash</option>
+                                              <option label="Online" value="Online">Online</option>
+                                              <!--  <option label="Cheque" value="object:1429">Cheque</option>
+                                             <option label="Credit card" value="object:1430">Credit card</option>
+                                              <option label="Debit Card" value="object:1431">Debit Card</option> -->
+                                          </select>
+                                          <span class="Validationlabels"
+                                          *ngIf='refundmode==undefined && Isempty'>* Please
+                                          Select
+                                          refundmode</span>
+                                          
+                                      </div>
+                                  </div>
+
+                                  <div class="row" *ngIf="refundmode=='Online'">
+                                          <div class="col-lg-1"> </div>
+                                          <div class="col-lg-3">
+                                              <h5 class="formlabel"> TransactionID <span class="starspan"></span></h5>
+                                          </div>
+                                          <div class="col-lg-8">
+                                              <input type="number" id="txt_ChequeNo" [(ngModel)]="TransactionID"  name="Transaction" 
+                                                  class="form-control plabel" placeholder=" TransactionID ">
+                                                
+                                          </div>
+                                      </div>
+                          <br>
+                                      <div class="row" *ngIf="refundmode=='Online'">
+                                          <div class="col-lg-1"> </div>
+                                          <div class="col-lg-3">
+                                              <h5 class="formlabel"> Date <span class="starspan"></span></h5>
+                                          </div>
+                                          <div class="col-lg-8">
+                                                  <div class="form-group">
+                                                          <input name="date5" class="form-control plabel"  placeholder="{{addnewcommunityevent_Date}}" bsDatepicker
+                                                              #dp="bsDatepicker" [(ngModel)]="Date5" (ngModelChange)="DateChange6()" [minDate]="minDate2"
+                                                              [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"   placement="right" >
+                          
+                                                            
+                          
+                                                      </div>
+                                          </div>
+                                      </div>
+                          
+                                      <div class="row" *ngIf="refundmode=='Online'">
+                                          <div class="col-lg-1"> </div>
+                                          <div class="col-lg-3">
+                                              <h5 class="formlabel"> Bank Name <span class="starspan"></span></h5>
+                                          </div>
+                                          <div class="col-lg-8">
+                                              <input type="text" id="txt_BankName" [(ngModel)]="bankname" name="bankname" 
+                                                  class="form-control plabel" placeholder="Bank Name">
+                          
+                                                
+                          
+                                          </div>
+                                      </div>
+<br>
+
+                                  <div class="row">
+                                      <div class="col-lg-1">
+                                      </div>
+                                      <div class="col-lg-3">
+                                          <label>Total Amount</label>
+                                      </div>
+                                      <div class="col-lg-8">
+                                          <input type="text" placeholder="30000" [(ngModel)]="totalAmount"
+                                              class="form-control plabel" id="txt_usr">
+                                              <span class="Validationlabels"
+                                              *ngIf='totalAmount==undefined && Isempty'>* Please
+                                              Fill
+                                              totalAmount</span>
+
+                                      </div>
+                                  </div>
+
+                                  <div class="row">
+                                      <div class="col-lg-4">
+                                      </div>
+                                      <div class="col-lg-8">
+                                          <button type="submit"  (click)="DeleteBookPartyHall(DeleteID)"
+                                              data-dismiss="modal"
+                                              class="btn btn-block btn-md cancelbutton">Save</button>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-lg-10">
+                                      </div>
+                                      <div class="col-lg-2">
+                                          <button type="submit" class="btn btn-default popupclose"
+                                               data-dismiss="modal">Close</button>
+                                      </div>
+                                  </div>
+
+                                 
+                              </div>
+                          </div>
+                      </div>
+
+              </table>
+          </div>
+      </div>
+  </div>
+
+</div>

@@ -1,0 +1,91 @@
+<div class="container-fluid Pages_background">
+    <div>
+        <div class="row">
+            <div class="col-lg-5">
+                <h4 class="Pages_header">{{pageMenuTitle}}</h4>
+            </div>
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-5">
+                <div class="mainrow">
+                    <div class="col-lg-12 BreadChrumbProperties">
+                        <span class="CommercialWorkspace"> {{workSpace_BreadChrumb}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="shadow p-3 mb-5 bg-white rounded col-lg-12  maincard ">
+        <h4 class="paneltitle">{{workSpace_PageTitle}}</h4>
+        <hr>
+        <div class="row">
+            <div class="col-lg-3">
+                <select class="form-control" id="ddl_workspacesetupBuilding" (change)="FilterByBuildingname($event)">
+                    <option  value="0"  selected="selected" [(ngModel)]="FloorEntity.BuildingID"> Select Building</option>
+                    <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                </select>
+
+                <!-- <div class="dropdown">
+                    <input class="form-control" type="text" (click)="myFunction()" placeholder="Select Building"
+                        [(ngModel)]="searchBuildinglist" value="{{searchBuildinglist}}">
+                    <div id="myDropdown" class="dropdown-content">
+                        <a (click)="FilterByBuildingname('','')">Select Building</a>
+                        <a (click)="FilterByBuildingname(build.id,build.name)"
+                            *ngFor="let build of Buildinglist|filter:searchBuildinglist">{{build.name}}</a>
+                    </div>
+                </div> -->
+            </div>
+            <div class="col-lg-3 " style="margin-left: 23px;">
+                <select (change)="WSType($event)" class="dropdown form-control maindropdown"
+                    id="ddl_workspacesetupType">
+                    <option value="0" selected="selected" [(ngModel)]="FloorEntity.WorkStationType"
+                        name="WorkStationType"> Select Type</option>
+                    <option value="{{WS.id}}" *ngFor="let WS of WSlist">{{WS.short}}</option>
+                </select>
+
+                <!-- <div class="dropdown">
+                    <input class="form-control" type="text" (click)="myFunction1()" placeholder="Select Type"
+                        [(ngModel)]="searchWSlist" value="{{searchWSlist}}">
+                    <div id="myDropdown1" class="dropdown-content">
+                        <a (click)="WSType('','')">Select Type</a>
+                        <a (click)="WSType(WS.id,WS.short)"
+                            *ngFor="let WS of WSlist|filter:searchWSlist">{{WS.short}}</a>
+                    </div>
+                </div> -->
+                <div class="col-lg-2 ">
+                </div>
+            </div>
+
+        </div>
+        <div class="row" style="margin-top:10px">
+            <div class="col-lg-12">
+                <table class="table table-bordered table-hover table-condensed ng-scope" st-table="">
+                    <thead style="background-color:#00b5d7 ; color: white">
+                        <tr>
+                            <th>{{workSpace_Floor}}</th>
+                            <th>{{workSpace_Unit}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Floors of FloorsList">
+                            <td>{{Floors.floor}}</td>
+                            <td>
+                                <input type="text" (input)="Getfloorunitdetails($event,Floors)" class="form-control "
+                                    placeholder="Units" required=""></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4"><button type="submit" (click)="InsertWorkSpace_Master()"
+                    class="btn btn-block btn-md savebutton">{{workSpace_Save}}</button></div>
+            <div class=col-lg-4> </div>
+        </div>
+    </div>
+    <div>
+    </div>
+</div>

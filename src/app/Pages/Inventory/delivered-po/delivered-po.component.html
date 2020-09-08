@@ -1,0 +1,168 @@
+<div class="container-fluid Pages_background" style="margin-left: -12px;">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header">Delivered Purchase Order</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <!-- <span class="pobreadcrump"> {{pO_BreadChrumb}} </span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <!-- <div class="col-lg-3 dashbutton">
+      <button type="button" [routerLink]="['/newpo',1]" routerLinkActive="active-link"
+        id="btn_button">{{pO_Button}}</button>
+    </div> -->
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <h3 class="panel-title clearfix paneltitle">Delivered Purchase Order</h3>
+    <hr>
+    <div class="row">
+      <div class="col-lg-4">
+        <ng-daterangepicker [options]="pickeroptions"></ng-daterangepicker>
+      </div>
+      <div class="col-lg-3 ddd">
+        <select class="dropdown form-control " required="" (change)="FilterByVendors($event)">
+          <option value="none" selected="selected"> Select Supplier</option>
+          <option value="{{vendor.short}}" *ngFor="let vendor of VendorList">{{vendor.short}}</option>
+        </select>
+      </div>
+      <label class="label1">Count : {{Count}}</label>
+      <br>
+    </div>
+    <br>
+    <div class="row p-2">
+      <div class="row" style="padding: 32px;">
+        <table class="table table-bordered table-condensed ng-scope " style="margin-top: -39px;">
+          <tbody>
+            <tr class="tableheader tableheaderfont">
+              <td style="width:150px">{{pO_PONo}}</td>
+              <td style="width:150px">{{pO_Type}}</td>
+              <!-- <td style="width:150px">Property</td> -->
+              <td style="width:150px">Supplier</td>
+              <td style="width:150px">{{pO_Date}}</td>
+              <td style="width:150px">Supplier PhoneNo</td>
+              <!-- <td style="width:150px">PO Raised By</td> -->
+              <!-- <td style="width:150px">{{pO_Status}}</td> -->
+              <td style="width:150px">{{pO_Details}}</td>
+            </tr>
+
+            <tr *ngFor="let PO of FilteredPOList">
+              <td>{{PO.poid}}</td>
+              <td>
+                <span *ngIf="PO.inventoryType=='1'">Inventory PO</span>
+                <span *ngIf="PO.inventoryType=='2'">Service PO</span>
+              </td>
+              <!-- <td>Wisma 46</td> -->
+              <td>{{PO.vendor}}</td>
+              <td>{{PO.date|date}}</td>
+              <td>{{PO.phoneNo}}</td>
+              <!-- <td>{{PO.poBy}}</td> -->
+              <!-- <td>{{PO.status}}</td> -->
+              <td>
+                <div class="row">
+                  <div class="col-lg-3" *ngIf="PO.inventoryType==1">
+                    <a data-toggle="modal" data-target="#myModalOne" (click)="Information(PO)" id="btn_infopopup">
+                      <i style="cursor:pointer;text-align: center;
+                    color:darkgreen;vertical-align:middle; background-color: white" class="fa fa-info-circle fa-2x"
+                        data-toggle="tooltip" title="Details"></i>
+                    </a>
+                  </div>
+                  <div class="col-lg-3" *ngIf="PO.inventoryType==2">
+                    <a data-toggle="modal" data-target="#myModalTwo" (click)="Service(PO)" id="btn_infopopup">
+                      <i style="cursor:pointer;text-align: center;
+                    color:darkgreen;vertical-align:middle; background-color: white" class="fa fa-info-circle fa-2x"
+                        data-toggle="tooltip" title="Details"></i>
+                    </a>
+                  </div>
+                  <div id="myModalOne" class="modal fade" role="dialog" style=" margin-top: 10%;">
+                    <div class="modal-dialog">
+                      <!-- Modal content-->
+                      <div class="modal-content " style="margin-top: -31px; width: 735px">
+                        <div class="modal-header">
+                          <h5>Details</h5>
+                          <button type="button" class="close " data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row" style="margin: 5px;">
+                            <table class="table table-bordered table-hover">
+                              <thead>
+                                <tr class="tableheader">
+                                  <td>Item</td>
+                                  <td>Quantity </td>
+                                  <td>Comments </td>
+
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let PO of POList">
+                                  <td>{{PO.item}}</td>
+                                  <td>{{PO.qty}}</td>
+                                  <td>{{PO.comments}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="myModalTwo" class="modal fade" role="dialog" style=" margin-top: 10%;">
+                    <div class="modal-dialog">
+                      <!-- Modal content-->
+                      <div class="modal-content " style="margin-top: -31px; width: 735px">
+                        <div class="modal-header">
+                          <h5>Details</h5>
+                          <button type="button" class="close " data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row" style="margin: 5px;">
+                            <table class="table table-bordered table-hover">
+                              <thead>
+                                <tr class="tableheader">
+                                  <td>Service Description </td>
+                                  <td>Grand Total</td>
+                                  <td>Vendor</td>
+                                  <td>Vendor PhoneNo</td>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let PO of polist">
+                                  <td>{{PO.serviceDescription}}</td>
+                                  <td>{{PO.grandTotal}}</td>
+                                  <td>{{PO.vendor}}</td>
+                                  <td>{{PO.phoneNo}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

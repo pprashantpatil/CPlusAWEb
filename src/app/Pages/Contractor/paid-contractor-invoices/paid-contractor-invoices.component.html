@@ -1,0 +1,359 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header" style="    margin-left: -14px;">Contractor Invoices</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <!-- <span class="building"> PO / Contractor Invoice Dashboard</span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 dashbutton">
+          <button type="button" routerLink="/ContractorInvoice" *ngIf="LoginID==4" routerLinkActive="active-link" id="btn_button" class="">New Invoice
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+        Export To Excel
+      </button> -->
+  </div>
+
+
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard" style="    margin-left: -14px;">
+    <h4 class="paneltitle ">Contractor Invoice Dashboard</h4>
+    <hr>
+    <div class="row">
+      <div class="col-lg-4">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions" (ngModelChange)="selectedDate($event)">
+        </ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <input type="text" placeholder="Search" [(ngModel)]="Search" class="form-control topdropdown" id="ddl_creditdashboardSearch"
+          style="width: 248px;">
+      </div>
+      <!-- <div class="col-lg-3">
+        <select class="form-control" id="ddl_buildingplans" [(ngModel)]="buildingid" (change)="fliterbuilding($event)">
+          <option value="0" selected="selected"> Select Property</option>
+          <option value="{{build.id}}" *ngFor="let build of BuildingList">{{build.name}}</option>
+        </select>
+      </div> -->
+      <div class="col-lg-3" *ngIf="LoginID!=4">
+        <select class="form-control" id="ContractorID" [(ngModel)]="Contractorid" (change)="GetContractorID($event)">
+          <option value="0" selected="selected"> Select Contractor</option>
+          <option value="{{build.id}}" *ngFor="let build of Contractorlist">{{build.company}}</option>
+        </select>
+      </div>
+    </div>
+
+
+
+    <div class="row p-2">
+      <div class="row table-responsive tableresposive tableresponsive" style="padding: 9px;
+        margin-left: 1px;">
+        <table class="table table-bordered table-hover table-condensed mainbuild" style="text-align: center;">
+          <tbody>
+            <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+              <td>Invoice Date</td>
+              <td *ngIf="LoginID==3">Contractor</td>
+              <td>Property </td>
+              <td> Stage</td>
+              <td>Invoice Number</td>
+              <td>Invoice Amount</td>
+              <td>Status</td>
+              <td>Paid Amount</td>
+              <td *ngIf="LoginID==2 || LoginID==3 ||LoginID==5 ||LoginID==4">Action </td>
+            </tr>
+            <tr *ngFor="let Project of ProjectAssignedLists | filter:Search">
+              <td>{{Project.invoiceDate|date}}</td>
+              <td *ngIf="LoginID==3">{{Project.company}}</td>
+              <td>{{Project.bname}}</td>
+              <td>{{Project.milestone}}</td>
+              <td>{{Project.invoiceNumber}}</td>
+              <td>{{Project.invoiceAmount}}</td>
+              <td *ngIf="Project.paidAmount!=0">Paid</td>
+              <td *ngIf="Project.paidAmount==0">Pending</td>
+              <td>{{Project.paidAmount}}</td>
+              <td *ngIf="LoginID==2 || LoginID==3 ||LoginID==5 || LoginID==4">
+                <i class="fa fa-edit" style="color: #00b5d7" *ngIf="LoginID==2" (click)="EditInvoice(Project)" title="Edit"></i>&nbsp;
+                <i class="" *ngIf="LoginID==5 && Project.paidAmount==null" data-toggle="modal" (click)="GetRowID(Project)" data-target="#InvoicesPayments"
+                  title="Pay">P</i>&nbsp;
+                <i class="fa fa-image" aria-hidden="true" data-toggle="modal" style="color: #00b5d7" data-target="#myInvoiceModaladdNew"
+                  title="Invoice" (click)="GetDetails(Project)"></i>&nbsp;
+                <i class="far fa-trash-alt" style="color: #00b5d7" *ngIf="LoginID==2 " title="Delete" (click)="DeleteInvoice(Project.id)"></i>&nbsp;
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- <div class="modal fade" id="myModaladdNew">
+    <div class="modal-dialog modal-lg">
+      <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+      <div class="modal-content" style="margin-top: 64px;
+        width: auto; height:auto; margin-left:108px;">
+        <div class="modal-header">
+          <h4>Invoice</h4>
+          <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+          </div>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="row" style="padding: 39px;">
+
+          <div class="col-lg-6" *ngFor="let pic of photos">
+            <br>
+            <img src="{{pic.photos}}" style="width:80%">
+            <br>
+          </div>
+          <br>
+          <br>
+        </div>
+        <br>
+      </div>
+      <br>
+    </div>
+    <br>
+  </div> -->
+
+  <div class="modal fade" id="InvoicesPayments">
+    <div class="modal-dialog modal-lg">
+      <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+      <div class="modal-content" style="margin-top: 64px;
+        width: auto; height:auto; margin-left:108px;">
+        <div class="modal-header">
+          <h4>Payments</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="row" style="padding: 39px;">
+          <div class="row">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-5 ">
+              <label>Payment Type</label>
+            </div>
+            <div class="col-lg-6 ">
+              <select name="PaymentTypeID" (change)="GetPaymentTypeID($event)" class="dropdown form-control maindropdown" id="ddl_PaymentTypeID">
+                <option value="0" selected>Select Payment Type</option>
+                <option value="Cash">Cash</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+              </select>
+            </div>
+          </div>
+
+          <div *ngIf="PaymentTypeID=='Credit Card'||PaymentTypeID=='Debit Card'" style="margin-left: 16px;
+          margin-top: 17px;">
+            <div class="row">
+              <div class="col-lg-1">
+              </div>
+              <div class="col-lg-5">
+                <label>Card No</label>
+              </div>
+              <div class="col-lg-6">
+                <input style="width: 238px;" placeholder="Enter Card No" type="text" class="form-control" id="CardNo" name="CardNo" maxlength=12>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-1">
+              </div>
+              <div class="col-lg-5">
+                <label>Expiry Date</label>
+              </div>
+              <div class="col-lg-6">
+                <input style="width: 238px;" type="text" class="form-control" placeholder="MM" id="month" maxlength=2 />
+                <input style="width: 238px;" type="text" class="form-control" placeholder="YYYY" id="year" maxlength=4 />
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-1">
+              </div>
+              <div class="col-lg-5">
+                <label>CVV</label>
+              </div>
+              <div class="col-lg-6">
+                <input type="text" style="width: 238px;" class="form-control" placeholder="CVV" id="CVV" name="CVV" maxlength=3 />
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="row" style="margin-left: 16px;
+          margin-top: 14px;">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-5">
+              <label>Amount</label>
+            </div>
+            <div class="col-lg-6">
+              <input type="text" style="width: 238px;" class="form-control" [(ngModel)]="Paidamount" placeholder="Amount" id="Amount" name="Amount"
+              />
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <button type="button" style="    background-color: #00b5d7;
+          width: 102px;
+          margin-left: 331px; color: white" class="btn btn-block btn-md allbtns btncolor" data-dismiss="modal" (click)="InsertPayments()">Pay</button>
+        </div>
+
+        <br>
+      </div>
+      <br>
+    </div>
+    <br>
+  </div>
+
+
+
+  <div class="modal fade" id="myInvoiceModaladdNew">
+    <div class="modal-dialog modal-lg">
+      <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+      <div class="modal-content" style="margin-top: 64px;
+            width: auto; height:auto; margin-left:108px;">
+        <div class="modal-header">
+          <h4>Invoice</h4>
+          <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+          </div>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="col-lg-12 card" style="margin-left: 1px;" id="content">
+            <div class="row">
+              <div class="col-lg-4">
+              </div>
+              <div class="col-lg-6">
+                <!-- <h1 style="color: #bb0508;font-size: 30px;">{{BuildingLists.name}}</h1> -->
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <label>FROM</label>
+                <p style="color: #3a515f;">{{CompanyName}}</p>
+                <p style="color: #3a515f;">{{CompanyPhoneNo}}</p>
+                <p style="color: #3a515f;">{{Companyaddress}}</p>
+                <p style="color: #3a515f;">{{CompanyemailID}}</p>
+                <p style="color: #3a515f;">{{CompanycontactName}}</p>
+                <!-- <p style="color: #3a515f;">{{BuildingLists.country}},{{BuildingLists.state}},{{BuildingLists.city}}</p> -->
+              </div>
+              <div class="col-lg-4"></div>
+              <!-- <div class="col-lg-4">
+                <label style="color: green;font-size: 17px;">Invoice Order</label>
+                <br>
+                <label>Date As:</label>
+                <input type="text" class="signature" [(ngModel)]="invoiceDate" name="podate" />
+                <br>
+                <label>Invoice Number #:</label>
+                <input type="text" class="signature" [(ngModel)]="invoiceNumber" name="ponumber" />
+              </div> -->
+
+              <div class="col-lg-4">
+                <label>Date: {{invoiceDate|date}}</label>
+                <br>
+                <label>PO Number #: {{invoiceNumber}}</label>
+                <br>
+                <label>To</label>
+                <p style="color: #3a515f;">{{bname}}</p>
+                <p style="color: #3a515f;">{{company}}</p>
+                <!-- <p style="color: #3a515f;">{{ContractorLocation}}</p>
+                <p style="color: #3a515f;">{{ContractorEmailID}}</p>
+                <p style="color: #3a515f;">{{ContractorContactName}}</p> -->
+              </div>
+            </div>
+            <div class="row">
+              <hr class="new5">
+            </div>
+
+            <!-- <div style="line-height: 22px;margin-left: 16px;">
+              <div class="row">
+                <label style="margin-block-end: auto;">Name:</label>&nbsp;
+                <input style="width: 89%;" type="text" class="signature" [(ngModel)]="bname" name="contractorname" />
+              </div>
+              <div class="row">
+                <label style="margin-block-end: auto;">Company Name:&nbsp;</label>
+                <input style="width: 82%;" type="text" class="signature" [(ngModel)]="company" name="contractorcompany" /> </div>
+
+              <div class="row">
+                <label style="margin-block-end: auto;">Date:&nbsp;</label>
+                <input style="width: 89%;" type="text" class="signature" [(ngModel)]="invoiceDate" name="contractorphone" />
+              </div>
+            </div> -->
+            <br>
+            <div class="row">
+              <div class="col-lg-12">
+                <table class="table table-bordered table-hover table-condensed mainbuild">
+                  <tr>
+                    <th>Project</th>
+                    <th>Phase</th>
+                    <th>Contractor</th>
+                    <th>Description</th>
+                    <th style="width: 100px;"> Amount</th>
+
+                  </tr>
+                  <tr>
+                    <td>{{bname}}</td>
+                    <td>{{milestone}}</td>
+                    <td>{{company}}</td>
+                    <td>{{notes}}</td>
+                    <td>{{invoiceAmount}}</td>
+
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-9"></div>
+              <div class="col-lg-3">
+                <p style="margin-top: 4px;background-color: #b7c3d0;padding-top: 6px;padding-bottom: 6px;padding-left: 12px;">
+                  Total Amount:{{invoiceAmount}}</p>
+              </div>
+            </div>
+            <br>
+            <!-- <div class="row">
+              <label style="margin-left: 19px;">Terms And Conditions</label>
+            </div> -->
+            <div class="row">
+              <!-- <div class="col-lg-7 box1" style="font-size:11px;;" [innerHtml]="tandc">
+                </div> -->
+              <div class="c0l-lg-9"></div>
+              <div class="col-lg-3" style="margin-left: 520px;">
+                <label>Signature</label>
+                <input type="text" style="text-align: center; width:75%;" class="signature" value="{{CompanycontactName}}" name="username"
+                />
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button class="btn btn-primary" (click)="SavePDF()">Generate PDF</button> -->
+        </div>
+        <br>
+      </div>
+      <br>
+    </div>
+    <br>
+  </div>

@@ -1,0 +1,459 @@
+<div class="container-fluid Pages_background ">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header">{{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-5">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span class="building">Technology Request/New Technology Request </span> </div>
+            </div>
+        </div>
+    </div>
+    <div class="shadow p-3 mb-5 bg-white col-lg-12 rounded maincard ">
+        <h6 class="paneltitle" *ngIf="TechID==null">{{newtechnology_PageTitle}}
+        </h6>
+
+        <h6 class="paneltitle" *ngIf="TechID!=null">Edit Technology Request
+        </h6>
+        <hr>
+        <div class="row">
+            <form class="col-lg-7">
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{newtechnology_Name}}<span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input type="text" name="Request" [(ngModel)]="TechnoEntity.Request"
+                            placeholder="{{newtechnology_Name}}" class="form-control maindropdown"
+                            id="txt_technologyName">
+
+                        <span class="Validationlabels"
+                            *ngIf='TechnoEntity.Request=="" && Isempty ||TechnoEntity.Request=="none"'>*
+                            Please
+                            Fill
+                            {{newtechnology_Name}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{newtechnology_RequestType}} <span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select [(ngModel)]="TechnoEntity.RequestTypeID" name="RequestTypeID"
+                            class="dropdown form-control maindropdown" id="ddl_technologyRequestType">
+                            <option value="0">Select Request</option>
+                            <option value="{{Request.id}}" *ngFor="let Request of Requestlist">{{Request.short}}
+                            </option>
+                        </select>
+
+                        <span class="Validationlabels" *ngIf='TechnoEntity.RequestTypeID==0 && Isempty'>* Please
+                            Select
+                            {{newtechnology_RequestType}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{newtechnology_PriorityType}} <span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select [(ngModel)]="TechnoEntity.PriorityTypeID" name="PriorityTypeID"
+                            class="dropdown form-control maindropdown" id="ddl_technologyPriorityType">
+                            <option value="0">Select Priority Type</option>
+                            <option value="{{Priority.id}}" *ngFor="let Priority of Prioritylist">{{Priority.short}}
+                            </option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='TechnoEntity.PriorityTypeID==0 && Isempty'>* Please
+                            Select
+                            {{newtechnology_PriorityType}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{newtechnology_Building}} <span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select (change)="GetBuildingAddress($event)" name="BuildingID"
+                            [(ngModel)]="TechnoEntity.BuildingID" class="dropdown form-control maindropdown"
+                            id="ddl_technologyBuilding">
+                            <option value="0">Select Building</option>
+                            <option value="{{Building.id}}" *ngFor="let Building of Buildinglist">{{Building.name}}
+                            </option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='TechnoEntity.BuildingID==0 && Isempty'>* Please
+                            Select
+                            {{newtechnology_Building}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{newtechnology_Address}} </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input type="text" value="{{BuildingAddress}}" name="address" placeholder="Address"
+                            class="form-control maindropdown" id="txt_technologyAddress">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{newtechnology_Floor}}<span class="starspan">*</span> </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select [(ngModel)]="TechnoEntity.Floor" name="Floor" class="dropdown form-control maindropdown"
+                            id="ddl_technologyFloor" (change)="UnitByID($event)">
+                            <option value="0">Select Floor</option>
+                            <option value="{{Floor.id}}" *ngFor="let Floor of FloorList">{{Floor.floor}}</option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='TechnoEntity.Floor==0 && Isempty'>* Please
+                            Select
+                            {{newtechnology_Floor}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{newtechnology_Unit}}<span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <!-- <input type="text" [(ngModel)]="TechnoEntity.Unit" name="Unit"
+                            placeholder="{{newtechnology_Unit}}" class="form-control maindropdown"
+                            id="txt_technologyUnit"> -->
+                        <select [(ngModel)]="TechnoEntity.Unit" name="Unit" class="dropdown form-control maindropdown"
+                            id="ddl_updateassetsFloor">
+                            <option value="0">Select Unit</option>
+                            <option value="{{Units.id}}" *ngFor="let Units of Unitslist">{{Units.unitID}}</option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='TechnoEntity.Unit==0 && Isempty'>* Please
+                            Select
+                            {{newtechnology_Unit}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Select Assets <span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select [(ngModel)]="TechnoEntity.EquipmentID" name="EquipmentID"
+                            class="dropdown form-control maindropdown" id="ddl_technologyAssets">
+                            <option value="0">Select Assets</option>
+                            <option value="{{Equipment.id}}" *ngFor="let Equipment of Equipmentlist">
+                                {{Equipment.equipmentname}}</option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='TechnoEntity.EquipmentID==0 && Isempty'>* Please
+                            Select
+                            Select Assets</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{newtechnology_RequestRaisedBy}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input value="Admin" type="text" placeholder="Admin" class="form-control maindropdown"
+                            id="txt_technologyRequestRaised">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{newtechnology_AssignedTo}}<span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select [(ngModel)]="TechnoEntity.AssignedTo" name="AssignedTo"
+                            (change)="TechnologyAssigned($event)" class="dropdown form-control maindropdown"
+                            id="ddl_technologySelectType">
+                            <option value="0">Select Type</option>
+                            <option value="{{User.id}}" *ngFor="let User of UserTypeList">
+                                {{User.short}}</option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='TechnoEntity.AssignedTo==0 && Isempty'>* Please
+                            Select
+                            {{newtechnology_AssignedTo}}</span>
+                    </div>
+                </div>
+                <div class="row" *ngIf="TechAssignedddl==1">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Name<span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select [(ngModel)]="TechnoEntity.AssignedToName" name="AssignedToName"
+                            class="dropdown form-control maindropdown" required id="ddl_updatescheduleAssignedTo">
+                            <option value="0">Select User</option>
+                            <option value="{{Users.name}}" *ngFor="let Users of Ulist">{{Users.name}}</option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='TechnoEntity.AssignedToName==0 && Isempty'>* Please
+                            Select
+                            Name</span>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="TechAssignedddl==2">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Name<span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TechnoEntity.AssignedToName" name="AssignedToName" type="text"
+                            class="form-control maindropdown" id="txt_updatescheduleDate">
+                        <span class="Validationlabels"
+                            *ngIf='TechnoEntity.AssignedToName=="" && Isempty ||TechnoEntity.AssignedToName=="none"'>*
+                            Please
+                            Fill
+                            Name</span>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="TechAssignedddl==4">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Vendor Type
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select class="dropdown form-control maindropdown" name="VendorType"
+                            (change)="GetVendorTypeID($event)" [(ngModel)]="TechnoEntity.VendorType">
+                            <option value="" selected="selected">select</option>
+                            <option *ngFor="let VendorTypes of VendorTypeList" value="{{VendorTypes.id}}">
+                                {{VendorTypes.short}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="TechAssignedddl==4">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Vendor</p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select class="dropdown form-control maindropdown" name="SelectedVendorID"
+                            (change)="Vendor($event)" [(ngModel)]="SelectedVendorID" required
+                            id="ddl_updatescheduleAssignedTo">
+                            <option value="0" selected="selected">Select Vendor</option>
+                            <option value="{{Vendors.id}}" *ngFor="let Vendors of Vlist">{{Vendors.vendorName}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="TechAssignedddl==4">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">EmailID</p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TechnoEntity.AssignedToEmailID" name="AssignedToEmailID" type="text"
+                            value="{{vendorEmail}}" class="form-control maindropdown" id="txt_updatescheduleDate">
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="TechAssignedddl==4">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Phone Number</p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TechnoEntity.AssignedToPhoneNo" name="AssignedToPhoneNo"
+                            name="AssignedToPhoneNo" type="text" value="{{vendorphno}}"
+                            class="form-control maindropdown" id="txt_updatescheduleDate">
+                    </div>
+                </div>
+
+
+                <!-- <div class="row" *ngIf="Assigned1==4">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Vendor<span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select class="dropdown form-control maindropdown" (click)="Vendor($event)" required
+                            id="ddl_updatescheduleAssignedTo">
+                            <option value="none">Select Vendor</option>
+                            <option value="{{Vendors.id}}" *ngFor="let Vendors of Vlist">{{Vendors.vendorName}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="Assigned1==4">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">EmailID<span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="ScheduledMaintainanceEntity.AssignedToEmailID" name="AssignedToEmailID"
+                            name="DueDate" type="text" value="{{vendorEmail}}" class="form-control maindropdown"
+                            id="txt_updatescheduleDate">
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="Assigned1==4">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Phone Number<span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="ScheduledMaintainanceEntity.AssignedToPhoneNo" name="AssignedToPhoneNo"
+                            name="DueDate" type="text" value="{{vendorphno}}" class="form-control maindropdown"
+                            id="txt_updatescheduleDate">
+                    </div>
+                </div>
+                <div class="row" *ngIf="Assigned1==1">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Name<span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select [(ngModel)]="ScheduledMaintainanceEntity.AssignedToName" name="AssignedToName"
+                            (change)="Users($event)" name="AssignedTo" class="dropdown form-control maindropdown"
+                            required id="ddl_updatescheduleAssignedTo">
+                            <option value="none">Select User</option>
+                            <option value="{{Users.id}}" *ngFor="let Users of Ulist">{{Users.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" *ngIf="Assigned1==2">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Name1<span class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="ScheduledMaintainanceEntity.AssignedToName" name="AssignedToName"
+                            name="DueDate" type="text" class="form-control maindropdown" id="txt_updatescheduleDate">
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{newtechnology_DueDate}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input type="date" [(ngModel)]="TechnoEntity.DueDate" name="DueDate"
+                            class="form-control maindropdown" id="txt_technologyDate" min={{mindate}}>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{newtechnology_Status}} </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select [(ngModel)]="TechnoEntity.StatusID" name="StatusID"
+                            class="dropdown form-control maindropdown" id="ddl_technologyFloor">
+                            <option value="0">Select Status</option>
+                            <option value="{{Status.id}}" *ngFor="let Status of StatusList">
+                                {{Status.short}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{newtechnology_Description}}</p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <textarea [(ngModel)]="TechnoEntity.Description" name="Description"
+                            placeholder="{{newtechnology_Description}}" id="txt_technologyDescription"
+                            class="form-control maindropdown" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{newtechnology_Comment}}</p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <textarea [(ngModel)]="TechnoEntity.Comment" name="Comment"
+                            placeholder="{{newtechnology_Comment}}" id="txt_technologyComment"
+                            class="form-control maindropdown" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="row" *ngIf="TechID==null">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{newtechnology_Attachment}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <ngx-dropzone [showPreviews]="true" (filesAdded)="onFilesAdded($event)"
+                            class="dropzone_vendorinvoice" id="dropzone_Attachment"></ngx-dropzone>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-2" *ngIf="TechID==null">
+                        <button class="savebutton" (click)="InsertTechnologyRequest()" id="btn_updatechnologySave"
+                            type="submit">{{newtechnology_Save}}</button>
+                    </div>
+
+                    <div class="col-lg-2" *ngIf="TechID!=null">
+                        <button class="savebutton" (click)="UpdateTechnologyRequest()" id="btn_updatechnologySave"
+                            type="submit">Update</button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-lg-5" *ngIf="Attachmentlist.length>0">
+                <h4>Attachments</h4>
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="{{Attachmentlist[0].attachment}}" alt="">
+                        </div>
+                        <div class="item" *ngFor="let Attachments of Attachmentlist| slice:1">
+                            <img src="{{Attachments.attachment}}" alt="">
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,63 @@
+/* Start of Mobile CSS */
+.Mobilecss{
+    margin-left: 0px;
+}
+
+
+@media screen and (min-width: 320px) {
+    .Mobilecss{
+        margin-left: 2px;
+    }
+    .mobsavebtn{
+        margin-left: 60px;
+    }
+    .bttn{
+        margin-left: -25px;
+    }
+    
+   
+    
+  }
+
+  @media screen and (min-width: 1900px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1600px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1400px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    .label1{
+        margin-left: 1087px;;
+    }
+  }
+  @media screen and (max-width: 1280px) {
+   
+    
+    .btt{
+        margin-left: 55px;;
+    }
+    #exportButton{
+        margin-left: -7px;
+    }
+    .bttn{
+        margin-left: 0px;
+    }
+    .label1{
+        margin-left: 891px;;
+    }
+    
+  }
+
+
+  /*End of Mobile CSS*/

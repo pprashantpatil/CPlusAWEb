@@ -1,0 +1,86 @@
+<div>
+  <div class="row">
+    <div class="col-lg-3" style="margin-bottom: 20px;margin-left: 15px;">
+      <h4 class="Pages_header">Timeline Plan</h4>
+    </div>
+    <div class="col-lg-5">
+    </div>
+    <div class="col-lg-4">
+      <div class="mainrow">
+        <div class="col-lg-12">
+          <!-- <span class="CommercialWorkspace">Building/Property Plans </span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card maincard" style="margin-right: 20px; margin-left: 15px;    margin-block-start: auto;">
+  <div class="row divForm">
+    <div class="col-lg-8 reqriedspan">
+      <form #loginForm="ngForm">
+        <div class="row">
+          <div class=col-lg-2> </div>
+          <div class="col-lg-3">
+            <h6>Property Name
+              <span>*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <select class="dropdown form-control" id="BuildingID" name="BuildingID" [(ngModel)]="BuildingID" required
+              disabled>
+              <option selected="selected">Select Property</option>
+              <option *ngFor="let Building of Buildinglist" value="{{Building.id}}">{{Building.name}}
+              </option>
+            </select>
+            <span class="Validationlabels" *ngIf='BuildingID==undefined && Isempty'>* Please Fill Property Name</span>
+          </div>
+
+        </div>
+        <br>
+        <!-- <div class="row ">
+          <div class=col-lg-2> </div>
+          <div class="col-lg-3">
+            <h6>TimeLine Plan Name
+              <span>*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7 ">
+            <input type="text" [(ngModel)]="PlaneName" name="PlaneName" id="txt_PlanName"  class="form-control"
+              placeholder="{{updateBuildingPlan_PlanName}}">
+          </div>
+
+        </div>
+        <br> -->
+        <div class="row ">
+          <div class=col-lg-2> </div>
+          <div class="col-lg-3">
+            <h6>TimeLine Plan</h6>
+          </div>
+          <div class="col-lg-7">
+            <input type="file" class="form-control" placeholder="Property Plan"
+              accept="image/x-png,image/gif,image/jpeg,application/pdf,.xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx"
+              multiple (change)="handleFileSelect1($event)">
+
+            <span class="Validationlabels" *ngIf='FileType==undefined && Isempty'>* Please Add Property Plan</span>
+          </div>
+
+
+
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-lg-5"></div>
+          <div class="col-lg-2">
+            <button type="submit" [disabled]="loginForm.form.invalid" class="btn btn-block btn-md"
+              (click)="InsertBuildingPlan()"
+              style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);">{{save}}</button>
+          </div>
+          <div class=col-lg-7> </div>
+        </div>
+        <br>
+        <br>
+        <br>
+      </form>
+    </div>
+  </div>
+</div>

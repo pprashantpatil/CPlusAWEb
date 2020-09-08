@@ -1,0 +1,247 @@
+<div class="container-fluid  Pages_background">
+    <div class="row">
+        <div class="col-lg-6">
+            <h3 class="header">{{pageMenuTitle}}</h3>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span class="building"> {{visitorLanguage_breadchrumb}} </span> </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <button type="button" routerLink="/UpdateVisitor" routerLinkActive="active-link" id="btn_button"
+                        class="dashbutton">{{visitorLanguage_button_Newvisitor}}</button>
+                </div>
+            </div>
+
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <button type="button" (click)="exporttoexcel()" id="btn_button" class="dashbutton">Export To
+                        Excel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="shadow p-3 mb-5 bg-white rounded col-lg-12  maincard ">
+            <h6 class="paneltitle">{{visitorLanguage_PageTitle}}</h6>
+            <hr>
+            <div class="row">
+                <div class="col-lg-3">
+                    <input type="text" [(ngModel)]="searchvisitor" placeholder="{{visitorLanguage_search}}"
+                        class="form-control" id="txt_Visitor_search">
+                </div>
+                <div class="col-lg-3 ">
+                    <div class="col-lg-2 ">
+                        <select class="dropdown form-control maindropdown" id="ddl_visitor_selectBuilding"
+                            (change)="onselectbuilding($event)">
+                            <option value='none' selected> Select Building</option>
+                            <option *ngFor="let building of buildingList" value="{{building.id}}">{{building.name}}
+                            </option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 ">
+                    <select class="dropdown form-control " name="Floor" id="ddl_Floor">
+                        <option value="none">Select Floor</option>
+                        <option value="{{floor.floor}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12 table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr class="tableheader">
+                                <td>Tag ID</td>
+                                <td>Raised By</td>
+                                <td>{{visitorLanguage_VisitorType}}</td>
+                                <td>{{visitorLanguage_VisitorName}}</td>
+                                <td>{{visitorLanguage_VisitorPhoneNumber}}</td>
+                                <td>{{visitorLanguage_IDType}}</td>
+                                <td>{{visitorLanguage_IDNumber}}</td>
+                                <td style="width: 92px;">{{visitorLanguage_EntryDateTime}}</td>
+                                <td style="width: 92px;">Laptop Serial No</td>
+                                <td>{{visitorLanguage_Building}}</td>
+                                <td>{{visitorLanguage_Floor}}</td>
+                                <td>{{visitorLanguage_Unit}}</td>
+                                <td>{{visitorLanguage_NoOfVisitors}} </td>
+                                <td style="width: 92px;">{{visitorLanguage_ExitDateTime}}</td>
+                                <!-- <td>{{visitorLanguage_Address}}</td> -->
+                                <td>{{visitorLanguage_Actions}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let Visitor of filteredVisitorlist | filter:searchvisitor">
+                                <td>{{Visitor.tagID}}</td>
+                                <td>{{Visitor.raisedBy}}</td>
+                                <td>{{Visitor.visitorType}}</td>
+                                <td>{{Visitor.visitorName}}</td>
+                                <td>{{Visitor.visitorPhoneNo}}</td>
+                                <td>{{Visitor.visitorIDType}}</td>
+                                <td>{{Visitor.idNumber}}</td>
+                                <td>{{Visitor.entryDateTime}}</td>
+                                <td>{{Visitor.laptopSerialNo}}</td>
+                                <td>{{Visitor.buildingName}}</td>
+                                <td>{{Visitor.floor}}</td>
+                                <td>{{Visitor.unitName}}</td>
+                                <td>{{Visitor.noOfVisitors}}</td>
+                                <td>{{Visitor.exitDateTime}}</td>
+                                <!-- <td>{{Visitor.addressOfVisitor}}</td> -->
+                                <td class="TableActions">
+                                    <a routerLink="/UpdateVisitor/{{Visitor.id}}" title="Edit"
+                                        style="background-color: white"> <i class="fa fa-edit"></i></a>
+                                    <a (click)="getvisitordetails(Visitor)" data-toggle="modal" title="Exit Time"
+                                        data-target="#UpdateExitTimeModal" style="background-color: white"> <i
+                                            class="fa fa-clock-o"></i></a>
+                                    <a (click)="getvisitordetails(Visitor)" data-toggle="modal" title="Document"
+                                        data-target="#UpdateVisitorAttachment" style="background-color: white"> <i
+                                            class="fa fa-paperclip"></i></a>
+                                    <a (click)="deletevisitor(Visitor.id)" title="Delete"
+                                        style="background-color: white"><i class="far fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <!-- UpDate Exit Time Modal content-->
+            <div id="UpdateExitTimeModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="margin-top: 100px;">
+                        <div class="modal-header">
+                            <h5>Exit Time Update</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <p> Exit Date </p>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <p> <input type="date" class="form-control" name="exitDateupdatemodel"
+                                            [(ngModel)]="exitDateupdatemodel" min="{{mindate}}"> </p>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <p>Exit Time </p>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <p> <input type="time" class="form-control" name="exitTimeupdatemodel"
+                                            [(ngModel)]="exitTimeupdatemodel"> </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default savebutton" (click)="UpdateVisitorExitime()"
+                                data-dismiss="modal">Update</button>
+                            <!-- <button type="button" class="btn btn-default popupUpdatebutton"
+                                data-dismiss="modal">Cancel</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Visitor Attachment Modal content-->
+            <div id="UpdateVisitorAttachment" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="margin-top: 100px;">
+                        <div class="modal-header">
+                            <h5>Attachments</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-lg-3"></div>
+                                <div *ngIf="selectedVisitorattachment.length>0">
+                                    <div class="col-lg-6" *ngFor="let visiphoto of selectedVisitorattachmentdetails">
+
+                                        <img src="{{visiphoto.attachment}}" class="imgResponsive" style="height: 200px;
+                                        width: 215px;">
+                                        <p *ngIf="selectedVisitorattachment.length==0"> No attacmnets found </p>
+
+
+                                    </div>
+                                </div>
+
+                                <button *ngIf="selectedVisitorattachment.length==0" type="button"
+                                    (click)="updatephoto(0)" class="btn btn-default savebutton" data-toggle="modal"
+                                    title="Document" data-target="#UpdateVisitorAttachmentdocumet"
+                                    data-dismiss="modal">Add</button>
+                                <div class="col-lg-3">
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+
+
+                            <button type="button" class="btn btn-default popupUpdatebutton"
+                                data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- On Update Visitor Attachment Modal content-->
+            <div id="UpdateVisitorAttachmentdocumet" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="margin-top: 100px;">
+                        <div class="modal-header">
+                            <h5>Update Attachment</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-1">
+
+                                </div>
+                                <div class="col-lg-10">
+                                    <ngx-dropzone [multiple]="false" [showPreviews]="true"
+                                        (filesAdded)="onAttachmentFileAdded($event)" class="dropzone_vendorinvoice">
+                                    </ngx-dropzone>
+                                </div>
+                                <div class="col-lg-1">
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default savebutton"
+                                (click)="onupdatevisitoracctamentdocument()">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

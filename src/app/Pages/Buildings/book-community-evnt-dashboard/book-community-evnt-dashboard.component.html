@@ -1,0 +1,105 @@
+<div class="container-fluid Pages_background">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header">{{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-4">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span class="building"> {{bookCommunityHallEventDashBoard_breadchrumb}} </span> </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-10">
+            <div class="col-lg-4">
+                <label class="switch">
+                    <input type="checkbox" checked (change)="changeStatus($event)">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="col-lg-4">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <button type="button" routerLink="/addnewcommunityevent" id="btn_button"
+                        class="dashbutton">{{bookCommunityHallEventDashBoard_bookButton}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+        <h6 class="paneltitle">{{bookCommunityHallEventDashBoard_PageTitle}}
+        </h6>
+        <hr>
+        <div class="row">
+            <div [hidden]="showorhidecontent" class="col-lg-12">
+                <!-- <ngx-fullcalendar defaultView="month" [events]="events" [options]="options"></ngx-fullcalendar> -->
+                <div class="row callendernavButtons">
+                    <div class="col-lg-4">
+                        <a (click)="previousmonth()"><i class="fa fa-chevron-left callendernavButtons"
+                                aria-hidden="true"></i></a>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <summary><strong>{{callenderMonth}}</strong> {{callenderyear}}</summary>
+                    </div>
+                    <div class="col-lg-4">
+                        <a (click)="nextmonth()"><i class="fa fa-chevron-right callendernavButtons"
+                                aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <div class="row callenderdiv">
+                    <!-- <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-2 callenderboxes"
+                                *ngFor="let calday of callenderdaysdount;let i = index">
+                                {{calday.date}} {{calday.day}}
+                                <span>
+                                    <span *ngIf="calday.hallName||calday.clientName" class="event_1">
+                                        Hall Name : {{calday.hallName}} <br>
+                                        Client Name : {{calday.clientName}} <br>
+                                        Start Date : {{calday.S_date|date}} <br>
+                                        End Date : {{calday.E_date|date}} <br>
+                                        Phone No : {{calday.phoneNo}} <br>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-2 callenderboxes"
+                                *ngFor="let calday of callenderdaysdount;let i = index">
+                                {{calday.date}} {{calday.day}}
+                                <div innerHtml='{{calday.BookCommunityHTML}}' (click)="ShowBookCommunityHall($event)"
+                                    style="overflow-y: auto;height: 150px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div [hidden]="!showorhidecontent" class="col-lg-12">
+                <app-bookcommunitylistview *ngIf="bookCommunityHallEventDashBoardLanguage"
+                    [bookCommunityHallEventDashBoardLanguage]="bookCommunityHallEventDashBoardLanguage">
+                </app-bookcommunitylistview>
+            </div>
+        </div>
+    </div>
+</div>

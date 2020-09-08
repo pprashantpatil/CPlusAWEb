@@ -1,0 +1,47 @@
+/* Start of Mobile CSS */
+.Mobilecss{
+    margin-left: 0px;
+}
+
+
+@media screen and (min-width: 320px) {
+    .Mobilecss{
+        margin-left: 2px;
+    }
+    .mobsavebtn{
+        margin-left: 70px;
+    }
+    .bttn{
+        margin-left: -25px;
+    }
+    
+   
+    
+  }
+
+  @media screen and (min-width: 1900px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1600px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1400px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    .mobsavebtn{
+        margin-left: 140px;
+    }
+    
+  }
+
+
+  /*End of Mobile CSS*/

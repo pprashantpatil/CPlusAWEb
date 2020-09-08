@@ -1,0 +1,45 @@
+.slots {
+    border: 10px solid #e2e2e2;
+    background: #ececec;
+    text-align: center;
+    border-radius: 8px;
+    color: #afafaf;
+    height: 75px;
+    width: 100%;
+    padding: 2px;
+    margin: 4px;
+}
+
+#btn_VisitorParking_AllocateParking {
+    width: 190px;
+    margin-left: -65px;
+}
+.imgResponsive{
+    widows: 100% ;
+    height: auto;
+}
+
+.container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+
+
+
+
+@media screen and (min-width: 1600px) {
+    .imgResponsive{
+        widows: 100% ;
+        height: auto;
+    }
+    
+    
+  }
+  @media screen and (min-width: 1900px) {
+    .imgResponsive{
+        height: auto;
+        width: 335px;
+        margin-top: 10px;
+    }
+    
+    
+  }

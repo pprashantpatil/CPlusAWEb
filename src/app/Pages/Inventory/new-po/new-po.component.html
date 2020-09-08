@@ -1,0 +1,266 @@
+<div class="container-fluid Pages_background">
+    <br>
+    <div class="col-lg-2" *ngIf="typeid==1||typeid==0">
+        <h4 class="Pages_header">{{pageMenuTitle}}</h4>
+    </div>
+    <br>
+    <div *ngIf="typeid==1||typeid==0" class="al-breadcrumb BreadChrumbProperties">
+        <!-- <span> {{newPO_BreadChrumb}}</span> -->
+    </div>
+    <hr *ngIf="typeid==1||typeid==0">
+    <br>
+
+    <div *ngIf="typeid==1||typeid==0" class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+
+        <h3 class="panel-title clearfix " *ngIf="typeid==1||typeid==0">{{newPO_PageTitle}}</h3>
+        <hr>
+        <p *ngIf="typeid==1||typeid==0">Select Inventory PO Type</p>
+        <div *ngIf="typeid==1||typeid==0" class="row">
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetTypeID($event)">
+                    <option>Select</option>
+                    <option value="1">Inventory PO</option>
+                    <option value="2">Service PO</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row p-2" *ngIf="typeid==1||typeid==0">
+            <div class="col-lg-3">
+                <p>Select Item Category</p>
+                <select class="dropdown form-control" (change)="onpotyselect($event)" id="ddl_newpotype">
+                    <option selected="selected" value="0">Select Type</option>
+                    <option value="{{potype.id}}" *ngFor="let potype of POTypeList">{{potype.short}}</option>
+                </select>
+            </div>
+            <div class="col-lg-3">
+                <p>Select Supplier</p>
+                <select class="dropdown form-control newpoddl" id="ddl_newvendor" (change)="onvendorTypeselect($event,filteredvendorlist)">
+                    <option selected="selected" value="0">Select Supplier</option>
+                    <option value="{{vendor.id}}" *ngFor="let vendor of filteredvendorlist">{{vendor.vendorName}}
+                    </option>
+                </select>
+            </div>
+            <br>
+            <div class="col-lg-3">
+                <p>{{newPO_Date}}</p>
+                <input type="date" class="form-control newpoddl1" required min="{{mindate}}" [(ngModel)]="date" placeholder="please select date">
+            </div>
+            <div class="col-lg-3">
+                <p style="margin-left: 12px;">Property</p>
+                <select class="form-control" style="margin-left: 10px;" disabled [(ngModel)]="buildingid" name="buildingid" id="ddl_TypeID"
+                    (change)="GetbuldingID($event)">
+                    <option value="undefined">Select Property</option>
+                    <option *ngFor="let list of buildinglist" value="{{list.id}}">
+                        {{list.name}}</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div *ngIf="typeid==1||typeid==0">
+            <button type="button" class="btn btn-deafult savebutton addnewItem" (click)="addFieldValue()">{{newPO_AddNew}}</button>
+        </div>
+        <br>
+        <div class="container-fluid" *ngIf="typeid==1||typeid==0">
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="PoTable">
+                        <tbody>
+                            <tr class="tableheader" style="color: white;">
+                                <td>{{newPO_SlNo}}</td>
+                                <td>{{newPO_Item}}</td>
+                                <td>{{newPO_Qty}}</td>
+                                <td>{{newPO_Comments}}</td>
+                                <td>{{newPO_Remove}}</td>
+                            </tr>
+                            <tr *ngFor="let tablerow of tablerows; let i = index">
+                                <td class="tablerowwidth">{{i+1}}</td>
+                                <td style="width:250px;">
+                                    <select class="dropdown form-control" [(ngModel)]="tablerow.itemtype" (change)="Itemdetails($event)">
+                                        <option value="0" selected="selected">Select Item</option>
+                                        <option value="{{itemtype.id}}" *ngFor="let itemtype of itemtypelist">
+                                            {{itemtype.short}}</option>
+                                    </select>
+                                </td>
+                                <td style="width:250px;">
+                                    <input type="number" [(ngModel)]="tablerow.quantity" name="quantity" class="form-control " placeholder="Quantity" required="">
+                                </td>
+                                <td style="width:250px;">
+                                    <input type="text" [(ngModel)]="tablerow.Comments" name="Comments" class="form-control" placeholder="Comments" required="">
+                                </td>
+                                <td style="width:100px;" class="TableActions" style="background-color: white;">
+                                    <a (click)="deleteFieldValue(i)" data-toggle="tooltip" title="Delete">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="row p-2" *ngIf="typeid==1||typeid==0">
+            <div class="col-lg-3">
+                <select class="form-control" (change)="GetFinanacerID($event)">
+                    <option> Finance Manager</option>
+                    <option *ngFor="let list of finanacerlist" value="{{list.id}}">{{list.name}}</option>
+                </select>
+            </div>
+            <div class="col-lg-3">
+                <select class="form-control newpoddl " (change)="GetManagerID($event)">
+                    <option>Finance Director</option>
+                    <option *ngFor="let list of managerlist" value="{{list.id}}">{{list.name}}</option>
+                </select>
+            </div>
+            <div class="col-lg-3">
+                <select class="form-control newpoddl1" (change)="GetCfoID($event)">
+                    <option>Select CFO</option>
+                    <option *ngFor="let list of cfolist" value="{{list.id}}">{{list.name}}</option>
+                </select>
+            </div>
+        </div> -->
+        <div class="row " *ngIf="typeid==1||typeid==0">
+            <div class="col-md-3"></div>
+            <div class="col-md-4">
+                <button type="button" (click)="InsertNewPo()" class="btn btn-deafult savebutton savepo">{{newPO_Save}}</button>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
+    </div>
+</div>
+<div class="container-fluid Pages_background" style="margin-top: -85px;" *ngIf="typeid==2">
+    <br>
+    <br>
+    <div class="col-lg-2" *ngIf="typeid==2">
+        <h4 class="Pages_header" style="margin-top: 48px;">Service</h4>
+    </div>
+    <br>
+    <br>
+    <div class="al-breadcrumb BreadChrumbProperties" *ngIf="typeid==2">
+        <span> Inventory/Service</span>
+    </div>
+    <hr *ngIf="typeid==2">
+    <br>
+    <div *ngIf="typeid==2" class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+        <h3 class="panel-title clearfix ">New Service</h3>
+        <hr>
+        <p *ngIf="typeid==2">Select Inventory PO Type</p>
+        <div *ngIf="typeid==2" class="row">
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetTypeID($event)">
+                    <option>Select</option>
+                    <option value="1">Inventory PO</option>
+                    <option value="2">Service PO</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row p-2" *ngIf="typeid==2">
+            <div class="col-lg-2">
+                <p>Property</p>
+            </div>
+            <div class="col-lg-4">
+                <select class="form-control " [(ngModel)]="buildingid" name="buildingid" id="ddl_TypeID" (change)="GetbuldingID($event)">
+                    <option value="undefined">select</option>
+                    <option *ngFor="let list of buildinglist" value="{{list.id}}">
+                        {{list.name}}</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row p-2" *ngIf="typeid==2">
+            <div class="col-lg-2">
+                <p>Supplier Type</p>
+            </div>
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetVendorTypeId($event)">
+                    <option>Select</option>
+                    <option *ngFor="let list of vendortypelist" value="{{list.id}}">{{list.short}}</option>
+                </select>
+            </div>
+            <div class="col-lg-2">
+                <p>Select Supplier</p>
+            </div>
+            <div class="col-lg-4">
+                <select class="dropdown form-control  podashboardddl" required="" (change)="GetVendorId($event)">
+                    <option value="none" selected="selected"> Select Supplier</option>
+                    <option value="{{vendor.id}}" *ngFor="let vendor of vendorlist">{{vendor.vendorName}}</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row p-2" *ngIf="typeid==2">
+            <div class="col-lg-2">
+                <p>Service Amount</p>
+            </div>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" (ngModelChange)="witheld($event)" on-focusout="caculategst()" [(ngModel)]="serviceamount"
+                    placeholder="Service Amount">
+            </div>
+            <div class="col-lg-2">
+                <p>Service Description</p>
+            </div>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" [(ngModel)]="servicedesc" placeholder="Service Description">
+            </div>
+        </div>
+        <br>
+        <div class="row p-2" *ngIf="typeid==2">
+            <div class="col-lg-2">
+                <p>Tax Amount</p>
+            </div>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" on-focusout="Calpercentage()" disabled [(ngModel)]="taxamount">
+            </div>
+            <div class="col-lg-2">
+                <p>Grand Total</p>
+            </div>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" disabled [(ngModel)]="garandtotal" placeholder="Grand Total">
+            </div>
+        </div>
+        <br>
+        <div class="row p-2" *ngIf="typeid==2">
+            <div class="col-lg-2">
+                <p>Finance Manager</p>
+            </div>
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetFinanacerID($event)">
+                    <option> Finance Manager</option>
+                    <option *ngFor="let list of finanacerlist" value="{{list.id}}">{{list.name}}</option>
+                </select>
+            </div>
+            <div class="col-lg-2">
+                <p>Finance Director</p>
+            </div>
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetManagerID($event)">
+                    <option>Finance Director</option>
+                    <option *ngFor="let list of managerlist" value="{{list.id}}">{{list.name}}</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row p-2" *ngIf="typeid==2">
+            <div class="col-lg-2">
+                <p>CFO</p>
+            </div>
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetCfoID($event)">
+                    <option>Select CFO</option>
+                    <option *ngFor="let list of cfolist" value="{{list.id}}">{{list.name}}</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row p-2" style="text-align: center;" *ngIf="typeid==2">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <button (click)="insertservice()" class="btn btn-deafult savebutton addnewItem">Save</button>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,179 @@
+<div class="container-fluid Pages_background ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">{{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> Property /Apply Staff Leaves </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <button type="button" routerLink="/staffleaves" routerLinkActive="active-link" id="btn_button" class="dashbutton">{{applyStaffLeaves_AddNewButton}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shadow p-3 mb-5 bg-white rounded   maincard ">
+    <h6 class="paneltitle">{{pageMenuTitle}}</h6>
+    <hr>
+    <form #loginForm="ngForm">
+      <!-- <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">Property
+            <span style="color: red;">*</span>
+          </p>
+        </div>
+        <div class="col-lg-5">
+          <select class="dropdown form-control" id="ddl_BuildingName" (change)="getbuildingID($event)" required>
+            <option selected="selected">Select Property</option>
+            <option *ngFor="let Build of Buildinglist" value="{{Build.id}}">{{Build.name}}</option>
+
+          </select>
+          <span class="Validationlabels" *ngIf='BuildingID==undefined && Isempty'>* Please Fill Property
+          </span>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">
+            {{applyStaffLeaves_StaffName}}
+            <span style="color: red;">*</span>
+          </p>
+        </div>
+        <div class="col-lg-5">
+          <select class="dropdown form-control" id="ddl_StaffName" name="StaffName" (change)="getstaffID($event)" required>
+            <option selected="selected">Select Staff</option>
+            <option *ngFor="let staff of Stafflist" value="{{staff.id}}">{{staff.name}}</option>
+
+          </select>
+          <span class="Validationlabels" *ngIf='staffID==undefined && Isempty'>* Please Fill {{applyStaffLeaves_StaffName}}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">
+            {{applyStaffLeaves_LeaveType}}
+            <span style="color: red;">*</span>
+          </p>
+        </div>
+        <div class="col-lg-5">
+          <select class="dropdown form-control" id="ddl_BuildingName" (change)="getleaveID($event)" required>
+            <option selected="selected">Select Leave Type</option>
+            <option *ngFor="let leave of leavelist" value="{{leave.id}}">{{leave.short}}</option>
+
+          </select>
+          <span class="Validationlabels" *ngIf='leaveID==undefined && Isempty'>* Please Fill {{applyStaffLeaves_LeaveType}}
+          </span>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">
+            {{applyStaffLeaves_StartDate}}
+            <span style="color: red;">*</span>
+          </p>
+        </div>
+        <div class="col-lg-5">
+          <div class="form-group">
+            <input name="date" class="form-control" placeholder="Start Date" bsDatepicker #dp="bsDatepicker" [(ngModel)]="Date" (ngModelChange)="DateChange()"
+              [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" [minDate]="minDate" [maxDate]="maxDate" placement="right" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">
+            {{applyStaffLeaves_EndDate}}
+            <span style="color: red;">*</span>
+          </p>
+        </div>
+        <div class="col-lg-5">
+          <div class="form-group">
+            <input name="date1" class="form-control" placeholder="End Date" bsDatepicker #dp="bsDatepicker" [(ngModel)]="Date1" (ngModelChange)="DateChange1()"
+              [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" [minDate]="minDate1" placement="right" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="halfday==0">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-2 ">
+          <p style="padding:5px">Half Day
+          </p>
+        </div>
+        <div class="col-lg-5 ">
+          <input [(ngModel)]="diffDays" name="HandicapBusRequired" type="checkbox" placeholder="Wheel Chair Access" class="maincheckbox"
+            id="txt_updatetransportNumberOfPassengers">
+        </div>
+      </div>
+
+
+      <!-- <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">
+            Covering Staff </p>
+        </div>
+        <div class="col-lg-5">
+          <select class="dropdown form-control" id="ddl_Covering" [(ngModel)]="coveringstaff" name="CoveringStaff">
+            <option selected="selected">Select Staff</option>
+            <option *ngFor="let staffss of CoveringStafflist" value="{{staffss.name}}">{{staffss.name}}
+            </option>
+          </select>
+        </div>
+      </div> -->
+
+
+      <div class="row">
+        <div class="col-lg-1
+              ">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">
+            {{applyStaffLeaves_Reason}}
+            <span style="color: red;">*</span>
+          </p>
+        </div>
+        <div class="col-lg-5">
+          <textarea class="form-control" id="txt_Reasons" [(ngModel)]="reason" name="reason" placeholder="{{applyStaffLeaves_Reason}}"
+            rows="5" id="comment" required></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-5">
+        </div>
+        <div class="col-lg-3">
+          <button type="submit" class="savebutton" [disabled]="loginForm.form.invalid" (click)="InsertStaffLeaves()" class="btn btn-block btn-md savebutton">{{applyStaffLeaves_Save}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

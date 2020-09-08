@@ -1,0 +1,141 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="Pages_header">New Contractor Assignments</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <!-- <div class="col-lg-12 BreadChrumbProperties">
+            <span class="CommercialWorkspace">Project / New Contractor Assignments</span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="card maincard" style="margin-right: 8px;">
+      <div class="row">
+        <div class="col-lg-8 reqriedspan" style="padding: 25px;">
+          <br>
+          <!-- <div class="row"> -->
+          <form>
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-3 ">
+                <p style="padding:5px">Project
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <select name="BuildingID" class="dropdown form-control " disabled [(ngModel)]="ProjectID" required
+                  id="ddl_updateassetsBuilding" (click)="GetBuildingID($event)">
+                  <option value="0" selected="selected">Select Project</option>
+                  <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">Floor
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <select class="dropdown form-control topdropdown" (click)="GetFloorID($event)" name="FloorID"
+                  [(ngModel)]="Entity.FloorID" id="FloorID" required="">
+                  <option value="0"> Select Floor</option>
+                  <option *ngFor="let vendor of FloorList" value="{{vendor.id}}">{{vendor.floor}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">Unit
+                  <span class="starspan"></span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <ng-multiselect-dropdown class="multiselect-dropdown" [placeholder]="'Select Units'"
+                  [data]="UserRoleList" name='Units' [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                  (onSelectAll)="onSelectAll($event)" (onDeSelect)="onItemDeSelect($event)">
+                </ng-multiselect-dropdown>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">Contractor
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <select class="dropdown form-control topdropdown" name="Vendor" [(ngModel)]="Entity.VendorID"
+                  id="ddl_invoiceSearchsdsdfVendor" required="">
+                  <option value="0"> Select Contractor</option>
+                  <option *ngFor="let vendor of vendorlist" value="{{vendor.id}}">{{vendor.company}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:4px">Start Date</p>
+                <span class="starspan">*</span>
+              </div>
+              <div class="col-lg-7">
+                <input type="date" name="FirstServiceDue" [(ngModel)]="Entity.StartDate" id="txt_FirstSStarte"
+                  placeholder="Start Date" class="form-control  ">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:4px">End Date</p>
+                <span class="starspan">*</span>
+              </div>
+              <div class="col-lg-7">
+                <input type="date" name="Enddate" [(ngModel)]="Entity.EndDate" id="txt_FirstEnddate"
+                  placeholder="End Date " class="form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">Comments
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <textarea placeholder="" name="Remarks" [(ngModel)]="Entity.Comments" id="txt_Remarks" rows="4" required
+                  class="form-control"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+              </div>
+              <div class="col-lg-2">
+                <button class="savebutton" (click)="InsertBuildingStagesMaster()" style="margin-bottom: 20px;
+                  margin-left: 111px;
+                  margin-top: 62px;" type="submit">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

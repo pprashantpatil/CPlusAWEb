@@ -1,0 +1,92 @@
+<div class="container-fluid Pages_background ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">{{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="purchasereport"> {{pageMenuTitle}} </span></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <!-- <button type="button" routerLink="/UpdateVendor" routerLinkActive="active-link" id="btn_button"
+                  class="dashbutton">New Vendor</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+      Export To Excel
+    </button>
+  </div>
+
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div class="row">
+      <div class="col-lg-4">
+        <h6>{{vendorPaymentReport_SelectDate}}</h6>
+        <ng-daterangepicker [options]="options"></ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <h6>{{vendorPaymentReport_SelectDate}}</h6>
+        <select class="dropdown form-control maindropdown" (change)="VendorSelected($event)" name="Building"
+          required="">
+          <option value="none" selected="selected"> Select Vendor</option>
+          <option value="{{VendorPurchase.short}}" *ngFor="let VendorPurchase of VendorPurchaseList">
+            {{VendorPurchase.short}}</option>
+        </select>
+      </div>
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2">
+        <h6>{{vendorPaymentReport_GrandTotal}}</h6>
+        <input type="text" name="Request" value="{{t}}" class="form-control maindropdown" required
+          id="txt_updateScheduleRequest" disabled>
+      </div>
+    </div>
+  </div>
+
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div>
+      <h6 class="paneltitle">{{vendorPaymentReport_Title}}
+      </h6>
+      <hr>
+      <div class="row">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr class="tableheader">
+              <td>{{vendorPaymentReport_Invoice}}</td>
+              <td>{{vendorPaymentReport_Vendor}}</td>
+              <td>{{vendorPaymentReport_Date}}</td>
+              <td>Amount Settled </td>
+              <td>{{vendorPaymentReport_Credit}}</td>
+              <td>{{vendorPaymentReport_Grand}}</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Vendorpayments of FilteredVendorpaymentsList">
+              <td>{{Vendorpayments.invoiceNo}}</td>
+              <td>{{Vendorpayments.vendorName}}</td>
+              <td>{{Vendorpayments.invoiceDate |date}}</td>
+              <td>{{Vendorpayments.paidAmount}} </td>
+              <td>{{Vendorpayments.usedCredits}}</td>
+              <td>{{Vendorpayments.totalAmount}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,172 @@
+<div class="container-fluid Pages_background Mobilecss">
+  <div>
+    <div class="row">
+      <div class="col-lg-12">
+        <h4 class="Pages_header" style="margin-left: -14px;">Project Timeline</h4>
+      </div>
+
+    </div>
+    <div class="row">
+
+      <div class="col-lg-12 dashbutton" style="margin-left: -14px;">
+        <button style="
+      margin-left: 9px;
+    margin-top: 0px;
+    margin-right: 10px;" id="exportButton" (click)="exporttoexcel()">Export To Excel</button>
+        <button routerLink="/ArchitecturalProjectTimeline" *ngIf="LoginTypeID!=1 && LoginTypeID!=9"
+          style="margin-left: -14px;" type="button" id="btn_button">Add New
+        </button>
+        <br>
+        <button routerLink="/TimelinePlanDash" *ngIf="LoginTypeID==2 || LoginTypeID==3 ||LoginTypeID==8||LoginTypeID==9"
+          style="margin-right: 24px;
+        margin-top: -20px;" [routerLink]="['/TimelinePlanDash']" type="button" id="btn_button">View Timeline Excel
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="row labels">
+    <div class="col-lg-10 Mobilecss" style="margin-left: -14px;
+    margin-bottom: 19px;">
+      <span style="background-color:rgb(26, 206, 26)">
+        <span style="color:white ;width: 177px;
+          text-align: center;">100% Accomplishment</span>
+      </span>
+      <span style="background-color:red">
+        <span style="color:white;width: 111px;
+          text-align: center;">Delay in Works</span>
+      </span>
+
+    </div>
+  </div>
+
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard" style="margin-left: -14px;">
+    <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Project Timeline</h6>
+      </div>
+    </div>
+
+    <div class="row p-4">
+      <div class="col-lg-4">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions" (ngModelChange)="selectedDate($event)">
+        </ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control" id="StageName" [(ngModel)]="StageName" name="StageName"
+          (click)="GetStageID($event)" required>
+          <option value="0" selected> Select Stage</option>
+          <option value="{{build.stage}}" *ngFor="let build of StageList">{{build.stage}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control" id="StaffName" [(ngModel)]="StaffName" name="StaffName"
+          (click)="GetStaff($event)" required>
+          <option value="0" selected> Select Staff</option>
+          <option value="{{build.name}}" *ngFor="let build of ProjectTeamList">{{build.name}}</option>
+        </select>
+      </div>
+      <!-- <div class="col-lg-2">
+        <label>Count : {{Count}}</label>
+
+      </div> -->
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive">
+          <table class="table table-bordered  table-condensed" style="text-align: center;">
+            <tbody>
+              <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                <td>Start Date</td>
+                <td>End date</td>
+                <td>Stage </td>
+                <td>Process Check</td>
+                <td>Care Of</td>
+                <td>Comments</td>
+                <td>Accomplishment</td>
+                <td>Actions</td>
+              </tr>
+              <tr *ngFor="let project of projectlist | filter:StageName |filter:StaffName"
+                [class.bgred]="project.text=='0' && project.accomplishment!='100%'"
+                [class.bggreen]="project.accomplishment=='100%'">
+                <td>{{project.s_Date|date}}</td>
+                <td>{{project.e_Date|date}}</td>
+                <td>{{project.stage}}</td>
+                <td>{{project.processCheck}}</td>
+                <td>{{project.name}}</td>
+                <td>{{project.description}}</td>
+                <td>{{project.accomplishment}}</td>
+                <td>
+                  <img title="MileStone" *ngIf="project.ismilestone=='1'" height="30px" width="30px"
+                    src="assets/Login/milesstone.jpg" style="border-radius: 41px;
+                    padding: 3px;margin-right: 7px;">
+                  <i class="fa fa-edit" title="Edit" *ngIf="LoginTypeID==3"
+                    [routerLink]="['/ArchitecturalProjectTimeline',project.id]"></i>&nbsp;
+                  <i class="far fa-trash-alt" title="Delete" *ngIf="LoginTypeID==3"
+                    (click)="DeleteProject(project.id)"></i>
+
+                  <button *ngIf="project.accomplishment!='100%'" class="btn btn-primary editable-table-button btn-xs"
+                    data-toggle="modal" (click)="GetAccomplishetID(project)" data-toggle="modal"
+                    data-target="#myModalAttachments" style="background-color: #d934ae;">Add Accomplishment</button>
+                </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="myModalAttachments" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content" style="margin-top: 100px;">
+        <div class="modal-header">
+          <h4>Add Accomplishment</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body col-lg-12">
+          <div class="row">
+            <div class=col-lg-1></div>
+            <div class="col-lg-3">
+              <p>Accomplishment
+                <span>*</span>
+              </p>
+            </div>
+            <div class="col-lg-7 form-group">
+              <select name="MileStone_Staf" class="dropdown form-control " name="Accomplishment"
+                [(ngModel)]="Accomplishment" required id="Accomplishment">
+                <option value="0" selected="selected"> Select</option>
+                <option value="10%" selected="selected"> 10%</option>
+                <option value="20%" selected="selected"> 20%</option>
+                <option value="30%" selected="selected"> 30%</option>
+                <option value="40%" selected="selected"> 40%</option>
+                <option value="50%" selected="selected"> 50%</option>
+                <option value="60%" selected="selected"> 60%</option>
+                <option value="70%" selected="selected"> 70%</option>
+                <option value="80%" selected="selected"> 80%</option>
+                <option value="90%" selected="selected"> 90%</option>
+                <option value="100%" selected="selected"> 100%</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-5">
+            </div>
+            <div class="col-lg-2">
+              <button class="btn btn-block btn-md"
+                style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);"
+                (click)="AddAccomplishment()" data-dismiss="modal">Save</button>
+            </div>
+            <div class="col-lg-5">
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

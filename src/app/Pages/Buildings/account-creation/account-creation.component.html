@@ -1,0 +1,85 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="Pages_header">Client Details</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <span class="CommercialWorkspace" style="margin-left: 52px;"> Staff / Client Details</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row breadCrumbHeadderProperties">
+      <div class="col-lg-12 dashbutton">
+        <button routerLink="/NewAccountCreation" type="button" id="btn_button">Add Client</button>
+      </div>
+    </div>
+    <!-- <div class="row breadCrumbHeadderProperties">
+                <div class="col-lg-12 dashbutton">
+                    <button (click)=export() type="button" id="btn_button">export</button>
+                </div>
+            </div> -->
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Clients</h6>
+      </div>
+    </div>
+    <div class="row p-4">
+      <div class="col-lg-3">
+        <input type="text" placeholder="search.." class="form-control" id="txt_searchBuilding">
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive">
+          <table class="table table-bordered table-hover table-condensed">
+            <tbody>
+              <tr class="tableheader tableheaderfont buildingtable" style="background-color: #00b5d7; color: White;">
+                <!-- <td>ID</td> -->
+                <td>Client Name</td>
+                <td>Client Industry</td>
+                <td>Contact Name</td>
+                <td>Phone Number</td>
+                <td>Email ID</td>
+                <td>Address</td>
+                <td>Bank Name</td>
+                <td>Bank Account No</td>
+                <td>Account Type</td>
+                <td>Swift Code</td>
+                <td>Tax Identification No</td>
+                <td>Actions</td>
+              </tr>
+              <tr *ngFor="let Accounts of AccountsLists">
+                <!-- <td>{{Accounts.id}}</td> -->
+                <td>{{Accounts.accountName}}</td>
+                <td>{{Accounts.account_Industry}}</td>
+                <td>{{Accounts.account_Contact_Name}}</td>
+                <td>{{Accounts.phone_No}}</td>
+                <td>{{Accounts.email}}</td>
+                <td>{{Accounts.address}}</td>
+                <td>{{Accounts.bankName}}</td>
+                <td>{{Accounts.bank_Account_no}}</td>
+                <td>{{Accounts.accountType}}</td>
+                <td>{{Accounts.shiftCode}}</td>
+                <td>{{Accounts.taxIdenficatoin}}</td>
+                <td> <a (click)="EditAccounts(Accounts)" style="background-color: white; color: #00b5d7;"> <i
+                      class="fa fa-edit" data-toggle="tooltip" title="edit"></i></a>
+
+                  <a (click)="DeleteAccounts(Accounts)" style="background-color: white; color: #00b5d7;"><i
+                      class="far fa-trash-alt" data-toggle="tooltip" title="Delete"></i></a></td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

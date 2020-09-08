@@ -1,0 +1,161 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-4">
+        <h4 class="Pages_header">Staff Work Schedule</h4>
+      </div>
+      <div class="col-lg-4">
+      </div>
+      <div class="col-lg-4">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <span> Staff / Staff Work Schedule</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card maincard">
+    <BR>
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="panel-title formlabel">STAFF WORK SCHEDULE</h3>
+      </div>
+
+    </div>
+    <hr>
+    <div class="row divForm">
+      <div class="col-lg-8 reqriedspan">
+
+        <div class="row">
+
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6 style="font-size: 14px;">Staff Type: <span>*</span> </h6>
+          </div>
+          <div class="col-lg-7 ">
+            <select class="form-control" (change)="GetStaffTypeID($event)" [(ngModel)]="stafftypeid" name="stafftypeid">
+              <option value="" selected>select</option>
+              <option value="10022">Engineer</option>
+              <option value="10025">QC</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="row ">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6 style="font-size: 14px;">Staff : <span>*</span> </h6>
+          </div>
+          <div class="col-lg-7 ">
+            <select class="form-control" (change)="GetStaffID($event)" [(ngModel)]="staffid" name="staffid"
+              [disabled]="tablecount=='1'">
+              <option value="" selected>select</option>
+              <option *ngFor="let staff of stafflist" value={{staff.id}}>{{staff.name}}</option>
+            </select>
+          </div>
+        </div><br>
+
+        <div class="row ">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6 style="font-size: 14px;">Start Date : <span>*</span> </h6>
+          </div>
+          <div class="col-lg-7">
+            <input type="date" [(ngModel)]="date" name="date" class="form-control">
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="row ">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6 style="font-size: 14px;">End Date : <span>*</span> </h6>
+          </div>
+          <div class="col-lg-7">
+            <input type="date" [(ngModel)]="edate" name="date" class="form-control">
+          </div>
+        </div>
+        <br>
+        <br>
+
+        <!-- 
+        <div class="row ">
+
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6 style="font-size: 14px;"> Day : </h6>
+          </div>
+          <div class="col-lg-7">
+              <select class="form-control" (change)="GetDayID($event)" [(ngModel)]="dayid" name="dayid">
+                  <option>select</option>
+                  <option *ngFor="let day of dayslist" value={{day.id}}>{{day.day}}</option>
+                </select>
+          </div>
+        </div>
+        <br> -->
+        <!-- <div class="row ">
+
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6 style="font-size: 14px;">Start Time : <span>*</span> </h6>
+          </div>
+          <div class="col-lg-7">
+            <input type="datetime" [(ngModel)]="starttime" name="starttime" class="form-control">
+          </div>
+        </div><br>
+        <div class="row ">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6 style="font-size: 14px;">End Time :<span>*</span> </h6>
+          </div>
+          <div class="col-lg-7">
+            <input type="datetiem" [(ngModel)]="endtime" name="endtime" class="form-control">
+
+          </div>
+        </div> -->
+        <br>
+
+
+
+        <div class="row ">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6 style="font-size: 14px;">Work Description :<span>*</span> </h6>
+          </div>
+          <div class="col-lg-7">
+            <textarea rows="4" cols="30" [(ngModel)]="workdescription" name="workdescription"
+              class="form-control"> </textarea>
+
+          </div>
+        </div>
+        <br>
+        <!-- <div class="row ">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6 style="font-size: 14px;">Comments :<span>*</span> </h6>
+          </div>
+          <div class="col-lg-7">
+            <textarea rows="4" cols="30" [(ngModel)]="comments" name="comments" class="form-control"> </textarea>
+
+          </div>
+        </div><br> -->
+        <div class="row">
+          <div class="col-lg-5">
+          </div>
+          <div class="col-lg-2">
+            <button class="btn btn-primary"
+              style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);"
+              (click)="updatedetails()">Update</button>
+          </div>
+          <div class="col-lg-5">
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>

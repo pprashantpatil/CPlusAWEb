@@ -1,0 +1,41 @@
+.formlabel{
+    color:#666666;
+}
+.mainrow{
+    float: right;
+    margin-top: 26px;
+}
+.maincard{
+    float: initial;
+    background: white;
+    margin-top: 50px;
+}
+.formlabel span{
+    color: red;
+} 
+.dropzone_vendorinvoice {
+    height: 66px;
+    border: 2px solid #717386;
+    width: 395px;
+}
+
+
+
+@media screen and (min-width: 1600px) {
+    .dropzone_vendorinvoice {
+        height: 66px;
+        border: 2px solid #717386;
+        width: 395px;
+    }
+    
+  }
+  @media screen and (min-width: 1900px) {
+    .dropzone_vendorinvoice {
+        height: 66px;
+        border: 2px solid #717386;
+        width: 624px;
+    }
+    
+  }
+
+

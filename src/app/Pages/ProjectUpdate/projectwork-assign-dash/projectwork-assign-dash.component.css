@@ -1,0 +1,27 @@
+@media screen and (max-width: 1280px){
+   
+    .label1{
+        margin-left: 62px;
+    }
+
+}
+@media screen and (min-width: 1400px) {
+    .label1{
+        margin-left: 102px;
+    }
+}
+.bgOpen{
+    background-color:#29b1f0;
+}
+
+.bgred{
+    background-color: red
+}
+
+.bggreen{
+    background-color: rgb(26, 206, 26)
+}
+   
+
+
+  

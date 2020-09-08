@@ -1,0 +1,23 @@
+.closebutton{
+    /* margin-left: 106px; */
+    border-radius: 6px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 56px;
+    height: 36px;
+    margin-left: 599px;
+    margin-right: 20px;  
+  
+}
+.updatebutton{
+    border-radius: 6px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 56px;
+    height: 36px;
+    margin-left: 599px;
+    margin-right: 0px;
+}
+

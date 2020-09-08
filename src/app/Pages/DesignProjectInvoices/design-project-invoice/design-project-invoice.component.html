@@ -1,0 +1,197 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-4">
+        <h4 class="Pages_header">Raise Invoice</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-1">
+        <div class="mainrow">
+          <!-- <div class="col-lg-12 BreadChrumbProperties">
+            <span class="CommercialWorkspace">Project / New Contractor Assignments</span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="card maincard" style="margin-right: 8px;">
+      <div class="row">
+        <div class="col-lg-8 reqriedspan" style="padding: 25px;">
+          <br>
+          <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-3 ">
+              <p style="padding:5px">Project
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <select name="BuildingID" class="dropdown form-control " disabled [(ngModel)]="ProjectID" required
+                id="ProjectID" >
+                <option value="0" selected="selected">Select Project</option>
+                <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <p style="padding:5px">Client
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7 ">
+              <select class="form-control" [(ngModel)]="ClientID" (change)="GetClientID($event)" id="ClientID"
+                name="ClientID" required>
+                <option value="0"> Select Client</option>
+                <option value="{{Staff.id}}" *ngFor="let Staff of ClientList">{{Staff.firstName}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-3">
+              <p style="padding:5px">Phone No
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <input type="text" id="phoneno" [(ngModel)]="phoneno" name="phoneno" class="form-control"
+                placeholder="Phone No" disabled>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-3">
+              <p style="padding:5px">Email
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <input type="text" id="email" [(ngModel)]="email" name="email" class="form-control" placeholder="Email"
+                disabled>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-3">
+              <p style="padding:5px">Stage
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <select class="dropdown form-control " name="StageID" [(ngModel)]="StageID" id="StageID" required>
+                <option value="0"> Select Stage</option>
+                <option value="{{build.id}}" *ngFor="let build of StageList">{{build.stage}}</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-3">
+              <p style="padding:5px">Invoice No
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <input type="text" id="InvoiceNo" [(ngModel)]="InvoiceNo" name="InvoiceNo" class="form-control"
+                placeholder="Invoice No">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-3">
+              <p style="padding:5px">Invoice Date
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <input type="date" name="InvoiceDate" [(ngModel)]="InvoiceDate" id="InvoiceDate"
+                placeholder="Invoice Date" class="form-control  ">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-3">
+              <p style="padding:5px">Invoice Amount
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <input type="number" id="InvoiceAmount" [(ngModel)]="InvoiceAmount" name="InvoiceAmount"
+                class="form-control" placeholder="Invoice Amount">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-3">
+              <p style="padding:5px">VAT(%)
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <input type="number" (ngModelChange)="GetVat($event)" id="VAT" name="VAT" [(ngModel)]="VAT"
+                class="form-control" placeholder="VAT">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-3">
+              <p style="padding:5px">Total Amount
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <input type="number" id="TotalAmount" value="TotalAmount" [(ngModel)]="TotalAmount" name="TotalAmount"
+                class="form-control" placeholder="Total Amount">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-3">
+              <p style="padding:5px">Description
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <textarea placeholder=" Invoice Description " name="InvoiceDescription" [(ngModel)]="InvoiceDescription"
+                id="InvoiceDescription" rows="4" required class="form-control"></textarea>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-2">
+              <button class="savebutton" (click)="Save()" style="margin-bottom: 20px;
+                  margin-left: 111px;
+                  margin-top: 62px;" type="submit">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

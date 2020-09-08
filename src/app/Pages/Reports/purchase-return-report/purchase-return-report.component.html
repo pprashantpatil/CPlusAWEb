@@ -1,0 +1,94 @@
+<div class="container-fluid Pages_background ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">{{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="purchasereport"> {{purchasereturnreport_breadchrumb}} </span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <!-- <button type="button" routerLink="/UpdateVendor" routerLinkActive="active-link" id="btn_button"
+                class="dashbutton">New Vendor</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+      Export To Excel
+    </button>
+  </div>
+
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div class="row">
+      <div class="col-lg-4">
+        <h6>{{purchasereturnreport_SelectDate}}</h6>
+        <ng-daterangepicker [options]="options"></ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <h6>{{purchasereturnreport_Selectvendor}}</h6>
+        <select class="dropdown form-control maindropdown" name="Building" (change)="VendorSelected($event)"
+          required="">
+          <option value="none" selected="selected"> Select Vendor</option>
+          <option value="{{VendorPurchase.short}}" *ngFor="let VendorPurchase of VendorPurchaseList">
+            {{VendorPurchase.short}}</option>
+        </select>
+      </div>
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2">
+        <h6>{{purchasereturnreport_GrandTotal}}</h6>
+        <input type="text" name="Request" value="{{t}}" class="form-control maindropdown" required
+          id="txt_updateScheduleRequest" disabled>
+      </div>
+    </div>
+  </div>
+
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div>
+      <h6 class="paneltitle">{{purchasereturnreport_PageTitle}}
+      </h6>
+      <hr>
+      <div class="row">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr class="tableheader">
+              <td>{{purchasereturnreport_Invoice}}</td>
+              <td>{{purchasereturnreport_Return}}</td>
+              <td>{{purchasereturnreport_Vendor}}</td>
+              <td>{{purchasereturnreport_Item}} </td>
+              <td>{{purchasereturnreport_Available}}</td>
+              <td>{{purchasereturnreport_ReturnQTY}}</td>
+              <td>{{purchasereturnreport_TotalAmount}}</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Purchase of FilteredVendorPurchaseList">
+              <td>{{Purchase.invoiceNo}}</td>
+              <td>{{Purchase.returnDate|date}}</td>
+              <td>{{Purchase.vendorName}}</td>
+              <td>{{Purchase.itemName}}</td>
+              <td>{{Purchase.availableQty}}</td>
+              <td>{{Purchase.returnQty}}</td>
+              <td>{{Purchase.totalAmount}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+<div class="container-fluid Pages_background">
+    <div class="row">
+        <div class="col-lg-5">
+            <h4 style="margin-bottom: 25px;" class="Pages_header" style="margin-left: -14px;">STAFF WORKSCHEDULE</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+
+    </div>
+
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard " style="margin-left: -14px;margin-top: 30px;">
+
+        <div class="row" style="margin-top: 25px;">
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class=col-lg-2> </div>
+                    <div class="col-lg-3">
+                        <h6>Project
+                            <span style="color: red;">*</span>
+                        </h6>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="form-group">
+                            <select name="ProjectID" disabled [(ngModel)]="projectID" class="dropdown form-control " required id="ddl_updateassetsBuilding"
+                                (click)="GetProjectID($event)">
+                                <option value="0" selected="selected"> Select Project</option>
+                                <option value="{{build.id}}" *ngFor="let build of projectlist">{{build.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class=col-lg-2> </div>
+                    <div class="col-lg-3">
+                        <h6>Team Members
+                            <span style="color: red;">*</span>
+                        </h6>
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        <select name="TeamMembers" [(ngModel)]="TeamMembers" class="dropdown form-control " required id="ddl_updateassetsBuilding"
+                            (click)="GetMemberID($event)">
+                            <option value="0" selected="selected"> Members</option>
+                            <option value="{{build.staffID}}" *ngFor="let build of memberlist">{{build.name}}</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class=col-lg-2> </div>
+                    <div class="col-lg-3">
+                        <h6>Start Date
+                            <span style="color: red;">*</span>
+                        </h6>
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        <input [(ngModel)]="SDate" name="StartingDate" type="date" id="txt_JoiningDate" required class="form-control">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class=col-lg-2> </div>
+                    <div class="col-lg-3">
+                        <h6>End Date
+                            <span style="color: red;">*</span>
+                        </h6>
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        <input [(ngModel)]="EDate" (change)="GetEndDate()" name="EndDate" type="date" id="txt_JoiningDate" required class="form-control">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class=col-lg-2> </div>
+                    <div class="col-lg-3">
+                        <h6>Task
+                            <span style="color: red;">*</span>
+                        </h6>
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        <textarea rows="2" type="text" [(ngModel)]="Task" placeholder="Task" id="task" name="task_ttl" class="form-control" [disabled]="typeID==2"></textarea>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class=col-lg-2> </div>
+                    <div class="col-lg-3">
+                        <h6>Description
+                            <span style="color: red;">*</span>
+                        </h6>
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        <textarea rows="3" class="form-control" [(ngModel)]="Description" id="Descrtiption" name="Text_Description" placeholder="Description"
+                            required></textarea>
+                    </div>
+                </div>
+
+                <div *ngIf="paramID==null" class="row">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <button type="submit" style="margin-left: 140px;" (click)="Save()" class="btn btn-block btn-md savebutton">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="paramID!=null" class="row">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <button type="submit" style="margin-left: 140px;" (click)="Update()" class="btn btn-block btn-md savebutton">Update</button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+
+            </div>
+        </div>
+    </div>
+</div>

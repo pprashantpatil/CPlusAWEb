@@ -1,0 +1,414 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="Pages_header">Finance Approval</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <span class="CommercialWorkspace">Finance / Finance Approval</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row breadCrumbHeadderProperties">
+      <!-- <div class="col-lg-12 dashbutton"> -->
+      <!-- <button routerLink="/ProjectTrackings" type="button" id="btn_button">Project Tracking</button> -->
+      <!-- </div> -->
+    </div>
+    <!-- <div class="row breadCrumbHeadderProperties">
+              <div class="col-lg-12 dashbutton">
+                  <button (click)=export() type="button" id="btn_button">export</button>
+              </div>
+          </div> -->
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Finance Approval</h6>
+      </div>
+    </div>
+    <div class="row p-4">
+      <div class="col-lg-3">
+        <input type="text" placeholder="search.." [(ngModel)]="ProjectSearch" class="form-control"
+          id="txt_searchBuilding">
+      </div>
+
+      <!-- <div class="col-lg-3">
+        <select class="dropdown form-control" id="ddl_BuildingName" (change)="getbuildingID($event)" required>
+          <option value selected="selected">Select Building</option>
+          <option *ngFor="let Building of BuildingList" value="{{Building.name}}">{{Building.name}}</option>
+
+        </select>
+
+      </div> -->
+
+      <!-- <div class="col-lg-3">
+          <select class="dropdown form-control" id="ddl_BuildingName" (change)="getstage($event)" required>
+            <option value selected="selected">Select Stages</option>
+            <option *ngFor="let stage of Buildingstageslist" value="{{stage.milestone}}">{{stage.milestone}}</option>
+  
+          </select>
+  
+        </div>
+
+        <div class="col-lg-3">
+          <select class="dropdown form-control" id="ddl_BuildingName" (change)="getstatusID($event)" required>
+            <option value selected="selected">Select Status</option>
+            <option *ngFor="let status of StatusTypelist" value="{{status.statusName}}">{{status.statusName}}</option>
+  
+          </select>
+  
+        </div> -->
+
+
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive">
+          <table class="table table-bordered table-hover table-condensed">
+            <tbody>
+              <tr class="tableheader tableheaderfont buildingtable" style="background-color: #00b5d7; color: White;">
+                <td>Building </td>
+                <td>Unit</td>
+                <!-- <td>Contractor</td> -->
+                <td>Approved Stage</td>
+                <td>Percentage Complete</td>
+                <td>Amount to Pay</td>
+                <td>Finance Status</td>
+                <td>Amount</td>
+                <td>Action</td>
+              </tr>
+              <tr *ngFor="let proj of Projectlist | filter:ProjectSearch">
+                <td>{{proj.buildingName}}</td>
+                <td>{{proj.units}}</td>
+                <!-- <td>{{proj.contractor}}</td> -->
+                <td>{{proj.milestone}}</td>
+                <td>{{proj.percentageCompleted}}</td>
+                <td>{{proj.percentageCompleted}}</td>
+                <td *ngIf="proj.financeApproval==0">-</td>
+                <td *ngIf="proj.financeApproval==1">Approved</td>
+                <td *ngIf="proj.financeApproval==2">Rejected</td>
+                <td>{{proj.amount}}</td>
+                <td class="TableActions" style="width: 173px;">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <i class="fa fa-image" title="Add Photos" aria-hidden="true" data-toggle="modal"
+                        data-target="#myModaladd" title="Engineer Photo" (click)="getphpto(proj.id)"></i>
+                    </div>
+                    <div class="col-lg-6">
+                      <i class="fa fa-file-video-o" title="Add Video" aria-hidden="true" data-toggle="modal"
+                        data-target="#myModaladd1" style="margin-left: -63px;" title="Engineer Video"
+                        (click)="getVideo(proj.videoURL)"></i>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <i class="fa fa-file-video-o" title="Add Video" aria-hidden="true" data-toggle="modal"
+                        data-target="#myModaladd11111" title="QC Video" (click)="getQCVideo(proj.qcVideoURL)"></i>
+                    </div>
+                    <div class="col-lg-6">
+                      <i class="fa fa-image" title="Add Photos" aria-hidden="true" data-toggle="modal"
+                        data-target="#myModaladd22222" style="margin-left: -63px;" title="QC Photo"
+                        (click)="getQCphpto(proj.id)"></i>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-primary editable-table-button btn-xs" *ngIf="proj.financeApproval==0"
+                    data-toggle="modal" data-target="#myupdate" (click)="getmyupdate(proj.id)">Proceed To Pay</button>
+                  <button class="btn btn-primary editable-table-button btn-xs" *ngIf="proj.financeApproval==0"
+                    (click)="RejectFinance(proj.id)" style="margin: 3px;
+                    width: 95px;">Reject</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModaladd">
+  <div class="modal-dialog modal-lg">
+    <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+    <div class="modal-content" style="margin-top: 64px;
+    width: 73%;margin-left: 108px;">
+      <div class="modal-header">
+        <h4>Engineer Photos</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="row" style="padding: 39px;">
+        <div class="col-lg-6" *ngFor="let pic of photos"><br>
+          <img src="{{pic.photoURL}}" style="width:80%"><br>
+        </div><br><br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModaladd1">
+  <div class="modal-dialog modal-lg">
+    <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+    <div class="modal-content" style="margin-top: 64px;
+    width: 73%;margin-left: 108px;">
+      <div class="modal-header">
+        <h4>Engineer Videos</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="row" *ngFor="let vid1 of video" style="padding: 39px;">
+        <video width="500" height="300" controls>
+          <source src="{{vid1}}" type="video/mp4">
+
+        </video>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModaladd11111">
+  <div class="modal-dialog modal-lg">
+    <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+    <div class="modal-content" style="margin-top: 64px;
+    width: 73%;margin-left: 108px;">
+      <div class="modal-header">
+        <h4>QC Videos</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="row" *ngFor="let vid1 of video1" style="padding: 39px;">
+        <video width="500" height="300" controls>
+          <source src="{{vid1}}" type="video/mp4">
+
+        </video>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="myModaladd22222">
+  <div class="modal-dialog modal-lg">
+    <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+    <div class="modal-content" style="margin-top: 64px;
+    width: 73%;margin-left: 108px;">
+      <div class="modal-header">
+        <h4>QC Photos</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="row" style="padding: 39px;">
+        <div class="col-lg-6" *ngFor="let pic of qcphotos"><br>
+          <img src="{{pic.photoURL}}" style="width:80%"><br>
+        </div><br><br>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="myupdate">
+  <div class="modal-dialog modal-lg">
+    <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+    <div class="modal-content" style="margin-top: 64px;
+    width: 73%;margin-left: 108px;">
+      <div class="modal-header">
+        <h4>Finance Approval</h4>
+        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">Transaction No</p>
+        </div>
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-7">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <input type="text" class="form-control" id="invoice" [(ngModel)]="TransactionNo" name="invoiceno"
+                placeholder="Transaction No" style="margin-top: 7px;">
+              <div class="col-lg-4">
+                <div class="form-group"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">Amount</p>
+        </div>
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-7">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <input type="text" class="form-control" id="Amount" [(ngModel)]="Amount" name="Amount"
+                placeholder="Amount">
+              <div class="col-lg-4">
+                <div class="form-group"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">Date</p>
+        </div>
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-7">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <input [(ngModel)]="date" name="Date" type="date" id="txt_date" required class="form-control">
+              <div class="col-lg-4">
+                <div class="form-group"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1">
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">Comments</p>
+        </div>
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-7">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <textarea rows="3" [(ngModel)]="FinanceComment" id="txt_financecomments" name="financecomments" required
+                class="form-control " placeholder="Comments" required></textarea>
+              <div class="col-lg-4">
+                <div class="form-group"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1">
+        </div>
+      </div>
+
+
+
+
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">Payment Type</p>
+        </div>
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-7">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <select name="PaymentTypeID" class="dropdown form-control maindropdown" style="width: 297px;"
+                (change)="PaymentBasedTextBox($event)" required id="ddl_VendorName">
+                <option value="0">Select Type</option>
+                <option value="{{Pay.id}}" *ngFor="let Pay of PaymentTypelist">{{Pay.short}}</option>
+              </select>
+              <div class="col-lg-4">
+                <div class="form-group"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-lg-1">
+        </div>
+      </div>
+
+      <div class="row" *ngIf="ChequeID==3">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-3 ">
+          <p class="disablebutton">Cheque No
+          </p>
+        </div>
+        <div class="col-lg-6 ">
+          <input type="text" name="Chequeno" id="txt_NetAmount" class="form-control" placeholder="Cheque No"
+            style="margin-left: 14px;">
+        </div>
+      </div>
+      <br>
+
+      <div class="row" *ngIf="ChequeID==3">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-3 ">
+          <p class="disablebutton">Bank Name
+          </p>
+        </div>
+        <div class="col-lg-6 ">
+          <input type="text" name="BankName" id="txt_NetAmount" class="form-control" placeholder="Bank Name"
+            style="margin-left: 14px;">
+        </div>
+      </div>
+      <br>
+      <br>
+
+
+
+
+
+
+
+      <div class="col-lg-12">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-block btn-md"
+              style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);" data-dismiss="modal"
+              (click)="UpdateBuildingProjectProgressfinance();">Update</button>
+          </div>
+        </div>
+
+        <div class="col-lg-4"></div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

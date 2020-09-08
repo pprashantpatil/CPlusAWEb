@@ -1,0 +1,62 @@
+.building{
+    color: #00b5d7;
+    font-size: 18px;
+}
+
+.dashbutton {
+    border-radius: 10px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 160px;
+    height: 40px;
+    margin-bottom: 12px;
+}
+
+.mainrow{
+    float: left;
+    margin-top: 22px;
+}
+.tableheaderfont{
+    color: white;
+}
+.tableheader{
+    border: black;
+    background-color: #00b5d7;;
+    text-align: center;
+    
+    }
+
+    .excelbutton{
+        margin-left: auto;
+        margin-right: 20px;
+        background-color: #00b5d7;
+        color: white;
+        margin-bottom: 8px;
+    }
+
+    .row{
+        margin-right: -2px;
+    margin-left: -5px;
+    }
+
+
+    .purchasereport{
+        margin-left: 53px;
+    }
+    
+    @media screen and (min-width: 1600px) {
+        .purchasereport{
+            margin-left: 53px;
+        }
+    
+        
+      }
+      @media screen and (min-width: 1900px) {
+        .purchasereport{
+            margin-left: 259px;
+        }
+    
+      }
+    
+    

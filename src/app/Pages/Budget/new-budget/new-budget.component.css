@@ -1,0 +1,12 @@
+.Backgroundforipad{
+    margin-left: 0px;
+
+}
+
+@media screen and (max-width: 1024px) {
+    .Backgroundforipad{
+        margin-left: 50px;
+        margin-top: 16px;
+    }
+
+  }

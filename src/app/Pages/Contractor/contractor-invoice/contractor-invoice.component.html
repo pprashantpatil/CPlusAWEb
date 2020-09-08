@@ -1,0 +1,158 @@
+<div class="container-fluid Pages_background">
+
+  <div class="row">
+    <div class="col-lg-9">
+      <h4 class="Pages_header">New Invoice</h4>
+    </div>
+
+    <div class="col-lg-3">
+      <div class="mainrow">
+        <!-- <div class="col-lg-12 BreadChrumbProperties">
+          <span class="CommercialWorkspace"> PO / New Invoice</span>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="card maincard">
+
+    <div class="row">
+      <div class="col-lg-8 reqriedspan">
+        <br>
+        <form #loginForm="ngForm">
+          <div class="row">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Contractor
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <select class="form-control" id="Contractor" [(ngModel)]="ContractorID" (change)="GetContractor($event)"
+                name="Contractor" required>
+                <option value="0"> Select Contractor</option>
+                <option *ngFor="let stage of SubContractorList" value="{{stage.id}}">{{stage.company}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>PO Number
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <select class="form-control" [(ngModel)]="POID" (change)="GetPOAmount($event)" id="poid" name="poid"
+                required>
+                <option value="none"> Select PO Number</option>
+                <option *ngFor="let po of PONumber" value="{{po.id}}">{{po.id}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>PO Amount
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <input type="number" class="form-control" [(ngModel)]="poAmount" value="{{poAmount}}" disabled
+                name="POAmount" required id="POAmount" placeholder="PO Amount">
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Invoice date
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <input type="date" class="form-control" [(ngModel)]="InvoiceDate" name="InvoiceDate" required
+                id="InvoiceDate" placeholder="Invoice Amount">
+            </div>
+          </div>
+
+
+          <div class="row ">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Invoice No
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <input type="text" class="form-control" [(ngModel)]="InvoiceNumber" name="InvoiceNo" required
+                id="InvoiceNo" placeholder="InvoiceNo">
+            </div>
+          </div>
+
+
+          <div class="row ">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Invoice Amount
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <input type="number" class="form-control" [(ngModel)]="InvoiceAmount" name="Invoice" required id="Invoice"
+                placeholder="Invoice Amount">
+            </div>
+          </div>
+
+
+          <div class="row ">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Notes
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <textarea rows="5" id="Notes" class="form-control" [(ngModel)]="Notes" name="Notes"></textarea>
+            </div>
+          </div>
+
+
+          <div class="row" *ngIf="ParamsID==null">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Attactments
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <ngx-dropzone class="dropzone_vendorinvoice" [showPreviews]="true" name="Photo" id="dropzone_assetphoto">
+              </ngx-dropzone>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="ParamsID==null">
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-2">
+              <button class="savebutton" (click)="Save()" type="submit">Save</button>
+            </div>
+          </div>
+
+
+
+          <div class="row" *ngIf="ParamsID!=null">
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-2">
+              <button class="savebutton" (click)="Update()" type="submit">Update</button>
+            </div>
+          </div>
+
+          <br>
+          <br>
+
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>

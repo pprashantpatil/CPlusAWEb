@@ -1,0 +1,75 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 class="Pages_header" style="margin-left: -14px;">Add Employee Benefits</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <!-- <span class="building"> Staff/ Add Employee Benefits</span>  -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard " style="margin-left: -14px;margin-top: 29px;">
+    <!-- <div class="row">
+      <div class="col-lg-12">
+        <h3 class="panel-title formlabel">Add Employee Benefits</h3>
+      </div>
+    </div>
+    <hr> -->
+    <form>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Benefit Name</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" [(ngModel)]="EmployeeEntity.BenefitName" name="BenefitName" id="BenefitNameID" class="form-control" placeholder="Benefit Name">
+        </div>
+      </div>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Title</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" [(ngModel)]="EmployeeEntity.Title" name="Title" id="Title" class="form-control" placeholder="Title">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Description</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" [(ngModel)]="EmployeeEntity.Description" name="Description" id="Description" class="form-control" placeholder="Description">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Date</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="date" [(ngModel)]="EmployeeEntity.Date" name="datesawf" class="form-control" id="ddl_Date" min="{{mindate}}">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-2" *ngIf="EmployeeID==null">
+          <button class="savebutton" (click)="InsertEmployee_Benifits()" id="btn_utilitySave" type="submit">Save</button>
+        </div>
+
+        <div class="col-lg-2" *ngIf="EmployeeID!=null">
+          <button class="savebutton" (click)="UpdateBenifits()" id="btn_utilitySave" type="submit">Update</button>
+        </div>
+      </div>
+    </form>
+  </div>

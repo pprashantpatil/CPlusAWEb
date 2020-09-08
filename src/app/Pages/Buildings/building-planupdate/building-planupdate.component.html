@@ -1,0 +1,102 @@
+<div class="Mobilecss">
+    <div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="Pages_header">PROPERTY PLANS</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card maincard" style="    margin-right: 30px;">
+        <div class="row divForm" style="padding: 24px;">
+            <div class="col-lg-8 reqriedspan">
+                <form #loginForm="ngForm">
+                    <div class="row">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-2">
+                            <h6>Property Name
+                                <span>*</span>
+                            </h6>
+                        </div>
+                        <div class="col-lg-7">
+                            <select class="dropdown form-control" id="BuildingID" name="BuildingID" [(ngModel)]="BuildingID" required disabled>
+                                <option selected="selected">Select Property</option>
+                                <option *ngFor="let Building of Buildinglist" value="{{Building.id}}">{{Building.name}}
+                                </option>
+                            </select>
+                            <span class="Validationlabels" *ngIf='BuildingID==undefined && Isempty'>* Please Fill Property Name</span>
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="row ">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-2">
+                            <h6>{{updateBuildingPlan_PlanName}}
+                                <span>*</span>
+                            </h6>
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="text" [(ngModel)]="PlaneName" name="PlaneName" id="txt_PlanName" required class="form-control" placeholder="{{updateBuildingPlan_PlanName}}">
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="row ">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-2">
+                            <h6>Property Plan</h6>
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control" placeholder="Property Plan" accept="image/x-png,image/gif,image/jpeg,application/pdf"
+                                multiple (change)="handleFileSelect1($event)">
+
+                            <span class="Validationlabels" *ngIf='FileType==undefined && Isempty'>* Please Add Property Plan</span>
+                        </div>
+
+
+
+                    </div>
+                    <br>
+
+                    <div class="row ">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-2">
+                            <h6>Description
+                                <span>*</span>
+                            </h6>
+                        </div>
+                        <div class="col-lg-7 ">
+                            <textarea type="text" [(ngModel)]="Description" name="Description" id="Description" class="form-control" rows="4" placeholder="Description"></textarea>
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="row ">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-2">
+                            <h6>Version No
+                                <span>*</span>
+                            </h6>
+                        </div>
+                        <div class="col-lg-7 ">
+                            <input type="text" [(ngModel)]="VersionNo" name="VersionNo" id="VersionNo" class="form-control" placeholder="Version No">
+                        </div>
+
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-lg-5"></div>
+                        <div class="col-lg-2">
+                            <button type="submit" [disabled]="loginForm.form.invalid" class="btn btn-block btn-md" (click)="InsertBuildingPlan()" style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);">{{save}}</button>
+                        </div>
+                        <div class=col-lg-7> </div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

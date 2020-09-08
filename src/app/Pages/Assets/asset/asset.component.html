@@ -1,0 +1,520 @@
+<div class="container-fluid " style="background-color: #F0F3F4;    margin-left: -11px;">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header">{{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 dashbutton" style="margin-left: -8px;">
+            <button style="margin-left: 6px;" routerLink="/UpdateAsset" type="button" id="btn_button">Add New </button>
+            <button (click)="exporttoexcel()" type="button" id="btn_button"> Export To Excel</button>
+        </div>
+    </div>
+    <div class="shadow p-3 mb-5 bg-white rounded col-lg-12  maincard ">
+        <h6 class="paneltitle">{{asseT_PageTitle}}</h6>
+        <hr>
+        <div class="row">
+            <div class="col-lg-3">
+                <input type="text" id="txt_assetSearch" [(ngModel)]="AssetsSearch" placeholder="search.."
+                    class="form-control">
+            </div>
+
+            <div class="col-lg-3 ">
+                <select class="dropdown form-control " name="Floor" id="ddl_Floor" (change)="GetFloor($event)">
+                    <option value="0">Select Floor</option>
+                    <option value="{{floor.id}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+                </select>
+            </div>
+            <label class="label1">Count : {{Count}}</label>
+
+        </div>
+        <br>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-condensed">
+                <tbody>
+                    <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+                        <td>{{asseT_Name}}</td>
+                        <td>{{asseT_Type}}</td>
+                        <td>Property</td>
+                        <td>Barcode</td>
+                        <!-- <td>Asset Cost</td>
+                        <td>Depreciation %</td> -->
+                        <!-- <td>{{asseT_Address}} </td> -->
+                        <td>{{asseT_Floor}}</td>
+                        <!-- <td style="    width: 70px;">Unit</td> -->
+                        <td>{{asseT_Next_Service_Due}}</td>
+                        <td>{{asseT_Warranty_Till}}</td>
+                        <td>Supplier Name</td>
+                        <td>Supplier PhoneNo</td>
+                        <td>Supplier EmailID</td>
+                        <td>{{asseT_Actions}}</td>
+                    </tr>
+                </tbody>
+                <tr *ngFor="let Assets of FilteredAssetList|filter:AssetsSearch|filter:UnitID">
+                    <td>{{Assets.equipmentname}}</td>
+                    <td>{{Assets.short}}</td>
+                    <td>{{Assets.buildingname}}</td>
+                    <td>{{Assets.barcode}}</td>
+                    <!-- <td>{{Assets.assetCosts}}</td>
+                    <td>{{Assets.depreciationpercentage}}</td> -->
+                    <!-- <td>{{Assets   .address}}</td> -->
+                    <td>{{Assets.floor}}</td>
+                    <!-- <td>{{Assets.unit}}</td> -->
+                    <td style="width: 100px;">{{Assets.nextServiceDue|date}}</td>
+                    <td style="width: 100px;">{{Assets.warrantyTill |date}}</td>
+                    <td>{{Assets.vendorName}}</td>
+                    <td>{{Assets.vendorPhoneNo}}</td>
+                    <td>{{Assets.vendorEmailID}}</td>
+                    <td class="TableActions">
+                        <a (click)="EditAssets(Assets)" style="background-color: white">
+                            <i class="fa fa-edit" data-toggle="tooltip" title="edit"></i>
+                        </a>
+
+                        <a (click)="Invoice(Assets)" data-toggle="modal" data-target="#myModalInvoice"
+                            style="background-color: white">
+                            <i class="fa fa-info" data-toggle="tooltip" title="Invoice"></i>
+                        </a>
+
+                        <a (click)="Photos(Assets)" data-toggle="modal" data-target="#myModalPhotos"
+                            style="background-color: white">
+                            <i class="fa fa-picture-o" data-toggle="tooltip" title="Photos"></i>
+                        </a>
+
+                        <a (click)="Attachment(Assets)" data-toggle="modal" data-target="#myModalAttachments"
+                            style="background-color: white">
+                            <i class="fa fa-paperclip" data-toggle="tooltip" title="Attachments"></i>
+                        </a>
+
+                        <a (click)="DeleteAssets(Assets)" style="background-color: white">
+                            <i class="far fa-trash-alt" data-toggle="tooltip" title="Delete"></i>
+                        </a>
+
+                        <a data-toggle="modal" data-target="#myModalservices" (click)="getassetID(Assets.id)"
+                            style="background-color: white">
+                            <i class="fa fa-lightbulb-o" data-toggle="tooltip" title="Service History"></i>
+                        </a>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+        <!-- Modal -->
+        <div id="myModalInvoice" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content" style="margin-top: 100px;">
+                    <div class="modal-header">
+                        <h4>Invoice</h4>
+                        <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+                            <i class=" i" style="margin-left: 301px;
+                              margin-top: 10px;
+                              font-size: 16px; " data-toggle="modal" data-target="#AddInvoiceAttachments">Add Invoice
+                            </i>
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" *ngFor="let Invoice of Invoicelist">
+                            <div class="col-lg-6">
+                                <img style="width: 100%; height: auto;" src="{{Invoice.invoice}}">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <button type="button" (click)="InvoiceDetails(Invoice)"
+                                            class="btn btn-default popupUpdatebutton" data-dismiss="modal"
+                                            data-toggle="modal" data-target="#InvoiceUpdate">Update</button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-default popupUpdatebutton"
+                                            data-dismiss="modal" (click)="DeleteInvoice(Invoice)">Delete</button>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="{{Invoice.invoice}}" download style="background-color: white;">
+                                            <i class="fas fa-download" style="font-size: 29px;
+                                                    margin-top: 12px;
+                                                    margin-left: 14px;
+                                                    color: #00b5d7;
+                                                    background-color: white;" title="Download"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="NoImagesAvail">
+                        <div class="col-lg-12">
+                            <img src="assets/Login/noimage.jpg" style="width: 60%;height:auto;" data-dismiss="modal">
+                        </div>
+                    </div>
+                    <!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-default popupUpdatebutton"
+                            data-dismiss="modal">Close</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <div id="myModalPhotos" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content" style="margin-top: 100px;">
+                    <div class="modal-header">
+                        <h4>Photos</h4>
+                        <div data-toggle="tooltip" title="Add Photos" data-dismiss="modal">
+                            <i class=" i" style="margin-left: 301px;
+                                  margin-top: 10px;
+                                  font-size: 16px; " data-toggle="modal" data-target="#AddPhotos">Add Photos
+                            </i>
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" *ngFor="let Photos of Photoslist">
+                            <div class="col-lg-6">
+                                <img style="width: 100%; height: auto;" src="{{Photos.attachment}}">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-default popupUpdatebutton"
+                                            data-dismiss="modal" data-toggle="modal" data-target="#PhotosUpdate"
+                                            (click)="UploadPhotos(Photos.id)">Update</button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-default popupUpdatebutton"
+                                            data-dismiss="modal" (click)="DeletePhotos(Photos)">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="NoImagesAvail">
+                            <div class="col-lg-12">
+                                <img src="assets/Login/noimage.jpg" style="width: 60%;height:auto;"
+                                    data-dismiss="modal">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-default popupUpdatebutton"
+                            data-dismiss="modal">Close</button>
+                    </div> -->
+                </div>
+
+            </div>
+        </div>
+
+        <div id="myModalAttachments" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content" style="margin-top: 100px;">
+                    <div class="modal-header">
+                        <h4>Attachment</h4>
+                        <div data-toggle="tooltip" title="Add Attachment" data-dismiss="modal">
+                            <i class=" i" style="margin-left: 235px;
+                                      margin-top: 10px;
+                                      font-size: 16px; " data-toggle="modal" data-target="#AddAttachment">Add
+                                Attachment
+                            </i>
+                        </div>
+
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" *ngFor="let Attachment of Attachmentlist">
+                            <div class="col-lg-6">
+                                <img style="width: 100%; height: auto;" src="{{Attachment.attachment}}">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-default popupUpdatebutton"
+                                            data-dismiss="modal" data-toggle="modal" data-target="#AttachmentsUpdate"
+                                            (click)="UploadAssetsAttachments(Attachment)">Update</button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-default popupUpdatebutton"
+                                            data-dismiss="modal" (click)="DeleteAttachment(Attachment)">Delete</button>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="{{Attachment.attachment}}" download style="background-color: white;">
+                                            <i class="fas fa-download" style="font-size: 29px;
+                                                    margin-top: 12px;
+                                                    margin-left: 14px;
+                                                    color: #00b5d7;
+                                                    background-color: white;" title="Download"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="NoImagesAvail">
+                            <div class="col-lg-12">
+                                <img src="assets/Login/noimage.jpg" style="width: 60%;height:auto;"
+                                    data-dismiss="modal">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-default popupUpdatebutton"
+                            data-dismiss="modal">Close</button>
+                    </div> -->
+                </div>
+
+            </div>
+        </div>
+
+        <!--Modal AttachmentsUpdate-->
+        <div id="AttachmentsUpdate" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content " style="margin-top: -31px;">
+                    <div class="modal-header">
+                        <button type="button" class="close " data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <h5>Update Attachment
+                                </h5>
+                            </div>
+                            <div class="col-lg-8">
+                                <ngx-dropzone class="dropzone_vendorinvoice" [showPreviews]="true"
+                                    (filesAdded)="onFilesAddedAttached($event)" name="Attachment"
+                                    id="dropzone_assetphoto"></ngx-dropzone>
+                                <button type="button" class="btn btn-default popupbuttonupdate" data-dismiss="modal"
+                                    (click)="UpdateAssetsAttachments()">
+                                    Update </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Modal PhotosUpdate-->
+        <div id="PhotosUpdate" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content " style="margin-top: -31px;">
+                    <div class="modal-header">
+                        <button type="button" class="close " data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <h5>Update Attachment
+                                </h5>
+                            </div>
+                            <div class="col-lg-8">
+                                <ngx-dropzone class="dropzone_vendorinvoice" (filesAdded)="onFilesAddedPhotos($event)"
+                                    [showPreviews]="true" name="Photos" id="dropzone_assetphoto"></ngx-dropzone>
+                                <button type="button" class="btn btn-default popupbuttonupdate" data-dismiss="modal"
+                                    (click)="UpdateAssetsPhotos()">Update </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Modal InvoiceUpdate-->
+        <div id="InvoiceUpdate" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content " style="margin-top: -31px;">
+                    <div class="modal-header">
+                        <button type="button" class="close " data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <h5>Invoice Attachment
+                                </h5>
+                            </div>
+                            <div class="col-lg-8">
+                                <ngx-dropzone class="dropzone_vendorinvoice" style="width: 391px;"
+                                    id="dropzone_assetphoto" (filesAdded)="onFilesAddedInvoice($event)"
+                                    [showPreviews]="true" name="Invoice">
+                                </ngx-dropzone>
+                                <button type="button" class="btn btn-default popupbuttonupdate" data-dismiss="modal"
+                                    (click)="UpdateAssetsInvoice()">Update </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--New Invoice Add-->
+        <div id="AddInvoiceAttachments" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header" style="height: 73px;">
+                        <h4 class="modal-title">Add Invoice</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <ngx-dropzone [showPreviews]="true" (filesAdded)="onFilesAddedInvoices($event)"
+                                        class="dropzone_vendorinvoice" id="dropzone_Attachment"></ngx-dropzone>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <button data-toggle="modal" data-dismiss="modal" (click)="AddInvoices()"
+                                        class="savebutton" type="button">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="AddPhotos" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header" style="height: 73px;">
+                        <h4 class="modal-title">Add Photos</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <ngx-dropzone [showPreviews]="true" (filesAdded)="onFilesPhotos($event)"
+                                        class="dropzone_vendorinvoice" id="dropzone_Attachment"></ngx-dropzone>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <button data-toggle="modal" data-dismiss="modal" (click)="AddPhotos()"
+                                        class="savebutton" type="button">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="AddAttachment" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header" style="height: 73px;">
+                        <h4 class="modal-title">Add Attachments</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <ngx-dropzone [showPreviews]="true" (filesAdded)="onFilesNewAttachments($event)"
+                                        class="dropzone_vendorinvoice" id="dropzone_Attachment"></ngx-dropzone>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <button data-toggle="modal" data-dismiss="modal" (click)="AddAttachments()"
+                                        class="savebutton" type="button">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+</div>
+
+<div id="myModalservices" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="margin-top: 100px;width: 800px;right: 60px;margin-top: 143px;
+        width: 944px;
+        right: 125px;">
+            <div class="row" style="text-align: center;">
+                <div class="col-md-12">
+                    <h3>
+                        <b>SERVICE HISTORY
+                        </b>
+                    </h3>
+                </div>
+            </div>
+            <div class="modal-header">
+                <button type="button" class="close " data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-condensed">
+                        <tbody>
+                            <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+                                <td>Service Date</td>
+                                <td>Maintenance Request</td>
+                                <td>Photo</td>
+                                <td>AssetName</td>
+                                <td>Building</td>
+                                <td>Floor</td>
+                                <td>Unit </td>
+                                <!-- <td>DateTime</td> -->
+                                <td>Warranty Till</td>
+                                <td>Vendor Name</td>
+                                <td>Vendor Phone</td>
+                                <!-- <td>{{asseT_Actions}}</td> -->
+                            </tr>
+                        </tbody>
+                        <tr *ngFor="let Assets of mainserhistry">
+                            <td style="width: 100px;">{{Assets.serviceDate|date}}</td>
+                            <td>{{Assets.request}}</td>
+                            <td>
+                                <img src="{{Assets.attachment}}" style="width: 100px;">
+                            </td>
+                            <td>{{Assets.assetName}}</td>
+                            <td>{{Assets.buildingName}}</td>
+                            <td>{{Assets.floorName}}</td>
+                            <td>{{Assets.unitName}}</td>
+                            <!-- <td style="width: 100px;">{{Assets.serviceTime}}</td> -->
+                            <td>{{Assets.warrantyTill|date}}</td>
+                            <td>{{Assets.serviceBy}}</td>
+                            <td>{{Assets.vendorPhoneNo}}</td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-default popupUpdatebutton"
+                    data-dismiss="modal">Close</button>
+            </div> -->
+        </div>
+
+    </div>
+</div>

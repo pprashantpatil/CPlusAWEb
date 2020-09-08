@@ -1,0 +1,148 @@
+<div class="container-fluid Pages_background">
+    <div>
+        <div class="row">
+            <div class="col-lg-3">
+                <h4 class="Pages_header">{{pageMenuTitle}}</h4>
+            </div>
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-3">
+                <div class="mainrow">
+                    <div class="col-lg-12 BreadChrumbProperties">
+                        <span> {{updateresourcelocation_breadchrumb}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card maincard">
+        <div class="row p-2 ">
+            <div class="col-lg-12 pannel">
+                <h4 class="paneltitle">{{updateresourcelocation_PageTitle}}</h4>
+            </div>
+        </div>
+        <div class="row divForm">
+            <div class="col-lg-8 reqriedspan">
+                <br>
+                <br>
+                <div class="row ">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5> {{updateresourcelocation_Name}} <span>*</span> </h5>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <input [(ngModel)]="ResourceEntity.Name" name="Name" type="text" class="form-control"
+                            placeholder="{{updateresourcelocation_Name}}">
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5>{{updateresourcelocation_Building}}<span>*</span> </h5>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <select (change)="GetBuildingAssets($event)" [(ngModel)]="ResourceEntity.BuildingID"
+                            name="BuildingID" class="dropdown form-control">
+                            <option value="none">Select Building</option>
+                            <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                        </select>
+                    </div>
+
+                </div>
+                <br>
+                <div class="row ">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5>{{updateresourcelocation_Location}}<span class="required">*</span></h5>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <input [(ngModel)]="ResourceEntity.Location" name="Location" class="form-control"
+                            placeholder="{{updateresourcelocation_Location}}">
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5>{{updateresourcelocation_Parent_Resource}}</h5>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <input [(ngModel)]="ResourceEntity.ParentResource" name="ParentResource" type="text"
+                            class="form-control" placeholder="{{updateresourcelocation_Parent_Resource}}">
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5>{{updateresourcelocation_Asset}}</h5>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <select [(ngModel)]="ResourceEntity.EquipmentID" name="EquipmentID"
+                            class="dropdown form-control" placeholder="Select">
+                            <option value="none">Select Assets</option>
+                            <option value="{{Assets.id}}" *ngFor="let Assets of AssetsList">{{Assets.equipmentname}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h5>{{updateresourcelocation_Inventory}}</h5>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <select [(ngModel)]="ResourceEntity.InventoryID" name="InventoryID"
+                            class="dropdown form-control" placeholder="Select Inventory">
+                            <option value="none">Select Inventory</option>
+                            <option value="{{Inventory.id}}" *ngFor="let Inventory of InventoryList">{{Inventory.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row" *ngIf="paramID==null">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <h6>{{updateresourcelocation_Attachment}} <span>*</span> </h6>
+                    </div>
+                    <div class="col-lg-8 " >
+                        <!-- <ngx-dropzone [(ngModel)]="ResourceEntity.Attachment" name="Attachment"
+                            (filesAdded)="onFilesAddedAttached($event)" class="dropzone_vendorinvoice"
+                            [showPreviews]="true" id="dropzone_Attachment" class="dropzone_vendorinvoice">
+                        </ngx-dropzone> -->
+                        <input type="file" class="form-control" placeholder="Photo" accept="image/*" multiple
+                        (change)="handleFileSelect1($event)">
+                    </div>
+                </div>
+                <br>
+                <div class="row" style="margin-bottom: 30%" *ngIf="paramID==null">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-3"><button type="submit" (click)="InsertResourceLocation()"
+                            class="btn btn-block btn-md savebutton">{{updateresourcelocation_button_save}}</button>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom: 30%" *ngIf="paramID!=null">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-3"><button type="submit" (click)="UpdateResourceLocation()"
+                            class="btn btn-block btn-md savebutton">update</button>
+                    </div>
+                </div>
+
+                <br>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- sfsdf -->

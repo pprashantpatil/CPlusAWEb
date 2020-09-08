@@ -1,0 +1,86 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header"> Update Tenant Inventory Master</h4>
+    </div>
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> Tenant/ Update Inventory Master </span></div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="card maincard">
+    <h4 class="paneltitle" style="margin-top: 12px;"> Update Inventory Master</h4>
+    <hr>
+    <form #loginForm="ngForm">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <p class="formlabel">Item Type<span>*</span></p>
+            </div>
+            <div class="col-lg-7">
+              <div class="form-group">
+                <select class="dropdown form-control" [(ngModel)]="Equipmentid" name="Equipmentid"
+                  (change)="GetEquipmentID($event)">
+                  <option>Select Type</option>
+                  <option *ngFor="let list of equipmentlist" value="{{list.id}}">{{list.short}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-4"></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <p class="formlabel">Item Name<span>*</span></p>
+            </div>
+            <div class="col-lg-7">
+              <div class="form-group">
+                <input type="text" [(ngModel)]="itemname" name="itemname" class="form-control" placeholder="Item Name"
+                  id=txt_ItemDescription>
+              </div>
+            </div>
+            <div class="col-lg-4"></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <p class="formlabel">Item Description<span>*</span></p>
+            </div>
+            <div class="col-lg-7">
+              <div class="form-group">
+                <input type="text" [(ngModel)]="itemdesc" name="itemdesc" class="form-control"
+                  placeholder="Item Description" id=txt_ItemDescription>
+              </div>
+            </div>
+            <div class="col-lg-4"></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-1"> </div>
+            <div class="col-lg-2">
+              <h5 class="formlabel">Photo</h5>
+            </div>
+            <div class="col-lg-7">
+              <ngx-dropzone [multiple]="false" (change)="onattachmentUpload($event)" style="width: 100%;height: 40px "
+                class="dropzone_vendorinvoice">
+              </ngx-dropzone>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-5"> </div>
+            <div class="col-lg-3">
+              <button class="btn btn-block btn-md savebutton" (click)="UpdateTenant()">Update</button>
+            </div>
+            <div class="col-lg-4"></div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>

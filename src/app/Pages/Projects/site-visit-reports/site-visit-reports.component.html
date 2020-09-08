@@ -1,0 +1,101 @@
+<div class="container-fluid Pages_background">
+    <div class="row">
+      <div class="col-lg-5">
+        <h4 style="margin-bottom: 25px;" class="Pages_header">SITE VISIT REPORTS</h4>
+      </div>
+      <div class="col-lg-3">
+      </div>
+  
+    </div>
+    <div class="container-fluid Pages_background">
+      <div>
+        <div class="card maincard">
+          <div class="row">
+            <div class="col-lg-8 reqriedspan">
+              <br>
+              <form #loginForm="ngForm">
+                <div class="row" >
+                  <div class=col-lg-2> </div>
+                  <div class="col-lg-3">
+                    <h6>Project<span>*</span> </h6>
+                  </div>
+                  <div class="col-lg-7 form-group">
+                    <select name="ProjectID" class="dropdown form-control " required id="ddl_updateassetsBuilding"
+                      (click)="GetProjectID($event)">
+                      <option value="0" selected="selected">Select Project</option>
+                      <option value="{{build.id}}" *ngFor="let build of projectlist">{{build.project}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class=col-lg-2> </div>
+                  <div class="col-lg-3">
+                    <h6>Name<span>*</span> </h6>
+                  </div>
+                  <div class="col-lg-7 form-group">
+                    <input type="text" [(ngModel)]="Name"  name="Name" class="form-control" >
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class=col-lg-2> </div>
+                  <div class="col-lg-3">
+                    <h6>Date<span>*</span> </h6>
+                  </div>
+                  <div class="col-lg-7 form-group">
+                    <input [(ngModel)]="Date" name="Date" type="date" id="txt_Date" required class="form-control">
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class=col-lg-2> </div>
+                  <div class="col-lg-3">
+                    <h6 >Time<span>*</span> </h6>
+                  </div>
+                  <div class="col-lg-7">
+                    <div class="form-group">
+                      <input type="time" [(ngModel)]="Time" name="Time" class="form-control" placeholder="Time" required>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class=col-lg-2> </div>
+                  <div class="col-lg-3">
+                    <h6>Observation<span>*</span> </h6>
+                  </div>
+                  <div class="col-lg-7 form-group">
+                    <textarea rows="3" type="text" [(ngModel)]="Observation" name="Observation"  class="form-control" ></textarea>
+                  </div>
+                </div>
+  
+  
+                <div class="row">
+                  <div class=col-lg-2> </div>
+                  <div class="col-lg-3">
+                    <p class="formlabel">Attachments<span style="color: red;">*</span></p>
+                  </div>
+                  <div class="col-lg-7 form-group">
+                    <input type="file" class="form-control" 
+                         (change)="handleFileSelect2($event)" multiple>
+  
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class=col-lg-1> </div>
+                  <div class="col-lg-4"></div>
+                  <div class="col-lg-2 ">
+                    <button type="submit" style="margin-bottom: 100px"
+                      class="btn btn-block btn-md savebutton" (click)="Save()">Save</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

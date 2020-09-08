@@ -1,0 +1,65 @@
+.formlabel span{
+    color: red;
+} 
+.formlabel{
+    color:#666666;
+}
+  
+.dashbutton button {
+    float: right;
+    border-radius: 10px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 30px;
+    margin-bottom: 12px;
+}
+.mainrow{
+    float: right;
+    margin-top: 26px;
+}
+.maincard{
+    float: initial;
+    background: white;
+
+}
+.dropzone_vendorinvoice {
+    border: 2px solid #717386;   
+    height: 91px;
+    max-width: 321px;
+    min-width: auto;
+}
+h1{
+    font-size: 16px;
+}
+
+
+@media screen and (min-width: 1600px) {
+    .dropzone_vendorinvoice {
+        border: 2px solid #717386;   
+        height: 91px;
+        max-width: 321px;
+        min-width: auto;
+    }
+  }
+  @media screen and (min-width: 1900px) {
+    .dropzone_vendorinvoice {
+        border: 2px solid #717386;   
+        height: 91px;
+        max-width: 495px;
+        min-width: auto;
+    }
+  }
+  
+
+
+  @media screen and (max-width: 1024px) {
+    .header{
+        margin-top: 60px;
+        
+    }
+   
+  
+    }
+

@@ -1,0 +1,662 @@
+<div class="container-fluid Pages_background">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="Pages_header"> {{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span class="building"> {{updateTenant_breadchrumb}} </span> </div>
+            </div>
+        </div>
+    </div><br>
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard ">
+        <div>
+            <div class="col-lg-3">
+                <h3 class="panel-title clearfix formlabel">{{updateTenant_PageTitle}}
+                </h3>
+            </div>
+            <div class="col-lg-6"></div>
+            <div class="col-lg-3  dashbutton ">
+                <button type="button" style="margin-top: -11px;margin-right: -11px; " routerLink="/Tenant"
+                    routerLinkActive="active-link" id="btn_button" class="">
+                    {{updateTenant_button_Dashboard}}
+                </button>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div class="row">
+            <div class="col-lg-8">
+                <form>
+
+                    <div class="row">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_Building}}</h5>
+                        </div>
+                        <div class="col-lg-6 ">
+                            <select id="ddl_updatetenentBuilding" [(ngModel)]="tenant.BuildingID" name="BuildingID"
+                                class="dropdown form-control updatebuildingddl"
+                                (change)="getfloorlist($event.target.value)" placeholder="Select Building">
+                                <option value="0" class="" selected="selected">Select Building</option>
+                                <option *ngFor="let building of buildinglist" value="{{building.id}}">{{building.name}}
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row ">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_Floor}} </h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <select id="ddl_updatetenentFloor" [(ngModel)]="tenant.FloorID" name="FloorID"
+                                class="dropdown form-control updatebuildingddl"
+                                (change)="getunitlist($event.target.value)" placeholder="Select Floor">
+                                <option value="0" class="" selected="selected">Select Floor</option>
+                                <option *ngFor="let floor of floorlist" value="{{floor.id}}">{{floor.floor}}</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row ">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_Unit}} </h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <select id="ddl_updatetenentUnit" name="Unit" [(ngModel)]="tenant.Unit"
+                                class="dropdown form-control updatebuildingddl"
+                                (change)="getunitid($event.target.value)" placeholder="Select Unit">
+                                <option value="0" class="" selected="selected">Select Unit</option>
+                                <option *ngFor="let unit of unitList" value="{{unit.id}}">{{unit.unitID}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_TenantName}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="txt_TenantName" class="form-control updatebuildingddl" name="Tenant"
+                                [(ngModel)]="tenant.Tenant" placeholder="{{updateTenant_TenantName}}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_TenantType}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <select id="ddl_updatetenentTenantType" name="TenantTypeID"
+                                [(ngModel)]="tenant.TenantTypeID" class="dropdown form-control updatebuildingddl"
+                                (change)="gettenanttypeid($event.target.value)">
+                                <option value="0" selected="selected">Select</option>
+                                <option *ngFor="let tenanttype of TenentTypelist" value="{{tenanttype.id}}">
+                                    {{tenanttype.short}}</option>
+
+                            </select>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_PrimaryContactName}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" name="PrimaryContact" [(ngModel)]="tenant.PrimaryContact"
+                                id="txt_TenantPrimaryContactName" class="form-control updatebuildingddl"
+                                placeholder="{{updateTenant_PrimaryContactName}}">
+                        </div>
+                    </div><br>
+                    <!-- <div class="row">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_NumberOfResidents}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" maxlength="1" min="0" max="9" name="NoOfResidents"
+                                id="txt_TenantNoOfResidents" [(ngModel)]="tenant.NoOfResidents"
+                                class="form-control updatebuildingddl" placeholder="{{updateTenant_NumberOfResidents}}"
+                                onkeypress='return (event.charCode > 47 && event.charCode < 58)'>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_NumberOfAdults}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" maxlength="1" min="0" max="9" name="NoOfAdults" id="txt_TenantAdults"
+                                [(ngModel)]="tenant.NoOfAdults" class="form-control updatebuildingddl"
+                                placeholder="{{updateTenant_NumberOfAdults}}"
+                                onkeypress='return (event.charCode > 47 && event.charCode < 58)'>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_NumberOfChildren}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" maxlength="1" min="0" max="9" disabled="disabled" name="NoOfChildren" id="txt_TenantChildren"
+                                class="form-control updatebuildingddl" placeholder="{{updateTenant_NumberOfChildren}}"
+                                value="{{tenant.NoOfResidents-tenant.NoOfAdults}}"
+                                onkeypress='return (event.charCode > 47 && event.charCode < 58)'>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_NumberOfPets}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" maxlength="1" min="0" max="9" name="NoOfPets" id="txt_TenantPets"
+                                [(ngModel)]="tenant.NoOfPets" class="form-control updatebuildingddl"
+                                placeholder="{{updateTenant_NumberOfPets}}"
+                                onkeypress='return (event.charCode > 47 && event.charCode < 58)'>
+                        </div>
+                    </div><br> -->
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_PhoneNumber}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="number" name="PhoneNo" id="txt_TenantPhoneNumber" [(ngModel)]="tenant.PhoneNo"
+                                class="form-control updatebuildingddl" placeholder="{{updateTenant_PhoneNumber}}">
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_EmergencyContactNumber}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="number" name="EmergencyPhoneNo" id="txt_TenantEmergencyContactNumber"
+                                [(ngModel)]="tenant.EmergencyNumber" class="form-control updatebuildingddl"
+                                placeholder="{{updateTenant_EmergencyContactNumber}}">
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_Email}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="email" name="EmailID" id="txt_TenantEmail"
+                                class="form-control updatebuildingddl" [(ngModel)]="tenant.EmailID"
+                                placeholder="{{updateTenant_Email}}">
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_Address}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <textarea rows="5" name="Address" id="txt_TenantAddress"
+                                class="form-control updatebuildingddl" [(ngModel)]="tenant.Address"
+                                placeholder="{{updateTenant_Address}}"></textarea>
+                        </div>
+                    </div><br>
+
+                    <div class="row">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h6>Country </h6>
+                        </div>
+                        <div class="col-lg-7 form-group">
+                            <select class="form-control" id="ddl_tenantBillType" [(ngModel)]="tenant.Country"
+                                style="width: 286px;" (change)="getcountryID($event)" name="Country" required>
+                                <option value="none"> Select Country</option>
+                                <option value="{{country.id}}" *ngFor="let country of Countrylist">{{country.short}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="row">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5>State</h5>
+                        </div>
+                        <div class="col-lg-7 form-group">
+                            <select class="form-control" id="ddl_BillType" style="width: 286px;"
+                                (change)="getstateID($event)" name="stateID1">
+                                <option value="none">Select State</option>
+                                <option value="{{state.id}}" *ngFor="let state of Statelist">{{state.short}}
+                                </option>
+                            </select>
+                        </div>
+                    </div> -->
+
+
+                    <div class="row">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5>City</h5>
+                        </div>
+                        <div class="col-lg-7 form-group">
+                            <select class="form-control" [(ngModel)]="tenant.City" id="ddl_BillType"
+                                style="width: 286px;" (change)="getcityID($event)" name="cityID1">
+                                <option value="none"> Select City</option>
+                                <option value="{{city.id}}" *ngFor="let city of citylist">{{city.short}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">Postal code</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="number" name="Zipcode" id="txt_TenantZipcode" [(ngModel)]="tenant.Zipcode"
+                                class="form-control updatebuildingddl" placeholder="Postal code">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">Lease Period(Months)</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="number" name="LeasePeriod" id="txt_TenantLeasePeriod"
+                                [(ngModel)]="tenant.LeasePeriod" class="form-control updatebuildingddl"
+                                placeholder="{{updateTenant_LeasePeriod}}">
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_Rent_Month}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="txt_TenantRent" name="RentPerMonth"
+                                class="form-control updatebuildingddl" [(ngModel)]="tenant.RentPerMonth"
+                                placeholder="{{updateTenant_Rent_Month}}"
+                                onkeypress='return (event.charCode > 47 && event.charCode < 58)'>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_Security_Deposit}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="number" id="txt_TenantSecurityDeposit" name="SecurityDeposit"
+                                class="form-control updatebuildingddl" [(ngModel)]="tenant.SecurityDeposit"
+                                placeholder="{{updateTenant_Security_Deposit}}">
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-3">
+                            <p style="padding:5px">{{updateTenant_Rent_Increase_Year}}</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <input type="text" maxlength="3" max="100" min="0" id="txt_TenantRentIncrease"
+                                    name="RentIncrement" [(ngModel)]="tenant.RentIncrement" class="form-control "
+                                    placeholder="{{updateTenant_Rent_Increase_Year}}">
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <p>%</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <select id="ddl_updatetenentYear" name="RentIncrementTypeID"
+                                    [(ngModel)]="tenant.RentIncrementTypeID" class="dropdown form-control "
+                                    (change)="getrentIncrementid($event.target.value)">
+                                    <option value="0" selected="selected">Select</option>
+                                    <option *ngFor="let rentIncrement of rentIncrementList"
+                                        value="{{rentIncrement.id}}">{{rentIncrement.short}}</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_RentDueOn}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="txt_TenantRentDue" name="RentDue" [(ngModel)]="tenant.RentDue"
+                                class="form-control updatebuildingddl" placeholder="{{updateTenant_RentDueOn}}">
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_MaintenanceAmount_Month}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="txt_TenantMaintainanceAmount" name="MaintenanceAmount"
+                                [(ngModel)]="tenant.MaintenanceAmount" class="form-control updatebuildingddl"
+                                placeholder="{{updateTenant_MaintenanceAmount_Month}} "
+                                onkeypress='return (event.charCode > 47 && event.charCode < 58)'>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_SinkingFundAmount}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="txt_TenantSinkingFund" name="SinkingFund"
+                                [(ngModel)]="tenant.SinkingFund" class="form-control updatebuildingddl"
+                                placeholder="{{updateTenant_SinkingFundAmount}} "
+                                onkeypress='return (event.charCode > 47 && event.charCode < 58)'>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_OtherFee}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="txt_TenantOtherFees" name="OtherFee" [(ngModel)]="tenant.OtherFee"
+                                class="form-control updatebuildingddl" placeholder="{{updateTenant_OtherFee}}"
+                                onkeypress='return (event.charCode > 47 && event.charCode < 58)'>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">Inventory Provided By Owner</h5>
+                        </div>
+                        <div class="col-lg-5">
+                            <ng-multiselect-dropdown (onSelectAll)="onSelectAll($event)"
+                                [(ngModel)]="selecteditemsModule" (onDeSelect)="onItemDeSelect($event)"
+                                [placeholder]="'Select'" [data]="itemlist" [settings]="itemdd"
+                                (onSelect)="getitemID($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">Notice Period</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="txt_TenantWaterMeter" name="NoticePeriod"
+                                [(ngModel)]="tenant.NoticePeriod" class="form-control updatebuildingddl "
+                                placeholder="Notice Period">
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_ExitTerms}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <textarea rows="5" id="txt_TenantExitTerms" name="Terms" [(ngModel)]="tenant.Terms"
+                                class="form-control updatebuildingddl"
+                                placeholder="{{updateTenant_ExitTerms}}"></textarea>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_ElectricityMeterNumber}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="txt_TenantElectricityMeter" name="ElectricityNo"
+                                [(ngModel)]="tenant.ElectricityNo" class="form-control updatebuildingddl"
+                                placeholder="{{updateTenant_ElectricityMeterNumber}}">
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_WaterMeterNumber}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="txt_TenantWaterMeter" name="WatermeterNo"
+                                [(ngModel)]="tenant.WatermeterNo" class="form-control updatebuildingddl "
+                                placeholder="{{updateTenant_WaterMeterNumber}}">
+                        </div>
+                    </div><br>
+                    <!-- <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_GasMeterNumber}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="txt_TenantGasMater" name="GasMeterNo" [(ngModel)]="tenant.GasMeterNo"
+                                class="form-control updatebuildingddl" placeholder="{{updateTenant_GasMeterNumber}}">
+                        </div>
+                    </div>
+                    <hr> -->
+                    <h5>{{updateTenant_EBANKDETAILS}}:</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_BankName}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" style="margin: 7px;" name="BankName" [(ngModel)]="tenant.BankName"
+                                id="txt_TenantBankName" class="form-control updatebuildingddl"
+                                placeholder="{{updateTenant_BankName}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_AccountNumber}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="number" style="margin: 7px;" name="AccountNo" [(ngModel)]="tenant.AccountNo"
+                                id="txt_TenantAccountNumber" class="form-control updatebuildingddl"
+                                placeholder="{{updateTenant_AccountNumber}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=col-lg-1> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_AccountType}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <select class="dropdown form-control updatebuildingddl" name="AccountTypeID"
+                                [(ngModel)]="tenant.AccountTypeID" style="margin: 7px;" id="ddl_updatetenentAccountType"
+                                (change)="getaccounttype($event.target.value)">
+                                <option value="none" class="" selected="selected">Select Account Type</option>
+                                <option *ngFor="let bankAccountType of bankAccountTypelist"
+                                    value="{{bankAccountType.id}}">{{bankAccountType.short}}</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_SwiftCode}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" style="margin: 7px;" name="SwiftCode" [(ngModel)]="tenant.SwiftCode"
+                                id="txt_TenantSwiftCode" class="form-control updatebuildingddl"
+                                placeholder="{{updateTenant_SwiftCode}}">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_Comments}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <textarea rows="5" style="margin: 7px;" name="Comments" [(ngModel)]="tenant.Comments"
+                                id="txt_TenantComments" class="form-control updatebuildingddl"
+                                placeholder="{{updateTenant_Comments}}"></textarea>
+                        </div>
+                    </div><br>
+                    <div class="row" *ngIf="!isedit">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">{{updateTenant_Attachment}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <ngx-dropzone style="margin: 7px;" [showPreviews]="true" #dropzone_forDocument
+                                (filesAdded)="TenantDocumentUpload($event)" class="dropzone_vendorinvoice"
+                                id="dropzone_Attachment"></ngx-dropzone>
+                            <button class="btn btn-default close" (click)="dropzone_forDocument.reset()">Reset</button>
+                        </div>
+                    </div><br>
+                    <div class="row" *ngIf="!isedit">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">Agreement</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <ngx-dropzone style="margin: 7px;" [showPreviews]="true" #dropzone_forAggrement
+                                (filesAdded)="TenantAgreementUpload($event)" class="dropzone_vendorinvoice"
+                                id="dropzone_Aggrement"></ngx-dropzone>
+                            <button class="btn btn-default close" (click)="dropzone_forAggrement.reset()">Reset</button>
+                        </div>
+                    </div><br>
+                    <div class="row" *ngIf="!isedit">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">Tenant Photo</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <ngx-dropzone style="margin: 7px;" [showPreviews]="true" #dropzone_forProfilePhoto
+                                [multiple]="false" [accept]="'image/png,image/jpeg'"
+                                (filesAdded)="tentantProfilePhotoupload($event)" class="dropzone_vendorinvoice"
+                                id="dropzone_ProfilePhoto"></ngx-dropzone>
+                            <button class="btn btn-default close"
+                                (click)="dropzone_forProfilePhoto.reset()">Reset</button>
+
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel"> {{updateTenant_LeaseStartDate}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="date" style="margin: 7px;" name="LeaseStartDate"
+                                [(ngModel)]="tenant.LeaseStartDate" id="txt_TenantLeaseStartDate"
+                                class="form-control updatebuildingddl" placeholder="{{updateTenant_LeaseStartDate}}">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel"> {{updateTenant_LeaseEndDate}}</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="date" style="margin: 7px;" name="LeaseEndDate"
+                                [(ngModel)]="tenant.LeaseEndDate" id="txt_TenantLeaseEndDate"
+                                class="form-control updatebuildingddl" placeholder="{{updateTenant_LeaseEndDate}}">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-1"> </div>
+                        <div class="col-lg-3">
+                            <h5 class="formlabel">Status</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <select name="Rentformonth" [(ngModel)]="tenant.ConstructionStatusID"
+                                class="dropdown form-control " id="ddl_rentRentMonth" placeholder="Select Status">
+                                <option  value="0" selected="selected">Select Status</option>
+                                <option value="13">Under Construction</option>
+                                <option value="14">Construction Completed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                        </div>
+                        <div class="col-lg-2">
+                            <button class="savebutton" id="btn_maintainancesave" (click)="inserttenatdetails()"
+                                type="submit">{{updateTenant_button_save}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4" *ngIf="isedit">
+                <h4>Attachments</h4>
+                <div id="myCarouselAttachments" class="carousel slide updatetenentattachments" data-ride="carousel"
+                    *ngIf="editAttachmentslist.length>0">
+                    <!-- Indicators -->
+                    <!-- <ol class="carousel-indicators" >
+                                <li data-target="#myCarousel" data-slide-to="0" class="active" ></li>
+                                <li data-target="#myCarousel" data-slide-to="1" ></li>
+                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                            </ol> -->
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active" *ngIf="editAttachmentslist">
+                            <img src="{{editAttachmentslist[0].attachment}}" alt="">
+                        </div>
+
+                        <div class="item" *ngFor="let atachment of editAttachmentslist| slice:1">
+                            <img src="{{atachment.attachment}}" alt="">
+                        </div>
+
+                        <!-- <div class="item">
+                                    <img src="http://192.168.1.2//FMSTestApi\Images\Equipment\Photo\201907171515071stAmaze.jpg" alt="New york">
+                                </div> -->
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarouselAttachments" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarouselAttachments" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <h4>Agreement</h4>
+                <div id="myCarouselAggrement" class="carousel slide updatetenentattachments" data-ride="carousel"
+                    *ngIf="editAggrementlist.length>0">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="{{editAggrementlist[0].attachment}}" alt="">
+                        </div>
+                        <div class="item" *ngFor="let Aggrement of editAggrementlist| slice:1">
+                            <img src="{{Aggrement.attachment}}" alt="">
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarouselAggrement" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarouselAggrement" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <h4>Profile Photo</h4>
+                <div *ngIf="editProfilephoto">
+                    <img src="{{editProfilephoto}}" class="profilepic" alt="">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

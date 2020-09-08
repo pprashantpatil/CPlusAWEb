@@ -1,0 +1,69 @@
+.tableresponsive{
+    /* padding: 23px; */
+    margin-left: 1px;
+}
+.tableheaderfont{
+    color: white;
+}
+.tableheader{
+    border: black;
+    background-color: #00b5d7;;
+    text-align: center;
+    
+    }
+    .mainrow{
+        float: right;
+        margin-top: 26px;
+    }
+    .maincard{
+        float: initial;
+        background: white;
+    
+    }
+    .excelbutton{
+        margin-left: auto;
+        margin-right: 20px;
+        background-color: #00b5d7;
+        color: white;
+        margin-bottom: 8px;
+    }
+
+    
+@media screen and (max-width: 1280px) {
+    .Pages_header{
+        margin-top: 60px;
+        margin-left: 15px;
+    }
+    .maincard{
+        margin-left: 12px;
+        
+    }
+    .ddd{
+        margin-top: -26px;
+    }
+    .dddd{
+        margin-left:668px;
+   }
+   .label1{
+    margin-left: 144px;
+}
+  
+    }
+    @media screen and (min-width: 1400px) {
+        .Pages_header{
+            margin-left: 3px;
+        }
+        .maincard{
+            margin-left: 0px;
+            
+        }
+        #btn_button{
+            margin-left: 6px;
+        }
+        .dddd{
+             margin-left:855px;
+        }
+        .label1{
+            margin-left: 198px;
+        }
+    }

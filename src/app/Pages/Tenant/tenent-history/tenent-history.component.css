@@ -1,0 +1,75 @@
+button.btn.btn-primary {
+    background: #fec501;
+    border-color: #fec501;
+}
+.mainrow{
+    float: right;
+    margin-top: 26px;
+}
+.tableheaderfont{
+    color: white;
+}
+.tableheader{
+    border: black;
+    background-color: #00b5d7;
+    text-align: center;
+    
+    }
+    .popupbtn{
+        border-radius: 10px;
+       background-color: #00b5d7;
+       color: white;
+       border: none;
+       width: 68px;
+       height: 35px;
+    }
+
+    .popupbutton{
+        background-color: #00b5d7;
+        color: white;
+        /* margin: 11px; */
+    }
+    
+    .popupbuttonupdate{
+        background-color: #00b5d7;
+        color: white;
+        /* margin: 11px; */
+        margin-left: 20px;
+        margin: 10px;
+    }
+    
+    
+    
+    .popupUpdatebutton{
+        background-color: #00b5d7;
+        color: white;
+        margin: 11px;
+    }
+    .popupbuttonAcpt{ 
+        background-color: #00b5d7;
+        height: 35px;
+        width: 130px;
+        border-radius: 10px;
+        color: white;
+    }
+    .popupbuttonRej{
+        background-color: #00b5d7;
+        height: 35px;
+        width: 130px;
+        border-radius: 10px;
+        color: white;
+    }
+    .dropzone_vendorinvoice {
+        height: 66px;
+        border: 2px solid #717386;
+        max-width: 404px;
+        min-width: auto;
+    }
+
+    .excelbutton{
+        margin-left: auto;
+        margin-right: 20px;
+        background-color: #00b5d7;
+        color: white;
+        margin-bottom: 8px;
+    }

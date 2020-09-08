@@ -1,0 +1,76 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="Pages_header" style="margin-left: -14px;">Holiday List</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <div class="col-lg-12" style="    margin-left: 66px;">
+            <!-- <span class="CommercialWorkspace"> Staff / Holiday List</span> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 dashbutton" style="margin-left: -14px;">
+        <button routerLink="/NewHolidaysLists" type="button" id="btn_button">Add New Holiday</button>
+      </div>
+    </div>
+    <!-- <div class="row breadCrumbHeadderProperties">
+              <div class="col-lg-12 dashbutton">
+                  <button (click)=export() type="button" id="btn_button">export</button>
+              </div>
+          </div> -->
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard"  style="margin-left: -14px;">
+    <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Holiday List</h6>
+      </div>
+    </div>
+    <div class="row p-4">
+      <div class="col-lg-3">
+        <input type="text" placeholder="search.." [(ngModel)]="BuildingSearch" class="form-control" id="txt_searchBuilding">
+      </div>
+      <!-- <div class="col-lg-3" style="background: antiquewhite;margin: 3px;border: #0000002e solid;">
+        <h4 style="font-size: 16px;">No Of Holidays:{{HolidaysListsCount}}</h4>
+      </div> -->
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive">
+          <table class="table table-bordered table-hover table-condensed">
+            <tbody>
+              <tr class="tableheader tableheaderfont buildingtable" style="background-color: #00b5d7; color: White;">
+                <!-- <td>ID</td> -->
+                <td>Date</td>
+                <td>Holiday Names</td>
+                <td>Holiday Description</td>
+                <td>Actions</td>
+
+              </tr>
+              <tr *ngFor="let Holidays of HolidaysList|filter:BuildingSearch">
+                <!-- <td>{{Holidays.id}}</td> -->
+                <td>{{Holidays.date|date}}</td>
+                <td>{{Holidays.holidayName}}</td>
+                <td>{{Holidays.descriptions}}</td>
+                <td class="TableActions">
+                  <a (click)="EditHolidays(Holidays)" style="background-color: white">
+                    <i class="fa fa-edit" data-toggle="tooltip" title="Edit"></i>
+                  </a>
+
+                  <a (click)="DeleteHolidays(Holidays)" style="background-color: white">
+                    <i class="far fa-trash-alt" data-toggle="tooltip" title="Delete"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

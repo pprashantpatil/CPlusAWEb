@@ -1,0 +1,170 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 style="margin-bottom: 25px;" class="Pages_header">ACTION ITEMS</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+
+  </div>
+  <div>
+    <div class="card maincard" style="margin-right: 18px;">
+      <div class="row">
+        <div class="col-lg-8 reqriedspan" style="padding: 25px;">
+          <br>
+          <form #loginForm="ngForm">
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-3">
+                <p>Project
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <select class="form-control" id="BuildingID" (change)="GetProjectID($event)" [(ngModel)]="BuildingID" name="BuildingID" required
+                  disabled>
+                  <option value="none"> Project</option>
+                  <option value="{{Project.id}}" *ngFor="let Project of projectlist">{{Project.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-3">
+                <p>Action Item Type
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <input type="text" id="Item" name="Item" [(ngModel)]="ActionItemType" class="form-control">
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-3">
+                <p>Task Name
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <textarea rows="3" id="Des_Subject" [(ngModel)]="Subject" name="Subject" class="form-control" placeholder="Task Name" required></textarea>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-3">
+                <p>Priority
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <select class="form-control" id="ddl_Priority" [(ngModel)]="Priority" name="Priority" required>
+                  <option value="none"> Priority</option>
+                  <option value="High"> High</option>
+                  <option value="Medium"> Medium</option>
+                  <option value="Low"> Low</option>
+
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-3">
+                <p>Assigned To
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <select class="form-control" id="ddl_Assigned" [(ngModel)]="AssignedTo" name="Assigned" required>
+                  <option value="none"> Assigned To</option>
+                  <option value="{{Team.staffID}}" *ngFor="let Team of ProjectTeamList">{{Team.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-3">
+                <p>Due Date
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <input type="date" name="JoiningDate" [(ngModel)]="DueDate" id="txt_DueDate" required class="form-control">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-3">
+                <p>Description
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <textarea rows="3" id="Des_Description" [(ngModel)]="Description" name="Description" class="form-control" placeholder="Description"
+                  required></textarea>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-3">
+                <p>Status
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <select class="form-control" id="ddl_Status" [(ngModel)]="Status" name="Status" required>
+                  <option value="none"> Status</option>
+                  <option value="To Do"> To Do</option>
+                  <option value="Doing"> Doing</option>
+                  <option value="Done"> Done</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div *ngIf="paramID==null" class="row">
+              <div class="col-lg-1">
+              </div>
+              <div class="col-lg-3">
+                <p>
+                  Attachments
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <ngx-dropzone class="dropzone_vendorinvoice" [showPreviews]="true" (filesAdded)="onFilesAddedPhoto($event)" name="Photo"
+                  id="dropzone_assetphoto">
+                </ngx-dropzone>
+              </div>
+            </div>
+
+            <div *ngIf="paramID==null" class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-4"></div>
+              <div class="col-lg-2 ">
+                <button type="submit" style="margin-bottom: 100px" (click)="Save()" class="btn btn-block btn-md savebutton">Save</button>
+              </div>
+            </div>
+            <div *ngIf="paramID!=null" class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-4"></div>
+              <div class="col-lg-2 ">
+                <button type="submit" style="margin-bottom: 100px" (click)="Update()" class="btn btn-block btn-md savebutton">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

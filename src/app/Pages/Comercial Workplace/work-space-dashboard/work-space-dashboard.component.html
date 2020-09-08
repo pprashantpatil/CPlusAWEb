@@ -1,0 +1,197 @@
+<div class="container-fluid Pages_background">
+    <div>
+        <div class="row">
+            <div class="col-lg-5">
+                <h4 class="Pages_header">{{pageMenuTitle}}</h4>
+            </div>
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-5">
+                <div class="mainrow">
+                    <div class="col-lg-12 BreadChrumbProperties">
+                        <span class="CommercialWorkspace"> {{workSpaceDashboard_breadchrumb}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="shadow p-3 mb-8 bg-white rounded col-lg-7  maincard ">
+            <h4 class="paneltitle">{{workSpaceDashboard_PageTitle}}</h4>
+            <hr>
+            <div class="row">
+                <div class="col-lg-4">
+                    <select (change)="GetFloor($event)" class="dropdown form-control maindropdown" name="Building"
+                        required="">
+                        <option value="none">Select Building</option>
+                        <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                    </select>
+                    <!-- 
+                    <div class="dropdown1">
+                        <input class="form-control" type="text" (click)="myFunction()" placeholder="Select Building"
+                            [(ngModel)]="searchBuildinglist" value="{{searchBuildinglist}}">
+                        <div id="myDropdown" class="dropdown1-content">
+                            <a (click)="GetFloor('','')">Select Building</a>
+                            <a (click)="GetFloor(build.id,build.name)"
+                                *ngFor="let build of Buildinglist|filter:searchBuildinglist">{{build.name}}</a>
+                        </div>
+                    </div> -->
+
+                </div>
+                <div class="col-lg-4">
+                    <select (change)="GetFloorID($event)" class="dropdown form-control maindropdown" name="Building"
+                        required="">
+                        <option value="none">Select Floor</option>
+                        <option value="{{Floor.id}}" *ngFor="let Floor of Floorlist">{{Floor.floor}}</option>
+                    </select>
+                    <!-- <div class="dropdown1">
+                        <input class="form-control" type="text" (click)="myFunction1()" placeholder="Select Floor"
+                            [(ngModel)]="searchFloorlist" value="{{searchFloorlist}}">
+                        <div id="myDropdown1" class="dropdown1-content">
+                            <a (click)="GetFloorID('','')">Select Floor</a>
+                            <a (click)="GetFloorID(Floor.id,Floor.floor)"
+                                *ngFor="let Floor of Floorlist|filter:searchFloorlist">{{Floor.floor}}</a>
+                        </div>
+                    </div> -->
+
+                </div>
+                <div class="col-lg-4">
+                    <select (change)="WorkSpaceFilter($event)" class="dropdown form-control maindropdown"
+                        name="Building" required="">
+                        <option value="none">Select Type</option>
+                        <option value="{{ws.short}}" *ngFor="let ws of WSlist">{{ws.short}}</option>
+                    </select>
+                    <!-- <div class="dropdown1">
+                        <input class="form-control" type="text" (click)="myFunction2()" placeholder="Select Type"
+                            [(ngModel)]="searchTypelist" value="{{searchTypelist}}">
+                        <div id="myDropdown2" class="dropdown1-content">
+                            <a (click)="WorkSpaceFilter('')">Select Type</a>
+                            <a (click)="WorkSpaceFilter(ws.short)"
+                                *ngFor="let ws of WSlist|filter:searchTypelist">{{ws.short}}</a>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2" *ngFor="let ws of FilteredWorkSpaceDetails">
+                    <img (click)="WSDetails(ws)" *ngIf="ws.short=='Cabin'&&ws.booked==1"
+                        src="http://14.192.17.225/fmslive/assets/img/cabin1.png"
+                        style="height: 50px;width: 50px; padding:6px">
+                    <h6 *ngIf="ws.short=='Cabin'&&ws.booked==1">{{ws.workSpaceID}}</h6>
+                    <img (click)="WSDetails(ws)" *ngIf="ws.short=='Cabin'&&ws.booked==2"
+                        src="http://14.192.17.225/fmslive/assets/img/cabin2.png"
+                        style="height: 50px;width: 50px; padding:6px">
+                    <h6 *ngIf="ws.short=='Cabin'&&ws.booked==2">{{ws.workSpaceID}}</h6>
+
+
+                    <img (click)="WSDetails(ws)" *ngIf="ws.short=='Work Station'&&ws.booked==1"
+                        src="http://14.192.17.225/fmslive/assets/img/workstation1.png"
+                        style="height: 50px;width: 50px; padding:6px">
+                    <h6 *ngIf="ws.short=='Work Station'&&ws.booked==1">{{ws.workSpaceID}}</h6>
+                    <img (click)="WSDetails(ws)" *ngIf="ws.short=='Work Station'&&ws.booked==2"
+                        src="http://14.192.17.225/fmslive/assets/img/workstation2.png"
+                        style="height: 50px;width: 50px; padding:6px">
+                    <h6 *ngIf="ws.short=='Work Station'&&ws.booked==2">{{ws.workSpaceID}}</h6>
+
+
+                    <img (click)="WSDetails(ws)" *ngIf="ws.short=='Conference Room'&&ws.booked==1"
+                        src="http://14.192.17.225/fmslive/assets/img/meeting1.png"
+                        style="height: 50px;width: 50px; padding:6px">
+                    <h6 *ngIf="ws.short=='Conference Room'&&ws.booked==1">{{ws.workSpaceID}}</h6>
+                    <img (click)="WSDetails(ws)" *ngIf="ws.short=='Conference Room'&&ws.booked==2"
+                        src="http://14.192.17.225/fmslive/assets/img/meeting2.png"
+                        style="height: 50px;width: 50px; padding:6px">
+                    <h6 *ngIf="ws.short=='Conference Room'&&ws.booked==2">F1-1001</h6>
+                </div>
+            </div>
+        </div>
+        <div class="shadow p-3 mb-8 bg-white rounded col-lg-4  maincard " *ngIf="ShowDetails">
+            <h4 class="paneltitle">Details</h4>
+            <hr>
+            <!-- <div class="row">
+                <div class="col-lg-6">
+                    <p>Name: {{name}} </p>
+                    <p>Building Name: {{BuildingName}} </p>
+                    <p>FloorName: {{floorname}} </p>
+                    <p>Mobile Number :{{mobileNumber}}</p>
+                    <p>Email: {{email}}</p>
+                    <p>Company : {{companyName}}</p>
+                </div>
+                <div class="col-lg-6">
+                    <p>Facilities : {{facilities}}</p>
+                    <p>SDate: {{startDate |date:'MM-dd-yyyy'}}</p>
+                    <p>EDate: {{endDate | date:'MM-dd-yyyy'}}</p>
+                    <p>STime: {{startTime}}</p>
+                    <p>ETime: {{endTime}}</p>
+                    <p>Type of WorkSpace : {{TypeOfworkspace}}</p>
+                    <p>Status: {{Status}}</p>
+                </div>
+            </div> -->
+
+
+
+
+
+            <div class="col-lg-12  table-responsive">
+                <table class="table table-bordered table-hover table-condensed">
+                    <tbody>
+                        <tr>
+                            <td>Name:</td>
+                            <td>{{name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Building Name:</td>
+                            <td>{{BuildingName}}</td>
+                        </tr>
+                        <tr>
+                            <td>FloorName:</td>
+                            <td>{{floorname}}</td>
+                        </tr>
+                        <tr>
+                            <td>Mobile Number :</td>
+                            <td>{{mobileNumber}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{{email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Company :</td>
+                            <td>{{companyName}}</td>
+                        </tr>
+                        <tr>
+                            <td>Start Date :</td>
+                            <td>{{startDate|date}}</td>
+                        </tr>
+                        <tr>
+                            <td>End Date:</td>
+                            <td>{{endDate | date}}</td>
+                        </tr>
+                        <tr>
+                            <td>Start Time :</td>
+                            <td>{{startTime}}</td>
+                        </tr>
+                        <tr>
+                            <td>End Time :</td>
+                            <td>{{endTime}}</td>
+                        </tr>
+                        <tr>
+                            <td>Type of WorkSpace :</td>
+                            <td>{{TypeOfworkspace}}</td>
+                        </tr>
+                        <tr>
+                            <td>Status: </td>
+                            <td>{{Status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>

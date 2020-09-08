@@ -1,0 +1,391 @@
+<div class="container-fluid Pages_background ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">{{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building" style="margin-left: -109px;"> {{tansportationRequest_breadchrumb}} </span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-10">
+      <div class="col-lg-4">
+        <label class="switch">
+          <input type="checkbox" id="chk_transportCheckBox" checked (change)="changeStatus($event)">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="col-lg-4">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <button type="button" routerLink="/UpdateTransportationRequest" routerLinkActive="active-link" id="btn_button"
+            class="dashbutton">{{tansportationRequest_button_NewRequest}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+      Export To Excel
+    </button>
+  </div>
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div class="row">
+      <div class="col-lg-12" [hidden]="showorhidecontent">
+        <!-- <ngx-fullcalendar defaultView="month" [events]="events" [options]="options">
+        </ngx-fullcalendar> -->
+
+        <div class="row callendernavButtons">
+
+          <div class="col-lg-4">
+            <a (click)="previousmonth()"><i class="fa fa-chevron-left i_Arrows" aria-hidden="true"></i></a>
+          </div>
+
+          <div class="col-lg-4">
+            <summary><strong>{{callenderMonth}}</strong> {{callenderyear}}</summary>
+          </div>
+          <div class="col-lg-4">
+            <a (click)="nextmonth()"><i class="fa fa-chevron-right i_Arrows" aria-hidden="true"></i></a>
+          </div>
+
+        </div>
+        <div class="row callenderdiv">
+          <!-- <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-2 callenderboxes" *ngFor="let calday of callenderdaysdount;let i = index">
+                {{calday.date}} {{calday.day}}
+                <span
+                  *ngIf="calday.name || calday.pickupLocation|| calday.destination|| calday.vendorname|| calday.noOfDays "
+                  class="event" innerHtml='{{calday.mantainenceHtml}}'>
+                 
+                </span>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-2 callenderboxes" *ngFor="let calday of callenderdaysdount;let i = index">
+                {{calday.date}} {{calday.day}}
+                <div innerHtml='{{calday.TransportationHTML}}' (click)="ShowTransportationRequest($event)" style="overflow-y: auto;height: 150px;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12" [hidden]="!showorhidecontent">
+        <h6 class="paneltitle">{{tansportationRequest_PageTitle}}
+        </h6>
+        <hr>
+        <div class="container-fluid  ">
+          <div class="row">
+            <div class="col-lg-3">
+              <input type="text" placeholder="search.." [(ngModel)]="Search" class="form-control"
+                id="txt_transportSearch">
+            </div>
+          </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12  table-responsive">
+                <table class="table table-bordered table-hover table-condensed">
+                  <tbody>
+                    <tr class="tableheader tableheaderfont" style="background-color: #fdcd3b; color: white">
+                      <td>{{tansportationRequest_Request}}</td>
+                      <td>Raised By</td>
+                      <td>{{tansportationRequest_PickupLocation}}</td>
+                      <td>{{tansportationRequest_Destination}}</td>
+                      <td>{{tansportationRequest_DepartureDateTime}}</td>
+                      <td>Building</td>
+                      <td>Floor</td>
+                      <td>Unit</td>
+                      <td>Vendor Name</td>
+                      <td>{{tansportationRequest_NoOfVehicles}} </td>
+                      <td>{{tansportationRequest_NoOfPeople}}</td>
+                      <td>{{tansportationRequest_NoOfDays}} </td>
+                      <td>{{tansportationRequest_Actions}}
+                      </td>
+                    </tr>
+                    <tr *ngFor="let Transport of TransportList|filter:Search">
+                      <td>{{Transport.name}} </td>
+                      <td>{{Transport.raisedBy}} </td>
+                      <td>{{Transport.pickupLocation}} </td>
+                      <td>{{Transport.destination}}</td>
+                      <td>{{Transport.TrasportationDateTime}} </td>
+                      <td>{{Transport.buildingName}}</td>
+                      <td>{{Transport.floorName}}</td>
+                      <td>{{Transport.unitName}}</td>
+                      <td>{{Transport.vendorname}}</td>
+                      <td>{{Transport.noOfVehicles}} </td>
+                      <td>{{Transport.noOfPassengers}}</td>
+                      <td>{{Transport.noOfDays}}</td>
+                      <td>
+                        <div class="row transportationrow">
+                          <div class="col-lg-3">
+                            <i class="fa fa-edit" data-toggle="tooltip" title="Edit"
+                              [routerLink]="['/UpdateTransportationshutterRequest',Transport.id,1]">
+                            </i>
+                          </div>
+                          <div class="col-lg-3">
+                            <button title="Reply" data-toggle="tooltip" title="Reply For" (click)="ReplyFor(Transport)"
+                              data-toggle="modal" data-target="#myModalReply"
+                              style="background-color:#fec501;color:white;height:25px;border-radius:50%;border:none"
+                              class="">R</button>
+                          </div>
+                          <div class="col-lg-3" (click)="Comments(Transport)">
+                            <i class="fas fa-comments" data-toggle="tooltip" title="Comments" aria-hidden="true"
+                              data-toggle="modal" data-target="#myModal"></i>
+                          </div>
+                        </div>
+                        <div class="row transportationrow">
+                          <div class="col-lg-3">
+                            <i class="far fa-trash-alt" data-toggle="tooltip" title="Delete"
+                              (click)="Delete(Transport)"></i>
+                          </div>
+                          <div class="col-lg-3" (click)="Cancel(Transport)" data-toggle="tooltip" title="Cancel">
+                            <i class="far fa-copyright" style="margin-top: 5px;"></i>
+                          </div>
+                          <div class="col-lg-3" (click)="VendorAssignment(Transport)"
+                            *ngIf="Transport.vendorname==null">
+                            <i class="fas fa-user" data-toggle="tooltip" title="Assign to" data-toggle="modal"
+                              data-target="#myModalOne" aria-hidden="true"></i>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="margin-top: 102px;">
+          <div class="modal-header">
+            <h5>Vendor Comments</h5>
+            <button type="button" class="close " data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <h4>No Comments</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal One -->
+    <div id="myModalOne" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="margin-top: 102px;">
+          <div class="modal-header">
+            <h4>Assign Transport Request
+            </h4>
+            <button type="button" class="close " data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-4">
+                <h5>Vendor Type
+                </h5>
+              </div>
+              <div class="col-lg-8">
+                <select (change)="VendorByID($event)" class="dropdown form-control" required
+                  [(ngModel)]="SelectedVendorType" id="ddl_updatescheduleAssignedTo">
+                  <option value="none">Select Vendor</option>
+                  <option value="{{Vendor.id}}" *ngFor="let Vendor of Vendlist">{{Vendor.short}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-4">
+                <h5>Vendor
+                </h5>
+              </div>
+              <div class="col-lg-8">
+                <select (change)="VendorName($event)" class="dropdown form-control " required
+                  [(ngModel)]="SelectedVendor" id="ddl_updatescheduleAssignedTo">
+                  <option value="none">Select </option>
+                  <option value="{{VendorID.id}}" *ngFor="let VendorID of VendorsByIDList">{{VendorID.vendorName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-4">
+                <h5>Phone Number</h5>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" value="{{vendorphno}}" id="txt_EventBooked" class="form-control ">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-4">
+                <h5>EmailID</h5>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" value="{{vendorname}}" id="txt_EventBooked" class="form-control ">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-4">
+              </div>
+              <div class="col-lg-8">
+                <button type="button" class="btn btn-default popupbutton" data-dismiss="modal"
+                  (click)="UpdateAssignedTo()">Assign</button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal myModalReply -->
+    <div id="myModalReply" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="margin-top: 102px;">
+          <div class="modal-header">
+            <h5>Transportation Reply Mode
+            </h5>
+            <button type="button" class="close " data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+
+            <div class="row">
+              <div class="col-lg-4">
+                <h5>Total Amount For This Trip
+                </h5>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" [(ngModel)]="TransportEntity.TotalAmount" name="TotalAmount" id="txt_EventBooked"
+                  class="form-control ">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-4">
+                <h5>Advance Amount Paid
+                </h5>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" [(ngModel)]="TransportEntity.AdvanceAmount" name="AdvanceAmount" id="txt_EventBooked"
+                  class="form-control ">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <h5>Balance Amount To Be Paid
+                </h5>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" [(ngModel)]="TransportEntity.TotalAmount-TransportEntity.AdvanceAmount"
+                  name="BalanceAmount" id="txt_EventBooked" class="form-control ">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-4">
+              </div>
+              <div class="col-lg-8">
+                <button type="button" class="btn btn-default popupbutton" (click)="InsertTransportationPayment()"
+                  data-dismiss="modal">Pay</button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+  <div class="row">
+<div class="col-lg-12" [hidden]="!showorhidecontent">
+    <h6 class="paneltitle">{{tansportationRequest_PageTitle}}
+    </h6>
+    <hr>
+    <div class="container-fluid  ">
+      <div class="row">
+        <div class="col-lg-3">
+          <input type="text" placeholder="search.." [(ngModel)]="Search1" class="form-control"
+            id="txt_transportSearch">
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12  table-responsive">
+            <table class="table table-bordered table-hover table-condensed">
+              <tbody>
+                <tr class="tableheader tableheaderfont" style="background-color: #fdcd3b; color: white">
+                  <td>Building</td>
+                  <td>Shuttle Type</td>
+                  <td>PickUp Location</td>
+                  <td>Destination</td>
+                  <td>Time</td>
+                  <td>Contact Person</td>
+                  <td>Email</td>
+                  <td>Actions</td>
+                </tr>
+                <tr *ngFor="let Transports of shuttlelist|filter:Search1">
+                  <td>{{Transports.name}} </td>
+                  <td>{{Transports.shuttlename}}</td>
+                  <td>{{Transports.pickUpLocation}} </td>
+                  <td>{{Transports.destination}} </td>
+                  <td>{{Transports.time}}</td>
+                  <td>{{Transports.contactPerson}} </td>
+                  <td>{{Transports.email}}</td>
+                  <td>
+                      <i class="far fa-trash-alt" data-toggle="tooltip" title="Delete"
+                      (click)="DeleteBuildingShuttle(Transports.id)"></i>&nbsp;
+                      <i class="fa fa-edit" data-toggle="tooltip" title="Edit" (click)="EditTransReq(Transports)">
+                        </i>
+                  </td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  </div>
+</div> -->

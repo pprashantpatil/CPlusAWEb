@@ -1,0 +1,225 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header newheader">Contractor PO Dashboard</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <!-- <span class="building"> PO / PO Contractor Dashboard</span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row">
+        <div class="col-lg-12 dashbutton Mobilecss">
+          <button type="button" routerLink="/ContractorPO" *ngIf="LoginID!=4" routerLinkActive="active-link"
+            id="btn_button" class="">New Contractor PO
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard" style="padding: 20px;">
+    <h4 class="paneltitle ">Contractor PO Dashboard</h4>
+    <hr>
+    <div class="row p-2">
+      <div class="col-lg-4">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions1" (ngModelChange)="selectedDate($event)">
+        </ng-daterangepicker>
+      </div>
+      <!-- <div class="col-lg-4">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions1" (ngModelChange)="selectedDate($event)">
+        </ng-daterangepicker>
+      </div> -->
+
+      <div class="col-lg-3">
+        <input type="text" placeholder="search.." [(ngModel)]="BuildingSearch" class="form-control"
+          id="txt_searchBuilding">
+      </div>
+
+      <div class="col-lg-3" *ngIf="LoginID!=4">
+        <select class="form-control" id="ContractorID" [(ngModel)]="Contractorid" (change)="GetContractorID($event)">
+          <option value="0" selected="selected"> Select Contractor</option>
+          <option value="{{build.id}}" *ngFor="let build of Contractorlist">{{build.company}}</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive">
+          <table class="table table-bordered table-hover table-condensed" style="text-align: center;">
+            <tbody>
+              <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: white">
+                <td>PO ID</td>
+                <td>Project</td>
+                <td>Stage</td>
+                <td *ngIf="LoginID==3">Contractor</td>
+                <td>Date</td>
+                <td>PO Amount</td>
+                <td>Description</td>
+                <td>Terms And Conditions</td>
+                <td>Actions</td>
+              </tr>
+              <tr *ngFor="let po of FilteredPOlists|filter:BuildingSearch|filter:BuildingName">
+                <td>{{po.id}}</td>
+                <td>{{po.project}}</td>
+                <td>{{po.stages}}</td>
+                <td *ngIf="LoginID==3">{{po.company}}</td>
+                <td>{{po.date|date}}</td>
+                <td>{{po.poAmount}}</td>
+                <td>
+                  <div [innerHTML]="po.description">
+                  </div>
+                </td>
+                <td>
+                  <div [innerHTML]="po.termsAndConditions">
+                  </div>
+                </td>
+                <td>
+                  <div class="row">
+                    <div class="col-lg-1">
+                      <i *ngIf="LoginID!=4" class="fa fa-edit" title="Edit" [routerLink]="['/ContractorPO',po.id]"></i>
+                      <i class="fa fa-image" aria-hidden="true" data-toggle="modal" style="color: #00b5d7"
+                        data-target="#myModaladdNew" title="Documents" (click)="GetDetails(po)"></i>&nbsp;
+                    </div>
+
+                  </div>
+                </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="myModaladdNew">
+      <div class="modal-dialog modal-lg">
+        <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-top: 15px;"></i>
+        <div class="modal-content" style="margin-top: 64px;
+          width: auto; height:auto; margin-left:108px;">
+          <div class="modal-header">
+            <h4>Purchase Order</h4>
+            <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+            </div>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="col-lg-12 card" style="    margin-left: 1px;" id="content">
+              <div class="row">
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-6">
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <label>FROM</label>
+                  <p style="color: #3a515f;">{{CompanyName}}</p>
+                  <p style="color: #3a515f;">{{CompanyPhoneNo}}</p>
+                  <p style="color: #3a515f;">{{Companyaddress}}</p>
+                  <p style="color: #3a515f;">{{CompanyemailID}}</p>
+                  <p style="color: #3a515f;">{{CompanycontactName}}</p>
+                  <!-- <p style="color: #3a515f;">{{BuildingLists.country}},{{BuildingLists.state}},{{BuildingLists.city}}</p> -->
+                </div>
+                <div class="col-lg-4"></div>
+
+
+                <div class="col-lg-4">
+                  <label>Date: {{POdate|date}}</label>
+                  <br>
+                  <label>PO Number #: {{BuildingID}}</label>
+                  <br>
+                  <label>To</label>
+                  <p style="color: #3a515f;">{{ContractorCompany}}</p>
+                  <p style="color: #3a515f;">{{ContractorPhoneNo}}</p>
+                  <p style="color: #3a515f;">{{ContractorLocation}}</p>
+                  <p style="color: #3a515f;">{{ContractorEmailID}}</p>
+                  <p style="color: #3a515f;">{{ContractorContactName}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <hr class="new5">
+              </div>
+              <div class="row">
+                <!-- <h6 style="margin-left: 16px;">To:</h6> -->
+              </div>
+              <!-- <div style="line-height: 22px;margin-left: 16px;">
+              <div class="row">
+                <label style="margin-block-end: auto;">Name:</label>&nbsp;
+                <input style="width: 89%;" type="text" class="signature" [(ngModel)]="project" name="contractorname" />
+              </div>
+              <div class="row">
+                <label style="margin-block-end: auto;">Company Name:&nbsp;</label>
+                <input style="width: 82%;" type="text" class="signature" [(ngModel)]="ContractorCompany" name="contractorcompany" /> </div>
+
+              <div class="row">
+                <label style="margin-block-end: auto;">Date:&nbsp;</label>
+                <input style="width: 89%;" type="text" class="signature" [(ngModel)]="POdate" name="contractorphone" />
+              </div>
+            </div> -->
+              <br>
+              <div class="row">
+                <div class="col-lg-12">
+                  <table class="table table-bordered table-hover table-condensed mainbuild">
+                    <tr>
+                      <th>Project</th>
+                      <th>Phase</th>
+                      <th>Contractor</th>
+                      <th>Description</th>
+                      <th style="width: 100px;">PO Amount</th>
+                    </tr>
+                    <tr>
+                      <td>{{project}}</td>
+                      <td>{{StagesID}}</td>
+                      <td>{{ContractorCompany}}</td>
+                      <td>
+                        <div [innerHTML]="description">
+                        </div>
+                      </td>
+                      <td>{{poAmount|number}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-9"></div>
+                <div class="col-lg-3">
+                  <p
+                    style="margin-top: 4px;background-color: #b7c3d0;padding-top: 6px;padding-bottom: 6px;padding-left: 12px;">
+                    PO Total Amount:{{poAmount|number}}</p>
+                </div>
+              </div>
+              <br>
+
+              <div class="row">
+
+                <div class="c0l-lg-9"></div>
+                <div class="col-lg-3 " style="    margin-left: 520px;">
+                  <label>Signature</label>
+                  <input type="text" style="text-align: center; width:75%;" class="signature"
+                    value="{{CompanycontactName}}" name="username" />
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+          <br>
+        </div>
+        <br>
+      </div>
+      <br>
+    </div>

@@ -1,0 +1,409 @@
+<div class="container-fluid ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">Dashboard</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 buildings">
+          <!-- <span class="building">Dashboard /Dashboard</span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 card" style="box-shadow: 3px 1px 4px;
+          height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;">No of PO</h4>
+        <h4 style="text-align: center">{{POCount}}</h4>
+      </div>
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 card" style="box-shadow: 3px 1px 4px;
+          height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;">No of Active PO</h4>
+        <h4 style="text-align: center">{{POActiveCount}}</h4>
+      </div>
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 card" style="box-shadow: 3px 1px 4px;
+      height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;">No of Closed PO</h4>
+        <h4 style="text-align: center">{{POClosedCount}}</h4>
+      </div>
+      <div class="col-lg-2">
+      </div>
+    </div>
+
+
+
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 card" style="box-shadow: 3px 1px 4px;
+          height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;">No Of Projects</h4>
+        <h4 style="text-align: center">{{NoOfProjects}}</h4>
+      </div>
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 card" style="box-shadow: 3px 1px 4px;
+          height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;">Active Projects</h4>
+        <h4 style="text-align: center">{{NoOfProjects}}</h4>
+      </div>
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 card" style="box-shadow: 3px 1px 4px;
+      height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;">Closed Projects</h4>
+        <h4 style="text-align: center">0</h4>
+      </div>
+      <div class="col-lg-2">
+      </div>
+    </div>
+
+
+
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 card" style="box-shadow: 3px 1px 4px;
+          height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;">No of Invoices</h4>
+        <h4 style="text-align: center">{{NoOfInvoices}}</h4>
+      </div>
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 card" style="box-shadow: 3px 1px 4px;
+          height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;">Pending Invoices</h4>
+        <h4 style="text-align: center">{{ActiveInvoices}}</h4>
+      </div>
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 card" style="box-shadow: 3px 1px 4px;
+      height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;">Paid Invoices</h4>
+        <h4 style="text-align: center">{{ClosedInvoices}}</h4>
+      </div>
+      <div class="col-lg-2">
+      </div>
+    </div>
+
+
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 card" style="box-shadow: 3px 1px 4px;
+          height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;">No of Staff</h4>
+        <h4 style="text-align: center">{{NoOfStaff}}</h4>
+      </div>
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 card" style="box-shadow: 3px 1px 4px;
+          height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;">Staff Leaves</h4>
+        <h4 style="text-align: center">{{NoOfStaffLeaves}}</h4>
+      </div>
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 card" style="box-shadow: 3px 1px 4px;
+      height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;">Staff Attendance</h4>
+        <h4 style="text-align: center">0</h4>
+      </div>
+      <div class="col-lg-2">
+      </div>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+  </div> -->
+
+
+
+  <div class="shadow p-3 mb-5 rounded  maincard " style="margin-left: -14px;
+  margin-top: 33px;height: 280px;">
+
+    <label style="margin-left: 67px;
+      font-size: 26px;
+      font-weight: 800;
+      font-family: inherit;">Inventory</label>
+    <div class="row" style="margin-left: 240px;
+     margin-top: -35px;">
+      <div class="col-lg-3 ">
+        <select class="form-control" id="Category" (change)="GetCategoryID($event)">
+          <option value="0"> Select Category</option>
+          <option value="{{category.category}}" *ngFor="let category of CategoryLists">{{category.category}}
+          </option>
+        </select>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control " (change)="GetSubCategoryID($event)" id="ddl_inventoryType">
+          <option value="0">Select SubCategory</option>
+          <option value="{{Equip.short}}" *ngFor="let Equip of EquipmentTypeList">{{Equip.short}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3 ">
+        <select class="dropdown form-control " (change)="GetItemID($event)" id="DSd" name="DSd">
+          <option value="0">Select Item</option>
+          <option value="{{item.short}}" *ngFor="let item of InventoryLists">{{item.short}}</option>
+        </select>
+      </div>
+    </div>
+
+
+
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="col-lg-3 card" style="height: 139px;
+      margin-right: 47px;
+      margin-left: 75px;
+      background: #00b5d7;
+      border-radius: 30px;
+      color: white;">
+        <h4 style="text-align: center; margin-top: 47px;">Available Item Count</h4>
+        <label style="text-align: center; font-size: 21px">{{Currentquanity}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="background: #00b5d7;
+      border-radius: 30px;
+      color: white;
+        height: 139px;
+        margin-left: 22px;
+        margin-right: 71px;">
+        <h4 style="text-align: center; margin-top: 47px;">Expiring Item Count</h4>
+        <label style="text-align: center; font-size: 21px">{{Expiringqty}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="background: #00b5d7;
+      border-radius: 30px;
+      color: white;
+        height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;">Expiried Item Count</h4>
+        <label style="text-align: center; font-size: 21px">{{Expiriredqty}}</label>
+      </div>
+
+    </div>
+
+    <!-- 
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="col-lg-3 card" style="
+          height: 139px;
+          margin-right: 47px;
+          margin-left: 75px;background: #c8c8c8; ">
+        <h4 style="text-align: center; margin-top: 47px;">No Of Projects</h4>
+        <label style="text-align: center; font-size: 21px">{{NoOfProjects}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="
+          height: 139px;
+          margin-left: 22px;
+          margin-right: 71px;background: #c8c8c8;">
+        <h4 style="text-align: center; margin-top: 47px;">Active Projects</h4>
+        <label style="text-align: center; font-size: 21px">{{NoOfProjects}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="
+          height: 139px;background: #c8c8c8;">
+        <h4 style="text-align: center; margin-top: 47px;">Closed Projects</h4>
+        <label style="text-align: center; font-size: 21px">0</label>
+      </div>
+
+    </div> -->
+
+  </div>
+
+
+  <div class="shadow p-3 mb-5 rounded  maincard " style="margin-left: -14px;
+  margin-top: 33px;height: 280px;">
+
+    <label style="margin-left: 67px;
+      font-size: 26px;
+      font-weight: 800;
+      font-family: inherit;">Purchase Order</label>
+    <div class="row" style="margin-left: 240px;
+     margin-top: -35px;">
+      <div class="col-lg-4" style="margin-left: 157px;">
+        <select class="form-control" id="POMonth" (change)="GetPOMonth($event)">
+          <option value="0"> Select Month</option>
+          <option value="1"> January</option>
+          <option value="2"> February</option>
+          <option value="3"> March</option>
+          <option value="4"> April</option>
+          <option value="5"> May</option>
+          <option value="6"> June</option>
+          <option value="7"> July</option>
+          <option value="8"> August</option>
+          <option value="9"> September</option>
+          <option value="10"> October</option>
+          <option value="11"> November</option>
+          <option value="12"> December</option>
+        </select>
+      </div>
+
+    </div>
+
+
+
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="col-lg-3 card" style="height: 139px;
+      margin-right: 47px;
+      margin-left: 75px;
+      background: #00b5d7;
+      border-radius: 30px;
+      color: white;">
+        <h4 style="text-align: center; margin-top: 47px;">No.Of PO Raised</h4>
+        <label style="text-align: center; font-size: 21px">{{totalpo}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="background: #00b5d7;
+      border-radius: 30px;
+      color: white;
+        height: 139px;
+        margin-left: 22px;
+        margin-right: 71px;">
+        <h4 style="text-align: center; margin-top: 47px;">No.Of PO Open</h4>
+        <label style="text-align: center; font-size: 21px">{{totalpoopen}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="background: #00b5d7;
+      border-radius: 30px;
+      color: white;
+        height: 139px;">
+        <h4 style="text-align: center; margin-top: 47px;">No.Of PO Closed</h4>
+        <label style="text-align: center; font-size: 21px">{{totalpoclosed}}</label>
+      </div>
+    </div>
+
+    <!-- 
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="col-lg-3 card" style="
+          height: 139px;
+          margin-right: 47px;
+          margin-left: 75px;background: #c8c8c8; ">
+        <h4 style="text-align: center; margin-top: 47px;">No Of Projects</h4>
+        <label style="text-align: center; font-size: 21px">{{NoOfProjects}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="
+          height: 139px;
+          margin-left: 22px;
+          margin-right: 71px;background: #c8c8c8;">
+        <h4 style="text-align: center; margin-top: 47px;">Active Projects</h4>
+        <label style="text-align: center; font-size: 21px">{{NoOfProjects}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="
+          height: 139px;background: #c8c8c8;">
+        <h4 style="text-align: center; margin-top: 47px;">Closed Projects</h4>
+        <label style="text-align: center; font-size: 21px">0</label>
+      </div>
+
+    </div> -->
+
+  </div>
+
+  <div class="shadow p-3 mb-5 rounded  maincard " style="margin-left: -14px;
+  margin-top: 33px;height: 280px;">
+
+    <label style="margin-left: 67px;
+      font-size: 26px;
+      font-weight: 800;
+      font-family: inherit;">Supplier</label>
+    <!-- <div class="row" style="margin-left: 240px;
+     margin-top: -35px;">
+      <div class="col-lg-3 ">
+        <select class="form-control" id="Category" (change)="GetPurcehseCategoryID($event)">
+          <option value="0"> Select Category</option>
+          <option value="{{category.category}}" *ngFor="let category of CategoryLists">{{category.category}}
+          </option>
+        </select>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control " (change)="GetPurcehseSubCategoryID($event)" id="ddl_inventoryType">
+          <option value="0">Select SubCategory</option>
+          <option value="{{Equip.short}}" *ngFor="let Equip of EquipmentTypeList">{{Equip.short}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3 ">
+        <select class="dropdown form-control " (change)="GetPurcehseItemID($event)" id="DSd" name="DSd">
+          <option value="0">Select Item</option>
+          <option value="{{item.short}}" *ngFor="let item of InventoryLists">{{item.short}}</option>
+        </select>
+      </div>
+    </div> -->
+
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="col-lg-3 card" style="height: 139px;
+      margin-right: 47px;
+      margin-left: 75px;
+      background: #00b5d7;
+    border-radius: 30px;
+    color: white;">
+        <h4 style="text-align: center; margin-top: 47px;">Purchased Quantity</h4>
+        <label style="text-align: center; font-size: 21px">{{purchaseQuanyity}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="background: #00b5d7;
+      border-radius: 30px;
+      color: white;
+        height: 139px;
+        margin-left: 22px;
+        margin-right: 71px;">
+        <h4 style="text-align: center; margin-top: 47px;">Return Quantity</h4>
+        <label style="text-align: center; font-size: 21px">{{returnQuantity}}</label>
+      </div>
+    </div>
+
+    <!-- 
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="col-lg-3 card" style="
+          height: 139px;
+          margin-right: 47px;
+          margin-left: 75px;background: #c8c8c8; ">
+        <h4 style="text-align: center; margin-top: 47px;">No Of Projects</h4>
+        <label style="text-align: center; font-size: 21px">{{NoOfProjects}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="
+          height: 139px;
+          margin-left: 22px;
+          margin-right: 71px;background: #c8c8c8;">
+        <h4 style="text-align: center; margin-top: 47px;">Active Projects</h4>
+        <label style="text-align: center; font-size: 21px">{{NoOfProjects}}</label>
+      </div>
+
+      <div class="col-lg-3 card" style="
+          height: 139px;background: #c8c8c8;">
+        <h4 style="text-align: center; margin-top: 47px;">Closed Projects</h4>
+        <label style="text-align: center; font-size: 21px">0</label>
+      </div>
+
+    </div> -->
+
+  </div>
+
+
+</div>

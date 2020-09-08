@@ -1,0 +1,151 @@
+<div class="container-fluid Pages_background" style="margin-left: -6px;
+margin-top: 12px;">
+  <div>
+    <div class="row">
+      <div class="col-lg-6">
+        <h4 class="Pages_header">Project Stage Assignment</h4>
+      </div>
+      <div class="col-lg-1">
+        <div class="mainrow">
+          <!-- <div class="col-lg-12 BreadChrumbProperties">
+            <span class="CommercialWorkspace">Project / New Contractor Assignments</span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="card maincard" style="margin-right: 8px;margin-top: 31px">
+      <div class="row">
+        <div class="col-lg-8 reqriedspan" style="padding: 25px;">
+          <br>
+          <!-- <div class="row"> -->
+          <form>
+            <div class="row">
+              <div class="col-lg-1">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">Project
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <select name="BuildingID" class="dropdown form-control " disabled [(ngModel)]="ProjectID" required
+                  id="ddl_updateassetsBuilding">
+                  <option value="0" selected="selected">Select Project</option>
+                  <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-1">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">Stage
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <select class="dropdown form-control " name="StageID" [(ngModel)]="StageID" id="StageID" required>
+                  <option value="0"> Select Stage</option>
+                  <option value="{{build.id}}" *ngFor="let build of StageList">{{build.stage}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">Staff Type</p>
+                <span class="starspan">*</span>
+              </div>
+              <div class="col-lg-7">
+                <select class="form-control" placeholder="Select Staff Type" [(ngModel)]="StaffTypeID"
+                  (change)="getStaffTypeID($event)" id="StaffTypeID" name="StaffTypeID" required>
+                  <option value="0"> Select Staff Type</option>
+                  <option value="{{Staff.id}}" *ngFor="let Staff of StaffTypelist">{{Staff.short}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">Staff</p>
+                <span class="starspan">*</span>
+              </div>
+              <div class="col-lg-7">
+                <select class="form-control" placeholder="Select Staff" [(ngModel)]="StaffID"
+                  (change)="getStaffID($event)" id="StaffID" name="StaffID" required>
+                  <option value="0"> Select Staff</option>
+                  <option value="{{Staff.id}}" *ngFor="let Staff of StaffList">{{Staff.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-1">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">Start Date</p>
+                <span class="starspan">*</span>
+              </div>
+              <div class="col-lg-7">
+                <input type="date" name="StartDate" [(ngModel)]="StartDate" id="StartDate" placeholder="Start Date"
+                  class="form-control  ">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-1">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">End Date</p>
+                <span class="starspan">*</span>
+              </div>
+              <div class="col-lg-7">
+                <input type="date" name="EndDate" [(ngModel)]="EndDate" id="EndDate" placeholder="End Date "
+                  class="form-control">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-1">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">Work Description
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <textarea placeholder=" Comments " name="Comments" [(ngModel)]="Comments" id="Comments" rows="4"
+                  required class="form-control"></textarea>
+              </div>
+            </div>
+            <br>
+            <div *ngIf="paramID==null" class="row">
+              <div class="col-lg-4">
+              </div>
+              <div class="col-lg-3">
+                <button class="savebutton" (click)="Save()" style="margin-bottom: 20px;
+                  margin-left: 111px;
+                  margin-top: 62px;" type="submit">Save</button>
+              </div>
+            </div>
+            <div *ngIf="paramID!=null" class="row">
+              <div class="col-lg-4">
+              </div>
+              <div class="col-lg-3">
+                <button class="savebutton" (click)="Update()" style="margin-bottom: 20px;
+                  margin-left: 111px;
+                  margin-top: 62px;" type="submit">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

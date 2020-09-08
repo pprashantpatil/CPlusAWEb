@@ -1,0 +1,157 @@
+<div class="container-fluid Pages_background">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header" style="margin-left: -14px;">Supplier Payment Reports</h4>
+        </div>
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-4">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <!-- <span class="building">Payment Reports </span> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <!-- <button type="button" routerLink="/UpdateVendor" routerLinkActive="active-link" id="btn_button"
+                        class="dashbutton">New Vendor</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+            Export To Excel
+        </button>
+    </div>
+    <div class="shadow p-3 mb-5 bg-white rounded  maincard " style="margin-left: -14px;    margin-right: 7px;">
+        <h6 class="paneltitle">Supplier Payment Reports
+        </h6>
+        <hr>
+        <div class="row">
+            <div class="col-lg-3">
+
+                <!-- <ng-daterangepicker [options]="options"></ng-daterangepicker> -->
+                <ng-daterangepicker [(ngModel)]="value" [options]="options" (ngModelChange)="selectedDate($event)">
+                </ng-daterangepicker>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-3">
+
+                <select class="dropdown form-control maindropdown" id="ddl_vendordashboardInvoiceNo"
+                    (change)="FilterByVendorName($event)">
+                    <option value="none" selected="selected"> Select Supplier </option>
+                    <option value="{{vendor.vendorName}}" *ngFor="let vendor of VendorList">{{vendor.vendorName}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">
+                <label>Total Amount : {{Grandtotal}}</label>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-bordered table-hover" style="width: -webkit-fill-available;">
+                <thead>
+                    <tr class="tableheader">
+                        <td>{{vendor_Date}}</td>
+                        <td>{{vendor_InvoiceNumber}} </td>
+                        <td>{{vendor_Type}} </td>
+                        <td>Supplier</td>
+
+
+                        <td>{{vendor_TotalAmount}} </td>
+                        <td>{{vendor_Status}}</td>
+                        <td>{{vendor_Invoice}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let payments of FilteredVPaymentsList">
+                        <td>{{payments.date|date}}</td>
+                        <td>{{payments.invoiceNo}} </td>
+                        <td>{{payments.typename}} </td>
+                        <td>{{payments.vendorName}}</td>
+
+
+                        <td>{{payments.grandTotal}}</td>
+                        <td>{{payments.status}}</td>
+                        <td>
+                            <!-- <img style="height:50px;width:50px" src="{{payments.attachment}}" (click)="InvoiceView(payments.attachment)" data-toggle="modal"
+                                data-target="#myModalupimage"> -->
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <img *ngIf="payments.frame==1" style="height:100px;width:100px" id="Equipmentlist"
+                                        src="assets/Login/pdfimage.png">
+                                    <img *ngIf="payments.frame==0" style="height:100px;width:100px" id="Equipmentlist"
+                                        src="assets/Images/download.png">
+                                </div>
+                                <div class="col-lg-4" style="margin-left: 33px;">
+                                    <a href="{{payments.attachment}}" download style="background-color:white">
+                                        <i class="fa fa-download" title="Download" style="background-color: white;
+                                                margin-top: 40px;
+                                                font-size: 26px;
+                                                margin-left: 18px;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="modal fade" id="myModalupimage">
+            <div class="modal-dialog modal-lg">
+
+                <div class="modal-content" style="margin-top: 15%;width: 503px;margin-left: 222px;">
+                    <div class="modal-header">
+                        <h4>Invoice</h4>
+                        <!-- <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+                          <i class=" i" style="margin-left: 221px;
+                          margin-top: 10px;
+                          font-size: 16px;" data-toggle="modal" data-target="#AddAttachments">Add Attachments</i>
+                        </div> -->
+                        <button type="button" class="close " data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="row" style="margin-top:5%;">
+                        <div class="col-lg-12">
+                            <div class="col-lg-2">
+
+                            </div>
+                            <div class="col-lg-8">
+                                <a>
+                                    <img src="{{invoiceview}}" style="width: 222px;">
+                                </a>
+                            </div>
+                            <div class="col-lg-2">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-9"> </div>
+                        <div class="col-lg-3">
+                            <button class="dashbutton " style="width: 69px;
+                    margin-right: 12px;" type="submit" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,127 @@
+<div class="container-fluid Pages_background Mobilecss" style="    margin-left: -11px;">
+  <div>
+    <div class="row">
+      <div class="col-lg-12">
+        <h4 class="Pages_header">Completed Action Items</h4>
+      </div>
+    </div>
+    <div class=" row">
+      <div class="col-lg-12 dashbutton">
+        <button type="button" id="btn_button" (click)="exporttoexcelActionItemsListsDone()">Export To Excel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Completed Action Items</h6>
+      </div>
+    </div>
+
+    <div class="row p-4">
+      <div class="col-lg-4">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions" (ngModelChange)="selectedDate($event)">
+        </ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <select class="form-control" id="ddl_Priority" (change)="GetPriority($event)" [(ngModel)]="Priority"
+          name="Priority" required>
+          <option value="none">Select Priority</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+      </div>
+      <div class="col-lg-3 btt">
+        <select class="form-control" *ngIf="LoginTypeID!=1" id="ddl_Assigned" (change)="GetStaffID($event)"
+          [(ngModel)]="SID" name="SID" required>
+          <option value="none"> Staff</option>
+          <option value="{{Team.staffID}}" *ngFor="let Team of ProjectTeamList">{{Team.name}}
+          </option>
+        </select>
+      </div>
+
+      <label class="label1">Count : {{DoneCount}}</label>
+
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12  table-responsive">
+          <table class="table table-bordered table-hover table-condensed" style="text-align: center;">
+            <tbody>
+              <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                <td>Assigned date</td>
+                <td>Due Date</td>
+                <!-- <td>Project Name</td> -->
+                <td>Action Item Type</td>
+                <td>Subject</td>
+                <td>Description</td>
+                <td *ngIf="LoginTypeID!=1">Assigned To</td>
+                <td>Priority</td>
+                <!-- <td>Status</td> -->
+                <!-- <td>Duedate Ageing</td> -->
+                <td>
+                  Actions</td>
+              </tr>
+              <tr *ngFor="let Actions of ActionItemsListsDone" [class.bgOpen]="Actions.ageing>5">
+                <td>{{Actions.modifieddate|date}}</td>
+                <td>{{Actions.dueDate|date}}</td>
+                <!-- <td>{{Actions.bname}}</td> -->
+                <td>{{Actions.actionItemType}}</td>
+                <td>{{Actions.subject}}</td>
+                <td>{{Actions.description}}</td>
+                <td *ngIf="LoginTypeID!=1">{{Actions.name}}</td>
+                <td>{{Actions.priority}}</td>
+                <!-- <td>{{Actions.status}}</td> -->
+                <!-- <td>{{Actions.ageing}}</td> -->
+                <td style="text-align: center;">
+                  <!-- <i class="far fa-trash-alt" title="Delete" (click)="DeleteProject(Actions.id)"></i> &nbsp;&nbsp;
+                  <i class="fa fa-edit" title="Edit" [routerLink]="['/ActionItems',Actions.id]"></i> -->
+                  <i class="fa fa-paperclip" data-toggle="modal" data-target="#myModalAttachments" title="Attachments"
+                    (click)="GetActionItemsID(Actions)"></i>
+                  <!-- <button class="btn btn-primary editable-table-button btn-xs" data-toggle="modal"
+                    data-target="#my1ModalAttachments" style="background-color: #00b5d7;">Upload</button> -->
+                </td>
+
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="myModalAttachments" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content" style="margin-top: 100px;">
+      <div class="modal-header">
+        <h4>Photos</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="myCarouselPhotos1" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="item active">
+              <img src="{{ImageOne}}" alt="">
+            </div>
+            <div class="item" *ngFor="let pic of Photos| slice:1">
+              <img src="{{pic.attachment}}" alt="">
+            </div>
+          </div>
+          <a class="left carousel-control" href="#myCarouselPhotos1" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarouselPhotos1" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

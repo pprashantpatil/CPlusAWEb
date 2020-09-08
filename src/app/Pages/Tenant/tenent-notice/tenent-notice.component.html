@@ -1,0 +1,117 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header"> {{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> {{tenantnotice_BreadChrumb}} </span></div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <h4 class="paneltitle "> {{tenantnotice_PageTitle}}</h4>
+    <hr>
+    <div class="row p-2">
+      <div class="col-lg-4">
+        <input type="text" placeholder="{{tenantnotice_Search}}" [(ngModel)]="Search"  class="form-control" id="txt_tenantNoticeSearch">
+      </div>
+      <div class="col-lg-4">
+        <select class="dropdown form-control"  (change)="GetFloor($event)"
+          id="txt_tenantNoticeBuilding">
+          <option value="none" selected="selected">Select Building</option>
+          <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+        </select>
+      </div>
+      <div class="col-lg-4">
+        <select class="dropdown form-control " (change)="FilteredFloorList($event)" id="ddl_pharmacyRequestFloor">
+          <option value="none">Select Floor</option>
+          <option value="{{floor.id}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row" style="padding:20px">
+      <table class="table table-bordered table-hover table-condensed mainbuild">
+        <tbody>
+          <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;"> 
+            <td>{{tenantnotice_Building}}</td>
+            <td> {{tenantnotice_Floor}}</td>
+            <td> Unit</td>
+            <td> {{tenantnotice_TenantName}} </td>
+            <td>{{tenantnotice_Notice}}</td>
+            <td>{{tenantnotice_NoticeDate}}</td>
+            <!-- <td>{{tenantnotice_Notes}}</td> -->
+            <td>{{tenantnotice_Actions}}</td>
+          </tr>
+          <tr *ngFor="let Tenant of FilteredTenantList|filter:Search">
+            <td>{{Tenant.buildingName}}</td>
+            <td>{{Tenant.floor}}</td>
+            <td>E-1001</td>
+            <td>{{Tenant.tenantName}}</td>
+            <td>{{Tenant.notice}}</td>
+            <td>{{Tenant.noticeDate}}</td>
+            <!-- <td>{{Tenant.notice}}</td> -->
+            <td><button type="button" class="btn" *ngIf="Tenant.noticeAccepted==false"
+                style="background-color:#d26d31;color:white" data-toggle="modal"
+                data-target="#myModaltwo"  (click)="TenantNoticeAccept(Tenant)">{{tenantnotice_Accept}}</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="myModaltwo" class="modal fade" role="dialog" style=" margin-top: 10%;">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content " style="margin-top: -30px;">
+          <div class="modal-header">
+            <h4>Reason</h4>
+            <button type="button" class="close " data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-1">
+              </div>
+              <div class="col-lg-2 ">
+                <p style="padding:5px">Reason
+                </p>
+              </div>
+              <div class="col-lg-5 ">
+                <textarea id="txt_Cancel" [(ngModel)]="tenentEntity.NoticeReason" placeholder="Reason"
+                  class="form-control maindropdown" rows="4"></textarea>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-1">
+              </div>
+              <div class="col-lg-2 ">
+                <p style="padding:5px">Date
+                </p>
+              </div>
+              <div class="col-lg-5 ">
+                <input type="date" style="width: 250px;" placeholder="" [(ngModel)]="tenentEntity.NoticeDate"  class="form-control" id="txt_tenantNoticeDate">
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row">
+              <button type="button" style="margin-left: 350px;" class="btn btn-default popupbutton" data-dismiss="modal"
+                (click)="CancelEvents()">Save</button>
+              <div class="row">
+              </div>
+            </div> -->
+          <div class="modal-footer">
+            <button type="button" style="margin-left: 350px;    background-color: #fec501;" data-dismiss="modal"
+              class="btn btn-default popupbutton" data-dismiss="modal" (click)="savecancelreason()">Save</button>
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

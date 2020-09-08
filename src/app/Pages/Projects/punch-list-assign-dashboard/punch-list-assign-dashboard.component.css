@@ -1,0 +1,44 @@
+.Mobilecss{
+    margin-left: -8px;
+    
+}
+
+
+
+
+/* . style="margin-right: -32px;"  */
+
+
+  @media screen and (max-width: 1280px){
+    .Mobilecss{
+        margin-left: 3px;
+        margin-top: 16px;
+    }
+    .excelbuttoncss{
+        margin-right: 0px;
+    }
+    .label1{
+        margin-left: 60px; 
+     }
+
+}
+@media screen and (min-width: 1400px) {
+    .excelbuttoncss{
+        margin-right: -32px;
+     }
+     .label1{
+        margin-left: 93px; 
+     }
+}
+
+.bgOpen{
+    background-color:#29b1f0;
+}
+
+.bgred{
+    background-color: red
+}
+
+.bggreen{
+    background-color: rgb(26, 206, 26)
+}

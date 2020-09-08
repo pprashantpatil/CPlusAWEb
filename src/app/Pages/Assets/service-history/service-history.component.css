@@ -1,0 +1,134 @@
+i {
+    color: #00b5d7;
+}
+
+i {
+    color: green;
+    font-size: 33px;
+}
+
+.excelbutton{
+    margin-left: auto;
+    margin-right: 20px;
+    background-color: #00b5d7;
+    color: white;
+    margin-bottom: 8px;
+}
+
+
+/* for callender start*/
+
+
+/* 
+@media (max-width: 800px) {
+    .callendertable .time {
+        display: none;
+    }
+} */
+
+.event {
+    color: #333;
+    background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+    /* background: linear-gradient(to bottom left, #33ccff 0%, #ffffcc 100%); */
+    border-radius: 5px;
+    font-size: 11px;
+    padding-left: 5px;
+}
+
+.callenderdiv {
+    width: 100%;
+    margin-left: 1px;
+}
+
+.callenderboxes {
+    width: 100%;
+    min-height: 100px;
+    background: white;
+    border: 1px solid antiquewhite;
+}
+
+.callenderboxes:hover {
+    /* background: greenyellow; */
+    border: 1px solid #00addf;
+}
+
+.todayDate {
+    /* background-color: #71c6c1; */
+    background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+    width: 100%;
+    height: 500px;
+    text-align: center;
+}
+
+.datenumber {
+    color: white;
+    margin-top: 38%;
+    font-size: 100px;
+}
+
+.dateday {
+    color: white;
+    font-size: -webkit-xxx-large;
+}
+
+.callendernavButtons {
+    text-align: center;
+    font-size: xx-large;
+    margin-bottom: 2%;
+}
+
+.callendernavButtons a {
+    color: white;
+}
+.i_Arrows{
+    color: #ffc107;
+    font-size: 32px;
+}
+
+
+/* for callender End*/
+
+
+
+
+.servicehistorybc{
+    margin-left: 21px;
+
+}
+
+
+@media screen and (min-width: 1600px) {
+   
+.servicehistorybc{
+    margin-left: 21px;
+
+}
+  }
+  @media screen and (min-width: 1900px) {
+  
+.servicehistorybc{
+    margin-left: 178px;
+
+}
+    
+  }
+
+
+  
+@media screen and (max-width: 1024px) {
+    .maincrad{
+        margin-left: 7px;
+        width: 780px;}
+        
+    .header{
+        margin-top: 60px;
+        margin-left: 7px;
+    }
+  
+    }
+    @media screen and (min-width: 1400px) {
+    
+      .maincrad{
+          margin-left: -13px;
+      }
+    }

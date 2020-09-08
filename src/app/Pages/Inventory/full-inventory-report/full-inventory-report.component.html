@@ -1,0 +1,145 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6" style="margin-left: -11px;">
+      <h4 class="Pages_header">{{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <!-- <span class="building"> {{fullInventory_BreadChrumb}} </span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-left: -14px;">
+    <button style="margin-right: 36px;
+    margin-bottom: -26px;" type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+      Export To Excel
+    </button>
+  </div>
+  <hr>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard" style="margin-left: -11px;">
+    <h4 class="paneltitle ">{{fullInventory_PageTitle}}</h4>
+    <hr>
+    <div class="row p-2">
+      <div class="col-lg-3">
+        <input type="text" placeholder="{{fullInventory_Search}}" [(ngModel)]="Search" class="form-control" id="txt_searchBuilding">
+      </div>
+      <div class="col-lg-3 ">
+        <select class="form-control" id="Category" (change)="GetCategoryID($event)">
+          <option value="0"> Select Category</option>
+          <option value="{{category.category}}" *ngFor="let category of CategoryLists">{{category.category}}
+          </option>
+        </select>
+      </div>
+      <!-- <div class="col-lg-3">
+        <select class="dropdown form-control " (change)="FilterByInventory($event)" id="ddl_inventoryType">
+          <option value="0">Select Type</option>
+          <option value="{{Equip.short}}" *ngFor="let Equip of EquipmentTypeList">{{Equip.short}}</option>
+        </select>
+      </div> -->
+      <div class="col-lg-3 ">
+        <select class="dropdown form-control " (change)="FilterByItem($event)" id="DSd" name="DSd">
+          <option value="0">Select Inventory</option>
+          <option value="{{item.short}}" *ngFor="let item of InventoryLists">{{item.short}}</option>
+        </select>
+      </div>
+      <div class="row table-responsive tableresposive " style="padding:10px; ">
+        <table class="table table-bordered table-hover table-condensed mainbuild" style="text-align: center;">
+          <tbody>
+            <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: white;">
+              <td>Inventory Category</td>
+              <td>{{fullInventory_InventoryName}}</td>
+              <td>{{fullInventory_Minimum}}</td>
+              <td>{{fullInventory_Available}}</td>
+              <td>Consumed Quantity</td>
+              <td>Consumed By</td>
+              <td>{{fullInventory_LastConsumedDate}}</td>
+            </tr>
+            <tr>
+              <td>Drawing Material</td>
+              <td>Drawing Papers</td>
+              <td>100</td>
+              <td>500</td>
+              <td>300</td>
+              <td>J. Fernandez Residence</td>
+              <td>27 July 2020</td>
+            </tr>
+            <tr>
+              <td>Drawing Material</td>
+              <td>Pencils</td>
+              <td>100</td>
+              <td>400</td>
+              <td>150</td>
+              <td>J. Fernandez Residence</td>
+              <td>30 July 2020</td>
+            </tr>
+            <tr>
+              <td>Drawing Material</td>
+              <td>Architect's Scale</td>
+              <td>200</td>
+              <td>300</td>
+              <td>80</td>
+              <td>J. Fernandez Residence</td>
+              <td>01 Aug 2020</td>
+            </tr>
+            <tr>
+              <td>Drawing Material</td>
+              <td>Drawing Storage Tube </td>
+              <td>200</td>
+              <td>300</td>
+              <td>100</td>
+              <td>J. Fernandez Residence</td>
+              <td>06 March 2020</td>
+            </tr>
+            <tr>
+              <td>Electrical Material</td>
+              <td>Tubelights</td>
+              <td>100</td>
+              <td>100</td>
+              <td>60</td>
+              <td>J. Fernandez Residence</td>
+              <td>01 June 2020</td>
+            </tr>
+            <tr>
+              <td>Accessories </td>
+              <td>Moleskine Classic Notebook</td>
+              <td>100</td>
+              <td>200</td>
+              <td>120</td>
+              <td>J. Fernandez Residence</td>
+              <td>19 June 2020</td>
+            </tr>
+            <tr>
+              <td>Electrical Material</td>
+              <td>Fans</td>
+              <td>100</td>
+              <td>100</td>
+              <td>40</td>
+              <td>J. Fernandez Residence</td>
+              <td>27 July 2020</td>
+            </tr>
+            <tr>
+              <td>Drawing Material</td>
+              <td>Marker Pen</td>
+              <td>100</td>
+              <td>100</td>
+              <td>60</td>
+              <td>J. Fernandez Residence</td>
+              <td>20 May 2020</td>
+            </tr>
+            <tr>
+              <td>Drawing Material</td>
+              <td>Mini Drafter</td>
+              <td>150</td>
+              <td>100</td>
+              <td>70</td>
+              <td>J. Fernandez Residence</td>
+              <td>15 July 2020</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>

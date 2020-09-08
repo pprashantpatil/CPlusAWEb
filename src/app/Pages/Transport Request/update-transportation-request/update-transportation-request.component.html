@@ -1,0 +1,406 @@
+<div class="container-fluid Pages_background ">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header">{{pageMenuTitle}}
+            </h4>
+        </div>
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-5">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span class="building"
+                        style="margin-left: -24px;">{{updateTransportationRequest_breadchrumb}}</span> </div>
+            </div>
+        </div>
+    </div>
+    <div class="shadow p-3 mb-5 bg-white col-lg-12 rounded maincard ">
+        <h6 class="paneltitle" *ngIf="TransReqID==null">{{updateTransportationRequest_PageTitle}}
+        </h6>
+
+        <h6 class="paneltitle" *ngIf="TransReqID!=null">Edit Transportation Request
+        </h6>
+        <hr>
+        <div class="row">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-2 ">
+
+            </div>
+            <div class="col-lg-5 ">
+                <input type="radio" [(ngModel)]="traveltype" name="traveltype" [value]="true">Shuttle&nbsp;
+                <input type="radio" [(ngModel)]="traveltype" name="traveltype" [value]="false">Rental Cab
+            </div>
+        </div><br>
+        <div class="row">
+            <form class="col-lg-7">
+                <div class="row" *ngIf="traveltype==false">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateTransportationRequest_RequestDetail}}<span
+                                class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TransportEntity.Name" name="Name" type="text"
+                            placeholder="{{updateTransportationRequest_RequestDetail}}"
+                            class="form-control maindropdown" required id="txt_updatetransportRequestDetails">
+
+                        <span class="Validationlabels"
+                            *ngIf='TransportEntity.Name=="" && Isempty ||TransportEntity.Name=="none"'>*
+                            Please
+                            Fill
+                            {{updateTransportationRequest_RequestDetail}}</span>
+                    </div>
+                </div>
+                <div class="row" *ngIf="traveltype==false||traveltype==true">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateTransportationRequest_Building}} <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select [(ngModel)]="TransportEntity.BuildingID" name="BuildingID" (change)="GetBuildingID($event)"
+                            class="dropdown form-control maindropdown"  required id="ddl_updatetransportBuilding">
+                            <option value="0">Select Building</option>
+                            <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='TransportEntity.BuildingID==0 && Isempty'>* Please
+                            Select
+                            {{updateTransportationRequest_Building}}</span>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="traveltype==false||traveltype==true">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Floor <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select [(ngModel)]="TransportEntity.FloorID" name="FloorID" (change)="GetFloorID($event)"
+                            class="dropdown form-control maindropdown"  required id="ddl_updatetransportBuilding">
+                            <option value="0">Select Floor</option>
+                            <option value="{{floor.id}}" *ngFor="let floor of FloorList">{{floor.floor}}</option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='TransportEntity.FloorID==0 && Isempty'>* Please
+                            Select
+                            {{updateTransportationRequest_Building}}</span>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="traveltype==false||traveltype==true">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Unit <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <select [(ngModel)]="TransportEntity.UnitID" name="UnitID" (change)="GetUnitID($event)"
+                            class="dropdown form-control maindropdown"  required id="ddl_updatetransportBuilding">
+                            <option value="0">Select Unit</option>
+                            <option value="{{unit.id}}" *ngFor="let unit of Unitlist">{{unit.unitID}}</option>
+                        </select>
+                        <span class="Validationlabels" *ngIf='TransportEntity.UnitID==0 && Isempty'>* Please
+                            Select
+                            {{updateTransportationRequest_Building}}</span>
+                    </div>
+                </div>
+
+
+                <div class="row" *ngIf="traveltype==true">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Shuttle Type<span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-6">
+                        <select class="form-control" [(ngModel)]="TransportEntity.ShuttleID" required name="ShuttleID"
+                            class="dropdown form-control maindropdown" (change)="GetShuttleID($event)">
+                            <option selected value="0">Select</option>
+                            <option *ngFor="let shutlle of shuttlelist" value="{{shutlle.id}}">{{shutlle.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" *ngIf="traveltype==true||traveltype==false">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateTransportationRequest_PickupLocation}}<span
+                                class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TransportEntity.PickupLocation" name="PickupLocation" type="text"
+                            placeholder="{{updateTransportationRequest_PickupLocation}}"
+                            class="form-control maindropdown" required required id="txt_updatetransportPickupLocation">
+                        <span class="Validationlabels"
+                            *ngIf='TransportEntity.PickupLocation=="" && Isempty ||TransportEntity.PickupLocation=="none"'>*
+                            Please
+                            Fill
+                            {{updateTransportationRequest_PickupLocation}}</span>
+                    </div>
+                </div>
+                <div class="row" *ngIf="traveltype==true||traveltype==false">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateTransportationRequest_Destination}} <span
+                                class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <textarea [(ngModel)]="TransportEntity.Destination" name="Destination"
+                            placeholder="{{updateTransportationRequest_Destination}}" required
+                            id="txt_updatetransportDestination" class="form-control maindropdown" rows="4"></textarea>
+                        <span class="Validationlabels"
+                            *ngIf='TransportEntity.Destination=="" && Isempty ||TransportEntity.Destination=="none"'>*
+                            Please
+                            Fill
+                            {{updateTransportationRequest_Destination}}</span>
+                    </div>
+                </div>
+                <div class="row" *ngIf="traveltype==true">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Time<span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TransportEntity.time" name="time" type="time" required
+                            placeholder="time" class="form-control maindropdown" required>
+                        <span class="Validationlabels"
+                                *ngIf='TransportEntity.shuttletime=="" && Isempty ||TransportEntity.shuttletime=="none"'>*
+                                Please
+                                Fill
+                                {{updateTransportationRequest_DepartureTime}}</span>
+                    </div>
+                </div>
+                <div class="row" *ngIf="traveltype==true">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Contact Person <span class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TransportEntity.ContactPerson" name="ContactPerson" type="text" placeholder="Contact Person"
+                            class="form-control maindropdown" />
+                    </div>
+                </div>
+                <div class="row" *ngIf="traveltype==true">
+                        <div class="col-lg-1">
+                        </div>
+                        <div class="col-lg-2 ">
+                            <p style="padding:5px">Email <span class="starspan">*</span>
+                            </p>
+                        </div>
+                        <div class="col-lg-5 ">
+                            <input [(ngModel)]="TransportEntity.email" name="email" type="text" placeholder="Email"
+                                class="form-control maindropdown" />
+                        </div>
+                    </div>
+                <div class="row" *ngIf="traveltype==false">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateTransportationRequest_DepartureDate}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TransportEntity.DepartureDateTime" name="DepartureDateTime" type="date"
+                            placeholder="Date" class="form-control maindropdown" id="txt_updatetransportDate"
+                            min="{{mindate}}">
+                    </div>
+                </div>
+                <div class="row" *ngIf="traveltype==false">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateTransportationRequest_DepartureTime}}<span
+                                class="starspan">*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TransportEntity.DepartureTime" format="HH:mm:ss" name="DepartureTime"
+                            type="time" required placeholder="time" class="form-control maindropdown" required
+                            id="txt_updatetransportTime">
+
+                        <span class="Validationlabels"
+                            *ngIf='TransportEntity.DepartureTime=="" && Isempty ||TransportEntity.DepartureTime=="none"'>*
+                            Please
+                            Fill
+                            {{updateTransportationRequest_DepartureTime}}</span>
+                    </div>
+                </div>
+                <div class="row" *ngIf="traveltype==false">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateTransportationRequest_ReturnDate}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TransportEntity.ReturnDateTime" name="ReturnDateTime" type="date"
+                            placeholder="{{updateTransportationRequest_ReturnDate}}" class="form-control maindropdown"
+                            id="txt_updatetransportReturnDate" min="{{mindate}}">
+                    </div>
+                </div>
+                <div class="row" *ngIf="traveltype==false">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateTransportationRequest_ReturnTime}}</p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TransportEntity.ReturnTime" name="ReturnTime" type="time"
+                            placeholder="{{updateTransportationRequest_ReturnTime}}" class="form-control maindropdown"
+                            id="txt_updatetransportReturnTime">
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="traveltype==false">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateTransportationRequest_SpecificInstructions}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <textarea [(ngModel)]="TransportEntity.EventDetails" name="EventDetails"
+                            placeholder="{{updateTransportationRequest_SpecificInstructions}}"
+                            id="txt_updatetransportSpecificInstructions" class="form-control maindropdown"
+                            rows="4"></textarea>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Wheel Chair Access
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TransportEntity.HandicapBusRequired" name="HandicapBusRequired"
+                            type="checkbox" placeholder="Wheel Chair Access" class="maincheckbox" required
+                            id="txt_updatetransportNumberOfPassengers">
+                    </div>
+                </div> -->
+                <div class="row" *ngIf="traveltype==false">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateTransportationRequest_NumberOfPassengers}}<span
+                                class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TransportEntity.NoOfPassengers" name="NoOfPassengers" type="text"
+                            placeholder="{{updateTransportationRequest_NumberOfPassengers}}"
+                            class="form-control maindropdown" required id="txt_updatetransportNumberOfPassengers">
+                        <span class="Validationlabels" *ngIf='TransportEntity.NoOfPassengers==0 && Isempty '>*
+                            Please
+                            Fill
+                            {{updateTransportationRequest_NumberOfPassengers}}</span>
+                    </div>
+                </div>
+                <div class="row" *ngIf="traveltype==false">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateTransportationRequest_NumberOfVehicles}}<span
+                                class="starspan">*</span></p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TransportEntity.NoOfVehicles" name="NoOfVehicles" type="number"
+                            placeholder="{{updateTransportationRequest_NumberOfVehicles}}"
+                            class="form-control maindropdown" required id="txt_updatetransportNumberOfVehicles">
+                        <span class="Validationlabels" *ngIf='TransportEntity.NoOfVehicles==0 && Isempty '>*
+                            Please
+                            Fill
+                            {{updateTransportationRequest_NumberOfVehicles}}</span>
+                    </div>
+                </div>
+                <div class="row" *ngIf="traveltype==false">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateTransportationRequest_ApproximateDistance}}</p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TransportEntity.Distance" name="Distance" type="text"
+                            placeholder="{{updateTransportationRequest_ApproximateDistance}}"
+                            class="form-control maindropdown" id="txt_updatetransportApproximateDistance">
+                    </div>
+                </div>
+
+                <!-- <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">Will Stop For Meals
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <input [(ngModel)]="TransportEntity.StopForMeals" name="StopForMeals" type="checkbox"
+                            placeholder="Will Stop For Meals" class="maincheckbox" required
+                            id="txt_updatetransportNumberOfPassengers">
+                    </div>
+                </div> -->
+                <div class="row" *ngIf="TransReqID==null&&traveltype==false">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                        <p style="padding:5px">{{updateTransportationRequest_Attachment}}
+                        </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <ngx-dropzone [(ngModel)]="TransportEntity.Attachment " name="Attachment" [showPreviews]="true"
+                            (filesAdded)="onFilesAddedPhoto($event)" class="dropzone_vendorinvoice"
+                            id="dropzone_updatetransportAttachment"></ngx-dropzone>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-2" *ngIf="TransReqID==null">
+                        <button class="savebutton" type="submit" (click)="InsertTransportationRequest()"
+                            id="btn_updatetransportSave">{{updateTransportationRequest_button_save}}</button>
+                    </div>
+                    <div class="col-lg-2" *ngIf="TransReqID!=null">
+                        <button class="savebutton" type="submit" (click)="UpdateTransportationRequests()"
+                            id="btn_updatetransportSave">Update</button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-lg-5" *ngIf="TransReqID!=null&&traveltype==false">
+                <h4 *ngIf="Attachmentlist.length>0">Attachments</h4>
+                <div id="myCarousel" *ngIf="Attachmentlist.length>0" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="{{Attachmentlist[0].attachment}}" alt="">
+                        </div>
+                        <div class="item" *ngFor="let Attachments of Attachmentlist| slice:1">
+                            <img src="{{Attachments.attachment}}" alt="">
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

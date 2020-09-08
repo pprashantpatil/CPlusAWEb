@@ -1,0 +1,55 @@
+.popupUpdatebutton{
+    background-color: #00b5d7;
+    color: white;
+    margin: 11px;
+}
+.popupbuttonAcpt{ 
+    background-color: #00b5d7;
+    height: 35px;
+    width: 130px;
+    border-radius: 10px;
+    color: white;
+}
+
+.announcementbc{
+    margin-left: 142px;
+}
+
+
+@media screen and (min-width: 1600px) {
+    .announcementbc{
+        margin-left: 142px;
+    }
+    
+  }
+  @media screen and (min-width: 1900px) {
+    .announcementbc{
+        margin-left: 206px;
+    }
+    
+  }
+
+  @media screen and (max-width: 1024px) {
+    .Pages_header{
+        margin-top: 60px;
+        margin-left: 20px;
+    }
+    .maincard{
+        margin-left: 20px;
+    }
+    .ddd{
+      margin-left: 55px;
+    }
+    
+  
+    }
+    @media screen and (min-width: 1400px) {
+        .maincard{
+            margin-left: -11px;
+        }
+        .Pages_header{
+           
+            margin-left: 0px;
+        }
+      
+    }

@@ -1,0 +1,85 @@
+<div class="container-fluid card card-hover" style="height: 600px;margin-left: -13px;">
+  <br>
+  <div class="row">
+    <div class="col-lg-3">
+      <h4> Chat Message</h4>
+      <!-- <span>typing .... </span> -->
+    </div>
+
+  </div>
+  <div style="height: 500px;overflow-y: scroll;">
+    <div *ngFor="let chat of ChatBox">
+      <div class="container" *ngIf="chat.MesgFrom==UserID">
+        <div class="row">
+          <div class="col-lg-4"></div>
+          <div class="col-lg-3"></div>
+          <div class="col-lg-5" style="background-color:lightcoral;border-radius: 5px;color:white">
+            <div>
+              <!-- <img src="{{docphoto}}" class="rounded-circle" style="width:26px;;margin-top: 5px;margin-right: 3%;
+              float: left;"> -->
+              <p style="margin-top: 5px;">{{chat.ChatMesg}}
+                <span style="
+                float: right;
+                margin-top: 14px;
+                font-size: 13px;
+            ">
+                  {{chat.Date |date}} {{chat.Time}}
+                </span>
+              </p>
+            </div>
+            <!-- <div>
+              <img src="{{chat.chatmsg}}" style="width: 100%;">
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="container" *ngIf="chat.MesgFrom!=UserID">
+        <div class="row">
+          <div class="col-lg-5" style="background-color:#00b5d7;border-radius: 5px;color:white;margin-top: 1px;">
+            <div>
+              <p style="margin-top: 5px;">
+                <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcResNk9FqC3ajpHNSlWUkZeC5oNX2fDF4_pkQ&usqp=CAU" class="rounded-circle"
+                  style="width:26px;margin-top: 5px;">-->
+                &nbsp; {{chat.ChatMesg}}
+                <span style="
+                float: right;
+                margin-top: 14px;
+                font-size: 13px;
+            ">
+                  {{chat.Date|date}} {{chat.Time}}
+                </span>
+              </p>
+            </div>
+            <!-- <div>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRgLjf3NBlwOnQ5cLowEIqKVA2A8iBXbZl6Pw&usqp=CAU" style="width: 100%;">
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  <label>Previous</label>
+  <hr>
+  <div class="container-fluid" style="border: 2px solid #00b5d7;  padding-top: 2%;  padding-bottom: 1.5%;">
+    <form #chatfrom="ngForm">
+      <div class="row">
+        <div class="col-lg-11">
+          <textarea rows="2" [(ngModel)]="chatconversation" name="chatconversation" required class="form-control" placeholder="Type a Message"></textarea>
+        </div>
+        <div class="col-lg-1">
+          <button type="submit" [disabled]="chatfrom.form.invalid">
+            <img src="assets/Images/send.png" alt="Avatar" class="right" (click)="dosendmsg()" style="width:50%;">
+          </button>
+        </div>
+        <!-- <div class="col-lg-2">
+          <ngx-dropzone [multiple]="false" (filesAdded)="onattachmentUpload($event)" class="dropzone_vendorinvoice" style="height: 50px;">
+          </ngx-dropzone>
+        </div> -->
+
+      </div>
+    </form>
+  </div>
+  <br>
+</div>

@@ -1,0 +1,272 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header"> {{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> {{pharmacyrequest_breadchrumb}} </span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 dashbutton">
+          <button type="button" routerLink="/PharmacyRequestDashboard" routerLinkActive="active-link" id="btn_button"
+            class="">
+            Pharmacy Dashboard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <h4 class="paneltitle ">{{pharmacyrequest_PageTitle}}</h4>
+    <hr>
+    <div class="row p-2">
+      <div class="col-lg-4">
+        <ng-daterangepicker [options]="pickeroptions"></ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control" (change)="GetFloor($event)" id="ddl_pharmacyRequestBuilding">
+          <option value="none">Select Building</option>
+          <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+        </select>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control " (change)="FilteredFloorList($event)" id="ddl_pharmacyRequestFloor">
+          <option value="none">Select Floor</option>
+          <option value="{{floor.id}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+        </select>
+      </div>
+      <div class="col-lg-2">
+        <input type="text" placeholder="Search.." [(ngModel)]="Search" class="form-control"
+          id="txt_pharmacyrequestSearch">
+      </div>
+    </div>
+    <div class="row" style="padding:20px">
+      <table class="table table-bordered table-hover  mainbuild">
+        <tbody>
+          <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+            <td>{{pharmacyrequest_Date}}</td>
+            <td>{{pharmacyrequest_Tenant}}</td>
+            <td>{{pharmacyrequest_Building}}</td>
+            <td>{{pharmacyrequest_Floor}}</td>
+            <td>{{pharmacyrequest_Unit}}</td>
+            <td>Vendor Name</td>
+            <td>{{pharmacyrequest_Prescription}}</td>
+            <td>{{pharmacyrequest_Status}}</td>
+          </tr>
+          <tr *ngFor="let Pharmacy of FilteredPharmacyList|filter:Search">
+            <td>{{Pharmacy.date|date}}</td>
+            <td>{{Pharmacy.name}}</td>
+            <td>{{Pharmacy.building}}</td>
+            <td>{{Pharmacy.floor}}</td>
+            <td>{{Pharmacy.unitID}}</td>
+            <td>{{Pharmacy.vendorName}}</td>
+            <td><img class="buildingimage" (click)="getimage(Pharmacy.prescriptionURL)" data-toggle="modal"
+                data-target="#myModalupimage" src="{{Pharmacy.prescriptionURL}}">
+            </td>
+            <td style="width: 150px;">
+              <div>
+                <button class="btn btn-danger editable-table-button btn-xs" (click)="PharmacyAssign(Pharmacy)"
+                  data-toggle="modal" data-target="#myModalOne" *ngIf="Pharmacy.assignedto==null || Pharmacy.statusID==7">Assign</button>
+
+                <!-- <button class="btn btn-danger editable-table-button btn-xs"  *ngIf="Pharmacy.assignedto!=null">Assigned</button> -->
+
+                <button class="btn btn-danger editable-table-button btn-xs" style="background-color: #4caf50;"
+                  *ngIf="Pharmacy.statusID==6">Accepted</button>
+
+                  <button class="btn btn-danger editable-table-button btn-xs" style="background-color: #4caf50;"
+                  *ngIf="Pharmacy.statusID==3">Delivered</button>
+
+                <button class="btn btn-danger editable-table-button btn-xs"
+                  *ngIf="Pharmacy.statusID==7">Rejected</button>
+
+
+                <button class="btn btn-danger editable-table-button btn-xs" data-toggle="modal"
+                  data-target="#myModaltwo" style="background-color: #fec501;margin-left: 8px;"
+                  (click)="CancelRequest(Pharmacy)">Cancel</button>
+                <!-- <button class="btn btn-danger editable-table-button btn-xs"  *ngIf="Pharmacy.statusID==3">Delivered</button> -->
+
+                <!-- <button class="btn btn-danger editable-table-button btn-xs"  *ngIf="Pharmacy.delivered==true">Delivered</button> -->
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- Modal One -->
+    <div id="myModalOne" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="margin-top: 102px;">
+          <div class="modal-header">
+            <h4>Assign Task
+            </h4>
+            <button type="button" class="close " data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-4">
+                <h5>Vendor Type
+                </h5>
+              </div>
+              <div class="col-lg-8">
+                <select (change)="VendorByID($event)" class="dropdown form-control" required
+                  id="ddl_updatescheduleAssignedTo">
+                  <option value="0">Select Vendor</option>
+                  <option value="{{Vendor.id}}" *ngFor="let Vendor of Vendlist">{{Vendor.short}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-4">
+                <h5>Vendor
+                </h5>
+              </div>
+              <div class="col-lg-8">
+                <select (change)="VendorName($event)" class="dropdown form-control " required
+                  id="ddl_updatescheduleAssignedTo">
+                  <option value="0">Select </option>
+                  <option value="{{VendorID.id}}" *ngFor="let VendorID of VendorsByIDList">{{VendorID.vendorName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-4">
+                <h5>Phone Number</h5>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" value="{{vendorphno}}" id="txt_EventBooked" class="form-control ">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-4">
+                <h5>EmailID</h5>
+              </div>
+              <div class="col-lg-8">
+                <input type="text" value="{{vendorname}}" id="txt_EventBooked" class="form-control ">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-4">
+              </div>
+              <div class="col-lg-8">
+                <button type="button" class="btn btn-default popupbutton" data-dismiss="modal"
+                  (click)="UpdateAssignedTo()">Assign</button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="myModaltwo" class="modal fade" role="dialog" style=" margin-top: 10%;">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content " style="margin-top: -30px;">
+          <div class="modal-header">
+            <h4>Reason For Cancel</h4>
+            <button type="button" class="close " data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-1">
+              </div>
+              <div class="col-lg-2 ">
+                <p style="padding:5px">Reason
+                </p>
+              </div>
+              <div class="col-lg-5 ">
+                <textarea id="txt_Cancel" [(ngModel)]="CancelEntity.CancelledReason" placeholder="Reason"
+                  class="form-control maindropdown" rows="4"></textarea>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row">
+            <button type="button" style="margin-left: 350px;" class="btn btn-default popupbutton" data-dismiss="modal"
+              (click)="CancelEvents()">Save</button>
+            <div class="row">
+            </div>
+          </div> -->
+          <div class="modal-footer">
+            <button type="button" style="margin-left: 350px;    background-color: #fec501;" data-dismiss="modal"
+              class="btn btn-default popupbutton" data-dismiss="modal" (click)="savecancelreason()">Save</button>
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+    <div class="modal fade" id="myModalupimage">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="margin-top: 15%;width: 503px;margin-left: 222px;">
+          <div class="modal-header">
+            <h4>Prescription</h4>
+            <!-- <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+                      <i class=" i" style="margin-left: 221px;
+                      margin-top: 10px;
+                      font-size: 16px;" data-toggle="modal" data-target="#AddAttachments">Add Attachments</i>
+                    </div> -->
+            <button type="button" class="close " data-dismiss="modal">&times;</button>
+          </div>
+          <div class="row" style="margin-top:5%;">
+            <div class="col-lg-12">
+              <div class="col-lg-2">
+
+              </div>
+              <div class="col-lg-8">
+                <!-- <a >
+                  <img src="{{pharmacyimg}}" style="width: 222px;">
+                </a> -->
+                <div>
+                  <a href="{{pharmacyimg}}" download style="background-color:white">
+                    <img src="{{pharmacyimg}}" style="width: 222px;">
+                  </a>
+                </div>
+                <p style="margin-top: 15px;">(Note : Click on the image to download)</p>
+
+              </div>
+              <div class="col-lg-2">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-lg-9"> </div>
+            <div class="col-lg-3">
+              <button class="dashbutton " style="width: 69px;
+                margin-right: 12px;" type="submit" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>

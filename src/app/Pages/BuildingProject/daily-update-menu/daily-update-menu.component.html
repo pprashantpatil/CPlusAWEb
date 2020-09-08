@@ -1,0 +1,152 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="Pages_header">Daily Update Menu</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <!-- <div class="col-lg-12 BreadChrumbProperties">
+            <span class="CommercialWorkspace">Contractor / Daily Update Menu</span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="card maincard" style="margin-top: 30px;">
+      <div class="row">
+        <div class="col-lg-8 reqriedspan">
+          <br>
+          <!-- <div class="row"> -->
+          <form>
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-3 ">
+                <p style="padding:5px">Project
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <select name="ProjectID" disabled class="dropdown form-control " [(ngModel)]="ProjectID" required
+                  id="ddl_updateassetsBuilding" (click)="GetBuildingID($event)">
+                  <option value="0" selected="selected">Select Project</option>
+                  <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">Floor
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <select class="dropdown form-control topdropdown" (click)="GetFloorID($event)" name="FloorID"
+                  [(ngModel)]="FloorID" id="FloorID" required="">
+                  <option value="0"> Select Floor</option>
+                  <option *ngFor="let vendor of FloorList" value="{{vendor.id}}">{{vendor.floor}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">Unit
+                  <span class="starspan"></span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <ng-multiselect-dropdown class="multiselect-dropdown" [placeholder]="'Select Units'"
+                  [data]="UserRoleList" name='Units' [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                  (onSelectAll)="onSelectAll($event)" (onDeSelect)="onItemDeSelect($event)">
+                </ng-multiselect-dropdown>
+              </div>
+            </div>
+
+            <br>
+            <div class="row">
+              <div class="col-lg-2"></div>
+              <div class="col-lg-3">
+                <p style="padding:3px">Stage
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <select class="form-control" id="ddl_buildingplans" [(ngModel)]="StageID" (change)="GetStageID($event)">
+                  <option value="none" selected="selected"> Select Stage</option>
+                  <option value="{{build.id}}" *ngFor="let build of StageList">{{build.stageName}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-2"></div>
+              <div class="col-lg-3">
+                <p style="padding:3px">Photos
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <input type="file" class="form-control" placeholder="Photos" (change)="handleFileSelect1($event)"
+                  accept="image/*" multiple>
+              </div>
+              <p style="margin-top: 7px;
+              margin-left: 327px;">
+                <b>Hold control button to select multiple </b>
+              </p>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-2"></div>
+              <div class="col-lg-3">
+                <p style="padding:3px">Videos
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <input type="file" class="form-control" placeholder="Videos" (change)="handleFileSelect($event)"
+                  accept="video/*" multiple>
+              </div>
+              <p style="margin-top: 7px;
+              margin-left: 327px;
+               ">
+                <b>Hold control button to select multiple </b>
+              </p>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">Description
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <textarea placeholder=" Description" name="Description" [(ngModel)]="Description" id="Description"
+                  rows="4" required class="form-control"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+              </div>
+              <div class="col-lg-2">
+                <button class="savebutton" (click)="Save()" style="margin-bottom: 20px;
+                  margin-left: 111px;
+                  margin-top: 62px;" type="submit">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

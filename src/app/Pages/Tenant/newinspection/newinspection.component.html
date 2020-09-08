@@ -1,0 +1,154 @@
+<div class="container-fluid Pages_background">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="Pages_header"> Inspection</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span class="building"> New Inspection </span> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard ">
+        <div>
+            <div class="col-lg-3">
+                <h3 class="panel-title clearfix formlabel">Inspection
+                </h3>
+            </div>
+        </div>
+   
+        <hr>
+        <form>
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel ">Building <span class="starspan">*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select (change)="GetFloor($event)"   name="Building" [(ngModel)]="BuildingID" 
+                        class="dropdown form-control">
+                        <option value="0">Select Building</option>
+                        <option value="{{build1.id}}" *ngFor="let build1 of Buildinglist">{{build1.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">Floor <span class="starspan">*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select (change)="UnitByID($event)"  name="Floor" [(ngModel)]="FloorID"  id="FloorID"
+                        class="dropdown form-control"  placeholder="Select ">
+                        <option value="0">Select Floor</option>
+                        <option value="{{floor.id}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+                    </select>
+                  
+                </div>
+            </div>
+            <br>
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">Unit<span class="starspan">*</span> </h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select class="dropdown form-control"  name="Unit" id="Unit" [(ngModel)]="Unit" 
+                        placeholder="Select Unit" (change)="UnitlistID($event)">
+                        <option value="0">Select Unit</option>
+                        <option value="{{Unit.id}}" *ngFor="let Unit of Unitlist">{{Unit.unitID}}</option>
+                    </select>
+                   
+                </div>
+            </div>
+            <br>
+            <div class="row ">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                  <h5 class="formlabel">Tenant Name<span class="starspan">*</span></h5>
+              </div>
+              <div class="col-lg-4">
+                  <input type="text"  name="TenantName " [(ngModel)]="TenantName"
+                  class="form-control " id="TenantName" placeholder="Tenant Name ">
+                 </div>
+          </div>
+          <br>
+          <div class="row ">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                  <h5 class="formlabel">Phone No <span class="starspan">*</span></h5>
+              </div>
+              <div class="col-lg-4">
+                  <input type="text"  name="Phone " [(ngModel)]="PhoneNo"
+                  class="form-control " id="Phone" placeholder="Phone No">
+          </div>
+          </div>
+          <br>
+         
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> Date </h5>
+                </div>
+                <div class="col-lg-4">
+                    <!-- <input type="date"  name="Date" [(ngModel)]="InspectionDate" 
+                        class="form-control " id="Date"> -->
+  
+                        <input [(ngModel)]="InspectionDate" name="Date" type="date"
+                        id="Date" placeholder="InspectionDate" class="form-control "
+                       >
+  
+                      
+  
+  
+                </div>
+            </div>
+            <br>
+  
+            <div class="row ">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                  <h5 class="formlabel"> Time </h5>
+              </div>
+              <div class="col-lg-4">
+                  <input type="time"   name="Time"  [(ngModel)]="Time" 
+                      class="form-control " id="Time" placeholder="Time">
+              </div>
+          </div>
+          <br>
+  
+  
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">Comments <span class="starspan">*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <textarea type="text" class="form-control" name="Comments"  [(ngModel)]="Comments" 
+                        id="txt_RentAmount" placeholder="Comments"></textarea>
+                  
+                </div>
+            </div>
+            <br>
+       
+  
+            <div class="row">
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-2" *ngIf="this.paramID==null">
+                    <button class="savebutton" (click)="InsertInspection()" id="btn_rentsave"
+                        type="submit">Save</button>
+                </div>
+  
+                <div class="col-lg-2" *ngIf="this.paramID!=null">
+                    <button class="savebutton" (click)="UpdateInspection()" id="btn_rentsave" type="submit">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>

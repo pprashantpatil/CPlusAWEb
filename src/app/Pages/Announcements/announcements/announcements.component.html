@@ -1,0 +1,169 @@
+<div class="container-fluid Pages_background">
+    <div>
+        <div class="row">
+            <div class="col-lg-5">
+                <h4 class="Pages_header">ANNOUNCEMENTS</h4>
+            </div>
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-4">
+                <div class="mainrow">
+                    <div class="col-lg-12 BreadChrumbProperties">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class=col-lg-2> </div>
+        <div class="col-lg-8"></div>
+        <div class="col-lg-2 dashbutton" style="margin-left: -18px;">
+            <button routerLink="/UpdateAnnouncement" *ngIf="LoginTypeID==2 || LoginTypeID==3||LoginTypeID==7 "
+                type="button">New Announcement
+            </button>
+        </div>
+    </div>
+</div>
+<div class="container-fluid Pages_background">
+    <div class="shadow p-2 mb-5 bg-white rounded   maincard " style="margin-right: 14px;">
+        <h4 class="paneltitle">Announcements</h4>
+        <hr>
+        <div class="row">
+            <div class="col-lg-4">
+                <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions"
+                    (ngModelChange)="selectedDate($event)">
+                </ng-daterangepicker>
+            </div>
+            <div class="col-lg-3 ddd">
+                <input type="text" placeholder="search.." [(ngModel)]="search" class="form-control"
+                    id="txt_projectrequestSearch">
+            </div>
+        </div>
+        <br>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-condensed" style="text-align: center;">
+                <tbody>
+                    <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+                        <td>Date</td>
+                        <td>Announcement</td>
+                        <td>Announcement Details</td>
+                        <td>Venue</td>
+                        <td *ngIf="LoginTypeID==3 || LoginTypeID==1 ||LoginTypeID==4">Actions</td>
+                    </tr>
+                </tbody>
+                <tr *ngFor="let Announcement of AnnouncementList|filter:search">
+                    <td>{{Announcement.dateTime|date}}</td>
+                    <td>{{Announcement.announcement}}</td>
+                    <td>{{Announcement.reason}}</td>
+                    <td>{{Announcement.venue}}</td>
+                    <td class="TableActions" *ngIf="LoginTypeID==3 || LoginTypeID==1 ||LoginTypeID==4">
+                        <i *ngIf="LoginTypeID==3" class="fa fa-edit" title="Edit"
+                            (click)="EditAnnouncement(Announcement)"></i>
+                        <i *ngIf="LoginTypeID==3" class="far fa-trash-alt" data-toggle="tooltip" title="Delete"
+                            (click)="Delete(Announcement)"></i>
+                        <a (click)="Attachment(Announcement)" data-toggle="modal" data-target="#myModalAttachments"
+                            style="background-color: white">
+                            <i class="fa fa-paperclip" data-toggle="tooltip" title="Attachments"></i>
+                        </a>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+
+        <div id="myModalAttachments" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content" style="margin-top: 100px;">
+                    <div class="modal-header">
+                        <h4>Photos</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="myCarouselPhotos1" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img src="{{Imageone}}" alt="">
+                                </div>
+                                <div class="item" *ngFor="let Attachment of Attachmentlist| slice:1">
+                                    <img src="{{Attachment.attachment}}" alt="">
+                                </div>
+                            </div>
+                            <a class="left carousel-control" href="#myCarouselPhotos1" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarouselPhotos1" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="AttachmentsUpdate" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+
+                <div class="modal-content " style="margin-top: -31px;">
+                    <div class="modal-header">
+                        <button type="button" class="close " data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <h5>Update Attachment
+                                </h5>
+                            </div>
+                            <div class="col-lg-8">
+                                <ngx-dropzone class="dropzone_vendorinvoice" [showPreviews]="true"
+                                    (filesAdded)="onFilesAddedAttached($event)" name="Attachment"
+                                    id="dropzone_assetphoto"></ngx-dropzone>
+                                <button style="margin-top: 10px;" type="button"
+                                    class="btn btn-default popupbuttonupdate" data-dismiss="modal"
+                                    (click)="UpdateAssetsAttachments()">
+                                    Update </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="AddAttachment" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header" style="height: 73px;">
+                        <h4 class="modal-title">Add Attachments</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <ngx-dropzone [showPreviews]="true" (filesAdded)="onFilesNewAttachments($event)"
+                                        class="dropzone_vendorinvoice" id="dropzone_Attachment"></ngx-dropzone>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <button data-toggle="modal" data-dismiss="modal" (click)="AddAttachments()"
+                                        class="savebutton" type="button">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

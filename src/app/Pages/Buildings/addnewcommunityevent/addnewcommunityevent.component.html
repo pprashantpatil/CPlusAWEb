@@ -1,0 +1,792 @@
+<div class="container-fluid Pages_background " *ngIf="paramID==null">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header">{{pageTitle}}</h4>
+        </div>
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-4">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span class="building"> {{addnewcommunityevent_breadchurmb}} </span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <!-- <button type="button" routerLink="/NewCreditNotes" routerLinkActive="active-link" id="btn_button"
+                  class="dashbutton">Book</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+        <h6 class="paneltitle">{{addnewcommunityevent_PageTitle}}
+        </h6>
+        <hr>
+
+        <form #loginForm="ngForm">
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{addnewcommunityevent_Date}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <!-- <input type="date" id="txt_date" placeholder="{{addnewcommunityevent_Date}}" class="form-control maindropdown"> -->
+                    <div class="form-group">
+                        <input name="date" class="form-control" placeholder="{{addnewcommunityevent_Date}}" bsDatepicker
+                            #dp="bsDatepicker" [(ngModel)]="Date" (ngModelChange)="DateChange()" [minDate]="minDate"
+                            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" required>
+                    </div>
+
+                    <span class="Validationlabels" *ngIf='Date==undefined && Isempty'>* Please
+                        Fill
+                        {{addnewcommunityevent_Date}}</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Start Time<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <!-- <input type="date" id="txt_date" placeholder="{{addnewcommunityevent_Date}}" class="form-control maindropdown"> -->
+                    <div class="form-group">
+                        <input type="time" class="form-control maindropdown" [(ngModel)]="Time" name="Time" required
+                            id="txt_NoofParkingSlots" placeholder="Time">
+                    </div>
+
+                    <span class="Validationlabels" *ngIf='Date==undefined && Isempty'>* Please
+                        Fill
+                        Time</span>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{addnewcommunityevent_selectBuilding}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control" id="ddl_BuildingName" (change)="getbuildingID($event)"
+                        required>
+                        <option selected="selected">Select Building</option>
+                        <option *ngFor="let Building of Buildinglist" value="{{Building.id}}">{{Building.name}}</option>
+
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{addnewcommunityevent_SelectCommunityHall}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control" id="ddl_BuildingName" (change)="GetHallID($event)" required>
+                        <option value="none">Select Community Hall</option>
+                        <option *ngFor="let Hall of Halllist" value="{{Hall.id}}">{{Hall.hallName}}</option>
+
+                    </select>
+                    <span class="Validationlabels" *ngIf='HallID==undefined && Isempty'>* Please
+                        Fill
+                        {{addnewcommunityevent_SelectCommunityHall}}</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" (click)="CheckCommunityHall()" [disabled]="loginForm.form.invalid"
+                        class="btn btn-block btn-md savebutton">{{addnewcommunityevent_CheckAndBook_Button}}</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+<div class="container-fluid Pages_background " *ngIf="bookdetails || paramID!=null">
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <!-- <button type="button" routerLink="/NewCreditNotes" routerLinkActive="active-link" id="btn_button"
+                  class="dashbutton">Book</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+        <!-- <h6 class="paneltitle">Book Community Hall
+        </h6> -->
+        <hr>
+        <form #loginForm1="ngForm">
+            <div class="row" *ngIf="paramID!=null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{addnewcommunityevent_selectBuilding}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control maindropdown" [disabled]="paramID!=null" id="ddl_BuildingName"
+                        [(ngModel)]="hallbuildingid2" name="buildingid1">
+                        <option selected="selected">Select Building</option>
+                        <option *ngFor="let Building of Buildinglist" value="{{Building.id}}">{{Building.name}}</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="paramID!=null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{addnewcommunityevent_SelectCommunityHall}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control maindropdown" [disabled]="paramID!=null" id="ddl_BuildingName"
+                        [(ngModel)]="hallid2" name="hallid2">
+                        <option selected="selected">Select Community Hall1</option>
+                        <option *ngFor="let Hall of Halllist" value="{{Hall.id}}">{{Hall.hallName}}</option>
+
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="row" *ngIf="paramID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{HallUser}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control maindropdown" id="hallName" (change)="GetHallUserID($event)">
+                        <option selected="selected">Select {{HallUser}}</option>
+                        <option *ngFor="let hall of HallUserTypelist" value="{{hall.id}}">{{hall.short}}</option>
+
+                    </select>
+
+                    <span class="Validationlabels" *ngIf='HallUserID==undefined && Isempty'>* Please
+                        Fill
+                        {{HallUser}}</span>
+
+
+                </div>
+            </div>
+
+            <div class="row" *ngIf="paramID!=null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{HallUser}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control maindropdown" id="hallName" [disabled]="paramID!=null"
+                        [(ngModel)]="usertypeid" name="hallid">
+                        <option selected="selected">Select {{HallUser}}</option>
+                        <option *ngFor="let hall of HallUserTypelist" value="{{hall.id}}">{{hall.short}}</option>
+
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="row" *ngIf="HallUserID==1 && paramID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{Building}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control maindropdown" id="ddl_BuildingName"
+                        (change)="GetBuildingID1($event)">
+                        <option selected="selected">Select Building</option>
+                        <option *ngFor="let Building of Buildinglist" value="{{Building.id}}">{{Building.name}}</option>
+
+                    </select>
+
+                    <span class="Validationlabels" *ngIf='BuildingID1==undefined && Isempty'>* Please
+                        Fill
+                        {{Building}}</span>
+
+                </div>
+            </div>
+
+            <div class="row" *ngIf="HallUserID==1 && paramID!=null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{Building}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control maindropdown" [disabled]="paramID!=null" id="ddl_BuildingName"
+                        name="bname" [(ngModel)]="uderbuildingID">
+                        <option selected="selected">Select Building</option>
+                        <option *ngFor="let Building of Buildinglist" value="{{Building.id}}">{{Building.name}}</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="HallUserID==1 && paramID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{Floor}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control maindropdown" id="ddl_BuildingName"
+                        (change)="GetFloorID($event)">
+                        <option selected="selected">Select Floor</option>
+                        <option *ngFor="let floor of FloorList" value="{{floor.id}}">{{floor.floor}}</option>
+
+                    </select>
+
+                    <span class="Validationlabels" *ngIf='floorID==undefined && Isempty'>* Please
+                        Fill
+                        {{Floor}}</span>
+
+                </div>
+            </div>
+
+            <div class="row" *ngIf="HallUserID==1 && paramID!=null ">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{Floor}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control maindropdown" [disabled]="paramID!=null" id="ddl_BuildingName"
+                        [(ngModel)]="floor2" name="floor">
+                        <option selected="selected">Select Floor</option>
+                        <option *ngFor="let floor of FloorList" value="{{floor.id}}">{{floor.floor}}</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="HallUserID==1 && paramID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{ClientName}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control maindropdown" id="ddl_BuildingName"
+                        (change)="GetclientDetal($event)">
+                        <option selected="selected">Select {{ClientName}}</option>
+                        <option *ngFor="let client of ClientNamelist" value="{{client.id}}">{{client.tenantName}}
+                        </option>
+
+                    </select>
+                    <span class="Validationlabels" *ngIf='ClientID==undefined && Isempty'>* Please
+                        Fill
+                        {{ClientName}}</span>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="HallUserID==1  && paramID!=null ">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{ClientName}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <!-- <select class="dropdown form-control" id="ddl_BuildingName" required
+                            [(ngModel]="clientname2" >
+                            <option selected="selected">Select Client</option>
+                            <option *ngFor="let client of ClientNamelist" value="{{client.tenantName}}">{{client.tenantName}}
+                            </option>
+    
+                        </select> -->
+                    <input type="text" class="form-control maindropdown" [disabled]="paramID!=null"
+                        [(ngModel)]="clientname2" name="clientname2" id="txt_NoofParkingSlots"
+                        placeholder="{{ClientName}}">
+                </div>
+            </div>
+
+
+            <div class="row" *ngIf="(HallUserID==2||HallUserID==3||HallUserID==4) && paramID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{ClientName}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control maindropdown" [(ngModel)]="Externalname" name="Externalname"
+                        id="txt_NoofParkingSlots" placeholder="{{ClientName}}">
+                </div>
+            </div>
+
+            <div class="row" *ngIf="(HallUserID==2||HallUserID==3||HallUserID==4 ) && paramID!=null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{ClientName}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" [disabled]="paramID!=null" class="form-control maindropdown"
+                        [(ngModel)]="Externalname" name="Externalname" id="txt_NoofParkingSlots"
+                        placeholder="{{ClientName}}">
+                </div>
+            </div>
+
+
+
+            <div class="row" *ngIf="HallUserID==1 && paramID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{Unit}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control maindropdown" [(ngModel)]="unit" name="unit"
+                        id="txt_NoofParkingSlots" placeholder="{{Unit}}">
+                </div>
+            </div>
+
+            <div class="row" *ngIf="HallUserID==1 && paramID!=null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{Unit}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" [disabled]="paramID!=null" class="form-control maindropdown" [(ngModel)]="unit2"
+                        name="unit" id="txt_NoofParkingSlots" placeholder="{{Unit}}">
+                </div>
+            </div>
+
+            <div class="row" *ngIf="(HallUserID==2||HallUserID==3||HallUserID==4||HallUserID==1) && paramID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{PhoneNO}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control maindropdown" [(ngModel)]="clientphone"
+                        onkeypress='return (event.charCode > 47 && event.charCode < 58)' maxlength="10"
+                        name="clientphone" id="txt_NoofParkingSlots" placeholder="{{PhoneNO}}" required>
+
+                    <span class="Validationlabels" *ngIf='Isempty &&(10>clientphone.length) '>* Please
+                        Fill
+                        {{PhoneNO}}</span>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="(HallUserID==2||HallUserID==3||HallUserID==4||HallUserID==1 )&& paramID!=null ">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{PhoneNO}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" [disabled]="paramID!=null" class="form-control maindropdown"
+                        onkeypress='return (event.charCode > 47 && event.charCode < 58)' maxlength="10"
+                        [(ngModel)]="clientphone2" name="clientphone" id="txt_NoofParkingSlots"
+                        placeholder="{{PhoneNO}}" required>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Start Date<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <!-- <input type="date" id="txt_date" placeholder="{{addnewcommunityevent_Date}}" class="form-control maindropdown"> -->
+                    <div class="form-group">
+                        <input name="date2" [disabled]="paramID!=null" class="form-control maindropdown" bsDatepicker
+                            #dp="bsDatepicker" [(ngModel)]="Date2" (ngModelChange)="DateChange2()" [minDate]="minDate1"
+                            [maxDate]="maxDate" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">End Date<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <!-- <input type="date" id="txt_date" placeholder="{{addnewcommunityevent_Date}}" class="form-control maindropdown"> -->
+                    <div class="form-group">
+                        <input name="date4" [disabled]="paramID!=null" class="form-control maindropdown" bsDatepicker
+                            #dp="bsDatepicker" [(ngModel)]="Date4" (ngModelChange)="DateChange4()" [minDate]="minDate2"
+                            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" required>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Start Time<span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="time" class="form-control maindropdown" [(ngModel)]="startTime" name="startTime"
+                        required id="txt_NoofParkingSlots" placeholder="Start Time">
+
+                    <!-- <timepicker [(ngModel)]="startTime"></timepicker> -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">End Time <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="time" class="form-control maindropdown" [(ngModel)]="endtime" name="endtime" required
+                        id="txt_NoofParkingSlots" placeholder="End Time">
+                    <!-- <timepicker [(ngModel)]="endtime"></timepicker> -->
+
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">No Of People <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control maindropdown" [(ngModel)]="noofpeople" name="starttime"
+                        required id="txt_NoofParkingSlots" placeholder="No Of People ">
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Type Of Party <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control maindropdown" [(ngModel)]="typeOfparty" name="typeofpa"
+                        required id="txt_NoofParkingSlots" placeholder="Type Of Party ">
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Additional Facilities</p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control maindropdown" [(ngModel)]="addfacility" name="addfacility"
+                        id="txt_NoofParkingSlots" placeholder="Additional Facilities">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px"> No of Days<span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control maindropdown" [disabled]="paramID!=null || paramID==null"
+                        [(ngModel)]="noofdays" name="noofdays" required id="txt_NoofParkingSlots"
+                        placeholder="No of Days">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Per Day Price<span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control maindropdown" [disabled]="paramID!=null"
+                        [(ngModel)]="perdayprice" name="perdayprice" required id="txt_NoofParkingSlots"
+                        placeholder="Per Day Price">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Additional Price <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control maindropdown" [disabled]="paramID!=null"
+                        [(ngModel)]="Addprice" name="Addprice" required id="txt_NoofParkingSlots"
+                        placeholder="Additional Price">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Total Amount<span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control maindropdown" [disabled]="paramID!=null"
+                        [(ngModel)]="Totalamount" name="Totalamount" required id="txt_NoofParkingSlots"
+                        placeholder="Total Amount">
+                </div>
+            </div>
+
+            <div class="row" *ngIf="paramID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Payment Type<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control maindropdown" id="ddl_BuildingName" required
+                        (change)="GetpaymenttypeID($event);">
+                        <option selected="selected">Select PaymentType</option>
+                        <option *ngFor="let Payment of PaymentTypelist1" value="{{Payment.id}}">{{Payment.short}}
+                        </option>
+
+                    </select>
+
+                    <span class="Validationlabels" *ngIf='paymenttypeID==undefined && Isempty'>* Please
+                        Fill
+                        {{ClientName}}</span>
+
+
+                </div>
+            </div>
+
+            <div class="row" *ngIf="paramID!=null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Payment Type<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control maindropdown" id="ddl_BuildingName" required
+                        [disabled]="paramID!=null" [(ngModel)]="paymenttype2" name="paymenttype2">
+                        <option selected="selected">Select Payment</option>
+                        <option *ngFor="let Payment of PaymentTypelist1" value="{{Payment.id}}">{{Payment.short}}
+                        </option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="paymenttypeID==2">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> TransactionID <span class="starspan">*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="number" id="txt_ChequeNo" [(ngModel)]="Transaction" [disabled]="paramID!=null"
+                        name="Transaction" class="form-control maindropdown" placeholder=" TransactionID ">
+                    <span class="Validationlabels" *ngIf='Transaction==undefined && Isempty'>* Please
+                        Fill
+                        TransactionID</span>
+                </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="paymenttypeID==3 ||paymenttypeID==2 ">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> Date <span class="starspan">*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <input name="date5" class="form-control maindropdown" [disabled]="paramID!=null"
+                            placeholder="{{addnewcommunityevent_Date}}" bsDatepicker #dp="bsDatepicker"
+                            [(ngModel)]="Date5" (ngModelChange)="DateChange6()" [minDate]="minDate3"
+                            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+
+                        <span class="Validationlabels" *ngIf='Date5==undefined && Isempty'>* Please
+                            Fill
+                            Date</span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="paymenttypeID==3 || paymenttypeID==4 || paymenttypeID==5 ||paymenttypeID==2 ">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> Bank Name <span class="starspan">*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" id="txt_BankName" [(ngModel)]="bankname" [disabled]="paramID!=null"
+                        name="bankname" class="form-control maindropdown" placeholder="Bank Name">
+
+                    <span class="Validationlabels" *ngIf='bankname==undefined && Isempty'>* Please
+                        Fill
+                        Bank Name</span>
+
+                </div>
+            </div>
+            <br>
+
+
+            <div class="row" *ngIf="paymenttypeID==3">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> Cheque Number <span class="starspan">*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="number" id="txt_ChequeNo" [(ngModel)]="Chequeno" [disabled]="paramID!=null"
+                        name="ChequeNo" class="form-control maindropdown" placeholder=" {{newPayment_TotalAmount}} "
+                        placeholder="Cheque Number ">
+                    <span class="Validationlabels" *ngIf='Chequeno==undefined && Isempty'>* Please
+                        Fill
+                        Cheque Number</span>
+
+                </div>
+            </div>
+            <br>
+
+
+
+
+
+            <div class="row" *ngIf="paymenttypeID==4 || paymenttypeID==5">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Name of Card<span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" [disabled]="paramID!=null" class="form-control maindropdown"
+                        [(ngModel)]="nameofcard" name="nameofcard" id="txt_NoofParkingSlots"
+                        placeholder="Name of Card">
+                </div>
+            </div>
+
+            <div class="row" *ngIf="paymenttypeID==4 || paymenttypeID==5">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px"> Card Number<span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" [disabled]="paramID!=null" class="form-control maindropdown"
+                        [(ngModel)]="cardnumber" name="cardnumber" id="txt_NoofParkingSlots"
+                        placeholder="Card Number">
+                </div>
+            </div>
+
+            <div class="row" *ngIf="paymenttypeID==4 || paymenttypeID==5">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Valid Up To<span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" [disabled]="paramID!=null" class="form-control maindropdown"
+                        [(ngModel)]="validupto" name="validupto" id="txt_NoofParkingSlots" placeholder="Valid Up To">
+                </div>
+            </div>
+
+            <div class="row" *ngIf="(paymenttypeID==4 || paymenttypeID==5) && paramID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Card Type
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control maindropdown" id="ddl_BuildingName"
+                        (change)="GetcardtypeID($event)">
+                        <option selected="selected">Select Card</option>
+                        <option *ngFor="let card of CardTypelist" value="{{card.id}}">{{card.short}}</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="(paymenttypeID==4 || paymenttypeID==5) && paramID!=null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Card Type
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control maindropdown" id="ddl_BuildingName" [disabled]="paramID!=null"
+                        [(ngModel)]="cardTypeID2" name="cardTypeID2">
+                        <option selected="selected">Select Card</option>
+                        <option *ngFor="let card of CardTypelist" value="{{card.id}}">{{card.short}}</option>
+
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="row" *ngIf="paramID==null">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" (click)="InsertBookPartyHall()" [disabled]="loginForm1.form.invalid"
+                        class="btn btn-block btn-md savebutton">Save</button>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="paramID!=null">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" (click)="updateBookPartyHall()" [disabled]="loginForm1.form.invalid"
+                        class="btn btn-block btn-md savebutton">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

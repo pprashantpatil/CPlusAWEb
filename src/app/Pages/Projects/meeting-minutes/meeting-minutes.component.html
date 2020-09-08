@@ -1,0 +1,225 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 style="margin-bottom: 25px;" class="Pages_header">ADD MEETING </h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+
+  </div>
+
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard ">
+
+    <div class="row">
+      <div class="col-lg-8">
+
+        <div class="row">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6> Meeting Type
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <div class="form-group">
+              <select name="MeetingType" [(ngModel)]="MeetingType" class="dropdown form-control"
+                (change)="GetMeetingType($event)" id="MeetingTypeID">
+                <option value="0" selected="selected"> Meeting Type</option>
+                <option value="Virtual Meeting"> Virtual Meeting</option>
+                <option value="Direct Meeting">Direct Meeting </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="row" *ngIf="MeetingType=='Virtual Meeting'">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6>Meeting Link
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <input type="text" [(ngModel)]="meetingLink" class="form-control">
+          </div>
+        </div>
+
+
+        <br>
+        <div class="row" *ngIf="MeetingType=='Virtual Meeting'">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6>Password
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <input type="text" [(ngModel)]="Password" class="form-control">
+          </div>
+        </div>
+
+        <br>
+        <div class="row">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6>Project
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <div class="form-group">
+              <select name="ProjectID" [(ngModel)]="projectID" class="dropdown form-control " required
+                id="ddl_updateassetsBuilding" (click)="GetProjectID($event)" disabled>
+                <option value="0" selected="selected"> Project</option>
+                <option value="{{build.id}}" *ngFor="let build of projectlist">{{build.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <div class="row">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6>Meeting Date
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <input [(ngModel)]="MeetingDate" name="MeetingDate" type="date" placeholder="Meeting Date" required
+              class="form-control">
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6>Meeting Time
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <div class="form-group">
+              <input type="time" [(ngModel)]="MeetingTime" name="MeetingTime" class="form-control"
+                placeholder="Meeting Time" required>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6>Meeting Name
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <input type="text" [(ngModel)]="MeetingName" class="form-control" [disabled]="typeID==2">
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6>Staff Attendees
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <div class="form-group">
+              <select name="Attendees1" [(ngModel)]="Attendees1" class="dropdown form-control " required
+                id="ddl_updateassetsBuilding" (click)="GetAttendees1($event)">
+                <option value="0" selected="selected"> Attendees</option>
+                <option value="{{build.staffID}}" *ngFor="let build of Attendeeslist1">{{build.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6>Client Attendees
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <div class="form-group">
+              <select name="Attendees2" [(ngModel)]="Attendees2" class="dropdown form-control " required
+                id="ddl_updateassetsBuilding" (click)="GetAttendees2($event)">
+                <option value="0" selected="selected"> Attendees</option>
+                <option value="{{build.id}}" *ngFor="let build of Attendeeslist2">{{build.firstName}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <br>
+        <!-- <div class="row">
+          <div class=col-lg-2> </div>
+          <div class="col-lg-3">
+            <h6>Meeting Minutes
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7 form-group">
+            <textarea rows="3" [(ngModel)]="MeetingMinutes" class="form-control" [disabled]="typeID==2"></textarea>
+          </div>
+        </div>
+
+ -->
+
+
+        <div class="row">
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+            <h6>Location
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7">
+            <input type="text" [(ngModel)]="Location" class="form-control" [disabled]="typeID==2">
+          </div>
+        </div>
+
+
+        <!-- <div *ngIf="paramID==null" class="row">
+          <div class=col-lg-2> </div>
+          <div class="col-lg-3">
+            <h6 class="formlabel">Attachments
+              <span style="color: red;">*</span>
+            </h6>
+          </div>
+          <div class="col-lg-7 form-group">
+            <input type="file" class="form-control" placeholder="Attachment" accept="image/*" (change)="handleFileSelect2($event)" class="form-control">
+          </div>
+        </div> -->
+
+        <div *ngIf="paramID==null" class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-2">
+          </div>
+          <div class="col-lg-2">
+            <div class="form-group">
+              <button type="submit" (click)="Save()" class="btn btn-block btn-md savebutton mobsavebtn">Save</button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="paramID!=null" class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-2">
+          </div>
+          <div class="col-lg-2">
+            <div class="form-group">
+              <button type="submit" (click)="Update()"
+                class="btn btn-block btn-md savebutton mobsavebtn">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

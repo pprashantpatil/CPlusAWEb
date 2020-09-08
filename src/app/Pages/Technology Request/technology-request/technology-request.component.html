@@ -1,0 +1,445 @@
+<div class="container-fluid Pages_background ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">{{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-5">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building">{{technology_BreadChrumb}} </span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-10">
+      <div class="col-lg-4">
+        <label class="switch">
+          <input type="checkbox" id="chk_technologyCheckbox" checked (change)="changeStatus($event)">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="col-lg-4">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <button type="button" routerLink="/UpdateTechnologyRequest" routerLinkActive="active-link" id="btn_button"
+            class="dashbutton">New Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+      Export To Excel
+    </button>
+  </div>
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div class="row">
+      <div class="col-lg-12" [hidden]="showorhidecontent">
+        <!-- <ngx-fullcalendar defaultView="month" [events]="events" [options]="options">
+        </ngx-fullcalendar> -->
+        <div class="row callendernavButtons">
+
+          <div class="col-lg-4">
+            <a (click)="previousmonth()"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+          </div>
+
+          <div class="col-lg-4">
+            <summary><strong>{{callenderMonth}}</strong> {{callenderyear}}</summary>
+          </div>
+          <div class="col-lg-4">
+            <a (click)="nextmonth()"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+          </div>
+
+        </div>
+        <div class="row callenderdiv">
+          <!-- <div class="col-lg-4 todayDate">
+                  <div class="datenumber">
+                      {{todaydate}}
+                  </div>
+                  <div class="dateday">
+                      {{todayDay}}
+                  </div>
+              </div> -->
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-2 callenderboxes" *ngFor="let calday of callenderdaysdount;let i = index">
+                {{calday.date}} {{calday.day}}
+                <span *ngIf="calday.statusID==1">
+                  <span
+                    *ngIf="calday.request || calday.building || calday.floor || calday.raisedBy ||calday.phoneNo || calday.comment"
+                    class="event_1">
+                    Request Name : {{calday.request}} <br>
+                    Building Name : {{calday.building}} <br>
+                    Floor Name : {{calday.floor}} <br>
+                    Request By : {{calday.raisedBy}} <br>
+                    Phone No : {{calday.phoneNo}} <br>
+                    Comment : {{calday.comment}} <br>
+                  </span>
+                </span>
+
+                <span *ngIf="calday.statusID==2">
+                  <span
+                    *ngIf="calday.request || calday.building || calday.floor || calday.raisedBy ||calday.phoneNo || calday.comment"
+                    class="event_2">
+                    Tech Name : {{calday.request}} <br>
+                    Building Name : {{calday.building}} <br>
+                    Floor Name : {{calday.floor}} <br>
+                    Request By : {{calday.raisedBy}} <br>
+                    Phone No : {{calday.phoneNo}} <br>
+                    Comment : {{calday.comment}} <br>
+                  </span>
+                </span>
+
+                <span *ngIf="calday.statusID==5 ||calday.statusID==6 ||calday.statusID==9 ||calday.statusID==11">
+                  <span
+                    *ngIf="calday.request || calday.building || calday.floor || calday.raisedBy ||calday.phoneNo || calday.comment"
+                    class="event_5">
+                    Tech Name : {{calday.request}} <br>
+                    Building Name : {{calday.building}} <br>
+                    Floor Name : {{calday.floor}} <br>
+                    Request By : {{calday.raisedBy}} <br>
+                    Phone No : {{calday.phoneNo}} <br>
+                    Comment : {{calday.comment}} <br>
+                  </span>
+                </span>
+
+                <span *ngIf="calday.statusID==10 ||calday.statusID==7">
+                  <span
+                    *ngIf="calday.request || calday.building || calday.floor || calday.raisedBy ||calday.phoneNo || calday.comment"
+                    class="event_7">
+                    Tech Name : {{calday.request}} <br>
+                    Building Name : {{calday.building}} <br>
+                    Floor Name : {{calday.floor}} <br>
+                    Request By : {{calday.raisedBy}} <br>
+                    Phone No : {{calday.phoneNo}} <br>
+                    Comment : {{calday.comment}} <br>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12" [hidden]="!showorhidecontent">
+        <h6 class="paneltitle">{{technology_PageTitle}}
+        </h6>
+        <hr>
+        <div class="container-fluid  ">
+          <div class="row">
+            <div class="col-lg-4">
+              <ng-daterangepicker [options]="pickeroptions" id="datepicker_technologyDate"></ng-daterangepicker>
+            </div>
+            <div class="col-lg-4">
+              <select class="form-control" id="ddl_technologyBuilding" (change)="onselectbuilding($event)">
+                <option value="none" selected> Select Building</option>
+                <option *ngFor="let building of buildingList" value="{{building.id}}">{{building.name}}</option>
+              </select>
+            </div>
+            <div class="col-lg-4">
+              <select class="form-control" id="ddl_technologyRequestType"
+                (change)="onselecttechnologyrequesttype($event)">
+                <option value="none" selected> Select Request Type</option>
+                <option *ngFor="let requesttype of TechnologyRequestTypeList" value="{{requesttype.id}}">
+                  {{requesttype.short}}</option>
+              </select>
+            </div>
+            <div class="col-lg-4">
+              <select class="form-control" id="ddl_technologyStatus" (change)="onselectstatus($event)">
+                <option value="none" selected> Select Status</option>
+                <option *ngFor="let status of statustypeList" value="{{status.sid}}">{{status.short}}</option>
+
+              </select>
+            </div>
+            <div class="col-lg-4">
+              <input [(ngModel)]="searchtechreq" type="text" placeholder="{{technology_Search}}" class="form-control"
+                id="txt_technologySearch">
+            </div>
+          </div>
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12  table-responsive">
+                <table class="table table-bordered table-hover table-condensed">
+                  <tbody>
+                    <tr class="tableheader tableheaderfont" style="background-color: #fdcd3b; color: white">
+                      <td>{{technology_RequestName}} </td>
+                      <td>{{technology_RequestType}} </td>
+                      <td>{{technology_Building}}</td>
+                      <td>{{technology_RaisedBy}} </td>
+                      <td>{{technology_AssignedTo}}</td>
+                      <td>{{technology_DueDate}} </td>
+                      <td>{{technology_Status}}</td>
+                      <td>{{technology_Comment}}</td>
+                      <td>{{technology_Actions}}</td>
+                    </tr>
+                    <tr *ngFor="let Technology of filteredTechnologyList | filter:searchtechreq">
+                      <td>{{Technology.request}}</td>
+                      <td>{{Technology.requestType }}</td>
+                      <td>{{Technology.building}} </td>
+                      <td>{{Technology.raisedBy}} </td>
+                      <td>{{Technology.raisedTo}} </td>
+                      <td>{{Technology.dueDate|date}} </td>
+                      <td>{{Technology.status}}</td>
+                      <td>{{Technology.comment}} </td>
+                      <td class="TableActions">
+                        <a (click)="EditTechnology(Technology)" data-toggle="tooltip" title="edit"
+                          style="background-color: white">
+                          <i class="fa fa-edit"></i>
+                        </a>
+                        <a data-toggle="modal" (click)="NewPhotos(Technology)" data-target="#attachments"
+                          style="background-color: white"><i class="fa fa-file" data-toggle="tooltip"
+                            title="Attachments"></i>
+                        </a>
+                        <a data-toggle="modal" (click)="getattachments(Technology)" data-target="#Comments"
+                          style="background-color: white">
+                          <i class="fas fa-comments" data-toggle="tooltip" title="Comments"></i>
+                        </a>
+                        <a (click)="deletetechgRequest(Technology)" style="background-color: white">
+                          <i class="far fa-trash-alt" data-toggle="tooltip" title="delete"></i>
+                        </a>
+                        <a data-toggle="modal" (click)="getattachments(Technology)" data-target="#assingTask"
+                          style="background-color: white" *ngIf="Technology.raisedTo1==null"><i class="fas fa-user" data-toggle="tooltip"
+                            title="Assign"></i></a>
+                        <a data-toggle="modal" (click)="CanceltechgRequest(Technology)"
+                          style="background-color: white"><i class="far fa-copyright" data-toggle="tooltip"
+                            title="cancel"></i></a>
+                      </td>
+                    </tr>
+
+                </table>
+              </div>
+            </div>
+
+            <div id="attachments" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content" style="margin-top: 106px;">
+                  <div class="modal-header">
+                    <h4 class="modal-title"> Attachments</h4>
+                    <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+                      <i class=" i" data-toggle="modal" data-target="#AddAttachments">Add Attachments</i>
+                    </div>
+                    <!-- <button class="savebutton" type="button" style="margin-left: 11px; 
+                              margin-bottom: 9px; background-color: white; color: #000;" data-dismiss="modal" data-toggle="modal"
+                      data-target="#AddAttachments">Add Attachments</button> -->
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container-fluid">
+                      <div class="row" *ngIf="TechnologyAttachmentList">
+                        <div class="col-lg-12" *ngFor="let attachment of TechnologyAttachmentList">
+                          <img src="{{attachment.attachment}}" style="width: 60%;height:auto; margin-left: 2px"
+                            data-dismiss="modal">
+                          <div>
+                            <button data-toggle="modal" (click)="TechnologyDetails(attachment)"
+                              class="btn btn-default popupUpdatebutton" data-toggle="modal"
+                              data-target="#Updateattachments" class="savebutton" type="button"
+                              data-dismiss="modal">update</button>
+                            <button class="savebutton" type="button" style="margin-left: 11px;
+                            margin-bottom: 9px;" (click)="DeleteAttachments(attachment)"
+                              data-dismiss="modal">delete</button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row" *ngIf="NoImagesAvail">
+                        <div class="col-lg-12">
+                          <img src="assets/Login/noimage.jpg" style="width: 60%;height:auto;" data-dismiss="modal">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="AddAttachments" class="modal fade" role="dialog" style=" margin-top: 10%;">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header" style="height: 73px;">
+                    <h4 class="modal-title">Add Attachment</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <ngx-dropzone [showPreviews]="true" (filesAdded)="onFilesAdded($event)"
+                            class="dropzone_vendorinvoice" id="dropzone_Attachment"></ngx-dropzone>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3">
+                          <button data-toggle="modal" data-dismiss="modal" (click)="AddAttachments()" class="savebutton"
+                            type="button">Add</button>
+                        </div>
+                        <!-- <div class="col-lg-3">
+                          <button class="savebutton" type="button">delete</button>
+                        </div> -->
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div> -->
+                </div>
+
+              </div>
+            </div>
+
+            <div id="Updateattachments" class="modal fade" role="dialog" style=" margin-top: 10%;">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Upload Attachment</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <ngx-dropzone [showPreviews]="true" (filesAdded)="onfileatchmentSelect($event)"
+                            class="dropzone_vendorinvoice" id="dropzone_Attachment"></ngx-dropzone>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3">
+                          <button data-toggle="modal" data-target="#Updateattachments" (click)="UpdateAttachments()"
+                            class="savebutton" type="button">update</button>
+                        </div>
+                        <!-- <div class="col-lg-3">
+                          <button class="savebutton" type="button">delete</button>
+                        </div> -->
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div> -->
+                </div>
+
+              </div>
+            </div>
+
+            <div id="Comments" class="modal fade" role="dialog" style=" margin-top: 10%;">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Comments</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <!-- <p *ngIf="TechnologyAttachment">{{TechnologyAttachment.comment}}</p> -->
+                          <p>No Comments</p>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="assingTask" class="modal fade" role="dialog" style=" margin-top: 10%;">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Assign Task</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                  </div>
+                  <div class="modal-body">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <p>Vendor Type</p>
+                        </div>
+                        <div class="col-lg-6">
+                          <select class="form-control" id="ddl_technologyStatus" (change)="onselectvendortype($event)"
+                            [(ngModel)]="SelectedVendorType">
+                            <option value="0" selected> Select Vendor Type</option>
+                            <option *ngFor="let vendortype of vendortypelist" value="{{vendortype.id}}">
+                              {{vendortype.short}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <p>Vendor</p>
+                        </div>
+                        <div class="col-lg-6">
+                          <select class="form-control" id="ddl_technologyStatus" (change)="onselectvendor($event)"
+                            [(ngModel)]="SelectedVendor">
+                            <option value="0" selected> Select Vendor</option>
+                            <option *ngFor="let vendor of vendorlist" value="{{vendor.id}}">{{vendor.vendorName}}
+                            </option>
+
+                          </select>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <p>Phone Number</p>
+                        </div>
+                        <div class="col-lg-6">
+                          <input type="text" [(ngModel)]="vendorPhonenumber" class="form-control"
+                            name="vendorPhonenumber">
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <p>Email ID</p>
+                        </div>
+                        <div class="col-lg-6">
+                          <input type="email" [(ngModel)]="vendoremail" class="form-control" name="vendorPhonenumber">
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <button class="savebutton" type="button" (click)="assignTask()"
+                          data-dismiss="modal">Assign</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

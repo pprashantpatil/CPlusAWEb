@@ -1,0 +1,154 @@
+<div class="container-fluid Pages_background">
+    <div>
+        <div class="row">
+            <div class="col-lg-3">
+                <h4 class="Pages_header">{{paymentsTitle}}</h4>
+            </div>
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-3">
+                <div class="mainrow">
+                    <div class="col-lg-12 BreadChrumbProperties">
+                        <span> {{building_BreadChrumb}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row breadCrumbHeadderProperties">
+            <div class="col-lg-12 ">
+                <button routerLink="/NewPayment" class="dashbutton" type="button"
+                    id="btn_button">{{payments_AddNewButton}}</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+        <div class="row  p-2">
+            <div class="col-lg-12 pannel">
+                <h6 class="paneltitle">{{pageMenuTitle}}</h6>
+            </div>
+        </div>
+        <div class="row p-4">
+            <div class="col-lg-5">
+                <ng-daterangepicker [(ngModel)]="value" [options]="options" (ngModelChange)="selectedDate($event)">
+                </ng-daterangepicker>
+            </div>
+
+            <div class="col-lg-3">
+                <select class="form-control" id="ddl_paymentsBuilding" (change)="filterbuilding($event)">
+                    <option value selected="selected"> Select Building</option>
+                    <option value="{{build.name}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                </select>
+
+            </div>
+            <div class="col-lg-3">
+                <select class="form-control" id="ddl_BillType" (change)="filterpayment($event)">
+                    <option value selected="selected"> Select Bill Type</option>
+                    <option value="{{payment.short}}" *ngFor="let payment of PaymentForlist">{{payment.short}}</option>
+                </select>
+
+            </div>
+
+
+
+
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12  table-responsive">
+                    <table class="table table-bordered table-hover table-condensed">
+                        <thead>
+                            <tr class="tableheader tableheaderfont">
+                                <td>{{payments_BuildingName}}</td>
+                                <td>{{payments_PaymentFor}}</td>
+                                <td>{{payments_PaymentDate}}</td>
+                                <!-- <td>{{payments_PaymentTime}}</td> -->
+                                <td>{{payments_BillNo}}</td>
+                                <td>{{payments_BillNoTotalAmount}}</td>
+                                <td>{{payments_PaymentType}}</td>
+                                <td>{{payments_Comments}}</td>
+                                <td>{{payments_Invoice}}</td>
+                                <td>{{payments_Actions}}</td>
+                            </tr>
+                        </thead>
+                        <tr *ngFor="let Payments of PaymentsList1 | filter:buildingname | filter:payment">
+                            <td>{{Payments.buildingName}}</td>
+                            <td>{{Payments.paymentFor}}</td>
+                            <td>{{Payments.paymentDate |date}}</td>
+                            <!-- <td>{{Payments.paymentTime}}</td> -->
+                            <td>{{Payments.billNo}} </td>
+                            <td>{{Payments.totalAmount}}</td>
+                            <td>{{Payments.paymentType}}</td>
+                            <td>{{Payments.comments}}</td>
+                            <td><img src="{{Payments.attachment}}" (click)="getimage(Payments.attachment)"
+                                    data-toggle="modal" data-target="#myModalupimage" style="width: 100px;"></td>
+
+                            <td class="TableActions">
+                                <i class="fa fa-edit" title="Edit"
+                                    [routerLink]="['/editbuildingpayment', Payments.id]"></i>
+                            </td>
+                        </tr>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="modal fade" id="myModalupimage">
+            <div class="modal-dialog modal-lg">
+
+                <div class="modal-content" style="margin-top: 15%;width: 588px;margin-left: 222px;">
+                    <div class="modal-header">
+                        <h4>Invoice</h4>
+                        <!-- <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+                          <i class=" i" style="margin-left: 221px;
+                          margin-top: 10px;
+                          font-size: 16px;" data-toggle="modal" data-target="#AddAttachments">Add Attachments</i>
+                        </div> -->
+                        <button type="button" class="close " data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="row" style="margin-top:5%;">
+                        <div class="col-lg-12">
+                            <div class="col-lg-2">
+                            </div>
+                            <div class="col-lg-8">
+                                <a href="{{invoiceimg}}" download>
+                                    <img src="{{invoiceimg}}" style="width: 350px;">
+                                </a>
+
+                                <!-- <a href="{{invoiceimg}}" download style="background-color: white;">
+                                    <i class="fas fa-download" style="font-size: 29px;
+                                            margin-top: 12px;
+                                            margin-left: 14px;
+                                            color: #00b5d7;
+                                            background-color: white;" title="Download"></i>
+                                </a> -->
+
+
+
+
+                            </div>
+                            <div class="col-lg-2">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-9"> </div>
+                        <div class="col-lg-3">
+                            <button class="dashbutton " style="width: 69px;
+                    margin-right: 12px;" type="submit" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

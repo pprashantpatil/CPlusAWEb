@@ -1,0 +1,255 @@
+<div class="container-fluid Pages_background">
+    <div>
+        <div class="row">
+            <div class="col-lg-4">
+                <h4 class="Pages_header">Inspection</h4>
+            </div>
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-4">
+                <div class="mainrow">
+                    <div class="col-lg-12 BreadChrumbProperties">
+                        <span style="margin-left: 127px;"> Tenant /Inspection</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row breadCrumbHeadderProperties">
+            <div class="col-lg-12 dashbutton">
+                <button routerLink="/Newinspection" type="button" id="btn_button">New Inspection </button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+        <div class="row  p-2">
+            <div class="col-lg-12 pannel">
+                <h6 class="paneltitle">Inspection</h6>
+            </div>
+        </div>
+        <div class="row p-4">
+            <div class="col-lg-3">
+                <input type="text" placeholder="search" [(ngModel)]="searchtext" class="form-control"
+                    id="txt_StaffsearchBuilding">
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12  table-responsive">
+                    <table class="table table-bordered table-hover table-condensed">
+                        <tbody>
+                            <tr class="tableheader tableheaderfont" style="background-color: #00b5d7;color:white">
+                                <th>Inspection Date</th>
+                                <th>Inspection Time</th>
+                                <th>Building</th>
+                                <th>Floor</th>
+                                <th>Unit</th>
+                                <th>Tenant Name</th>
+                                <th>Phone Number</th>
+                                <th>Comments</th>
+                                <th>Status</th>
+                                <!-- <th>Post Inspection Comments</th>
+                                <th>No Show Comments</th> -->
+                                <th>Actions</th>
+                            </tr>
+                            <tr *ngFor="let inspection of inspectionlist| filter : searchtext">
+                                <td>{{inspection.date}}</td>
+                                <td>{{inspection.time}}</td>
+                                <td>{{inspection.name}}</td>
+                                <td>{{inspection.floor}}</td>
+                                <td>{{inspection.unitID}}</td>
+                                <td>{{inspection.tenantName}}</td>
+                                <td>{{inspection.phoneNo}}</td>
+                                <td>{{inspection.comments}}</td>
+                                <td>{{inspection.short}}</td>
+                                <!-- <td>{{inspection.notes}}</td>
+                                <td>{{inspection.noShow}}</td> -->
+                                <td>
+                                    <i class="fa fa-edit" style="color: #00b5d7;" (click)="EditInspection(inspection)"
+                                        title="Edit" *ngIf="inspection.notes=='-'&& inspection.noShow=='-'"></i>&nbsp;
+
+                                    <i class="far fa-trash-alt" style="color: #00b5d7;" title="Delete"
+                                        (click)="DeleteInspection(inspection.id)"></i>&nbsp;
+
+                                    <!-- <i class="fa fa-check" style="color: #00b5d7;"
+                                        *ngIf="inspection.notes=='-'&& inspection.noShow=='-'" title="Completed"
+                                        data-toggle="modal" data-target="#myModal"
+                                        (click)="Completed(inspection.id)"></i>&nbsp;
+
+                                    <i class="fa fa-question-circle" style="color: #00b5d7;"
+                                        *ngIf="inspection.notes=='-'&&inspection.noShow=='-'" title="No Show"
+                                        data-toggle="modal" data-target="#myModal1"
+                                        (click)="NotSubmitted(inspection.id)"></i>&nbsp; -->
+
+                                    <i class="fa fa-image" style="margin: 10px;" title="Error Lists" data-toggle="modal"
+                                        data-target="#myModalphoto" (click)="getimage(inspection.id)"></i>
+                                </td>
+
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal1" style="margin-top:80px;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="margin-left: 104px;">
+                <div class="modal-header">
+                    <h3 style="margin-left: 292px;">No Show Comments</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2">
+                        <label style="font-weight: 500;">Comment</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <textarea class="plabel form-control" [(ngModel)]="Reason1" name="Reason" placeholder="Reason "
+                            style="height:161px;"></textarea>
+                    </div>
+                    <div class="col-lg-1">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-5">
+                    </div>
+                    <div class="col-lg-7">
+                        <button type="submit" (click)="updatens1()" data-dismiss="modal"
+                            class="btn btn-block btn-md cancelbutton" style="width: 87px;
+                            background-color: #00b5d7;
+                            margin-left: 244px;
+                            margin-top: 17px;color: white;">Complete</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-10">
+                    </div>
+                    <div class="col-lg-2">
+                        <button type="submit" class="btn btn-default"
+                            style="background-color: #00b5d7;margin-bottom: 14px;color: white;"
+                            data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" style="margin-top:80px;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="margin-left: 104px;">
+                <div class="modal-header">
+                    <h3 style="margin-left: 292px;">Complete Inspection</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2">
+                        <label style="font-weight: 500;">Comment</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <textarea class="plabel form-control" [(ngModel)]="Reason" name="Reason" placeholder="Reason "
+                            style="height:161px;"></textarea>
+                    </div>
+                    <div class="col-lg-1">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-5">
+                    </div>
+                    <div class="col-lg-7">
+                        <button type="submit" (click)="updatens()" data-dismiss="modal"
+                            class="btn btn-block btn-md cancelbutton" style="width: 87px;
+                            background-color: #00b5d7;
+                            margin-left: 244px;
+                            margin-top: 17px;color: white;">Complete</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-10">
+                    </div>
+                    <div class="col-lg-2">
+                        <button type="submit" class="btn btn-default"
+                            style="background-color: #00b5d7;margin-bottom: 14px;color: white;"
+                            data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModalphoto" style="margin-left: 127px;">
+    <div class="modal-dialog modal-lg" style="margin-top: 10%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Error Lists</h4>
+                <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+                </div>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-4" style="margin-top: 10px; margin-bottom: 10px" *ngFor="let image of photolist">
+                        <a>
+                            <img src="{{image.damagePhoto}}" style="width: 100%;height: 200px;">
+                        </a>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <h5 style="width: 75px;">Error Notes :</h5>
+                            </div>
+                            <div class="col-lg-8">
+                                <label >{{image.errorNotes}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="row" *ngFor="let image of photolist">
+                <div class="col-lg-5">
+                    <a>
+                        <img src="{{image.damagePhoto}}" style="width: 306px;
+                        height: 171px;
+                        margin: 17px;">
+                    </a>
+                </div>
+                <div class="col-lg-7">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <h5 style="margin-top: 25px;">Date: Jan 1, 2020</h5>
+                            <label >Error Notes:</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <h5>{{image.errorNotes}}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" *ngIf="NoImagesAvail">
+                <div class="col-lg-12">
+                    <img src="assets/Login/noimage.jpg" style="width: 45%;height:auto;" data-dismiss="modal">
+                </div>
+            </div>
+            <!-- <div class="row">
+          <div class="col-lg-9"> </div>
+          <div class="col-lg-3">
+            <button class="dashbutton closebutton" type="submit" data-dismiss="modal">Close</button>
+          </div>
+        </div> -->
+        </div>
+    </div>
+</div>

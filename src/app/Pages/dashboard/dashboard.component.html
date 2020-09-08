@@ -1,0 +1,1538 @@
+<div class="container-fluid ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">Project Progress</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 buildings">
+          <!-- <span class="building">Project Progress /Project Progress</span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div class="row" style="margin-top: 20px;">
+      <div class="col-lg-2">
+        <!-- <h4 style="font-size: 14px;
+        margin-left: 20px;
+        margin-top: 23px;">Select Property</h4> -->
+      </div>
+
+      <div class="col-lg-2">
+        <!-- <select (change)="GetFloorByBuildingID($event)" [(ngModel)]="BuildingID" class="dropdown form-control maindropdown" style="width: 213px;"
+          id="ddl_BuildingName" required>
+          <option value="0" selected="selected">Select Property</option>
+          <option *ngFor="let Building of Buildinglist" value="{{Building.id}}">{{Building.name}}</option>
+        </select> -->
+      </div>
+
+      <div class="col-lg-2">
+        <h4 style="font-size: 14px;
+        margin-left: 72px;
+        margin-top: 23px;">Select Floor</h4>
+      </div>
+
+      <div class="col-lg-2">
+        <select (change)="GetFloorID($event)" [(ngModel)]="FloorID" class="dropdown form-control maindropdown" style="width: 213px;
+        margin-left: 20px;
+        margin-bottom: 5px;" id="ddl_BuildingName" required>
+          <option value="0" selected="selected">Select Floor</option>
+          <option value="{{floor.id}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+        </select>
+      </div>
+
+
+      <div class="col-lg-4 row" *ngIf="MobUI==0">
+        <div class="col-lg-12" style="margin-top: 11px;
+        margin-left: 50px;">
+          <span style="background-color :red ;">
+            <span style="color:white ;width: 102px;
+            text-align: center;">Engineer/ QC Rejected</span>
+          </span>
+          <span style="background-color:rgb(30, 179, 238)">
+            <span style="color:black ;width: 87px;
+            text-align: center;">Work In Progress</span>
+          </span>
+          <span style="background-color:darkorange; width: 87px;">
+            <span style="color :black;
+            text-align: center;">Completed On Time</span>
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- <div class="row" style="margin-top: 20px;margin-top: -5px;">
+      <div class="col-lg-3">
+        <h4 style="font-size: 14px;
+        margin-left: 20px;
+        margin-top: 23px;">Select Floor</h4>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control maindropdown" [(ngModel)]="FloorID"
+          style="width: 288px;margin-left: -87px;" name="Floor" id="FloorIDddd" required=""
+          (change)="GetFloorID($event)">
+          <option value="0">Select Floor</option>
+          <option value="{{floor.id}}" *ngFor="let floor of Floorlist">{{floor.floor}}</option>
+        </select>
+      </div>
+    </div> -->
+
+    <!-- <div class="row" style="margin-top: 20px;">
+      <div class="col-lg-3">
+        <h4 style="font-size: 14px;
+        margin-left: 20px;
+        margin-top: 23px;">Select Stage</h4>
+      </div>
+      <div class="col-lg-3">
+        <select class="dropdown form-control maindropdown" [(ngModel)]="StageID"
+          style="width: 288px;margin-left: -87px;" name="Stage" id="StageID" required="" (change)="GetStageID($event)">
+          <option value="0">Select Stage</option>
+          <option value="{{Stage.id}}" *ngFor="let Stage of StagesList">{{Stage.milestone}}</option>
+        </select>
+      </div>
+    </div> -->
+
+
+
+
+    <div class="row" *ngIf="AllDetailsBuilding && NoOfUnitsCount!=0">
+      <table class="table table-bordered table-hover table-condensed col-lg-5" style="margin-left: 35px;">
+        <!-- <tr>
+          <td style="border-color: burlywood;">Over All Project Progress</td>
+          <td style="border-color: burlywood;">60%</td>
+        </tr> -->
+
+        <tr>
+          <td style="border-color: burlywood;">Total No. of Units</td>
+          <td style="border-color: burlywood;">{{NoOfUnitsCount}}</td>
+        </tr>
+
+        <tr>
+          <td style="border-color: burlywood;"> No. of Units 90% Completed</td>
+          <td style="border-color: burlywood;">1</td>
+        </tr>
+
+        <tr>
+          <td style="border-color: burlywood;">No. of Units 75% Completed</td>
+          <td style="border-color: burlywood;">0</td>
+        </tr>
+
+        <tr>
+          <td style="border-color: burlywood;">No. of Units 50% Completed</td>
+          <td style="border-color: burlywood;">0</td>
+        </tr>
+
+        <tr>
+          <td style="border-color: burlywood;">No. of Units Work Delayed </td>
+          <td style="border-color: burlywood;">0</td>
+        </tr>
+
+        <tr>
+          <td style="border-color: burlywood;">No. of Units on Schedule </td>
+          <td style="border-color: burlywood;">0</td>
+        </tr>
+      </table>
+    </div>
+
+
+    <div class="row" *ngIf="AllDetailsBuilding && NoOfUnitsCount==0">
+      <table class="table table-bordered table-hover table-condensed col-lg-5" style="margin-left: 35px;">
+        <!-- <tr>
+          <td style="border-color: burlywood;">Over All Project Progress</td>
+          <td style="border-color: burlywood;">60%</td>
+        </tr> -->
+
+        <tr>
+          <td style="border-color: burlywood;">Total No. of Floor</td>
+          <td style="border-color: burlywood;">{{FloorCount}}</td>
+        </tr>
+
+        <tr>
+          <td style="border-color: burlywood;"> No. of Floor 90% Completed</td>
+          <td style="border-color: burlywood;">1</td>
+        </tr>
+
+        <tr>
+          <td style="border-color: burlywood;">No. of Floor 75% Completed</td>
+          <td style="border-color: burlywood;">0</td>
+        </tr>
+
+        <tr>
+          <td style="border-color: burlywood;">No. of Floor 50% Completed</td>
+          <td style="border-color: burlywood;">0</td>
+        </tr>
+
+        <tr>
+          <td style="border-color: burlywood;">No. of Floor Work Delayed </td>
+          <td style="border-color: burlywood;">0</td>
+        </tr>
+
+        <tr>
+          <td style="border-color: burlywood;">No. of Floor on Schedule </td>
+          <td style="border-color: burlywood;">0</td>
+        </tr>
+      </table>
+    </div>
+
+
+
+    <div class="row" style="margin-top: 20px;">
+      <div class="col-lg-6">
+        <div class="col-lg-2" *ngFor="let Units of UnitsList">
+
+
+          <img src="http://14.192.17.225/Adnoc/assets/Login/Inc.png" class="hoverforimage" (click)="GetBlackHome(Units)" *ngIf="Units.stageID==null && Units.vendo==null "
+            style="height: 50px;width: 50px;padding: 6px;">
+
+          <h6 class="labelalignments" *ngIf="Units.stageID==null && Units.vendo==null">
+            {{Units.unitID}}</h6>
+          <h6 style="text-align: center;margin-left: -13px;" data-toggle="modal" data-target="#myBuildingUnits" (click)="GetUnitName(Units)"
+            *ngIf="Units.stageID==null && Units.vendo==null">{{Units.stagesCount}}/{{Units.stagesPercentage|number:'1.0-0'}}%</h6>
+
+
+          <img src="http://14.192.17.225/Adnoc/assets/Login/Blue.png" class="hoverforimage" (click)="GetBlueVendorAssigned(Units)"
+            *ngIf="Units.stageID==null && Units.vendo!=null && Units.rejectBIT==null " style="height: 50px;width: 50px;padding: 6px;">
+          <h6 class="labelalignments" *ngIf="Units.stageID==null && Units.vendo!=null&& Units.rejectBIT==null ">
+            {{Units.unitID}}</h6>
+          <h6 style="text-align: center;margin-left: -13px;" data-toggle="modal" data-target="#myBuildingUnits" (click)="GetUnitName(Units)"
+            *ngIf="Units.stageID==null && Units.vendo!=null&& Units.rejectBIT==null ">{{Units.stagesCount}}/{{Units.stagesPercentage|number:'1.0-0'}}%</h6>
+
+
+
+          <img src="http://14.192.17.225/Adnoc/assets/Login/Blue.png" class="hoverforimage" (click)="GetBlueVendorAssigned(Units)"
+            *ngIf="Units.stageID!=null && Units.workScheduleDate!=null && Units.finishedDate==null    && Units.apProvalBIT==true && Units.qcReject==false  "
+            style="height: 50px;width: 50px;padding: 6px;">
+          <h6 class="labelalignments" *ngIf="Units.stageID!=null && Units.workScheduleDate!=null && Units.finishedDate==null   && Units.staffName!=Null && Units.apProvalBIT==true && Units.qcReject==false  ">
+            {{Units.unitID}}</h6>
+          <h6 style="text-align: center;margin-left: -13px;" data-toggle="modal" data-target="#myBuildingUnits" (click)="GetUnitName(Units)"
+            *ngIf="Units.stageID!=null && Units.workScheduleDate!=null && Units.finishedDate==null   && Units.staffName!=Null && Units.apProvalBIT==true && Units.qcReject==false  ">{{Units.stagesCount}}/{{Units.stagesPercentage|number:'1.0-0'}}%</h6>
+
+
+          <img src="http://14.192.17.225/Adnoc/assets/Login/Blue.png" class="hoverforimage" (click)="GetBlueVendorAssigned(Units)"
+            *ngIf="Units.stageID!=null && Units.workScheduleDate!=null && Units.finishedDate==null    && Units.apProvalBIT==null && Units.qcReject==null  "
+            style="height: 50px;width: 50px;padding: 6px;">
+          <h6 class="labelalignments" *ngIf="Units.stageID!=null && Units.workScheduleDate!=null && Units.finishedDate==null   && Units.staffName!=Null && Units.apProvalBIT==null && Units.qcReject==null  ">
+            {{Units.unitID}}</h6>
+          <h6 style="text-align: center;margin-left: -13px;" data-toggle="modal" data-target="#myBuildingUnits" (click)="GetUnitName(Units)"
+            *ngIf="Units.stageID!=null && Units.workScheduleDate!=null && Units.finishedDate==null   && Units.staffName!=Null && Units.apProvalBIT==null && Units.qcReject==null  ">{{Units.stagesCount}}/{{Units.stagesPercentage|number:'1.0-0'}}%</h6>
+
+
+
+          <img src="http://14.192.17.225/Adnoc/assets/Login/Blue.png" class="hoverforimage" (click)="GetBlueVendorAssigned(Units)"
+            *ngIf="Units.stageID==null && Units.staffWorkScheduleID!=null && Units.apProvalBIT==true && Units.qcReject==false "
+            style="height: 50px;width: 50px;padding: 6px;">
+          <h6 class="labelalignments" *ngIf="Units.stageID==null && Units.staffWorkScheduleID!=null && Units.apProvalBIT==true && Units.qcReject==false">
+            {{Units.unitID}}</h6>
+          <h6 style="text-align: center;margin-left: -13px;" data-toggle="modal" data-target="#myBuildingUnits" (click)="GetUnitName(Units)"
+            *ngIf="Units.stageID==null && Units.staffWorkScheduleID!=null && Units.apProvalBIT==true && Units.qcReject==false">{{Units.stagesCount}}/{{Units.stagesPercentage|number:'1.0-0'}}%</h6>
+
+
+
+          <!-- <img src="http://14.192.17.225/Adnoc/assets/Login/Not.png" (click)="GetRedHouseDetails(Units)"
+            *ngIf="Units.stageID!=null && Units.workScheduleDate!=null && Units.finishedDate!=null && Units.workScheduleDate!=Units.finishedDate  && Units.apProvalBIT==false  "
+            style="height: 50px;width: 50px;padding: 6px;">
+          <h6 style="text-align: center;margin-left: -13px;"
+            *ngIf="Units.stageID!=null && Units.workScheduleDate!=null && Units.finishedDate!=null && Units.workScheduleDate!=Units.finishedDate  && Units.apProvalBIT==false ">
+            {{Units.unitID}}</h6>
+
+          <img src="http://14.192.17.225/Adnoc/assets/Login/Not.png" (click)="GetRedHouseDetails(Units)"
+            *ngIf="Units.stageID!=null && Units.workScheduleDate!=null && Units.finishedDate!=null  && Units.apProvalBIT==false "
+            style="height: 50px;width: 50px;padding: 6px;">
+          <h6 style="text-align: center;margin-left: -13px;"
+            *ngIf="Units.stageID!=null && Units.workScheduleDate!=null && Units.finishedDate!=null  && Units.apProvalBIT==false ">
+            {{Units.unitID}}</h6> -->
+
+
+          <img src="http://14.192.17.225/Adnoc/assets/Login/Not.png" class="hoverforimage" (click)="GetRedHouseDetails(Units)" *ngIf="Units.rejectBIT==true && Units.qcReject==true ||Units.financeApproval==2  "
+            style="height: 50px;width: 50px;padding: 6px;">
+          <h6 class="labelalignments" *ngIf="Units.rejectBIT==true && Units.qcReject==true ||Units.financeApproval==2 ">
+            {{Units.unitID}}</h6>
+          <h6 style="text-align: center;margin-left: -13px;" data-toggle="modal" data-target="#myBuildingUnits" (click)="GetUnitName(Units)"
+            *ngIf="Units.rejectBIT==true && Units.qcReject==true ||Units.financeApproval==2 ">{{Units.stagesCount}}/{{Units.stagesPercentage|number:'1.0-0'}}%</h6>
+
+
+
+          <img src="http://14.192.17.225/Adnoc/assets/Login/Not.png" class="hoverforimage" (click)="GetRedHouseDetails(Units)" *ngIf="Units.rejectBIT==false && Units.qcReject==true ||Units.financeApproval==2  "
+            style="height: 50px;width: 50px;padding: 6px;">
+          <h6 class="labelalignments" *ngIf=" Units.rejectBIT==false && Units.qcReject==true ||Units.financeApproval==2 ">
+            {{Units.unitID}}</h6>
+          <h6 style="text-align: center;margin-left: -13px;" data-toggle="modal" data-target="#myBuildingUnits" (click)="GetUnitName(Units)"
+            *ngIf=" Units.rejectBIT==false && Units.qcReject==true ||Units.financeApproval==2 ">{{Units.stagesCount}}/{{Units.stagesPercentage|number:'1.0-0'}}%</h6>
+
+
+
+
+          <img src="http://14.192.17.225/Adnoc/assets/Login/Not.png" class="hoverforimage" (click)="GetRedHouseDetails(Units)" *ngIf="Units.rejectBIT==true && Units.qcReject==false ||Units.financeApproval==2  "
+            style="height: 50px;width: 50px;padding: 6px;">
+          <h6 class="labelalignments" *ngIf=" Units.rejectBIT==true && Units.qcReject==false ||Units.financeApproval==2 ">
+            {{Units.unitID}}</h6>
+          <h6 style="text-align: center;margin-left: -13px;" data-toggle="modal" data-target="#myBuildingUnits" (click)="GetUnitName(Units)"
+            *ngIf=" Units.rejectBIT==true && Units.qcReject==false ||Units.financeApproval==2 ">{{Units.stagesCount}}/{{Units.stagesPercentage|number:'1.0-0'}}%</h6>
+
+
+
+
+          <img src="http://14.192.17.225/Adnoc/assets/Login/room1.png" class="hoverforimage" style="height: 50px;width: 50px;padding: 6px;"
+            (click)="GetWorkCompletedDetails(Units)" *ngIf="Units.stageID!=null && Units.workScheduleDate!=null && Units.finishedDate!=null && Units.apProvalBIT==true  ">
+          <h6 class="labelalignments" *ngIf="Units.stageID!=null && Units.workScheduleDate!=null && Units.finishedDate!=null && Units.apProvalBIT==true ">
+            {{Units.unitID}}</h6>
+          <h6 style="text-align: center;margin-left: -13px;" data-toggle="modal" data-target="#myBuildingUnits" (click)="GetUnitName(Units)"
+            *ngIf="Units.stageID!=null && Units.workScheduleDate!=null && Units.finishedDate!=null && Units.apProvalBIT==true ">{{Units.stagesCount}}/{{Units.stagesPercentage|number:'1.0-0'}}%</h6>
+
+
+        </div>
+      </div>
+
+      <div class="col-lg-6" *ngIf="MaintainanceRequestVis" style="padding: 15px;border: 1px solid black;margin-left: -10px; margin-top: -209px;">
+        <!-- <label style="margin-left: 43px;">Complete Percentage : {{unitWt}}%</label> -->
+        <!-- <br>
+        <label style="margin-left: 43px;">Amount To Pay : {{unitWt}}%</label> -->
+        <table class="table table-bordered table-hover table-condensed col-lg-5" style="margin-left: 6px;">
+          <tr>
+            <td style="border-color: burlywood;">Property</td>
+            <td style="border-color: burlywood;">{{BuildingName}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;">Unit</td>
+            <td style="border-color: burlywood;">{{UnitName}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;">Contractor</td>
+            <td style="border-color: burlywood;">{{VendorName}}</td>
+          </tr>
+
+
+          <tr>
+            <td style="border-color: burlywood;">Current Stage</td>
+            <td style="border-color: burlywood;">{{milestone}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;">Stage Start Date</td>
+            <td style="border-color: burlywood;">{{sDate|date}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;">Stage End Date</td>
+            <td style="border-color: burlywood;">{{eDate|date}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;">Engineer Assigned </td>
+            <td style="border-color: burlywood;">{{StaffName}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;"> Review Assigned Date </td>
+            <td style="border-color: burlywood;">{{WorkAssignedDate|date}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;"> Review Completed Date </td>
+            <td style="border-color: burlywood;">{{CompletedDate|date}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;">Review Comments </td>
+            <td style="border-color: burlywood;">{{projectComment}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;">Review Status </td>
+            <td style="border-color: burlywood;">{{ApprovalStatus}}</td>
+          </tr>
+
+
+          <tr>
+            <td style="border-color: burlywood;">QC Approvals </td>
+            <td style="border-color: burlywood;">{{QCApprovalStatus}}</td>
+          </tr>
+        </table>
+
+
+
+
+
+
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Property:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{BuildingName}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Unit:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{UnitName}}</h5>
+          </div>
+          <div class="col-lg-3">
+
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Contractor:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{VendorName}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Current Stage :</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{milestone}}</h5>
+          </div>
+          <div class="col-lg-3">
+
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Stage Start Date:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{sDate|date}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Stage End Date:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{eDate|date}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;"> Engineer Assigned :</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{StaffName}}</h5>
+          </div>
+          <div class="col-lg-3">
+
+          </div>
+        </div> -->
+        <!-- 
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;"> Review Assigned Date:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{WorkAssignedDate|date}}</h5>
+          </div>
+          <div class="col-lg-3">
+
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Review Completed Date :</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{CompletedDate|date}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Review Comments :</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{projectComment}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Review Status:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{ApprovalStatus}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div> -->
+
+
+
+        <!-- <div class="row " *ngIf="QCVis">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">QC Assigned To:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Aadam</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">QC Approvals:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{QCApprovalStatus}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">QC Name:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Aadam</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div> -->
+
+
+
+        <div class="row">
+          <h4 style="margin-left: 20px;">Engineer Photos</h4>
+          <hr>
+          <div class="row" style="padding: 17px;margin-left: 32px;">
+            <!-- <div class="col-lg-2" *ngFor="let pic of photos">
+              <br>
+              <img src="{{pic.photoURL}}" style="width:123%">
+              <br>
+            </div> -->
+
+            <div class="col-lg-2">
+              <br>
+              <img src="assets/Images/download.png" data-toggle="modal" data-target="#myModalPhotos" (click)="GetEngineerImages($event)"
+                style="width:123%">
+              <br>
+
+            </div>
+            <div class="col-lg-10">
+              <h4>Comments</h4>
+              <h5>I have Reviewed the Stage and it was perfectly done by the constructor</h5>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="row">
+          <h4 style="margin-left: 20px;">Engineer Videos</h4>
+          <hr>
+          <div class="row" style="padding: 17px;margin-right: 306px;">
+            <div class="col-lg-2" *ngFor="let vid1 of videos">
+              <br>
+              <video width="100" height="100" style="margin-left: 42px;" controls>
+                <source src="{{vid1.videoURL}}" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <h4 style="margin-left: 20px;">QC Photos</h4>
+          <hr>
+          <div class="row" style="padding: 17px;margin-left: 32px;">
+            <!-- <div class="col-lg-2" *ngFor="let pic of qcphotos">
+              <br>
+              <img src="{{pic.photoURL}}" style="width:123%">
+              <br>
+            </div> -->
+            <div class="col-lg-2">
+              <br>
+              <img src="assets/Images/download.png" data-toggle="modal" data-target="#myModalQCPhotos" (click)="GetImages($event)" style="width:123%">
+              <br>
+
+            </div>
+            <div class="col-lg-10">
+              <h4>Comments</h4>
+              <h5>The Stage is processed successfully</h5>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <h4 style="margin-left: 20px;">QC Videos</h4>
+          <hr>
+          <div class="row" style="    padding: 17px;
+          margin-left: -26px;
+          margin-right: 326px;">
+            <div class="col-lg-2" *ngFor="let vid1 of video1">
+              <video width="100" height="100" controls style="    margin-left: 49px;">
+                <source src="{{vid1}}" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- <h4 style="margin-left: 20px;" *ngIf="TableVisible==true">Previous Stages</h4>
+        <hr>
+
+        <div class="table-responsive" *ngIf="TableVisible==true">
+          <table class="table table-bordered table-hover table-condensed">
+            <tbody>
+              <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+                <td>Property</td>
+                <td>Unit</td>
+                <td>Stage Name</td>
+
+                <td>Engineer Approval</td>
+                <td>QC Approval</td>
+                <td>Finance Approval</td>
+              </tr>
+            </tbody>
+            <tr *ngFor="let Vendors of StaffDetails1">
+              <td>Wisma 46 </td>
+              <td>{{UnitName}}</td>
+              <td>{{Vendors.milestone}}</td>
+
+              <td>Approved</td>
+              <td>Approved</td>
+              <td>Paid</td>
+            </tr>
+          </table>
+        </div> -->
+
+
+      </div>
+      <div class="col-lg-6" *ngIf="BlackVis" style="padding: 15px;border: 1px solid black;margin-left: -10px;margin-top: -209px;">
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Note:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">This Unit is not yet assigned to the Contractor</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6" *ngIf="AssignedVis" style="padding: 15px;border: 1px solid black;margin-left: -10px;margin-top: -209px;">
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Property:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{BuildingName}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Unit:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{UnitName}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Current Stage:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{CurrentStage}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6" *ngIf="AfterVendorAssigned" style="padding: 15px;border: 1px solid black;margin-left: -10px;margin-top: -209px;">
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Property:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Wisma 86</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Unit:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{units}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Contractor:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{VendorName}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Start date:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{StageStartDate|date}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">End date:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{StageEndDate|date}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6" *ngIf="AfterStaffAssigned" style="padding: 15px;border: 1px solid black;margin-left: -10px;margin-top: -209px;">
+
+        <!-- <label style="margin-left: 43px;">Complete Percentage : {{unitWt}} %</label>
+        <br>
+        <label style="margin-left: 43px;">Amount To Pay : {{unitWt}} %</label> -->
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Property:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{BuildingNames}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Unit:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{unit}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Contractor:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{VendorName}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Current Stage:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{milestone}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Start date:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{StageStartDate|date}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">End date:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{StageEndDate|date}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Reviewer:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{StaffName}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Review StartDate:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{sDate|date}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Review EndDate:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{eDate|date}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Review Comments:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{projectComment}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">QC Name:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Aadam</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row">
+          <h4 style="margin-left: 20px;">Engineer Photos</h4>
+          <hr>
+          <div class="row" style="padding: 17px;margin-left: 32px;">
+            <div class="col-lg-2" *ngFor="let pic of photos">
+              <br>
+              <img src="{{pic.photoURL}}" style="width:123%">
+              <br>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <h4 style="margin-left: 20px;">Engineer Videos</h4>
+          <hr>
+          <div class="row" style="padding: 17px;margin-right: 306px;">
+            <div class="col-lg-2" *ngFor="let vid1 of videos">
+              <br>
+              <video width="100" height="100" controls>
+                <source src="{{vid1.videoURL}}" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <h4 style="margin-left: 20px;">QC Photos</h4>
+          <hr>
+          <div class="row" style="padding: 17px;margin-left: 32px;">
+            <div class="col-lg-2" *ngFor="let pic of qcphotos">
+              <br>
+              <img src="{{pic.photoURL}}" style="width:123%">
+              <br>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <h4 style="margin-left: 20px;">QC Videos</h4>
+          <hr>
+          <div class="row" style="padding: 17px;margin-left: 32px;margin-right: 257px;">
+            <div class="col-lg-2" *ngFor="let vid1 of video1">
+              <video width="100" height="100" controls>
+                <source src="{{vid1}}" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <!-- <h4 style="margin-left: 20px;">Previous Stages</h4>
+        <hr> -->
+
+        <!-- <div class="table-responsive">
+          <table class="table table-bordered table-hover table-condensed">
+            <tbody>
+              <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+                <td>Property</td>
+                <td>Unit</td>
+                <td>Stage Name</td>
+
+                <td>Engineer Approval</td>
+                <td>QC Approval</td>
+                <td>Finance Approval</td>
+              </tr>
+            </tbody>
+            <tr *ngFor="let Vendors of StaffDetails2">
+              <td>Wisma 46 </td>
+              <td>{{unit}}</td>
+              <td>{{Vendors.stageName}}</td>
+
+              <td>Approved</td>
+              <td>Approved</td>
+              <td>Paid</td>
+            </tr>
+          </table>
+        </div> -->
+      </div>
+      <div class="col-lg-6" *ngIf="AfterCompletionOfWork" style="padding: 15px;border: 1px solid black;margin-left: -10px;margin-top: -209px;">
+        <!-- <label style="margin-left: 43px;">Complete Percentage : 1.594%</label>
+        <br>
+        <label style="margin-left: 43px;">Amount To Pay : 1.594%</label> -->
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Property:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{BuildingName}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Unit:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{UnitName}}</h5>
+          </div>
+          <div class="col-lg-3">
+
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Contractor:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{VendorName}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Current Stage :</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{CurrentStage}}</h5>
+          </div>
+          <div class="col-lg-3">
+
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Stage Start Date:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{StageStartDate|date}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Stage End Date:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{StageEndDate|date}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Review Assigned To:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{StaffName}}</h5>
+          </div>
+          <div class="col-lg-3">
+
+          </div>
+        </div> -->
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;"> Review Assigned Date:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{WorkAssignedDate|date}}</h5>
+          </div>
+          <div class="col-lg-3">
+
+          </div>
+        </div> -->
+
+
+        <!-- <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Review Completed Date :</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{CompletedDate|date}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Review Comments :</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{projectComment}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Review Status:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">{{ApprovalStatus}}</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">QC Name:</h5>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="formlabel" style="font-size: 12px;">Aadam</h5>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div> -->
+
+
+
+        <table class="table table-bordered table-hover table-condensed col-lg-5" style="margin-left: 6px;">
+          <tr>
+            <td style="border-color: burlywood;">Property</td>
+            <td style="border-color: burlywood;">{{BuildingName}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;">Unit</td>
+            <td style="border-color: burlywood;">{{UnitName}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;">Contractor</td>
+            <td style="border-color: burlywood;">{{vendorName}}</td>
+          </tr>
+
+
+          <tr>
+            <td style="border-color: burlywood;">Current Stage</td>
+            <td style="border-color: burlywood;">{{CurrentStage}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;">Stage Start Date</td>
+            <td style="border-color: burlywood;">{{Startdate|date}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;">Stage End Date</td>
+            <td style="border-color: burlywood;">{{EndDate|date}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;">Engineer Assigned </td>
+            <td style="border-color: burlywood;">{{StaffName}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;"> Review Assigned Date </td>
+            <td style="border-color: burlywood;">{{WorkAssignedDate|date}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;"> Review Completed Date </td>
+            <td style="border-color: burlywood;">{{CompletedDate|date}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;">Review Comments </td>
+            <td style="border-color: burlywood;">{{projectComment}}</td>
+          </tr>
+
+          <tr>
+            <td style="border-color: burlywood;">Review Status </td>
+            <td style="border-color: burlywood;">{{ApprovalStatus}}</td>
+          </tr>
+
+
+          <tr>
+            <td style="border-color: burlywood;">QC Approvals </td>
+            <td style="border-color: burlywood;">{{QCApprovalStatus}}</td>
+          </tr>
+        </table>
+
+
+        <!-- <div class="row">
+          <h4 style="margin-left: 20px;">Photos</h4>
+          <hr>
+          <div class="row" style="padding: 17px;margin-left: 32px;">
+            <div class="col-lg-2" *ngFor="let pic of photos">
+              <br>
+              <img src="{{pic.photoURL}}" style="width:123%">
+              <br>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <h4 style="margin-left: 20px;">Videos</h4>
+          <hr>
+          <div class="row" style="padding: 17px;margin-right: 306px;">
+            <div class="col-lg-2" *ngFor="let vid1 of videos">
+              <br>
+              <video width="100" height="100" controls>
+                <source src="{{vid1.videoURL}}" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div> -->
+
+
+        <div class="row">
+          <h4 style="margin-left: 20px;">Engineer Photos</h4>
+          <hr>
+          <div class="row" style="padding: 17px;margin-left: 32px;">
+            <!-- <div class="col-lg-2" *ngFor="let pic of photos">
+              <br>
+              <img src="{{pic.photoURL}}" style="width:123%">
+              <br>
+            </div> -->
+
+            <div class="col-lg-2">
+              <br>
+              <img src="assets/Images/download.png" data-toggle="modal" data-target="#myModalPhotos" (click)="GetEngineerImages($event)"
+                style="width:123%">
+              <br>
+
+            </div>
+            <div class="col-lg-10">
+              <h4>Comments</h4>
+              <h5>I have Reviewed the Stage and it was perfectly done by the constructor</h5>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="row">
+          <h4 style="margin-left: 20px;">Engineer Videos</h4>
+          <hr>
+          <div class="row" style="padding: 17px;margin-right: 306px;">
+            <div class="col-lg-2" *ngFor="let vid1 of videos">
+              <br>
+              <video width="100" height="100" style="margin-left: 42px;" controls>
+                <source src="{{vid1.videoURL}}" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <h4 style="margin-left: 20px;">QC Photos</h4>
+          <hr>
+          <div class="row" style="padding: 17px;margin-left: 32px;">
+            <!-- <div class="col-lg-2" *ngFor="let pic of qcphotos">
+              <br>
+              <img src="{{pic.photoURL}}" style="width:123%">
+              <br>
+            </div> -->
+            <div class="col-lg-2">
+              <br>
+              <img src="assets/Images/download.png" data-toggle="modal" data-target="#myModalQCPhotos" (click)="GetImages($event)" style="width:123%">
+              <br>
+
+            </div>
+            <div class="col-lg-10">
+              <h4>Comments</h4>
+              <h5>The Stage is processed successfully</h5>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <h4 style="margin-left: 20px;">QC Videos</h4>
+          <hr>
+          <div class="row" style="    padding: 17px;
+          margin-left: -26px;
+          margin-right: 326px;">
+            <div class="col-lg-2" *ngFor="let vid1 of video1">
+              <video width="100" height="100" controls style="    margin-left: 49px;">
+                <source src="{{vid1}}" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- <h4 style="margin-left: 20px;" *ngIf="TableVisible==true">Previous Stages</h4>
+        <hr> -->
+
+        <!-- <div class="table-responsive" *ngIf="TableVisible==true">
+          <table class="table table-bordered table-hover table-condensed">
+            <tbody>
+              <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+                <td>Property</td>
+                <td>Unit</td>
+                <td>Stage Name</td>
+                <td>Start Date</td>
+                <td>End Date</td>
+                <td>Reviewer Approval</td>
+                <td>Finance Approval</td>
+              </tr>
+            </tbody>
+            <tr *ngFor="let Vendors of VendorDetailsLists1">
+              <td>Wisma 46 </td>
+              <td>{{Vendors.unit}}</td>
+              <td>{{Vendors.milestone}}</td>
+              <td>{{Vendors.startDate|date}}</td>
+              <td>{{Vendors.endDate|date}}</td>
+              <td>Approved</td>
+              <td>Paid</td>
+            </tr>
+          </table>
+        </div> -->
+
+
+
+
+
+
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+
+
+  <!--Engineer Photos-->
+
+  <div id="myModalPhotos" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="margin-top: 100px;">
+        <div class="modal-header">
+          <h4>Engineer Photos</h4>
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <!-- <div class="row">
+            <div class="col-lg-2" *ngFor="let pic of photos">
+              <br>
+              <img src="{{pic.photoURL}}" style="width:123%">
+              <br>
+            </div>
+          </div> -->
+          <div id="myCarouselPhotos" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="item active">
+                <img src="{{ImageOne}}" alt="">
+              </div>
+              <div class="item" *ngFor="let pic of photos| slice:1">
+                <img src="{{pic.photoURL}}" alt="">
+              </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarouselPhotos" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarouselPhotos" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+
+
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!--Qc Photos-->
+
+
+
+  <div id="myModalQCPhotos" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="margin-top: 100px;">
+        <div class="modal-header">
+          <h4>QC Photos</h4>
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <!-- <div class="row">
+            <div class="col-lg-6" *ngFor="let pic of qcphotos">
+              <br>
+              <img src="{{pic.photoURL}}" style="width: 90px;">
+              <br>
+            </div>
+          </div> -->
+
+
+          <div id="myCarouselPhotos1" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="item active">
+                <img src="{{qcphotos[0].photoURL}}" alt="">
+              </div>
+              <div class="item" *ngFor="let pic of qcphotos| slice:1">
+                <img src="{{pic.photoURL}}" alt="">
+              </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarouselPhotos1" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarouselPhotos1" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+  <div id="myBuildingUnits" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content" style="margin-top: 100px;">
+        <div class="modal-header">
+          <h4>Completed Stages</h4>
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row table-responsive tableresposive tableresponsive" style="padding: 9px;
+            margin-left: 1px;">
+            <table class="table table-bordered table-hover table-condensed mainbuild" style="text-align: center;">
+              <tbody>
+                <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+                  <td>Date</td>
+                  <td>Contractor Name</td>
+                  <td>Completed Stages</td>
+                </tr>
+                <tr *ngFor="let Project of PreviousStagesLists">
+                  <td>{{Project.modifiedDate|date}}</td>
+                  <td>{{ContractorName}}</td>
+                  <td>{{Project.stageName}}</td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>

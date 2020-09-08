@@ -1,0 +1,106 @@
+<div class="container-fluid Pages_background">
+    <div>
+        <div class="row">
+            <div class="col-lg-5">
+                <h4 class="Pages_header">{{pageMenuTitle}}</h4>
+            </div>
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-3">
+                <div class="mainrow">
+                    <div class="col-lg-12 BreadChrumbProperties">
+                        <span> {{userDashboard_breadchrumb}} </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <button type="button" routerLink="/UpdateUser" routerLinkActive="active-link" id="btn_button" class="dashbutton">{{userDashboard_button_NewUser}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-1"></div>
+<div class="container-fluid Pages_background">
+    <div class="shadow p-2 mb-5 bg-white rounded   maincard ">
+        <h4 class="paneltitle">{{userDashboard_PageTitle}}</h4>
+        <hr>
+        <div class="row">
+            <div class="col-lg-3">
+                <input type="text" placeholder="search.." [(ngModel)]="serachtext" class="form-control" id="txt_userBuilding">
+            </div>
+            <div class="col-lg-3 ">
+                <!-- <select class="dropdown form-control maindropdown" id="ddl_UserType">
+                    <option> Select UserType</option>
+                    <option label="Internal User" value="object:1427">Internal User</option>
+                    <option label="Commercial User" value="object:1428">Commercial User</option>
+                    <option label="Tenant" value="object:1429">Tenant</option>
+                    <option label="Vendor" value="object:1430">Vendor</option>
+                    <option label="Pharmacist" value="object:1431">Pharmacist</option>
+                    <option label="Grocery" value="object:1432">Grocery</option>
+                    <option label="Travels" value="object:1433">Travels</option>
+                    <option label="Doctor" value="object:1434">Doctor</option>
+                </select> -->
+                <select name="userRoletype" class="dropdown form-control"
+                id="ddl_UserRole" required placeholder="User Role" (change)="filterrole($event)">
+                <option  value selected="selected">Select Role Type </option>
+                <option value="{{Role.short}}" *ngFor="let Role of RoleTypeList">{{Role.short}}</option>
+            </select>
+            </div>
+        </div>  
+        <br>
+        <div>
+            <table class="table table-bordered table-hover table-condensed ng-scope" st-table="">
+                <thead style="background-color:#00b5d7">
+                    <tr>
+                        <td>{{userDashboard_Photo}}</td>
+                        <td>{{userDashboard_Name}}</td>
+                        <td>{{UserID}}</td>
+                        <td>{{userDashboard_User_Type}}</td>
+                        <td>{{userDashboard_Email}}</td>
+                        <td>{{userDashboard_Phone}}</td>
+                        <td>{{userDashboard_Module}}</td>
+                        <td>{{userDashboard_Actions}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let Users of UsersList | filter:serachtext | filter:userRoletype">
+                        <td><img style="height:50px;width:50px"  src="{{Users.photoURL}}"></td>
+                        <td>{{Users.name}}</td>                     
+                        <td>{{Users.userID}}</td>
+                        <td>{{Users.userRoletype}}</td>
+                        <td>{{Users.emailID}}</td>
+                        <td>{{Users.phoneNo}}</td>
+                        <td>{{Users.userRole}}</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <i class="fa fa-edit" title="Edit" [routerLink]="['/editUpdateUser',Users.id]"></i>
+                                </div>
+                                <div class="col-lg-2">
+                                    <i class="fa fa-trash"  title="Delete" (click)="DeleteUsers(Users.id, Users.name)" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-lg-2" *ngIf="Users.pause==0">
+                                        <i class="fa fa-pause" title="Pause" aria-hidden="true" (click)="PouseUsers(Users.id)"></i>
+                                    </div>
+                                    <div class="col-lg-2" *ngIf="Users.pause==1">
+                                            <i class="fa fa-play"  title="Play" aria-hidden="true" (click)="playUsers(Users.id)"></i>
+                                        </div>
+
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>

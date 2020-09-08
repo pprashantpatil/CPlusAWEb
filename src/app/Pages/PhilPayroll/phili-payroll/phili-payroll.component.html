@@ -1,0 +1,187 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="Pages_header">Payroll</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <span class="CommercialWorkspace"> Staff / Payroll</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row breadCrumbHeadderProperties">
+      <div class="col-lg-12 dashbutton">
+        <button routerLink="/NewPhilPayroll" type="button" id="btn_button">New Payroll</button>
+      </div>
+    </div>
+    <!-- <div class="row breadCrumbHeadderProperties">
+                <div class="col-lg-12 dashbutton">
+                    <button (click)=export() type="button" id="btn_button">export</button>
+                </div>
+            </div> -->
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Payroll</h6>
+      </div>
+    </div>
+    <div class="row" *ngIf="DatesVis">
+      <div class="col-lg-6">
+        <h5>Start Date</h5>
+        <input type="date" [(ngModel)]="StartDate" name="StartDate" id="StartDate" class="form-control"
+          placeholder="StartDate" value="{{mindate}}" style="width: 247px;">
+      </div>
+      <div class="col-lg-3">
+        <h5 style="margin-left: -233px;">End Date</h5>
+        <input type="date" [(ngModel)]="EndDate" name="EndDate" id="EndDate" class="form-control" placeholder="EndDate"
+          (change)=Dates($event) value="{{mindate}}" style="width: 247px;margin-left: -233px;">
+      </div>
+
+      <div class="col-lg-3">
+      </div>
+    </div>
+
+    <div class="table-responsive" style=" font-size: 13px;margin-top: 31px;" *ngIf="TablesVis">
+      <table class="table table-bordered table-hover table-condensed">
+        <tbody>
+          <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+            <td>Staff Name</td>
+            <td>Designation</td>
+            <td>Department</td>
+            <td>Mobile Number</td>
+            <td>Email</td>
+            <td>Gross Salary</td>
+            <!-- <td>Total Leaves</td>
+            <td>Leaves /Month</td>
+            <td>LOP Days</td>
+            <td>LOP Amount</td> -->
+            <td>SSS Rate</td>
+            <td>Pagibig Rate</td>
+            <td>Philihealth</td>
+
+            <td>Net Pay </td>
+            <td>Actions</td>
+          </tr>
+        </tbody>
+        <tr *ngFor="let Philli of PhiliPayrollsLists ">
+          <td>{{Philli.name}}</td>
+          <td>{{Philli.designation}}</td>
+          <td>{{Philli.department}}</td>
+          <td>{{Philli.mobileNo}}</td>
+          <td>{{Philli.emailID}}</td>
+          <td>{{Philli.grossSalaryMonthly}}</td>
+          <!-- <td>{{Philli.totalLeavesEntitled}}</td>
+          <td>{{Philli.leavesthisMonth}}</td>
+          <td>{{Philli.lopDays}}</td>
+          <td>{{Philli.lopAmount}}</td> -->
+          <td>{{Philli.sssRate}}</td>
+          <td>{{Philli.pagibigRate}}</td>
+          <td>{{Philli.philiHealth}}</td>
+
+          <td>{{Philli.netPayMonthly}}</td>
+          <td> <a style="background-color: white; color: #00b5d7;"> <i class="fa fa-edit" data-toggle="tooltip"
+                title="edit"></i></a>
+
+            <a style="background-color: white; color: #00b5d7;"><i class="far fa-trash-alt" data-toggle="tooltip"
+                title="Delete"></i></a>
+
+            <a style="background-color: white ;margin-right: 70px;
+            font-size: 13px;  color: #00b5d7;"><i class="fa fa-eye" data-toggle="tooltip" title="View"
+                data-toggle="modal" data-target="#ViewVendor"></i></a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="ViewVendor" class="modal fade" role="dialog" style=" margin-top: 10%;"
+      style="scroll-behavior: auto;margin-top: 112px;">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content " style=" width: 762px;
+          padding: 15px;
+          margin-top: -30px;
+          margin-left: -132px;
+          height: 500px;">
+          <div class="modal-header">
+            <h4 style="
+                  font-size: 30px;">Payrolls Details</h4>
+            <button type="button" class="close " data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <table class="table table-bordered table-hover">
+                  <tbody>
+                    <tr>
+                      <td>STAFF NAME</td>
+                      <td>Boniday S. Guieb</td>
+                    </tr>
+                    <tr>
+                      <td>DESIGNATION</td>
+                      <td>Security</td>
+                    </tr>
+                    <tr>
+                      <td>DEPARTMENT</td>
+                      <td>Management</td>
+                    </tr>
+                    <tr>
+                      <td>LOP DAYS </td>
+                      <td>0</td>
+                    </tr>
+                    <tr>
+                      <td>LOP AMOUNT</td>
+                      <td>0</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        GROSS SALARY </td>
+                      <td>34800</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        BASIC SALARY </td>
+                      <td>30000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-lg-6">
+                <h4>Deductions</h4>
+                <table class="table table-bordered table-hover">
+                  <tbody>
+                    <tr>
+                      <td>Withholding Tax</td>
+                      <td>100</td>
+                    </tr>
+                    <tr>
+                      <td>Pagibig Rate</td>
+                      <td>100</td>
+                    </tr>
+                    <tr>
+                      <td>SSS Rate</td>
+                      <td>100</td>
+                    </tr>
+                    <tr>
+                      <td>PhiliHealth</td>
+                      <td>100</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h4 style="margin-left: 208px;">Net Pay: 38600</h4>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

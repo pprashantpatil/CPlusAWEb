@@ -1,0 +1,261 @@
+<div class="container-fluid " style="background-color: #F0F3F4;">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header">{{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12 buildings">
+                    <span class="building"> {{staffsalary_breadchrumb}} </span> </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="shadow p-3 mb-5 bg-white rounded   maincard ">
+        <h6 class="paneltitle">{{staffsalary_PageTitle}}</h6>
+        <hr>
+        <div class="row">
+            <div class="col-lg-3">
+                <input type="text" placeholder="search.." [(ngModel)]="serachtext" class="form-control" id="dtxt_staffsalary_search">
+            </div>
+            <div class="col-lg-3">
+
+                <select class="form-control" id="ddl_paymentsBuilding" [(ngModel)]="buildingname">
+                    <option value selected="selected"> Select Building</option>
+                    <option value="{{build.name}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                </select>
+
+            </div>
+            <div class="col-lg-3">
+
+                <select class=" form-control" id="ddl_staffsalary_selectmonth" [(ngModel)]="month3">
+                    <option value> Select Month</option>
+                    <option label="Jan" value="Jan">Jan</option>
+                    <option label="Feb" value="Feb">Feb</option>
+                    <option label="March" value="March">March</option>
+                    <option label="April" value="April">April</option>
+                    <option label="May" value="May">May</option>
+                    <option label="June" value="June">June</option>
+                    <option label="July" value="July">July</option>
+                    <option label="August" value="August">August</option>
+                    <option label="September" value="September">September</option>
+                    <option label="October" value="October">October</option>
+                    <option label="November" value="November">November</option>
+                    <option label="December" value="December">December</option>
+                </select>
+
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr class="tableheader">
+                                <td>{{staffsalary_Building}}</td>
+                                <td>{{staffsalary_StaffName}}</td>
+                                <td>{{staffsalary_Role}}</td>
+                                <td>{{staffsalary_Leaves}}</td>
+                                <td>{{staffsalary_CrossSalary}}</td>
+                                <td>{{staffsalary_Deductions}}</td>
+                                <td>{{staffsalary_NetSalary}}</td>
+                                <td>{{staffsalary_Actions}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let Staffsalary of StaffsalaryList |filter:serachtext| filter:buildingname|filter:month3">
+                                <td>{{Staffsalary.building}}</td>
+                                <td>{{Staffsalary.staff}}</td>
+                                <td>{{Staffsalary.role}}</td>
+                                <td>{{Staffsalary.leavestook}}</td>
+                                <td>{{Staffsalary.monthlySalary}}</td>
+                                <td>{{Staffsalary.Deductions}}</td>
+                                <td>{{Staffsalary.NetSalary}}</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-lg-4"></div>
+                                        <div class="col-lg-3">
+                                            <button type="button" class="dashbutton" id="btn_button"
+                                                style="margin-left:25px" (click)="pay(Staffsalary)" data-toggle="modal"
+                                                data-target="#myModal">
+                                                {{staffsalary_Button_pay}}
+                                            </button>
+                                        </div>
+                                        <!-- The Modal -->
+                                        <div class="modal fade" id="myModal" style="margin-top: 95px">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <h2 class="modal-title">Salary for the month of <span>
+                                                            <b class="paybutton">{{month}}</b></span></h2>
+                                                    <div class="row">
+                                                        <div class="col-lg-1"> </div>
+                                                        <div class="col-lg-2">
+                                                            <label for="">
+                                                                <h4>Staff Name:</h4>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <label for="">
+                                                                <h4>{{staff}}</h4>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-1"> </div>
+                                                        <div class="col-lg-2">
+                                                            <label for="">
+                                                                <h4>Gross Salary:</h4>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <label for="">
+                                                                <h4>{{gross}}</h4>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-1"> </div>
+                                                        <div class="col-lg-2">
+                                                            <label for="">
+                                                                <h4>Deductions:</h4>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <label for="">
+                                                                <h4>{{Deductions}}</h4>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-1"> </div>
+                                                        <div class="col-lg-2">
+                                                            <label for="">
+                                                                <h4>Net Salary:</h4>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <label for="">
+                                                                <h4>{{NetSalary}}</h4>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-1"> </div>
+                                                        <div class="col-lg-2">
+                                                            <label for="">
+                                                                <h4>Payment Type:</h4>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <select class="dropdown form-control paydropdown"
+                                                                (change)="paymenttype($event)" required="">
+                                                                <option> Select Payment</option>
+                                                                <option label="Cash" value="1">Cash</option>
+                                                                <option label="Online" value="2">Online
+                                                                </option>
+                                                                <option label="Cheque" value="3">Cheque
+                                                                </option>
+                                                                <option label="Credit card" value="4">Credit
+                                                                    card</option>
+                                                                <option label="Debit Card" value="5">Debit
+                                                                    Card</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row" *ngIf="paymentID==3">
+                                                        <div class="col-lg-1"></div>
+                                                        <div class="col-lg-2">
+                                                            <p style="padding:5px">Cheque No<span
+                                                                    style="color: red;">*</span></p>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <div class="form-group">
+                                                                <input type="text" [(ngModel)]="Chequeno"
+                                                                    class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"
+                                                                    placeholder="" />
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4"></div>
+                                                    </div>
+                                                    <div class="row" *ngIf="paymentID==2">
+                                                        <div class="col-lg-1"></div>
+                                                        <div class="col-lg-2">
+                                                            <p style="padding:5px">Transaction ID<span
+                                                                    style="color: red;">*</span></p>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <div class="form-group">
+                                                                <input type="text" [(ngModel)]="Chequeno"
+                                                                    class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"
+                                                                    placeholder="" />
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4"></div>
+                                                    </div>
+                                                    <div class="row" *ngIf="paymentID==2||paymentID==3">
+                                                        <div class="col-lg-1"></div>
+                                                        <div class="col-lg-2">
+                                                            <p style="padding:5px">Bank Name<span
+                                                                    style="color: red;">*</span></p>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <div class="form-group">
+                                                                <input type="text" [(ngModel)]="bankname"
+                                                                    class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"
+                                                                    placeholder="" />
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4"></div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-1"> </div>
+                                                        <div class="col-lg-2">
+                                                            <label for="">
+                                                                <h4>Remarks:</h4>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <textarea class="mainsal" [(ngModel)]="Remarks"
+                                                                placeholder="Remarks"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-1"> </div>
+                                                        <div class="col-lg-2">
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <button class="savebutton" (click)="paysalary()"
+                                                                data-dismiss="modal" type="submit">Save</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-9"> </div>
+                                                        <div class="col-lg-3">
+                                                            <button class="dashbutton closebutton" type="submit"
+                                                                data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

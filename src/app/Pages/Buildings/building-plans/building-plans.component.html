@@ -1,0 +1,212 @@
+<div class="container-fluid Pages_background Backgroundforipad">
+    <div>
+        <div class="row">
+            <div class="col-lg-3">
+                <h4 class="Pages_header" style="    margin-left: -13px;">PROJECT PLAN</h4>
+            </div>
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-3">
+                <div class="mainrow">
+                    <div class="col-lg-12">
+                        <!-- <span class="CommercialWorkspace"> Construction Projects / Project Plan</span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-lg-12 dashbutton" style="margin-left: -17px;">
+                <button routerLink="/UpdateBuildingPlan" *ngIf="LoginTypeID==2 || LoginTypeID==3 " type="button" id="btn_button">{{buildingPlans_AddNewButton}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard" style="margin-left: -15px;">
+        <div class="row subheader">
+            <div class="col-lg-12">
+                <h4 class="paneltitle">PROJECT PLAN DASHBOARD</h4>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-lg-3">
+                <input type="search" id="txt_Search" [(ngModel)]="BuildingSearch" placeholder="Search..." class="form-control">
+            </div>
+            <div class="col-lg-3">
+                <select class="form-control" id="ddl_buildingplans" name="buildingplans" (change)="FilterByBuildingname($event)">
+                    <option value="none" selected="selected"> Select Uploaded By</option>
+                    <option value="{{staff.users}}" *ngFor="let staff of UploadedByssss">{{staff.users}}</option>
+                </select>
+            </div>
+            <div class="col-lg-3">
+                <select class="form-control" id="Plan" name="Plan" (change)="GetPlanName($event)">
+                    <option value="none" selected="selected"> Select Plan Name</option>
+                    <option value="{{plans.planName}}" *ngFor="let plans of DistinctPlans">{{plans.planName}}</option>
+                </select>
+            </div>
+
+            <div class="col-lg-3">
+                <select class="form-control" id="version" name="version" (change)="GetVersionNo($event)">
+                    <option value="none" selected="selected"> Select Version</option>
+                    <option value="{{version.versionNo}}" *ngFor="let version of VersionLists">{{version.versionNo}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row tabledivproperties">
+            <div class="col-lg-12 table-responsive">
+                <table class="table table-bordered table-hover table-condensed ng-scope">
+                    <thead class="tableheader tableheaderfont">
+                        <tr>
+                            <th>Date</th>
+                            <th>Uploaded By</th>
+                            <th>{{buildingPlans_Plans}}</th>
+                            <!-- <th>Property Name</th> -->
+                            <th>{{buildingPlans_PlanName}}</th>
+                            <th>Description</th>
+                            <th>Version No</th>
+                            <th *ngIf="LoginTypeID==2 || LoginTypeID==3 ||LoginTypeID==1 ||LoginTypeID==5 ||LoginTypeID==8||LoginTypeID==9">{{buildingPlans_Actions}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let build of BuildingPlanFilterList| filter:BuildingSearch |filter:UploadedBy">
+                            <td>{{build.modifiedDate|date}}</td>
+                            <td>{{build.modifiedby}}</td>
+                            <td *ngIf="build.frame==0">
+                                <img src="{{build.buildingPlan}}" style="width:100px;height:100px" />
+                            </td>
+                            <td *ngIf="build.frame==1">
+                                <img src="assets/Login/pdfimage.png" style="width:100px;height:100px" />
+                            </td>
+
+                            <td *ngIf="build.frame==2">
+                                <img src="assets/Login/excel.png" style="width:100px;height:100px" />
+                            </td>
+
+                            <td>{{build.planName}}</td>
+                            <!-- <td>{{build.planName}}</td> -->
+                            <td>{{build.description}}</td>
+                            <td>{{build.versionNo}}</td>
+
+                            <td *ngIf="LoginTypeID==2 || LoginTypeID==3 || LoginTypeID==1 || LoginTypeID==5 ||LoginTypeID==8||LoginTypeID==9" class="TableActions">
+                                <i class="far fa-trash-alt" title="Delete" *ngIf="LoginTypeID!=1" (click)="DeleteBuildingPlan(build.id,build.planName)"></i>
+                                <i class="fa fa-eye" [routerLink]="['/Buildingplanimages',build.buildingID]" title="View" *ngIf="LoginTypeID==1 || LoginTypeID==3 ||LoginTypeID==5||LoginTypeID==8||LoginTypeID==9"
+                                    (click)="Views(build)"></i>
+
+                                <button class="btn btn-primary editable-table-button btn-xs" (click)="GetPlansDetails(build)" data-toggle="modal" data-toggle="modal"
+                                    data-target="#UpdatePlans" style="background-color: #00b5d7;margin-left: 17px;
+                                    margin-top: 9px;">Update Plan</button>
+                            </td>
+
+
+                        </tr>
+
+                        <!-- <tr *ngFor="let build of BuildingPlanFilterList| filter:BuildingSearch">
+                            <td *ngIf="build.frame==0">
+                                <img src="{{build.buildingPlan}}" style="width:100px;height:100px" />
+                            </td>
+                            <td *ngIf="build.frame==1">
+                                <img src="assets/Login/pdfimage.png" style="width:100px;height:100px" />
+                            </td>
+
+                            <td>{{build.buildingName}}</td>
+                            <td>Floor Plans</td>
+
+                            <td *ngIf="LoginTypeID==2 || LoginTypeID==3 || LoginTypeID==1" class="TableActions">
+                                <i class="far fa-trash-alt" title="Delete" *ngIf="LoginTypeID!=1" (click)="DeleteBuildingPlan(build.buildingID,build.planName)"></i>
+                                <i class="fa fa-eye" title="View" *ngIf="LoginTypeID==1 || LoginTypeID==3" [routerLink]="['/Buildingplanimages',build.buildingID]"></i>
+                            </td>
+
+                            
+                        </tr> -->
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="UpdatePlans" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top: 100px;">
+            <div class="modal-header">
+                <h4>Update Project Plan</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body col-lg-12">
+                <div class="row" style="padding: 16px;">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <p>Plan Name
+                            <span>*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <input type="text" [(ngModel)]="PlaneName" name="PlaneName" id="txt_PlanName" required class="form-control" placeholder="Plan Name">
+                    </div>
+                </div>
+
+
+                <div class="row" style="padding: 16px;">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <p>Version No
+                            <span>*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <input type="text" [(ngModel)]="VersionNo" name="Version" id="Version" required class="form-control" placeholder="Version No">
+                    </div>
+
+
+                </div>
+
+                <div class="row" style="padding: 16px;">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <p>Description
+                            <span>*</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <textarea type="text" rows="4" [(ngModel)]="Description" name="Description" id="Description" required class="form-control"
+                            placeholder="Description"></textarea>
+                    </div>
+
+
+                </div>
+
+                <div class="row ">
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-3">
+                        <p>Property Plan</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="file" class="form-control" placeholder="Property Plan" accept="image/x-png,image/gif,image/jpeg,application/pdf"
+                            multiple (change)="handleFileSelect1($event)">
+                    </div>
+
+
+
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-4">
+                        <button class="btn btn-block btn-md" style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);" (click)="InsertBuildingPlan()"
+                            data-dismiss="modal">Update Plan</button>
+                    </div>
+                    <div class="col-lg-4">
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

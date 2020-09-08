@@ -1,0 +1,156 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 style="margin-bottom: 25px;" class="Pages_header">Project Timeline</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+
+  </div>
+  <div>
+    <div class="card maincard" style="margin-right: 21px;">
+      <div class="row">
+        <div class="col-lg-8 reqriedspan" style="    padding: 25px;">
+          <br>
+          <form #loginForm="ngForm">
+            <div class="row">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <p>Project
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7 form-group">
+                <select name="BuildingID" class="dropdown form-control" [(ngModel)]="BuildingID" required id="BuildingID" disabled>
+                  <option value="0" selected="selected"> Project</option>
+                  <option value="{{project.id}}" *ngFor="let project of projectlist">{{project.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <p>Select Stage
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7 form-group">
+                <select class="form-control" id="ddl_Stage" [(ngModel)]="StageID" name="Stages" (change)="GetStageID($event)">
+                  <option value="none" selected="selected"> Select Stage</option>
+                  <option value="{{build.id}}" *ngFor="let build of StageList">{{build.stageName}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <p>Start Date
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input [(ngModel)]="S_Date" name="StartDate" type="date" id="txt_StartDate" required class="form-control">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <p>End Date
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input [(ngModel)]="E_Date" name="EndDate" type="date" id="txt_EndDate" required class="form-control">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <p>Activity
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7 form-group">
+                <textarea rows="3" id="Activity" name="Activity" [(ngModel)]="MileStone_Name" class="form-control" placeholder="Activity"
+                  required></textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <p>Care Of
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7 form-group">
+                <select name="MileStone_Staf" class="dropdown form-control " [(ngModel)]="MileStone_Staf" required id="MileStone_Staf">
+                  <option value="0" selected="selected"> Care Of</option>
+                  <option value="{{Team.staffID}}" *ngFor="let Team of ProjectTeamList">{{Team.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <p>Milestone
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input type="checkbox" id='ismilestone' name="Ismilestone" [(ngModel)]="Ismilestone">
+              </div>
+            </div>
+
+            <!-- <div class="row">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <p>Client Contact
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7 form-group">
+                <select name="ProjectID" class="dropdown form-control " [(ngModel)]="MileStone_Client" required id="ddl_updateassetsBuilding">
+                  <option value="0" selected="selected"> Client Contact</option>
+                  <option value="{{project.id}}" *ngFor="let project of ClientList">{{project.firstName}}</option>
+                </select>
+              </div>
+            </div> -->
+
+            <div class="row">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <p>Comments
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7 form-group">
+                <textarea rows="3" id="Comments" [(ngModel)]="Description" name="Comments" class="form-control" placeholder="Comments" required></textarea>
+              </div>
+            </div>
+            <div *ngIf="paramID==null" class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-4"></div>
+              <div class="col-lg-2 ">
+                <button type="submit" style="margin-bottom: 100px" (click)="Save()" class="btn btn-block btn-md savebutton">Save</button>
+              </div>
+            </div>
+            <div *ngIf="paramID!=null" class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-4"></div>
+              <div class="col-lg-2 ">
+                <button type="submit" style="margin-bottom: 100px" (click)="Update()" class="btn btn-block btn-md savebutton">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

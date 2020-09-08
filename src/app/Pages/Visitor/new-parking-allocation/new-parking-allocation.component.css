@@ -1,0 +1,64 @@
+/* 
+.Slots {
+    padding: 20px;
+    font-size: 16px;
+    color: #666666;
+}
+
+.slots {
+    border: 10px solid #e2e2e2;
+    background: #ececec;
+    text-align: center;
+    border-radius: 8px;
+    color: #afafaf;
+    height: 58px;
+    width: 100%;
+    padding: 6px;
+    margin: 4px;
+}
+
+button.btn.btn-primary {
+    background: #fec501;
+    border-color: #fec501;
+}
+
+.imgresponsive {
+    width: 100%;
+    height: auto;
+}
+
+#btn_tenantNewParking {
+    width: 190px;
+}
+.slots {
+    border: 10px solid #e2e2e2;
+    background: #ececec;
+    text-align: center;
+    border-radius: 8px;
+    color: #afafaf;
+    height: 58px;
+    width: 12%;
+    padding: 6px;
+    margin: 4px;
+}
+
+#btn_VisitorParking_AllocateParking {
+    width: 190px;
+} */
+
+
+.slots {
+    border: 10px solid #e2e2e2;
+    background: #ececec;
+    text-align: center;
+    border-radius: 8px;
+    color: #afafaf;
+    height: 58px;
+    width: 12%;
+    padding: 6px;
+    margin: 4px;
+}
+
+#btn_VisitorParking_AllocateParking {
+    width: 190px;
+}

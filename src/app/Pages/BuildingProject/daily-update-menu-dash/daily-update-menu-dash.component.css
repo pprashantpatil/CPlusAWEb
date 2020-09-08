@@ -1,0 +1,11 @@
+#carousel {
+    width: auto;
+    height: auto;
+    background-color:white;
+    overflow: visible;
+    white-space:nowrap;
+}
+
+#carousel .slide {
+    display: inline-block;
+}

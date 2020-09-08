@@ -1,0 +1,52 @@
+.newreq{
+    background-color:#00b5d7;
+    color:white; 
+    margin-left: 76px; 
+     border-color: rgba(20, 21, 31, 0.20); 
+     margin-top: -11px;
+}
+
+.build{
+    background-color:#00b5d7;
+    color:white; 
+    margin-left: 76px; 
+     border-color: rgba(20, 21, 31, 0.20); 
+     margin-top: -11px;
+    width: 183px;
+    margin-left: 221px;
+    border-radius: 34px;
+}
+
+
+.excelbutton{
+    margin-left: auto;
+    margin-right: 20px;
+    background-color: #00b5d7;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.dashbutton{
+    margin-left: auto;
+}
+
+.projectreqbc{
+    margin-left: 1px;
+}
+
+
+@media screen and (min-width: 1600px) {
+    .projectreqbc{
+        margin-left: 1px;
+    }
+    
+  }
+  @media screen and (min-width: 1900px) {
+    .projectreqbc{
+        margin-left: 209px;
+    }
+    
+  }
+
+
+

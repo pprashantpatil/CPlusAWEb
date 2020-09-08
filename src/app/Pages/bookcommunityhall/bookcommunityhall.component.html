@@ -1,0 +1,277 @@
+<div class="container-fluid" style="background-color: #F0F3F4;">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header">{{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <span class="building"> {{bookCommunityHall_BreadChrumb}} </span></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <!-- <button type="button" id="btn_button" class="dashbutton">Book</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shadow p-3 mb-5 bg-white col-lg-12 rounded maincard ">
+        <form #loginForm="ngForm">
+            <div class="row" *ngIf="paramid==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{bookCommunityHall_Building}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+
+                    <select class="dropdown form-control maindropdown" id="ddl_CommunityHallBuilding"
+                        (change)="getbuildingID($event)" required>
+                        <option value="" class="" selected="selected">Select Building</option>
+                        <option *ngFor="let Building of Buildinglist" value="{{Building.id}}">{{Building.name}}</option>
+
+                    </select>
+
+                    <span class="Validationlabels" *ngIf='BuildingID==undefined && Isempty'>* Please
+                        Fill
+                        {{bookCommunityHall_Building}}</span>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="paramid!=null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{bookCommunityHall_Building}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+
+                    <select class="dropdown form-control maindropdown" [(ngModel)]="buildID"
+                        (change)="getbuildingID2(buildID)" name="buildingname" id="ddl_CommunityHallBuilding1" required>
+                        <option value="" class="" selected="selected">Select Building</option>
+                        <option *ngFor="let Building of Buildinglist" value="{{Building.id}}">{{Building.name}}</option>
+
+                    </select>
+
+                    <span class="Validationlabels" *ngIf='buildID==undefined && Isempty'>* Please
+                        Fill
+                        {{bookCommunityHall_Building}}</span>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{bookCommunityHall_Community}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+
+                    <input type="text" [(ngModel)]="HallName" name="HallName"
+                        placeholder="{{bookCommunityHall_Community}}" class="form-control maindropdown"
+                        id="txt_CommunityHall" required>
+
+
+                    <span class="Validationlabels" *ngIf='HallName==undefined && Isempty'>* Please
+                        Fill
+                        {{bookCommunityHall_Community}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{bookCommunityHall_Location}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+
+                    <input type="text" [(ngModel)]="Location" name="Location"
+                        placeholder="{{bookCommunityHall_Location}}" class="form-control maindropdown" id="txt_Location"
+                        required>
+
+
+                    <span class="Validationlabels" *ngIf='Location==undefined && Isempty'>* Please
+                        Fill
+                        {{bookCommunityHall_Location}}</span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{bookCommunityHall_HallCapacity}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+
+                    <input type="text" [(ngModel)]="Capacity" name="Capacity" id="txt_HallCapacity" required
+                        placeholder="{{bookCommunityHall_HallCapacity}}" class="form-control maindropdown" required>
+
+                    <span class="Validationlabels" *ngIf='Capacity==undefined && Isempty'>* Please
+                        Fill
+                        {{bookCommunityHall_HallCapacity}}</span>
+
+
+                </div>
+            </div>
+            <div class="row" *ngIf="paramid==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{bookCommunityHall_ContactName}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+
+                    <select class="dropdown form-control maindropdown" id="ddl_CommunityHallBuilding"
+                        (change)="GetCotactNumber($event)" required>
+                        <option value="" class="" selected="selected">Select Contact</option>
+                        <option *ngFor="let Contact of Concactlist" value="{{Contact.id}}">{{Contact.contactPersonName}}
+                        </option>
+
+                    </select>
+                    <span class="Validationlabels" *ngIf='concactname==undefined && Isempty'>* Please
+                        Fill
+                        {{bookCommunityHall_ContactName}}</span>
+
+
+                </div>
+            </div>
+
+            <div class="row" *ngIf="paramid!=null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{bookCommunityHall_ContactName}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+
+                    <select class="dropdown form-control maindropdown" id="ddl_CommunityHallBuilding"
+                        [(ngModel)]="contactname" (change)="GetCotactNumber1(contactname)" name="concactname" required>
+                        <option value="" class="" selected="selected">Select Contact</option>
+                        <option *ngFor="let Contact of Concactlist" value="{{Contact.contactPersonName}}">
+                            {{Contact.contactPersonName}}</option>
+
+                    </select>
+
+                    <span class="Validationlabels" *ngIf='contactname==undefined && Isempty'>* Please
+                        Fill
+                        {{bookCommunityHall_ContactName}}</span>
+
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{bookCommunityHall_PhoneNumber}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+
+                    <input type="text" [(ngModel)]="ContactPhoneNo" [disabled]="paramid==null ||paramid!=null "
+                        name="ContactPhoneNo" id="txt_PhoneNumber" required
+                        placeholder="{{bookCommunityHall_PhoneNumber}}" class="form-control maindropdown" id="txt_usr"
+                        onkeypress='return (event.charCode > 48 && event.charCode < 57)'>
+
+
+                    <span class="Validationlabels" *ngIf='ContactPhoneNo==undefined && Isempty'>* Please
+                        Fill
+                        {{bookCommunityHall_PhoneNumber}}</span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{bookCommunityHall_AmountorDay}}</p>
+                </div>
+                <div class="col-lg-5 ">
+
+                    <input type="text" [(ngModel)]="Price" name="Price" id="txt_Amount"
+                        onkeypress='return (event.charCode > 47 && event.charCode < 58)' required
+                        placeholder="{{bookCommunityHall_AmountorDay}}" class="form-control maindropdown" id="txt_usr">
+
+                    <span class="Validationlabels" *ngIf='Price==undefined && Isempty'>* Please
+                        Fill
+                        {{bookCommunityHall_AmountorDay}}</span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{bookCommunityHall_AdditionalCharges}} </p>
+                </div>
+                <div class="col-lg-5 ">
+
+                    <input type="text" [(ngModel)]="AdditionalCharge" name="AdditionalCharge"
+                        onkeypress='return (event.charCode > 47 && event.charCode < 58)' id="txt_AdditionalCharge"
+                        placeholder="{{bookCommunityHall_AdditionalCharges}}" class="form-control maindropdown"
+                        id="txt_usr" required>
+                    <span class="Validationlabels" *ngIf='AdditionalCharge==undefined && Isempty'>* Please
+                        Fill
+                        {{bookCommunityHall_AdditionalCharges}}</span>
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{bookCommunityHall_Notes}}</p>
+                </div>
+                <div class="col-lg-5 ">
+
+                    <textarea id="txt_Notes" [(ngModel)]="Notes" name="Notes" placeholder="{{bookCommunityHall_Notes}}"
+                        class="form-control maindropdown" rows="4"></textarea>
+
+                </div>
+            </div>
+            <div class="row" *ngIf="paramid==null">
+                <div class="col-lg-3">
+                </div>
+                <div class="col-lg-5 ">
+                    <div class="col-lg-2 ">
+                        <!-- <button type="submit"  [disabled]="loginForm.form.invalid" style="margin-bottom: 100px" (click)="InsertBuildingHallDetails()" class="savebutton">{{bookCommunityHall_Save}}</button> -->
+                        <button type="submit" style="margin-bottom: 100px" [disabled]="loginForm.form.invalid"
+                            (click)="InsertBuildingHallDetails()"
+                            class="btn btn-block btn-md savebutton">{{bookCommunityHall_Save}}</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="paramid!=null">
+                <div class="col-lg-3">
+                </div>
+                <div class="col-lg-5 ">
+                    <div class="col-lg-2 ">
+                        <!-- <button type="submit" [disabled]="loginForm.form.invalid" style="margin-bottom: 100px" id="btn_SaveUpdateCommunityHall"  (click)="UpdateBuildingHallDetails()" class="savebutton">{{update1}}</button> -->
+
+                        <button type="submit" style="margin-bottom: 100px" [disabled]="loginForm.form.invalid"
+                            (click)="UpdateBuildingHallDetails()"
+                            class="btn btn-block btn-md savebutton">{{update1}}</button>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="container-fluid Pages_background">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header">Supplier Return</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <!-- <span class="building"> {{vendor_BreadChrumb}} </span>  -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 " style="margin-left: -20px;">
+            <button class="dashbutton" style="margin-left: 6px;" routerLink="/VendorReturn" type="button"
+                id="btn_button">Add New
+            </button>
+            <button class="dashbutton" (click)="exporttoexcel()" type="button" id="btn_button"> Export To Excel</button>
+        </div>
+    </div>
+    <div class="shadow p-3 mb-5 bg-white rounded  maincard " style="    margin-right: 19px;">
+        <div>
+            <h6 class="paneltitle">Supplier Return
+            </h6>
+            <hr>
+            <div class="row">
+                <div class="col-lg-3">
+                    <ng-daterangepicker [options]="options"></ng-daterangepicker>
+                </div>
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" id="txt_vendorreturnSearch" [(ngModel)]="Search" class="form-control"
+                        placeholder="{{vendor_Search}}">
+                </div>
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-3">
+                    <label style="margin-left: 130px;">Total Amount : {{Grandtotal}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-bordered table-hover" style="width: -webkit-fill-available;">
+                    <thead>
+                        <tr class="tableheader">
+                            <!-- <td>Property</td> -->
+                            <td>Supplier</td>
+                            <td>{{vendor_ItemName}} </td>
+                            <td>{{vendor_Invoice}} </td>
+                            <td>PO No </td>
+                            <td>Total Quantity</td>
+                            <td>Return Qty </td>
+                            <!-- <td>{{vendor_Available}} </td> -->
+                            <td>Total Return Amount</td>
+                            <td>{{vendor_Remarks}} </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Purchase of FilteredPurchaseReturnList|filter:Search">
+                            <!-- <td>{{Purchase.building}}</td> -->
+                            <td>{{Purchase.vendorName}}</td>
+                            <td>{{Purchase.itemName}}</td>
+                            <td>{{Purchase.invoiceNo}} </td>
+                            <td>{{Purchase.poid}} </td>
+                            <td>{{Purchase.availableQty}} </td>
+                            <td>{{Purchase.returnQty}}</td>
+                            <!-- <td>{{Purchase.availableQty-Purchase.returnQty}}</td> -->
+                            <td>{{Purchase.totalAmount}}</td>
+                            <td>{{Purchase.remarks}} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

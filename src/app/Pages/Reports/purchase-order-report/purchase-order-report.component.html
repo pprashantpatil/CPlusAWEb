@@ -1,0 +1,141 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-5">
+        <h4 class="Pages_header">{{pageMenuTitle}}</h4>
+      </div>
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-5">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <span class="purchasereport"> {{purchaseOrderReport_breadchrumb}} </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class=col-lg-1> </div>
+    <div class="col-lg-9"></div>
+    <div class="col-lg-2">
+      <button routerLink="/newpo" class="btn btn-block btn-md dashbutton" type="button"
+        id="btn_button">{{purchaseOrderReport_Button}}
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+      Export To Excel
+    </button>
+  </div>
+
+</div>
+
+
+<div class="container-fluid Pages_background">
+  <div class="shadow p-2 mb-5 bg-white rounded   maincard ">
+    <h4 class="paneltitle">{{purchaseOrderReport_PageTitle}}</h4>
+    <hr>
+    <div class="row">
+      <div class="col-lg-4">
+        <h4>{{purchaseOrderReport_SelectDate}}</h4>
+        <ng-daterangepicker [options]="options"></ng-daterangepicker>
+      </div>
+
+      <div class="col-lg-4">
+        <h4>Select Vendor</h4>
+        <select class="form-control" (change)="Vendor($event)" style="width: 300px;">
+          <option value="none" selected="selected"> Select Vendor</option>
+          <option value="{{VendorPurchase.short}}" *ngFor="let VendorPurchase of VendorPurchaseList">
+            {{VendorPurchase.short}}</option>
+        </select>
+      </div>
+      <div class="col-lg-4">
+        <h4>{{purchaseOrderReport_SelectStatus}}</h4>
+        <!-- <select class="form-control">
+          <option value="none" selected="selected"> Select Status</option>
+          <option value="{{Status.id}}" *ngFor="let Status of StatusList">
+            {{Status.short}}</option>
+        </select> -->
+        <select class="dropdown form-control" required="" (change)="FilterByStatus($event)" id="ddl_Status"
+          placeholder="Select Status" style="width: 300px;">
+          <option value="" class="" selected="selected">Select Status</option>
+          <option label="Delivered" value="Delivered">Delivered</option>
+          <option label="Pending" value="Pending">Pending</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <table class="table table-bordered table-hover table-condensed">
+          <thead>
+            <tr class="tableheader tableheaderfont">
+              <td>{{purchaseOrderReport_PO}}</td>
+              <td>{{purchaseOrderReport_POType}}</td>
+              <td>{{purchaseOrderReport_Vendor}}</td>
+              <td>{{purchaseOrderReport_Date}}</td>
+              <td>{{purchaseOrderReport_User}}</td>
+              <td>{{purchaseOrderReport_Status}}</td>
+              <td>{{purchaseOrderReport_Details}}</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Purchase of FilteredPurchaseList">
+              <td>{{Purchase.poid}}</td>
+              <td>{{Purchase.poType}}</td>
+              <td>{{Purchase.vendor}}</td>
+              <td>{{Purchase.date|date}}</td>
+              <td>{{Purchase.poBy}}</td>
+              <td>{{Purchase.status}}</td>
+              <td>
+                <i class="fa fa-info-circle" data-toggle="modal" data-target="#myModalOne"
+                  style="font-size:30px;color:darkgreen" title="Info" (click)="Information(Purchase)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div id="myModalOne" class="modal fade" role="dialog" style=" margin-top: 10%;">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content " style="margin-top: -31px; width: 735px;padding: 10px;">
+          <div class="modal-header">
+            <h5>Details</h5>
+            <button type="button" class="close " data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr class="tableheader">
+                    <td>Sl No.</td>
+                    <td>Item </td>
+                    <td>Quantity </td>
+                    <td>Comments </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let PO of POItemsList">
+                    <td>{{PO.poItemID}}</td>
+                    <td>{{PO.item}}</td>
+                    <td>{{PO.qty}}</td>
+                    <td>{{PO.comments}} </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

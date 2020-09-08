@@ -1,0 +1,26 @@
+.tableheaderfont{
+    color: rgb(218, 212, 212);
+}
+
+.mainrow{
+    float: right;
+    margin-top: 26px;
+}
+.paneltitle {
+    font-weight: 400;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: #666666;
+}
+.redstar{
+    color: red;
+}
+
+.dropzone_vendorinvoice {
+    height: 66px;
+    border: 2px solid #717386;
+    width: 318px;
+}

@@ -1,0 +1,183 @@
+<div class="container-fluid " style="background-color: #F0F3F4;">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header">{{parkingTitle}}</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <span class="building"> {{parking_BreadChrumb}} </span></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <button type="button" routerLink="/addparkingslot" routerLinkActive="active-link" id="btn_button"
+                        class="dashbutton">{{parking_AddNewButton}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="shadow p-3 mb-5 bg-white rounded col-lg-12  maincard ">
+        <h6 class="paneltitle">{{pageMenuTitle}}</h6>
+        <hr>
+        <div class="row">
+            <div class="col-lg-3">
+                <!-- <select class="form-control" id="ddl_buildingplans"  (change)="fliterbuilding($event)">
+                    <option value="none" selected="selected"> Select Building</option>
+                    <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                </select> -->
+                <select class="form-control" id="ddl_buildingplans" [(ngModel)]="building"
+                    (change)="fliterbuilding($event)">
+                    <option value="none" selected="selected"> Select Building</option>
+                    <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                </select>
+            </div>
+            <div class="col-lg-3 ">
+                <select class="form-control" id="ddl_buildingplans" (change)="filterfloor($event)">
+                    <option value> Select Floor</option>
+                    <option value="{{floor.floor}}" *ngFor="let floor of flordetails">{{floor.floor}}</option>
+                </select>
+            </div>
+            <!-- <div class="col-lg-3 ">
+                <select class="form-control" id="ddl_buildingplans" (change)="filterfacing($event)">
+                    <option value> Select Facing</option>
+                    <option value="{{face.facing}}" *ngFor="let face of facinglist">{{face.facing}}</option>
+                </select>
+            </div> -->
+            <div class="col-lg-3 ">
+                <input type="text" placeholder="search.." [(ngModel)]="BuildingSearch" class="form-control"
+                    id="txt_searchBuilding">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group  ">
+                <p class="Slots">{{parking_BuildingName}}{{buildingName}} </p>
+                <p class="Slots">{{parking_ParkingSlots}}{{floorID}}</p>
+                <!-- 
+                <p class="Slots" style="background-color:#36be2f;padding: 5px;margin-left: 10px; ">Tenent</p>
+                <p class="Slots" style="background-color:#2ca4de;padding: 5px;margin-left: 10px; ">Visitor</p>
+                <p class="Slots" style="background-color:#687277;padding: 5px;margin-left: 10px; ">Empty Slot</p>
+            </div> -->
+
+            </div>
+        </div>
+
+        <div class="row" style="margin-left: 12px;">
+
+
+            <p style="background-color:#36be2f;color:#36be2f;height: 20px;margin-left: 10px; ">Tenant</p>
+            <p style="font-size: 16px; margin-left: 4px;">Tenant</p>
+            <p style="background-color:#2ca4de;color:#2ca4de;height:20px;margin-left: 10px; ">Visitor</p>
+            <p style="font-size: 16px; margin-left: 4px;">Visitor</p>
+            <p style="background-color:#687277;color:#687277;height: 20px;margin-left: 10px; ">Empty</p>
+            <p style="font-size: 16px; margin-left: 4px;"> Available</p>
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-12" style="margin-bottom: 63%;">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="col-lg-3" (click)="showtenent(list)" style="height: 90px;margin-top: 15px;"
+                            *ngFor="let list of slotList |filter:floorID | filter:facingID |filter:BuildingSearch">
+                            <div class="row slots" *ngIf="list.kkk==1"
+                                style="border: 5px solid #36be2f;width: 100%;height: 100px;">
+                                <span>{{list.floor}} <br> {{list.slot}}
+                                    <br> {{list.tenantName}}
+                                </span>
+                                <p>
+
+                                </p>
+
+                                <!-- <label style="margin: 0px 10px 25px -5px;" for="{{list.id}}">{{list.slot}}
+                                    {{list.tenantName}}
+
+                                </label> -->
+
+                            </div>
+
+                            <div class="row slots" *ngIf="list.kkk==0"
+                                style="border: 5px solid #687277;width: 100%;height: 100px;">
+                                <span>{{list.floor}} <br> {{list.slot}}
+                                    <br>{{list.tenantName}}
+                                </span>
+                                <!-- <label  for="{{list.id}}">{{list.slot}}
+                                    {{list.tenantName}}
+
+
+                                </label> -->
+
+
+                            </div>
+
+                            <div class="row slots" *ngIf="list.kkk==2"
+                                style="border: 5px solid #2ca4de;width: 100%;height: 100px;">
+
+                                <span>{{list.floor}} <br> {{list.slot}}
+                                    <br> {{list.tenantName}}
+                                </span>
+                                <!-- <label style="margin: 0px 10px 25px -5px;" for="{{list.id}}">{{list.slot}}
+                                    {{list.visitorName}}
+
+                             
+                                </label> -->
+
+                                <!-- <label style="margin: 0px 10px 25px 10px;background-color: blue;" for="{{list.id}}">{{list.slot}} /{{list.tenantName}}
+                                               
+                                                
+                                            </label> -->
+                                <!-- <label  style="margin: 13px 10px 25px 10px;" for="{{list.id}}">{{list.tenantName}}
+                                               
+                                               
+                                            </label> -->
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-3" *ngIf="shhooo==1">
+
+
+                        <div class="container-fluid  shadow p-3 mb-12 bg-white rounded maincard">
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <img class="profileimg" src="{{tenphoto}}" style="width: 100%">
+                                </div>
+
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p>Name : <b style="color: black;">{{tenenrname}}</b></p>
+                                    <p>Mobile Number : {{tenephone}} </p>
+                                    <p>Unit : {{unitname}}</p>
+                                    <p>Floor : {{floor}}</p>
+                                    <p>Type : {{ttype}}</p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

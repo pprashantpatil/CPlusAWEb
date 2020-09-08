@@ -1,0 +1,196 @@
+<div class="container-fluid Pages_background Mobilecss">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 class="Pages_header">PUNCH LISTS </h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+
+  </div>
+  <div class="container-fluid Pages_background">
+    <div>
+      <div class="card maincard">
+        <div class="row">
+          <div class="col-lg-8 reqriedspan" style="padding: 20px;">
+            <br>
+            <form #loginForm="ngForm">
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <P>Project
+                    <span style="color: red;"> *</span>
+                  </P>
+                </div>
+                <div class="col-lg-7">
+                  <select name="ProjectID" class="dropdown form-control " disabled name="projects"
+                    [(ngModel)]="projectID" required id="ddl_updateassetsBuilding" (click)="GetProjectID($event)">
+                    <option value="0" selected="selected">Select Project</option>
+                    <option value="{{build.id}}" *ngFor="let build of projectlist">{{build.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <br>
+              <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2">
+                  <p style="padding:5px">Floor
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <select class="dropdown form-control " (click)="GetFloorID($event)" name="FloorID"
+                    [(ngModel)]="FloorID" id="FloorID" required="">
+                    <option value="0"> Select Floor</option>
+                    <option *ngFor="let vendor of FloorList" value="{{vendor.id}}">{{vendor.floor}}</option>
+                  </select>
+                </div>
+              </div>
+              <br>
+              
+
+
+
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <P>Punch List
+                    <span style="color: red;"> *</span>
+                  </P>
+                </div>
+                <div class="col-lg-7">
+                  <select name="PunchListID" [(ngModel)]="PunchListID" class="dropdown form-control " required
+                    id="PunchListID" (click)="GetPunchListID($event)">
+                    <option value="0" selected="selected">Select PunchList</option>
+                    <option value="{{build.id}}" *ngFor="let build of PunchList">{{build.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <br>
+
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <P>Staff
+                    <span style="color: red;"> *</span>
+                  </P>
+                </div>
+                <div class="col-lg-7">
+                  <select name="StaffId" [(ngModel)]="StaffId" class="dropdown form-control " required id="StaffId"
+                    (click)="GetMemberID($event)">
+                    <option value="0" selected="selected">Select Staff</option>
+                    <option value="{{build.staffID}}" *ngFor="let build of memberlist">
+                      {{build.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <br>
+              <!-- 
+              <div class="row">
+                <div class=col-lg-2> </div>
+                <div class="col-lg-3">
+                  <P>Name<span style="color: red;">*</span> </P>
+                </div>
+                <div class="col-lg-7 form-group">
+                  <input type="text" [(ngModel)]="Name" name="Name" class="form-control" [disabled]="typeID==2">
+                </div>
+              </div> -->
+
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <P style="font-size: 14px;">Start Date
+                    <span>*</span>
+                  </P>
+                </div>
+                <div class="col-lg-7">
+                  <div class="form-group">
+                    <input type="Date" [(ngModel)]="Date" name="Date" class="form-control" placeholder="Date" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <P style="font-size: 14px;">End Date
+                    <span>*</span>
+                  </P>
+                </div>
+                <div class="col-lg-7">
+                  <div class="form-group">
+                    <input type="Date" [(ngModel)]="EndDate" name="EndDate" class="form-control" placeholder="EndDate"
+                      required>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <P style="font-size: 14px;">Time
+                    <span>*</span>
+                  </P>
+                </div>
+                <div class="col-lg-7">
+                  <div class="form-group">
+                    <input type="time" [(ngModel)]="Time" name="Time" class="form-control" placeholder="Time" required>
+                  </div>
+                </div>
+              </div> -->
+
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <P>Remarks
+                    <span style="color: red;">*</span>
+                  </P>
+                </div>
+                <div class="col-lg-7">
+                  <textarea rows="3" [(ngModel)]="Remarks" name="Remarks" class="form-control" placeholder="Remarks"
+                    required></textarea>
+                </div>
+              </div>
+
+              <br>
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                  <P>Status
+                    <span style="color: red;">*</span>
+                  </P>
+                </div>
+                <div class="col-lg-7">
+                  <select [(ngModel)]="Status" class="dropdown form-control " name="Status" required id="Status"
+                    (click)="GetStatus($event)">
+                    <option value="0" selected="selected">Select Status</option>
+                    <option value="Assigned">Assigned</option>
+                    <option value="Accepted">Accepted</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Completed">Completed</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="paramID==null">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-2 ">
+                  <button type="submit" style="margin-bottom: 100px" class="btn btn-block btn-md savebutton"
+                    (click)="Save()">Save</button>
+                </div>
+              </div>
+              <div class="row" *ngIf="paramID!=null">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-2 ">
+                  <button type="submit" style="margin-bottom: 100px" class="btn btn-block btn-md savebutton"
+                    (click)="Update()">Update</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

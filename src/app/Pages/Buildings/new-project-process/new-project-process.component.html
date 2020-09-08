@@ -1,0 +1,148 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 class="Pages_header">New Project Progress</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building" style="margin-left: 204px;"> Building / New Project Progress</span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard ">
+    <div class="row subheader">
+      <div class="col-lg-12">
+        <h4 class="paneltitle">New Project Progress</h4>
+      </div>
+    </div>
+    <hr>
+    <form>
+      <div class="row">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel">Building</h5>
+        </div>
+        <div class="col-lg-6 ">
+          <select id="ddl_updatetenentBuilding" [(ngModel)]="ProjectProgressEntity.BuildingID" name="BuildingID"
+            class="dropdown form-control updatebuildingddl" (change)="getfloorlist($event.target.value)"
+            placeholder="Select Building">
+            <option value="0" class="" selected="selected">Select Building</option>
+            <option *ngFor="let building of buildinglist" value="{{building.id}}">{{building.name}}
+            </option>
+
+          </select>
+        </div>
+      </div>
+      <br>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel">Floor</h5>
+        </div>
+        <div class="col-lg-6">
+          <select id="ddl_updatetenentFloor" [(ngModel)]="ProjectProgressEntity.FloorID" name="FloorID"
+            class="dropdown form-control updatebuildingddl" (change)="getunitlist($event.target.value)"
+            placeholder="Select Floor">
+            <option value="0" class="" selected="selected">Select Floor</option>
+            <option *ngFor="let floor of floorlist" value="{{floor.id}}">{{floor.floor}}</option>
+
+          </select>
+        </div>
+      </div>
+      <br>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel">Unit</h5>
+        </div>
+        <div class="col-lg-6">
+          <select id="ddl_updatetenentUnit" name="Unit" [(ngModel)]="ProjectProgressEntity.UnitID"
+            class="dropdown form-control updatebuildingddl" 
+            placeholder="Select Unit">
+            <option value="0" class="" selected="selected">Select Unit</option>
+            <option *ngFor="let unit of unitList" value="{{unit.id}}">{{unit.unitID}}</option>
+          </select>
+        </div>
+      </div>
+      <br>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel">Stage</h5>
+        </div>
+        <div class="col-lg-6">
+          <input type="text" name="Stage" [(ngModel)]="ProjectProgressEntity.Stages" id="txt_Stage"
+            class="form-control updatebuildingddl" placeholder="Stage">
+        </div>
+      </div>
+      <br>
+
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel">Date</h5>
+        </div>
+        <div class="col-lg-6">
+          <input type="date" name="Date" [(ngModel)]="ProjectProgressEntity.Date" id="txt_Date"
+            class="form-control updatebuildingddl" placeholder="Date">
+        </div>
+      </div>
+      <br>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-1">
+          <h5 class="formlabel">Comments</h5>
+        </div>
+        <div class="col-lg-6">
+          <textarea rows="5" name="Comments" [(ngModel)]="ProjectProgressEntity.Comments" id="txt_Comments"
+            class="form-control updatebuildingddl" placeholder="Comments"></textarea>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-1 ">
+          <p style="padding:20px;margin-left: -18px;">Photos
+          </p>
+        </div>
+        <div class="col-lg-6">
+          <ngx-dropzone class="dropzone_vendorinvoice" [showPreviews]="true"
+            (filesAdded)="onFilesAddedAttachment($event)" name="Attachment" id="dropzone_Photos">
+          </ngx-dropzone>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-1 ">
+          <p style="padding:20px;margin-left: -18px;">Video
+          </p>
+        </div>
+        <div class="col-lg-6">
+          <!-- <ngx-dropzone    class="dropzone_vendorinvoice" [showPreviews]="true" (filesAdded)="onFilesAddedVideo($event)"
+            name="Attachment" id="dropzone_Photos">
+          </ngx-dropzone> -->
+          <input type="file" class="form-control" placeholder="Photo"   multiple (change)="handleFileSelect1($event)">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-2">
+          <button class="savebutton" (click)="InsertProjectProgress()" type="submit">Save</button>
+        </div>
+      </div>
+
+    </form>
+  </div>

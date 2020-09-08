@@ -1,0 +1,13 @@
+.Mobilecss{
+    margin-left: 0px;
+}
+
+@media screen and (min-width: 1024px) {
+    .Mobilecss{
+        margin-left: 19px;
+        margin-top: 6px;
+    }
+    
+  
+
+  }

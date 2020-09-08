@@ -1,0 +1,334 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-4">
+        <h4 class="Pages_header">Project Expense</h4>
+      </div>
+      <div class="col-lg-4">
+      </div>
+      <div class="col-lg-4">
+        <div class="mainrow">
+          <!-- <div class="col-lg-12 BreadChrumbProperties">
+            <span> Project / Project Review</span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card maincard" style="    margin-left: -1px;
+  margin-right: 6px;
+  margin-top: 20px;">
+    <BR>
+    <div class="row">
+      <div class="col-lg-12">
+      </div>
+    </div>
+    <hr>
+    <form #staffForm="ngForm">
+      <div class="row divForm">
+        <div class="col-lg-8 reqriedspan">
+          <div class="row">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-2">
+              <p style="padding:5px">Project
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <select name="ProjectID" [(ngModel)]="projectID" disabled class="dropdown form-control " required
+                id="ddl_updateassetsBuilding">
+                <option value="0" selected="selected"> Project</option>
+                <option value="{{build.id}}" *ngFor="let build of projectlist">{{build.name}}</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-2">
+              <p style="padding:5px">Expense Type
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <select class="dropdown form-control" (change)="GetExpenseType($event)" name="ExpenseType"
+                [(ngModel)]="ExpenseType" id="ExpenseType" required="">
+                <option value="0"> Select Expense Type</option>
+                <option value="Service">Labour</option>
+                <option value="Inventory">Material</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Date :
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-7">
+              <input type="date" [(ngModel)]="ExpenseDate" id="ExpenseDate" required name="ExpenseDate"
+                class="form-control">
+            </div>
+          </div>
+          <br>
+          <div class="row" *ngIf="ExpenseType=='Service'">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Staff Type:
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-7 ">
+              <select class="form-control" [(ngModel)]="StaffTypeID" name="StaffTypeID" id="StaffTypeID"
+                (change)="GetStaffTypeID($event)" [disabled]="tablecount=='1'">
+                <option value="" selected>Select Staff Type</option>
+                <option value="{{Staff.id}}" *ngFor="let Staff of StaffTypelist">{{Staff.short}}
+
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="row" *ngIf="ExpenseType=='Service'">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Staff :
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-7 ">
+              <select class="form-control" [(ngModel)]="StaffID" name="StaffID" id="StaffID"
+                (change)="GetStaffID($event)">
+                <option value="" selected>Select Staff</option>
+                <option value="{{Staff.id}}" *ngFor="let Staff of StaffList">{{Staff.name}}
+              </select>
+            </div>
+          </div>
+          <br>
+          <ng-container *ngIf="ExpenseType=='Service'">
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <h6 style="font-size: 14px;">Rate Per Hour:
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7">
+                <input type="number" class="form-control" [(ngModel)]="rateperhour" name="rateperhour" required
+                  id="rateperhour" placeholder="Rate Per Hour" disabled> </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <h6 style="font-size: 14px;">No. Of Hours:
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7">
+                <input type="number" class="form-control" (input)="onSearchChange($event.target.value)"
+                  [(ngModel)]="noofhrs" name="noofhrs" required id="noofhrs" placeholder="No. Of Hours"> </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <h6 style="font-size: 14px;">Remarks:
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7">
+                <textarea rows="4" cols="30" id="Remarks" [(ngModel)]="Remarks" required name="Remarks"
+                  class="form-control" placeholder="Remarks"> </textarea> </div>
+            </div>
+            <br>
+          </ng-container>
+          <ng-container *ngIf="ExpenseType=='Inventory'">
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <h6 style="font-size: 14px;">Category :
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 ">
+                <select class="form-control" [(ngModel)]="ItemCategory" name="ItemCategory" id="ItemCategory"
+                  (change)="GetCategory($event)">
+                  <option value="0" selected>select Category</option>
+                  <option *ngFor="let category of CategoryLists" value="{{category.category}}">
+                    {{category.category}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <h6 style="font-size: 14px;">Sub Category :
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 ">
+                <select class="form-control" [(ngModel)]="ItemSubCategory" name="ItemSubCategory" id="ItemSubCategory"
+                  (change)="GetSubCategory($event)">
+                  <option value="0" selected>select SubCategory</option>
+                  <option *ngFor="let itemlist of itemtypelist" value="{{itemlist.short}}">
+                    {{itemlist.short}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <h6 style="font-size: 14px;">Item :
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 ">
+                <select class="form-control" [(ngModel)]="Item" name="Item" id="Item" (change)="GetItem($event)">
+                  <option value="0" selected>select Item</option>
+                  <option *ngFor="let staff of Itemlist" value={{staff.short}}>{{staff.short}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <h6 style="font-size: 14px;">Item Mrp:
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7">
+                <input type="number" class="form-control" [(ngModel)]="Itemmrp" name="itemmrp" required id="itemmrp"
+                  placeholder="Item Mrp" disabled>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <h6 style="font-size: 14px;">Quantity:
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7">
+                <input type="number" class="form-control" (input)="onSearchChange1($event.target.value)"
+                  [(ngModel)]="Quantity" name="Quantity" required id="Quantity" placeholder="Quantity">
+              </div>
+            </div>
+            <br>
+          </ng-container>
+          <div class="row" *ngIf="ExpenseType=='Inventory' || ExpenseType=='Service'">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Amount:
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-7">
+              <input type="number" class="form-control" [(ngModel)]="TotalExpense" name="TotalExpense" required
+                id="TotalExpense" placeholder="Amount">
+            </div>
+          </div>
+          <br>
+          <div *ngIf="paramID==undefined" class="row">
+            <div class="col-lg-5">
+            </div>
+            <div class="col-lg-2">
+              <button class="btn btn-block btn-md" [disabled]="staffForm.form.invalid"
+                style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);"
+                (click)="insertdetails()">Add</button>
+            </div>
+            <div class="col-lg-5">
+            </div>
+            <br>
+          </div>
+          <div *ngIf="paramID!=undefined" class="row">
+            <div class="col-lg-5">
+            </div>
+            <div class="col-lg-2">
+              <button class="btn btn-block btn-md"
+                style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);"
+                (click)="Update()">Update</button>
+            </div>
+            <div class="col-lg-5">
+            </div>
+            <br>
+          </div>
+          <br>
+        </div>
+      </div>
+    </form>
+  </div>
+  <br>
+  <div class="table-responsive card maincard" *ngIf="tablecount=='1'" style="padding: 12px;">
+    <br>
+    <table *ngIf="ExpenseType=='Service'" class="table table-bordered table-hover table-condensed"
+      style="text-align: center;">
+      <tbody>
+        <tr class="tableheader tableheaderfont" style="text-align: center;">
+          <th style="width:15%">Staff</th>
+          <th style="width:15%">Date</th>
+          <th style="width:15%">No OF hours</th>
+          <th style="width:15%">Remarks</th>
+          <th style="width:15%">Amount</th>
+          <th style="width:10%">Actions</th>
+        </tr>
+        <tr *ngFor="let details of qwert">
+          <td>{{details.StaffName}}</td>
+          <td>{{details.ExpenseDate}}</td>
+          <td>{{details.noofhrs}}</td>
+          <td>{{details.Remarks}}</td>
+          <td>{{details.TotalExpense}}</td>
+          <td>
+            <i class="far fa-trash-alt" title="Delete" (click)="delete(details.sno)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table *ngIf="ExpenseType=='Inventory'" class="table table-bordered table-hover table-condensed"
+      style="text-align: center;">
+      <tbody>
+        <tr class="tableheader tableheaderfont" style="text-align: center;">
+        
+          <th style="width:15%">Date</th>
+          <th style="width:15%">Item Category</th>
+          <th style="width:15%">Item SubCategory</th>
+          <th style="width:15%">Item </th>
+          <th style="width:15%">Quantity</th>
+          <th style="width:15%">Amount</th>
+          <th style="width:10%">Actions</th>
+        </tr>
+        <tr *ngFor="let details of qwert">
+        
+          <td>{{details.ExpenseDate}}</td>
+          <td>{{details.ItemCategory}}</td>
+          <td>{{details.ItemSubCategory}}</td>
+          <td>{{details.Item}}</td>
+          <td>{{details.Quantity}}</td>
+          <td>{{details.TotalExpense}}</td>
+          <td>
+            <i class="far fa-trash-alt" title="Delete" (click)="delete(details.sno)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div class="row" *ngIf="tablecount=='1'">
+      <div class="col-lg-5">
+      </div>
+      <div class="col-lg-2">
+        <button class="btn btn-block btn-md"
+          style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);"
+          (click)="insertdetails1()">Save</button>
+      </div>
+      <div class="col-lg-5">
+
+      </div>
+
+    </div>
+  </div>

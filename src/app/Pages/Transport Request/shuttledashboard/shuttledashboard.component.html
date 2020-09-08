@@ -1,0 +1,148 @@
+<div class="row" style="margin-top: 15px;"> 
+    <div class="col-lg-6">
+      <h4 class="header" style="margin-left: 15px;">Shuttle Request
+      </h4>
+    </div>
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-5">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building" style="margin-left: 196px;">Requests/Shuttle Request</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+  
+    <div class="row">
+      <div class="col-lg-12">
+  
+  
+  
+        <div class="container-fluid  ">
+          <div class="row">
+            <div class="col-lg-3">
+              <input type="text" placeholder="search.." [(ngModel)]="Search1" class="form-control"
+                id="txt_transportSearch">
+            </div>
+          </div>
+          <div class="container-fluid" style="margin-top: 10px;">
+            <div class="row">
+              <div class="col-lg-12  table-responsive">
+                <table class="table table-bordered table-hover table-condensed">
+                  <tbody>
+                    <tr class="tableheader tableheaderfont" style="background-color: #fdcd3b; color: white">
+                      <td>Building</td>
+                      <td>Floor</td>
+                      <td>Unit</td>
+                      <td>Shuttle Type</td>
+                      <td>PickUp Location</td>
+                      <td>Destination</td>
+                      <td>Time</td>
+                      <td>Contact Person</td>
+                      <td>Email</td>
+                      <td>Actions</td>
+                    </tr>
+                    <tr *ngFor="let Transports of shuttlelist|filter:Search1">
+                      <td>{{Transports.name}} </td>
+                      <td>{{Transports.floorName}} </td>
+                      <td>{{Transports.unitName}} </td>
+                      <td>{{Transports.shuttlename}}</td>
+                      <td>{{Transports.pickUpLocation}} </td>
+                      <td>{{Transports.destination}} </td>
+                      <td>{{Transports.time}}</td>
+                      <td>{{Transports.contactPerson}} </td>
+                      <td>{{Transports.email}}</td>
+                      <td>
+                        <i class="far fa-trash-alt" data-toggle="tooltip" title="Delete"
+                          (click)="DeleteBuildingShuttle(Transports.id)"></i>&nbsp;
+                        <i class="fa fa-edit" data-toggle="tooltip" title="Edit"
+                          [routerLink]="['/UpdateTransportationshutterRequest',Transports.id,2]">
+                        </i>
+                        <i  *ngIf="Transports.statusID=='1'" class="fas fa-user" data-toggle="tooltip" (click)="VendorAssignment(Transports)" title="Assign to" data-toggle="modal"
+                        data-target="#myModalOne" aria-hidden="true"></i>
+                      </td>
+                    </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div id="myModalOne" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="margin-top: 102px;">
+        <div class="modal-header">
+          <h4>Assign Transport Request
+          </h4>
+          <button type="button" class="close " data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-4">
+              <h5>Vendor Type
+              </h5>
+            </div>
+            <div class="col-lg-8">
+              <select (change)="VendorByID($event)" class="dropdown form-control" required
+                id="ddl_updatescheduleAssignedTo">
+                <option value="none">Select Vendor</option>
+                <option value="{{Vendor.id}}" *ngFor="let Vendor of Vendlist">{{Vendor.short}}</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-4">
+              <h5>Vendor
+              </h5>
+            </div>
+            <div class="col-lg-8">
+              <select (change)="VendorName($event)" class="dropdown form-control " required
+                id="ddl_updatescheduleAssignedTo">
+                <option value="none">Select </option>
+                <option value="{{VendorID.id}}" *ngFor="let VendorID of VendorsByIDList">{{VendorID.vendorName}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-4">
+              <h5>Phone Number</h5>
+            </div>
+            <div class="col-lg-8">
+              <input type="text" value="{{vendorphno}}" id="txt_EventBooked" class="form-control ">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-4">
+              <h5>EmailID</h5>
+            </div>
+            <div class="col-lg-8">
+              <input type="text" value="{{vendorname}}" id="txt_EventBooked" class="form-control ">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-8">
+              <button type="button" class="btn btn-default popupbutton" data-dismiss="modal"
+                (click)="UpdateAssignedTo()">Assign</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

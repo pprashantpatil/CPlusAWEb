@@ -1,0 +1,230 @@
+
+ <div class="container-fluid Pages_background">
+  <div>
+      <div class="row">
+          <div class="col-lg-3">
+              <h4 class="Pages_header">Job Postings</h4>
+          </div>
+          <div class="col-lg-6">
+          </div>
+          <div class="col-lg-3">
+              <div class="mainrow">
+                  <div class="col-lg-12 BreadChrumbProperties">
+                      <span> jobs / job Postings</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+  <div class="card maincard">
+      <div class="row">
+          <div class="col-lg-12">
+              <h3 class="panel-title formlabel">JOB DETAILS</h3>
+          </div>
+
+      </div>
+      <hr>
+      <div class="row divForm">
+          <div class="col-lg-8 reqriedspan">
+              <form #loginForm="ngForm">
+                  <div class="row " >
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Date <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7 ">
+                        <input type="date" [(ngModel)]="date" name="date" class="form-control">
+                      </div>
+                  </div><br>
+
+                  <div class="row" >
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Building  <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7 ">
+                        <select class="form-control" (change)="GetBuildingId($event)" [(ngModel)]="buildingid" name="buildingid" >
+                          <option value="" selected>select</option>
+                          <option *ngFor="let building of buildinglist" value={{building.id}}>{{building.name}}</option>
+                        </select>
+                        
+                      </div>
+                  </div>
+
+                  <!-- <div class="row">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6>{{staffDetails_BuildingAddress}}<span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-9">
+                          <textarea rows="3" id="txt_SatffDetails_BuildingAddress" class="form-control " required placeholder="Address"></textarea>
+                      </div>
+                  </div> -->
+                  <br>
+                  <div class="row ">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Job Title <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                        <input type="text" class="form-control" [(ngModel)]="jobtitle" name="jobtitle" placeholder="Job Title">
+                      </div>
+                  </div>
+                  <br>
+                  <!-- <div class="row ">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Project Address<span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                              <textarea rows="3" id="txt_SatffDetails_address" name="address"
+                              class="form-control" placeholder="Project Address" required></textarea>
+
+                      </div>
+                  </div>
+                  <br> -->
+                  <div class="row ">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;"> Job Description </h6>
+                      </div>
+                      <div class="col-lg-7">
+                        <textarea rows="4" cols="30" class="form-control" [(ngModel)]="jobdescription" name="jobdescription" placeholder="Job Description"></textarea>
+                      </div>
+                  </div>
+                  <br>
+                  <div class="row " >
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Salary Range <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                        <input type="text" class="form-control" [(ngModel)]="salaryrange" name="salaryrange" placeholder="salaryrange">
+                      </div>
+                  </div><br>
+                  <div class="row " >
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Expected Start date<span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                        <input type="date" class="form-control" [(ngModel)]="expstartdate" name="expstartdate" placeholder="Expected Start date">
+                        
+                      </div>
+                  </div>
+                  <br>
+
+
+
+                  <div class="row " >
+                    <div class=col-lg-1> </div>
+                    <div class="col-lg-2">
+                        <h6 style="font-size: 14px;">Years Of Expereince<span>*</span> </h6>
+                    </div>
+                    <div class="col-lg-7">
+                      <input type="text" class="form-control" [(ngModel)]="yearsofexp" name="yearsofexp" placeholder="Years Of Expereince">
+                       
+
+                    </div>
+                </div>
+                <br>
+                <div class="row " >
+                  <div class=col-lg-1> </div>
+                  <div class="col-lg-2">
+                      <h6 style="font-size: 14px;">Department<span>*</span> </h6>
+                  </div>
+                  <div class="col-lg-7">
+                    <input type="text" class="form-control" [(ngModel)]="department" name="department" placeholder="Department">
+                     
+
+                  </div>
+              </div>
+              <br>
+              <div class="row " >
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h6 style="font-size: 14px;">Work Location<span>*</span> </h6>
+                </div>
+                <div class="col-lg-7">
+                  <input type="text" class="form-control" [(ngModel)]="worklocation" name="worklocation" placeholder="Work Location">
+                   
+
+                </div>
+            </div>
+            <br>
+            <div class="row " >
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                  <h6 style="font-size: 14px;">Work Timings<span>*</span> </h6>
+              </div>
+              <div class="col-lg-7">
+                <input type="time" class="form-control" [(ngModel)]="worktimings" name="worktimings" >
+                 
+
+              </div>
+          </div>
+          <br>
+            <div class="row " >
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                  <h6 style="font-size: 14px;">Contract Type<span>*</span> </h6>
+              </div>
+              <div class="col-lg-7">
+                <select class="form-control" (change)="GetContractTypeID($event)" [(ngModel)]="contractid" name="contractid">
+                  <option value="" selected>select</option>
+                  <option value="Permanent" >Permanent</option>
+                  <option value="Contract" >Contract</option>
+                </select>
+                
+              </div>
+          </div>
+          <br>
+          <div class="row " >
+          <div class=col-lg-1> </div>
+          <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Addtional Requirements<span>*</span> </h6>
+          </div>
+          <div class="col-lg-7">
+            <input type="text" class="form-control" [(ngModel)]="requirements"  name="requirements" placeholder="Requirements">
+            
+          </div>
+      </div>
+      <br>
+      <div class="row" *ngIf="id==undefined">
+        <div class="col-lg-5">
+    
+        </div>
+        <div class="col-lg-2">
+          <button class="btn btn-primary" (click)="insertdetails()">Save</button>
+        </div>
+        <div class="col-lg-5">
+    
+        </div>
+      </div>
+      <div class="row" *ngIf="id!=null">
+        <div class="col-lg-5">
+        </div>
+        <div class="col-lg-2">
+          <button class="btn btn-primary" (click)="updatedetails()">Update</button>
+        </div>
+        <div class="col-lg-5">
+    
+        </div>
+      </div>
+                  <br>
+              </form>
+
+          </div>
+          <div class="col-lg-4"></div>
+      </div>
+  </div>
+
+</div>

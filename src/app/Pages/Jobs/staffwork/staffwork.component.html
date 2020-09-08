@@ -1,0 +1,380 @@
+<div class="container-fluid Pages_background Mobilecss">
+  <div>
+    <div class="row">
+      <div class="col-lg-4">
+        <h4 class="Pages_header">Assign Staff For Review</h4>
+      </div>
+      <div class="col-lg-4">
+      </div>
+      <div class="col-lg-4">
+        <div class="mainrow">
+          <!-- <div class="col-lg-12 BreadChrumbProperties">
+            <span> Project / Project Review</span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card maincard" style="    margin-left: -1px;
+  margin-right: 6px;
+  margin-top: 20px;">
+    <BR>
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- <h3 class="panel-title formlabel">STAFF WORK SCHEDULE</h3> -->
+      </div>
+    </div>
+    <hr>
+    <form #staffForm="ngForm">
+      <div class="row divForm">
+        <div class="col-lg-8 reqriedspan" style="padding: 20px">
+          <div class="row">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-2 ">
+              <p style="padding:5px">Project
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7 ">
+              <select name="BuildingID" [(ngModel)]="BuildingID" class="dropdown form-control " required id="ddl_updateassetsBuilding"
+                (click)="GetBuildingID($event)" disabled>
+                <option value="0" selected="selected">Select Project</option>
+                <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-2">
+              <p style="padding:5px">Floor
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7">
+              <select class="dropdown form-control " (click)="GetFloorID($event)" name="FloorID" [(ngModel)]="FloorID" id="FloorID" required="">
+                <option value="0"> Select Floor</option>
+                <option *ngFor="let vendor of FloorList" value="{{vendor.id}}">{{vendor.floor}}</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-2 ">
+              <p style="padding:5px">Unit
+                <span class="starspan"></span>
+              </p>
+            </div>
+            <div class="col-lg-7 ">
+              <select name="UnitID" class="dropdown form-control " required id="ddl_updateassetUnitID" (click)="GetUnits($event)">
+                <option value="0" selected="selected">Select Unit</option>
+                <option value="{{Unit.unitID}}" *ngFor="let Unit of UserRoleList">{{Unit.unitID}}</option>
+              </select>
+              <!-- <ng-multiselect-dropdown [placeholder]="'Select Units'" [data]="UserRoleList" name='Units'
+                [(ngModel)]="UnitID" [settings]="dropdownSettings" (onDeSelect)="onItemDeSelect($event)"
+                (onSelect)="onItemSelect($event)">
+              </ng-multiselect-dropdown> -->
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-2 ">
+              <p style="padding:5px">Project Stage
+                <span class="starspan">*</span>
+              </p>
+            </div>
+            <div class="col-lg-7 ">
+              <select class="form-control" id="StageID" name="StageID" [(ngModel)]="StageID" required id="ddl_updateassetsBuilding" (click)="GetStageID($event)">
+                <option value="0" selected="selected"> Select Stage</option>
+                <option value="{{build.id}}" *ngFor="let build of StageList">{{build.stageName}}</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Staff Type:
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-7 ">
+              <select class="form-control" (change)="GetStaffTypeID($event)" [disabled]="tablecount=='1'">
+                <!-- <option *ngFor="let staffff of staff" value={{staffff.id}}>{{staffff.short}}</option> -->
+                <option value="" selected>select</option>
+                <option value="10022">Engineer</option>
+                <option value="10025">QC</option>
+                <!-- <option value="10023">Project Reviewer</option>
+                  <option value="10024">Architect</option> -->
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="row ">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Staff :
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-7 ">
+              <select class="form-control" (change)="GetStaffID($event)">
+                <option value="" selected>select</option>
+                <option *ngFor="let staff of stafflist" value={{staff.id}}>{{staff.name}}</option>
+              </select>
+            </div>
+          </div>
+          <br>
+
+
+
+
+
+          <!-- <div class="row">
+              <div class="col-lg-1">
+              </div>
+              <div class="col-lg-2 ">
+                <p style="padding:5px">Stages <span class="starspan">*</span></p>
+              </div>
+              <div class="col-lg-7 ">
+                <select class="dropdown form-control " required id="ddl_updateassetUnitID" (change)="GetStagesID($event)">
+                  <option value="0" selected="selected">Select Stage</option>
+                  <option value="{{stage.stageID}}" *ngFor="let stage of stages">{{stage.milestone}}</option>
+                </select>
+              </div>
+            </div> -->
+          <br>
+
+          <div class="row ">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Start Date :
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-7">
+              <input type="date" [(ngModel)]="date" required name="date" class="form-control">
+            </div>
+          </div>
+          <br>
+
+          <div class="row ">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">End Date :
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-7">
+              <input type="date" [(ngModel)]="Enddate" required name="date1" class="form-control">
+            </div>
+          </div>
+          <br>
+
+          <!-- <div class="row ">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <h6 style="font-size: 14px;">Start Time : <span>*</span> </h6>
+              </div>
+              <div class="col-lg-7">
+                <input type="time" [(ngModel)]="starttime" required name="starttime" class="form-control">
+              </div>
+            </div><br>
+            <div class="row ">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <h6 style="font-size: 14px;">End Time :<span>*</span> </h6>
+              </div>
+              <div class="col-lg-7">
+                <input type="time" [(ngModel)]="endtime" required name="endtime" class="form-control">
+  
+              </div>
+            </div>
+            <br> -->
+          <div class="row ">
+            <div class=col-lg-1> </div>
+            <div class="col-lg-2">
+              <h6 style="font-size: 14px;">Work Description :
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-7">
+              <textarea rows="4" cols="30" [(ngModel)]="workdescription" required name="workdescription" class="form-control" placeholder="Work Description"> </textarea>
+            </div>
+          </div>
+          <br>
+          <!-- <div class="row ">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <h6 style="font-size: 14px;">Comments :<span>*</span> </h6>
+              </div>
+              <div class="col-lg-7">
+                <textarea rows="4" cols="30" [(ngModel)]="comments" name="comments" class="form-control"
+                  placeholder="Comments"> </textarea>
+              </div>
+            </div>
+            <br> -->
+          <div class="row">
+            <div class="col-lg-5">
+            </div>
+            <div class="col-lg-2">
+              <button class="btn btn-block btn-md" [disabled]="staffForm.form.invalid" style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);"
+                (click)="insertdetails2()">Save</button>
+            </div>
+            <div class="col-lg-5">
+            </div>
+            <br>
+          </div>
+          <br>
+          <!-- <div class="row" *ngIf="tablecount=='1'">
+            <div class="col-lg-12" style="margin-left: 56px;">
+              <table >
+                <thead>
+                  <tr>
+                    <th>Staff Type</th>
+                    <th>Staff</th>
+                    <th>Date</th>
+                    <th>Day</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Work Description</th>
+                    <th>Comments</th>
+                    <th>Actions</th>
+                  </tr>
+                  <tr *ngFor="let details of qwert">
+                    <td>{{details.StaffTypeName}}</td>
+                    <td>{{details.StaffName}}</td>
+                    <td>{{details.Date}}</td>
+                    <td>{{details.DayName}}</td>
+                    <td>{{details.StartTime}}</td>
+                    <td>{{details.EndTime}}</td>
+                    <td>{{details.WorkDescription}}</td>
+                    <td>{{details.Comments}}</td>
+                   <td><i  class="far fa-trash-alt" title="Delete" (click)="delete(details.sno)"></i></td>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div><br><br>
+          <div class="row" *ngIf="tablecount=='1'">
+            <div class="col-lg-5">
+            </div>
+            <div class="col-lg-2">
+              <button class="btn btn-primary"  style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);" (click)="insertdetails1()">Save</button>
+            </div>
+            <div class="col-lg-5">
+  
+            </div>
+  
+          </div>
+          <div class="col-lg-4"></div> -->
+        </div>
+
+
+        <!-- <div class="col-lg-4" *ngIf="ShowDetails">
+            <div class="container-fluid  shadow p-3 mb-12 bg-white rounded maincard">
+              <div class="row">
+                <div class="col-lg-4">
+                  <h4>Details</h4>
+                </div>
+                <div class="col-lg-6">
+                  <img class="profileimg" src="assets/Login/images.png">
+                </div>
+                <div class="col-lg-4">
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-lg-12  table-responsive" style="padding: 31px;
+                margin-top: -53px;
+                margin-left: -17px;">
+                  <table class="table table-bordered table-hover table-condensed">
+                    <tbody>
+                      <tr>
+                        <td>Building Name:</td>
+                        <td>Wisma 46 </td>
+                      </tr>
+                      <tr>
+                        <td>Stage :</td>
+                        <td>Earthworks - Excavation Works - Septic tank</td>
+                      </tr>
+                      <tr>
+                        <td>Contractor :</td>
+                        <td>Meiji Electric Philippines Inc</td>
+                      </tr>
+                      <tr>
+                        <td>Phone No : </td>
+                        <td>8529632563</td>
+                      </tr>
+                      <tr>
+                        <td>Start Date : </td>
+                        <td> 2020-01-24</td>
+                      </tr>
+                      <tr>
+                        <td>End Date : </td>
+                        <td>2020-03-31</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+
+
+      </div>
+    </form>
+  </div>
+  <br>
+  <div class="table-responsive card maincard" *ngIf="tablecount=='1'">
+    <br>
+    <table class="table table-bordered table-hover table-condensed">
+      <tbody>
+        <tr class="tableheader tableheaderfont">
+          <!-- <th style="width:15%">Staff Type</th> -->
+          <th style="width:15%">Staff</th>
+          <th style="width:15%">Date</th>
+          <!-- <th style="width:15%">Day</th> -->
+          <!-- <th style="width:15%">Start Time</th>
+            <th style="width:15%">End Time</th> -->
+          <th style="width:15%">Work Description</th>
+          <!-- <th style="width:15%">Comments</th> -->
+          <th style="width:10%">Actions</th>
+        </tr>
+        <tr *ngFor="let details of qwert">
+          <!-- <td>{{details.StaffTypeName}}</td> -->
+          <td>{{details.StaffName}}</td>
+          <td>{{details.Date}}</td>
+          <!-- <td>{{details.DayName}}</td> -->
+          <!-- <td>{{details.StartTime}}</td>
+            <td>{{details.EndTime}}</td> -->
+          <td>{{details.WorkDescription}}</td>
+          <!-- <td>{{details.Comments}}</td> -->
+          <td>
+            <i class="far fa-trash-alt" title="Delete" (click)="delete(details.sno)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div class="row" *ngIf="tablecount=='1'">
+      <div class="col-lg-5">
+      </div>
+      <div class="col-lg-2">
+        <button class="btn btn-block btn-md" style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);" (click)="insertdetails1()">Save</button>
+      </div>
+      <div class="col-lg-5">
+
+      </div>
+
+    </div>
+  </div>

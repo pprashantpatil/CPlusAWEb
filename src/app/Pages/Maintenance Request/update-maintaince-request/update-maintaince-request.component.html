@@ -1,0 +1,329 @@
+<div class="container-fluid Pages_background ">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header">{{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-4">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span class="building">{{upadteMaintanceRequest_breadchrumb }}</span> </div>
+            </div>
+        </div>
+    </div>
+    <div class="shadow p-3 mb-5 bg-white col-lg-12 rounded maincard ">
+        <h6>{{upadteMaintanceRequest_PageTitle}}</h6>
+        <hr>
+        <form #loginForm="ngForm">
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">Public Request</p>
+                </div>
+                <div class="col-lg-3">
+                    <label>
+                        <!-- <h6>Public </h6> -->
+                        <input type="checkbox" name="checkbox" id="checkbox" (click)="PublicBit($event)">
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_Request}}<span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+                    <input [(ngModel)]="maintainanceEntity.Request" name="Request" type="text" placeholder="Name"
+                        id="txt_Request" required class="form-control maindropdown">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_RequestType}}<span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+                    <select [(ngModel)]="maintainanceEntity.RequestTypeID" name="RequestTypeID"
+                        class="dropdown form-control maindropdown" required id="ddl_RequestType">
+                        <option value="0">Select Request Type</option>
+                        <option value="{{Request.id}}" *ngFor="let Request of Reqlist">{{Request.short}}</option>
+                    </select>
+
+                    <span class="Validationlabels" *ngIf='maintainanceEntity.RequestTypeID==0 && Isempty  '>* Please
+                        Fill
+                        {{upadteMaintanceRequest_RequestType}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_PriorityType}}<span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+                    <select [(ngModel)]="maintainanceEntity.PriorityTypeID" name="PriorityTypeID"
+                        class="dropdown form-control maindropdown" required id="ddl_PriorityType">
+                        <option value="0">Select Priority Type</option>
+                        <option value="{{Priority.id}}" *ngFor="let Priority of Prioritylist">{{Priority.short}}
+                        </option>
+                    </select>
+                    <span class="Validationlabels" *ngIf='maintainanceEntity.PriorityTypeID==0 && Isempty'>* Please
+                        Fill
+                        {{upadteMaintanceRequest_PriorityType}}</span>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_RequestRaisedBy}} <span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-5 ">
+                   
+
+                        <input  value="{{RaisedBy}}"  name="RaisedBy" type="text" id="txt_RequestRaised"
+                        required placeholder="{{RaisedBy}}" class="form-control maindropdown">
+                </div>
+            </div> -->
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_Building}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+                    <select [(ngModel)]="maintainanceEntity.BuildingID" name="BuildingID"
+                        (change)="GetBuildingAddress($event)" [disabled]="paramID!=null"
+                        class="dropdown form-control maindropdown" required id="ddl_updatemaintainanceBuilding">
+                        <option value="0">Select Building</option>
+                        <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                    </select>
+
+                    <span class="Validationlabels"
+                        *ngIf='maintainanceEntity.BuildingID==undefined && Isempty || maintainanceEntity.BuildingID==0 && Isempty'>*
+                        Please
+                        Fill
+                        {{upadteMaintanceRequest_Building}}</span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_Address}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+                    <input value="{{BuildingAddress}}" [disabled]="paramID!=null" type="text" id="txt_Address" required
+                        placeholder="{{upadteMaintanceRequest_Address}}" class="form-control maindropdown">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_Floor}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+                    <select [(ngModel)]="maintainanceEntity.Floor" [disabled]="paramID!=null" name="Floor"
+                        (change)="getunitlist($event)" class="dropdown form-control maindropdown" required
+                        id="ddl_Floor">
+                        <option value="none">Select Floor</option>
+                        <option value="{{floor.id}}" *ngFor="let floor of FloorList">{{floor.floor}}</option>
+                    </select>
+
+                    <span class="Validationlabels"
+                        *ngIf='maintainanceEntity.Floor==undefined && Isempty || maintainanceEntity.Floor=="none" && Isempty'>*
+                        Please
+                        Fill
+                        {{upadteMaintanceRequest_Floor}}</span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_Unit}}<span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+                    <!-- <input  [(ngModel)]="maintainanceEntity.Unit" name="Unit"  type="text" required id="txt_Unit" placeholder="{{upadteMaintanceRequest_Unit}}"
+                        class="form-control maindropdown"> -->
+
+                    <select [(ngModel)]="maintainanceEntity.Unit" [disabled]="paramID!=null" name="unit"
+                        class="dropdown form-control maindropdown" required id="ddl_unit">
+                        <option value="none">Select Unit</option>
+                        <option value="{{unit.id}}" *ngFor="let unit of unitlist">{{unit.unitID}}</option>
+                    </select>
+
+                    <span class="Validationlabels"
+                        *ngIf='maintainanceEntity.Unit==undefined && Isempty || maintainanceEntity.Unit=="none" && Isempty'>*
+                        Please
+                        Fill
+                        {{upadteMaintanceRequest_Unit}}</span>
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_SelectAssets}}</p>
+                </div>
+                <div class="col-lg-5 ">
+                    <select [(ngModel)]="maintainanceEntity.EquipmentID" name="EquipmentID"
+                        class="dropdown form-control maindropdown" name="Assets Type" id="ddl_Assets">
+                        <option value="none">Select Assets</option>
+                        <option value="{{Assets.id}}" *ngFor="let Assets of Equipmentlist">{{Assets.equipmentname}}
+                        </option>
+                    </select>
+
+                    <span class="Validationlabels"
+                        *ngIf='maintainanceEntity.EquipmentID==undefined && Isempty || maintainanceEntity.EquipmentID=="none" && Isempty '>*
+                        Please
+                        Fill
+                        {{upadteMaintanceRequest_SelectAssets}}</span>
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_PreferredVisitDate}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <!-- <input [(ngModel)]="maintainanceEntity.DueDate" name="DueDate"  type="date" class="form-control maindropdown" id="txt_date"> -->
+
+                    <input name="date2" class="form-control maindropdown" bsDatepicker #dp="bsDatepicker"
+                        [(ngModel)]="DueDate" (ngModelChange)="DateChange2()"
+                        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" [minDate]="minDate" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_PreferredTime}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <input [(ngModel)]="maintainanceEntity.PreferredTime" name="PreferredTime" type="time"
+                        id="txt_PreferredTime" class="form-control maindropdown" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_Description}}<span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+                    <textarea [(ngModel)]="maintainanceEntity.Description" name="Description" required
+                        placeholder="{{upadteMaintanceRequest_Description}}" id="txt_Description"
+                        class="form-control maindropdown" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="row" *ngIf="this.paramID==null">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_Attachment}}<span class="starspan">*</span>
+                    </p>
+                </div>
+                <div class="col-lg-5 ">
+                    <!-- <ngx-dropzone  [(ngModel)]="maintainanceEntity.Attachment"  (filesAdded)="onFilesAddedAttached($event)" name="Attachment" [showPreviews]="true"  id="dropzone_Attachment" class="dropzone_vendorinvoice"></ngx-dropzone> -->
+
+                    <input type="file" class="form-control maindropdown" placeholder="Photo" accept="image/*" multiple
+                        (change)="handleFileSelect1($event)">
+
+                    <span class="Validationlabels"
+                        *ngIf='maintainanceEntity.FileType==undefined && Isempty || maintainanceEntity.FileType=="none" && Isempty '>*
+                        Please
+                        Fill
+                        {{upadteMaintanceRequest_Attachment}}</span>
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_Status}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-5 ">
+                    <select [(ngModel)]="maintainanceEntity.StatusID" name="StatusID"
+                        class="dropdown form-control maindropdown" required id="ddl_Status">
+                        <option value=0>Select status</option>
+                        <option value="{{Status.id}}" *ngFor="let Status of Statuslist">{{Status.short}}
+                        </option>
+                    </select>
+                    <span class="Validationlabels" *ngIf='maintainanceEntity.StatusID==0 && Isempty '>* Please
+                        Fill
+                        {{upadteMaintanceRequest_Status}}</span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_CheckList}}
+                    </p>
+                </div>
+                <div class="col-lg-5">
+                    <select [(ngModel)]="maintainanceEntity.CheckListTypeID" name="CheckListTypeID"
+                        class="dropdown form-control maindropdown" id="ddl_CheckList">
+                        <option value="none">Select Checklist</option>
+                        <option value="{{Checklist.id}}" *ngFor="let Checklist of Checklist">{{Checklist.short}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{upadteMaintanceRequest_Comments}}</p>
+                </div>
+                <div class="col-lg-5 ">
+                    <textarea [(ngModel)]="maintainanceEntity.Comment" name="Comment"  placeholder="{{upadteMaintanceRequest_Comments}}" id="txt_Comments"
+                        class="form-control maindropdown" rows="4"></textarea>
+                </div>
+            </div> -->
+            <div class="row" *ngIf="this.paramID==null">
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-2">
+                    <button [disabled]="loginForm.form.invalid" (click)="InsertMaintenanceRequest()"
+                        class="btn btn-block btn-md savebutton" id="btn_maintainancesave"
+                        type="submit">{{upadteMaintanceRequest_button_save}}</button>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="this.paramID!=null">
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-2">
+                    <button [disabled]="loginForm.form.invalid" (click)="UpdateMaintenanceRequest()"
+                        class="btn btn-block btn-md savebutton" id="btn_maintainancesave" type="submit">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- sdgfdg -->

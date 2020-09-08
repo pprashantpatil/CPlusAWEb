@@ -1,0 +1,277 @@
+<div class="container-fluid Pages_background " style=" margin-left: -12px;">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header">{{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-4">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <!-- <span class="building"> Property / Staff Leaves </span> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-10">
+            <div class="col-lg-4">
+                <label class="switch">
+                    <input type="checkbox" checked (change)="changeStatus($event)">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="col-lg-4">
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <button type="button" routerLink="/applystaffleaves" routerLinkActive="active-link" id="btn_button"
+                        class="dashbutton">{{staffLeaves_AddNewButton}}</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div class="row ddd">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <button type="button" id="btn_buttsson" class="dashbutton">Export To Excel</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-lg-12 " style="margin-left: -8px;">
+            <button class="dashbutton" style="margin-left: 6px;" routerLink="/applystaffleaves" type="button"
+                id="btn_button">{{staffLeaves_AddNewButton}}
+            </button>
+            <button class="dashbutton" (click)="exporttoexcel()" type="button" id="btn_button"> Export To Excel</button>
+        </div>
+    </div>
+
+    <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+
+        <div class="row">
+            <div class="col-lg-12" [hidden]="showorhidecontent">
+                <!-- <ngx-fullcalendar defaultView="month" [events]="events" [options]="options">
+                </ngx-fullcalendar> -->
+
+                <div class="row callendernavButtons">
+
+                    <div class="col-lg-4">
+                        <a (click)="previousmonth()">
+                            <i class="fa fa-chevron-left callendernavButtons" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <summary>
+                            <strong>{{callenderMonth}}</strong> {{callenderyear}}</summary>
+                    </div>
+                    <div class="col-lg-4">
+                        <a (click)="nextmonth()">
+                            <i class="fa fa-chevron-right callendernavButtons" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="row callenderdiv">
+                    <!-- <div class="col-lg-4 todayDate">
+                            <div class="datenumber">
+                                {{todaydate}}
+                            </div>
+                            <div class="dateday">
+                                {{todayDay}}
+                            </div>
+                        </div> -->
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-2 callenderboxes"
+                                *ngFor="let calday of callenderdaysdount;let i = index">
+                                {{calday.date}} {{calday.day}}
+                                <div>
+                                    <div *ngIf="(calday.staffName||calday.leavetype) && calday.iscontinuous==true"
+                                        class="eventcontinue" style="overflow-y: auto;height: 130px;width: 100%;"
+                                        (click)="ShowStaffDetails($event)" [innerHtml]='calday.Leavehtml'>
+                                        <!-- Staff Name : {{calday.staffName}} <br>
+                              Leave Type : {{calday.leavetype}} <br>
+                              Building : {{calday.building}} <br> -->
+
+
+                                    </div>
+
+                                    <div *ngIf="(calday.staffName||calday.leavetype) && !calday.iscontinuous" class=""
+                                        (click)="ShowStaffDetails($event)"
+                                        style="overflow-y: auto;width: 100%;height: 130px;"
+                                        [innerHtml]='calday.Leavehtml'>
+                                        <!-- Staff Name : {{calday.staffName}} <br>
+                                Leave Type : {{calday.leavetype}} <br>
+                                Building : {{calday.building}} <br> -->
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-lg-12" [hidden]="!showorhidecontent">
+                <h6 class="paneltitle">{{staffLeaves_PageTitle}}
+                </h6>
+                <hr>
+                <div class="container-fluid Pages_background " style="background-color: white">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <input type="text" placeholder="search.." class="form-control" [(ngModel)]="searchtext"
+                                id="txt_staffleavessearchBuilding">
+                        </div>
+                        <!-- <div class="col-lg-3">
+                            <select class="form-control" id="ddl_buildingplans" (change)="filterbuilding($event)">
+                                <option value selected="selected"> Select Building</option>
+                                <option value="{{build.name}}" *ngFor="let build of Buildinglist">{{build.name}}
+                                </option>
+                            </select>
+                        </div> -->
+                        <div class="col-lg-3">
+                            <select class="form-control" id="ddl_buildingplans" (change)="filterleavetype($event)">
+                                <option value selected="selected"> Select Leave Type</option>
+                                <option value="{{leave.short}}" *ngFor="let leave of Leavetypelist">{{leave.short}}
+                                </option>
+                            </select>
+                        </div>
+                        <label class="label1">Count : {{Count}}</label>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12  table-responsive">
+                                <table class="table table-bordered table-hover table-condensed">
+                                    <tbody>
+                                        <tr class="tableheader tableheaderfont"
+                                            style="background-color: #00b5d7; color: white">
+                                            <td>{{staffLeaves_StaffName}}</td>
+                                            <!-- <td>Property</td> -->
+                                            <td>{{staffLeaves_LeaveType}}</td>
+
+                                            <td style="width: 100px;">{{staffLeaves_StartDate}}</td>
+                                            <td style="width: 100px;">{{staffLeaves_EndDate}}</td>
+                                            <td>{{staffLeaves_DaysLeave}} </td>
+                                            <td>{{staffLeaves_Reason}}</td>
+                                            <td>Covering Staff</td>
+                                            <td>{{staffLeaves_Status}}</td>
+                                            <!-- <td>{{staffLeaves_RejectReason}}</td> -->
+                                            <td style="width: 60px;">{{staffLeaves_Actions}}
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            *ngFor="let Leaves of StaffLeaves |filter:searchtext| filter:buildingname |filter:leavetype">
+                                            <td>{{Leaves.staffName}} </td>
+                                            <!-- <td>{{Leaves.building}}</td> -->
+                                            <td>{{Leaves.leavetype}}</td>
+                                            <td>{{Leaves.sDateOfLeave|date}}</td>
+                                            <td>{{Leaves.eDateOfLeave|date}} </td>
+                                            <td>{{Leaves.noOfDays}}</td>
+                                            <td>{{Leaves.leaveReason}}</td>
+                                            <td>{{Leaves.coveringStaff}}</td>
+                                            <td>Not Yet Approved</td>
+                                            <!-- <td>{{Leaves.rejectReason}}</td> -->
+                                            <td>
+                                                <i class="fas fa-check-square"
+                                                    style="font-size: 20px;margin-right: 5px;" title="Approved"
+                                                    *ngIf="Leaves.status=='Approved'"></i>
+                                                <i class="fas fa-thumbs-down"
+                                                    style="font-size: 20px;margin-right: 5px; color: red" title="Reject"
+                                                    (click)="getrejectid(Leaves.staffID)" data-toggle="modal"
+                                                    data-target="#myModal" *ngIf="Leaves.status==null"></i>
+                                                <i class="far fa-thumbs-up" style="font-size: 20px;margin-right: 5px;"
+                                                    title="Approve" *ngIf="Leaves.status==null"
+                                                    (click)="approveleave(Leaves.staffID)"></i>
+                                                <i class="fas fa-times-circle"
+                                                    style="font-size: 20px;margin-right: 5px;  color: red"
+                                                    title="Rejected" *ngIf="Leaves.status=='Rejected'"></i>
+                                            </td>
+                                        </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModal" style="margin-top:80px;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <h2 class="modal-title popcard" style="font-size: 20px;
+                /* text-align: center; */
+                margin-bottom: 18px;
+                margin-left: 63px;
+                margin-top: 17px;">Cancel Request</h2>
+            <!-- <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Select Request</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" placeholder="Select Request" class="form-control plabel" id="txt_usr">
+                    </div>
+                </div> -->
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2">
+                    <label>Reason For Cancellation</label>
+                </div>
+                <div class="col-lg-8">
+                    <textarea class="plabel form-control" [(ngModel)]="Reason" name="Reason"
+                        placeholder="Reason "></textarea>
+                </div>
+                <div class="col-lg-1">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5">
+                </div>
+                <div class="col-lg-7">
+                    <button type="submit" (click)="Rejectleave()" data-dismiss="modal"
+                        class="btn btn-block btn-md cancelbutton">Cancel</button>
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-lg-10">
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

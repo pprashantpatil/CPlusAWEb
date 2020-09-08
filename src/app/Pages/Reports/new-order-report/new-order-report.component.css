@@ -1,0 +1,28 @@
+.building{
+    color: #00b5d7;
+    font-size: 18px;
+}
+
+.dashbutton {
+    border-radius: 10px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 160px;
+    height: 40px;
+    margin-bottom: 12px;
+}
+
+.mainrow{
+    float: left;
+    margin-top: 22px;
+}
+.tableheaderfont{
+    color: white;
+}
+.tableheader{
+    border: black;
+    background-color: #00b5d7;;
+    text-align: center;
+    
+    }

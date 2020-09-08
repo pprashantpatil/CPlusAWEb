@@ -1,0 +1,69 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header">Stages Master</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> Buildings / Stages Master </span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 dashbutton">
+          <button type="button" routerLink="/NewBuildingStages" routerLinkActive="active-link" id="btn_button">
+            Add New
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+      Export To Excel
+    </button> -->
+  </div>
+
+
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <h4 class="paneltitle ">Stages Master</h4>
+    <hr>
+    <div class="row p-2">
+
+      <div class="row table-responsive tableresposive tableresponsive" style="padding: 9px;
+      margin-left: 1px;">
+        <table class="table table-bordered table-hover table-condensed mainbuild">
+          <tbody>
+            <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+              <td>ID</td>
+              <td>Code </td>
+              <td>Milestone</td>
+              <td>Unit Wt </td>
+              <td>Actions </td>
+
+            </tr>
+            <tr *ngFor="let Stages of Stageslist">
+              <td>{{Stages.id}}</td>
+              <td>{{Stages.code}}</td>
+              <td>{{Stages.milestone}}</td>
+              <td>{{Stages.unitWt}}</td>
+              <td class="TableActions">
+                <a data-toggle="tooltip" (click)="Edit(Stages)" title="Edit" style="background-color: white"> <i class="fa fa-edit"></i></a>
+                <a data-toggle="tooltip" title="Delete" style="background-color: white"> <i
+                    class="far fa-trash-alt"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

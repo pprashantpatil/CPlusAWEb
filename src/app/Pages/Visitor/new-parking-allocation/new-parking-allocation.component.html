@@ -1,0 +1,160 @@
+<div class="container-fluid Pages_background">
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="Pages_header">{{visitorParkingAllocation_PageTitle}}</h4>
+            </div>
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-3">
+                <div class="row mainrow">
+                    <div class="col-lg-12 BreadChrumbProperties">
+                        <span class="building"> {{visitorParkingAllocation_BreadChrumb}} </span> </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+            <h4 class="paneltitle "> {{pageMenuTitle}}</h4>
+            <hr>
+            <div class="row p-2">
+                <div class=" dashbutton">
+                    <button type="button" (click)="newparkingallocation()" class="btn btn-default"
+                        id="btn_visitorNewParking">{{visitorParkingAllocation_Button}}</button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row" *ngIf="!newparking">
+            <div class="col-lg-10">
+                <div ba-panel="" ba-panel-title="Allotted Parking Slots" ba-panel-class="with-scroll"
+                    ng-show="Parking.dashboard==0" class="">
+                    <div class="panel with-scroll animated zoomIn" zoom-in="">
+                        <div class="panel-heading clearfix">
+                            <h3 class="panel-title formlabel">{{visitorParkingAllocation_parkingslots}}</h3>
+                        </div>
+                        <hr>
+                        <div class="panel-body" ng-transclude="">
+                            <div class="row ng-scope">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <select class="dropdown form-control " id="ddl_visitorparkingBuilding"
+                                            (change)="getparkingslotsbybuildingid($event)">
+                                            <option value="none" selected="selected">Select Building</option>
+                                            <option value="{{building.id}}" *ngFor="let building of buildinglist">
+                                                {{building.name}}</option>
+    
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 100%;">
+                            <div class="col-lg-2" *ngFor="let parkingslot of filteredparkinglist" style="text-align:center">
+                                <a (click)="getslotdetails(parkingslot)">
+                                    <p>{{parkingslot.floor}}</p>
+                                    <div class="slots">
+                                        <span>{{parkingslot.slot}} {{parkingslot.tenantName}}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2" *ngIf="slotdetails">
+                <div ba-panel="" ba-panel-title="Allotted Parking Slots" ba-panel-class="with-scroll"
+                    ng-show="Parking.dashboard==0" class="">
+                    <div class="panel with-scroll animated zoomIn" zoom-in="">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg12">
+                                    <img src="{{selectedtenantImage}}" class="imgresponsive">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg12">
+                                    <p>Name : {{selectedtenantName}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg12">
+                                    <p>Mobile Number : {{selectedtenantPhoneNumber}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg12">
+                                    <p>Unit : {{selectedtenantunit}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg12">
+                                    <p>Floor : {{selectedtenantfloor}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg12">
+                                    <p>Parking Slot : {{selectedtenantslot}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+    </div>
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard" *ngIf="newparking">
+        <h4 class="paneltitle "> {{tenantParkingAllocation_ALLOTTED}}</h4>
+        <hr>
+        <form #loginForm="ngForm">
+            <div class="row p-2">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <select class="dropdown form-control " id="ddl_NewvisitorparkingBuilding"
+                            (change)="getFloorlist($event)">
+                            <option value="none">Select Building</option>
+                            <option value="{{building.id}}" *ngFor="let building of buildinglist">{{building.name}}</option>
+    
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <select class="dropdown form-control " id="ddl_NewvisitorparkingFloor"
+                            (change)="GetSlotListByID($event)">
+                            <option value="none">Select Floor</option>
+                            <option value="{{floor.id}}" *ngFor="let floor of floorlist">{{floor.floor}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <select class="dropdown form-control" name="visitorid" [(ngModel)]="visitorid"
+                            id="ddl_Newvisitorname" (change)="getvisitordetails($event)">
+                            <option value="0">Select visitor</option>
+                            <option value="{{visitor.id}}" *ngFor="let visitor of visitorList">{{visitor.name}}</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <div class="col-lg-3">
+                    <input type="text" required [(ngModel)]="visitorPhonenumber" name="visitorPhonenumber"
+                        id="txt_visitorparkingPhoneNumber" placeholder="Visitor Phone number" class="form-control">
+                </div>
+            </div>
+    
+            <div class="row" *ngIf="SlotList">
+                <div class="col-lg-3" *ngFor="let slot of SlotList">
+                    <input type="checkbox" (change)="onslotselect($event,slot)" required>
+                    <p>{{slot.slot}}</p>
+                </div>
+            </div>
+            <div>
+                <button type="button" [disabled]="loginForm.form.invalid" class="btn btn-block btn-md savebutton"
+                    id="btn_visitorNewParkingAllocate" (click)="allocateParking()">Save</button>
+    
+            </div>
+        </form>
+    
+    
+    </div>

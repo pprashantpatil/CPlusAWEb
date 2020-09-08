@@ -1,0 +1,643 @@
+<div class="container-fluid Pages_background ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">{{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-5">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building" style="margin-right: 42px;"> {{maintainenceRequest_breadchrumb}} </span></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-10">
+      <div class="col-lg-4">
+        <label class="switch">
+          <input type="checkbox" checked (change)="changeStatus($event)">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="col-lg-4">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <button type="button" routerLink="/UpadteMaintanceRequest" routerLinkActive="active-link" id="btn_button"
+            class="dashbutton" style="margin-right: 8px;">{{maintainenceRequest_button_Newrequest}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <button type="button" class="btn  btn-md excelbutton" style="margin-left: 940px;" (click)="exporttoexcel()">
+      Export To Excel
+    </button>
+  </div>
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div class="row">
+      <div class="col-lg-12" [hidden]="showorhidecontent">
+        <!-- <ngx-fullcalendar defaultView="month" [events]="events" [options]="options">
+          </ngx-fullcalendar> -->
+
+        <div class="row callendernavButtons">
+          <div class="col-lg-4">
+            <a (click)="previousmonth()"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+          </div>
+
+          <div class="col-lg-4">
+            <summary><strong>{{callenderMonth}}</strong> {{callenderyear}}</summary>
+          </div>
+          <div class="col-lg-4">
+            <a (click)="nextmonth()"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+          </div>
+
+        </div>
+        <div class="row callenderdiv">
+          <!-- <div class="col-lg-4 todayDate">
+                        <div class="datenumber">
+                            {{todaydate}}
+                        </div>
+                        <div class="dateday">
+                            {{todayDay}}
+                        </div>
+                    </div> -->
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-2 callenderboxes" *ngFor="let calday of callenderdaysdount;let i = index">
+                {{calday.date}} {{calday.day}}
+                <div *ngIf="calday.request" (click)="ShowMaintenanceRequest($event)" class="event_Pending"
+                  [innerHtml]='calday.mantainenceHtml'
+                  style="overflow-y: auto;height: 150px; border-bottom: solid 6px white;">
+                  <!-- Request : {{calday.request}}
+                  Floor:{{calday.Floor}}
+                  Unit :{{calday.unitID}}
+                  Status:{{calday.Status}}
+                  Vendor Name :{{calday.vendorName}}
+                  Phone :{{calday.Phone}} -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-lg-12" [hidden]="!showorhidecontent">
+        <h6 class="paneltitle">{{maintainenceRequest_PageTitle}}
+        </h6>
+        <hr>
+        <div class="container-fluid  ">
+
+          <div class="row">
+            <div class="col-lg-4">
+              <!-- <input type="date" placeholder="search.." class="form-control" id="txt_maintainancerequestDate"> -->
+              <ng-daterangepicker [(ngModel)]="SelectedDateRange" [options]="options1"
+                (ngModelChange)="selectedDate($event)"></ng-daterangepicker>
+            </div>
+            <div class="col-lg-3" style="margin-left: 25px;">
+              <input type="text" [(ngModel)]="searchtext" placeholder="{{maintainenceRequest_search}}"
+                id="txt_maintainancerequestSearch" class="form-control" id="txt_searchBuilding">
+            </div>
+
+            <div class="col-lg-3">
+              <select class="form-control" id="ddl_paymentsBuilding" (change)="filterrequesttype($event)">
+                <option value> Select Type</option>
+                <option value="{{type.short}}" *ngFor="let type of maintainencelist">{{type.short}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-lg-3">
+              <select class="form-control" id="ddl_paymentsBuilding" (change)="filterbuilding($event)">
+                <option value> Select Building</option>
+                <option value="{{build.name}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3">
+              <select class="form-control" id="ddl_paymentsBuilding" (change)="filterstatus($event)">
+                <option value> Select Status</option>
+                <option value="{{status.short}}" *ngFor="let status of Statuslist">{{status.short}}</option>
+              </select>
+
+            </div>
+            <!-- <div class="col-lg-3">
+                <select class="form-control" id="ddl_paymentsBuilding" (change)="filterstatus($event)">
+                  <option value  > Select Status</option>
+                  <option value="{{status.short}}" *ngFor="let status of Statuslist">{{status.short}}</option>
+              </select>
+              </div> -->
+            <div class="col-lg-3">
+              <select class="form-control" id="ddl_paymentsBuilding" (change)="filterByTenant($event)">
+                <option value> Select Tenant</option>
+                <option value="{{tenent.tenantName}}" *ngFor="let tenent of Tenentlist">{{tenent.tenantName}}</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12  table-responsive">
+                <table class="table table-bordered table-hover">
+                  <tbody>
+                    <tr class="tableheader tableheaderfont" style="background-color: #00b5d7;color: #ffffff;">
+                      <td>{{maintainenceRequest_Request_Name}}</td>
+                      <td>{{maintainenceRequest_RequestType}} </td>
+                      <td>{{maintainenceRequest_Building}} </td>
+                      <td>{{maintainenceRequest_Floor}}</td>
+                      <td>{{maintainenceRequest_Unit}}</td>
+                      <td>{{raisedby}} </td>
+                      <td>Assets</td>
+                      <td style="width: 100px">{{maintainenceRequest_Due_Date}}</td>
+                      <td>{{maintainenceRequest_Status}}</td>
+                      <td>Vendor Name</td>
+                      <td>Internal Staff</td>
+                      <!-- <td>Vendor Phone</td> -->
+                      <!-- <td>{{discription}}</td> -->
+                      <td>{{maintainenceRequest_Comments}}</td>
+                      <td>Check List</td>
+                      <td style="width: 66px;">{{maintainenceRequest_Actions}}
+                      </td>
+                    </tr>
+                    <tr
+                      *ngFor="let Maintainance of MaintainanceList| filter:searchtext |filter:requesttype|filter:buildname|filter:statusname|filter:TenantName">
+                      <td>{{Maintainance.request}}</td>
+                      <td>{{Maintainance.requesttype}}</td>
+                      <td>{{Maintainance.buildingname }}</td>
+                      <td>{{Maintainance.floor }}</td>
+                      <td>{{Maintainance.unitID}}</td>
+                      <td>{{Maintainance.raisedby}}</td>
+                      <td>{{Maintainance.assets}}</td>
+                      <!-- <td>{{Maintainance.raisedTo}} </td> -->
+                      <td>{{Maintainance.duedate|date }}</td>
+                      <td>{{Maintainance.status}}</td>
+                      <td>{{Maintainance.vendorName}}</td>
+                      <td>{{Maintainance.internalUser}}</td>
+                      <!-- <td>{{Maintainance.vendorphone}}</td> -->
+                      <!-- <td>{{Maintainance.description}}</td> -->
+                      <td>{{Maintainance.notes}}</td>
+                      <td>{{Maintainance.checklist}}</td>
+                      <td>
+                        <div class="row">
+                          <div class="col-lg-3" style="cursor: pointer">
+                            <i class="fa fa-edit" title="Edit"
+                              [routerLink]="['/editUpadteMaintanceRequest',Maintainance.id]"></i>
+                          </div>
+                          <div class="col-lg-3" style="cursor: pointer">
+                            <i class="fa fa-file" title="Attachments" aria-hidden="true" data-toggle="modal"
+                              data-target="#myModal" (click)="getImages(Maintainance.id)"></i>
+                          </div>
+                          <div class="col-lg-3" style="cursor: pointer">
+                            <i class="far fa-trash-alt" title="Delete"
+                              (click)="DeleteMaintenanceRequest(Maintainance)"></i>
+                          </div>
+                          <div class="col-lg-3" style="cursor: pointer">
+                            <i class="fa fa-plus" title="Add Photos" aria-hidden="true" data-toggle="modal"
+                              data-target="#myModalupadd" data-dismiss="modal"
+                              (click)="addimage(Maintainance.id);$dismiss()"></i>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-3" style="cursor: pointer">
+                            <!-- <i class="fa fa-picture-o" aria-hidden="true" data-toggle="modal"
+                                        data-target="#myModal2"></i> -->
+                            <!-- <button aria-hidden="true" data-toggle="modal" *ngIf="Maintainance.assignedto==null"
+                                        data-target="#myModal2" title="Assign"
+                                        (click)="GetmaintainanceID(Maintainance.id)">A</button> -->
+                            <i class=" i" data-toggle="modal"
+                              *ngIf="Maintainance.vendorName=='NA' && Maintainance.internalUser=='NA'"
+                              data-target="#myModal2" title="Assign" (click)="GetmaintainanceID(Maintainance.id)">A</i>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                </table>
+              </div>
+            </div>
+
+            <div class="modal fade" id="myModal">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="margin-top: 105px;">
+                  <div class="row" style="width: 90%;">
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <h4 class="modal-title" style="margin-left: 69px;">Attachments</h4>
+                      </div>
+                      <div class="col-lg-9">
+                        <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-left: 582px;
+                            margin-top: 29px;"></i>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <div *ngIf="llll==0">
+                        <div class="col-lg-4" *ngFor="let image of photourllist">
+                          <img src="{{image.attachment}}" style="width: 100%; height: auto;margin-left: 40px;">
+                          <div class="row" style="margin-left: 120px;margin-top: 10px">
+                            <div class="col-lg-2">
+                              <button class="dashbutton closebutton" type="submit" aria-hidden="true"
+                                data-toggle="modal" data-target="#myModalup" data-dismiss="modal"
+                                (click)="updateattachment(image.id);$dismiss()">Update</button>
+                            </div>
+                            <div class="col-lg-2" style="margin-left: 20px;">
+                              <!-- <button class="dashbutton updatebutton" data-toggle="modal"  data-toggle="modal" type="submit"
+                                    (click)="DeleteImage(image.id);$dismiss()">Delete</button> -->
+
+                              <button class="dashbutton updatebutton" type="submit" data-dismiss="modal"
+                                (click)="DeleteImage(image.id)">Delete</button>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div *ngIf="llll==1">
+                        <div>
+                          <img src="assets/Login/noimage.jpg" style="width: 200px; height: 200px;">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-lg-9"> </div>
+                    <div class="col-lg-3">
+                      <button class="dashbutton closebutton" type="submit" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="myModal1">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="row">
+                    <h4 class="modal-title">Vendor Comments</h4>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-9"> </div>
+                    <div class="col-lg-3">
+                      <button class="dashbutton closebutton" type="submit" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModal2">
+  <!--Product : FMS1.0 -->
+  <!--Date : 5th Jan, 2018 -->
+  <!--Author : Usha, Dhanashekar, Chidanand, Kiran, Sanath, Bhargav, Mamatha -->
+  <!--Description : This modal helps to assign maintenance task to some internal /external users -->
+  <!--Last Modified Date : 17th Sept 2018, 5th Oct 2018 -->
+  <!--Last Modified Changes : Added field user type maintenance task-->
+  <!--Last Modified By : Usha-->
+  <!--Copyrights : AmazeINC-Bangalore-2018 -->
+
+  <div class="modal-content" style="margin-top: 10%;width: 50%;left:25%">
+    <div class="modal-header">
+      <div class="row">
+        <div class="col-lg-3">
+          <h4 class="modal-title" style="width: 250px;"> Assign Maintenance Request</h4>
+        </div>
+        <div class="col-lg-9">
+          <i class="fa fa-times maintainancerequestmodal" aria-hidden="true" data-dismiss="modal"></i>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-body">
+      <div class="row" style="margin-left:0px;margin-right:0px">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-4">
+              <label for="" style="margin-left: 54px;">Assiged To</label>
+            </div>
+            <div class="col-lg-8">
+              <select (change)="AssignedTo($event)" class="dropdown form-control maindropdown" required
+                id="ddl_updatescheduleAssignedTo" style="width: 238px;    margin-left: -54px;">
+                <option value="0">Select </option>
+                <option value="1">Internal Users</option>
+                <option value="4">Vendor</option>
+                <!-- <option value="{{Assigned.id}}" *ngFor="let Assigned of Assignedlist">{{Assigned.short}}</option> -->
+              </select>
+            </div>
+          </div>
+          <br>
+
+          <div class="row" *ngIf="Assigned==1">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label for="" style="margin-left: 54px;">Date</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="date" [(ngModel)]="Date" name="StartDate" id="txt_StartDate" class="form-control"
+                    min="{{mindate}}" disabled value="{{Date}}" style="width: 238px; margin-left: -54px;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <div class="row" *ngIf="Assigned==1">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label for="" style="margin-left: 54px;">Time</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="time" disabled [(ngModel)]="StartTime" name="StartTime" id="txt_StartTime"
+                    class="form-control" value="{{StartTime}}" style="width: 238px;margin-left: -54px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <div class="row" *ngIf="Assigned==1">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label for="" style="margin-left: 54px;">Staff Type</label>
+                </div>
+                <div class="col-lg-8">
+                  <select name="StaffTypeID" style="width: 238px;    margin-left: -54px;" [(ngModel)]="StaffTypeID"
+                    class="dropdown form-control " id="ddl_StaffTypeID" (change)="FilterByStaffType($event)">
+                    <option value="" class="" selected="selected">Select Staff Type</option>
+                    <option value="1">Security</option>
+                    <option value="2">Gardener</option>
+                    <option value="3">Electrician</option>
+                    <option value="4">Plumber</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row" *ngIf="Assigned==1">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label for="" style="margin-left: 54px;">Staff Name</label>
+                </div>
+                <div class="col-lg-8">
+                  <select (change)="UserName($event)" [(ngModel)]="IntUserID" style="width: 238px;margin-left: -54px;"
+                    name="InternalUsers" class="dropdown form-control maindropdown" id="ddl_updatescheduleAssignedTo">
+                    <option value="none">Select User</option>
+                    <option value="none" *ngIf="NoStafVis">No Staff Available</option>
+                    <option value="{{Use.id}}" *ngFor="let Use of StaffListsByDate">{{Use.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row" *ngIf="Assigned==4">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <label for="">Vendor Type</label>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <select class="dropdown form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"
+                  [(ngModel)]="vendorType" (change)="typeChanged(vendorType)" name="User Type">
+                  <option value="{{ventype.id}}" selected="selected" *ngFor="let ventype of VendorTypeList">
+                    {{ventype.short}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="Assigned==4">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <label for="">Vendor</label>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <!-- <select class="dropdown form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" [(ngModel)]="vendorName" data-ng-options="type as type.vendorName for type in ctrl.parent.VendorList">
+                                  <option value="" class="" selected="selected">Select vendor</option>
+                                </select> -->
+
+                <select class="dropdown form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"
+                  [(ngModel)]="vendorName" (change)="getvendetails(vendorName)" name="User name">
+                  <option value="{{ven.id}}" selected="selected" *ngFor="let ven of Vendorlist">{{ven.vendorName }}
+                  </option>
+                </select>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row " *ngIf="Assigned==4">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <label for="">Phone Number</label>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required" [(ngModel)]="phoneNo"
+                  placeholder="Phone No" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="Assigned==4">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <label for="">EmailID</label>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required" [(ngModel)]="emailID"
+                  placeholder="EmailID" />
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <label for="">Address</label>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required" [(ngModel)]="emailID"
+                  placeholder="Address" />
+              </div>
+            </div>
+          </div> -->
+
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <label for="">Work Order NO</label>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required"
+                  value="{{WorkOrderNo}}" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <label for="">Building</label>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required"
+                  value="{{buildingName}}" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <label for="">Floor</label>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required" value="{{Floor}}" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <label for="">Unit</label>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required"
+                  value="{{UnitName}}" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <label for="">Assets</label>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required"
+                  value="{{assetName}}" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+              <label for="">Warranty Till</label>
+            </div>
+            <div class="col-lg-5">
+              <div class="form-group">
+                <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required"
+                  value="{{WarrantyTill|date}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="assignTask()" data-dismiss="modal">Assign</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="myModalup">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="row" style="margin-top: 120px;padding-top: 20px;">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2">
+          <p style="padding:5px">Update Attachment</p>
+        </div>
+        <div class="col-lg-7">
+          <div class="form-group">
+            <input type="file" class="form-control" placeholder="Photo" accept="image/*"
+              (change)="handleFileSelect($event)">
+            <div class="col-lg-4">
+              <div class="form-group"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-12">
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-block btn-md"
+                style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);" data-dismiss="modal"
+                (click)="UpdateMaintenanceRequestDocument();">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="myModalupadd">
+  <div class="modal-dialog modal-lg" style="margin-top: 131px;">
+    <div class="modal-content">
+      <div class="row" style="margin-top: 10px;padding: 20px">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2">
+          <p style="padding:5px">Add Attachment</p>
+        </div>
+        <div class="col-lg-7">
+          <div class="form-group">
+            <input type="file" class="form-control" placeholder="Photo" accept="image/*" multiple
+              (change)="handleFileSelect1($event)">
+            <div class="col-lg-4">
+              <div class="form-group"></div>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="form-group">
+              <button type="submit" class="btn btn-block btn-md"
+                style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);" data-dismiss="modal"
+                (click)="addmaintimages();">Update</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <i class="fa fa-times" aria-hidden="true" data-dismiss="modal" style="margin-left: 46px;"></i>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,417 @@
+<div class="container-fluid Pages_background">
+    <div>
+        <div class="row">
+            <div class="col-lg-3">
+                <h4 class="Pages_header">{{newPaymentLanguageTitle}}</h4>
+            </div>
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-3">
+                <div class="mainrow">
+                    <div class="col-lg-12 BreadChrumbProperties">
+                        <span> {{newPayment_BreadChrumb}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <form #loginForm2="ngForm">
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+       
+            <div class="row" *ngIf="paramID==null">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{newPayment_PaymentFor}}<span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <!-- <input type="text" id="txt_PaymentFor" required class="form-control" placeholder="{{newPayment_PaymentFor}}"> -->
+                    <select class="dropdown form-control" id="ddl_BuildingName" (change)="GetPayment($event)" required>
+                        <option selected="selected">Select Payment</option>
+                        <option *ngFor="let pay of Paymentlist" value="{{pay.id}}">{{pay.short}}</option>
+
+                    </select>
+
+                     <span class="Validationlabels"
+                    *ngIf='PaymentFor==undefined && Isempty'>* Please
+                    Fill
+                    {{newPayment_PaymentFor}}</span>
+                </div>
+            </div>
+
+
+            <div class="row" *ngIf="paramID!=null">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{newPayment_PaymentFor}}</h5>
+                </div>
+                <div class="col-lg-4">
+                    <!-- <input type="text" id="txt_PaymentFor" required class="form-control" placeholder="{{newPayment_PaymentFor}}"> -->
+                    <select class="dropdown form-control" id="ddl_BuildingName1" name="paymentfor" (change)="GetPayment($event)" [(ngModel)]="pyamentfor" required>
+                        <option selected="selected">Select Payment</option>
+                        <option *ngFor="let pay of Paymentlist" value="{{pay.id}}">{{pay.short}}</option>
+
+                    </select>
+
+                     <span class="Validationlabels"
+                    *ngIf='PaymentFor==undefined && Isempty'>* Please
+                    Fill
+                    {{newPayment_PaymentFor}}</span>
+                </div>
+            </div>
+
+
+            <br>
+
+            <div class="row" *ngIf="PaymentFor==6">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">Other<span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" id="txt_PaymentTo" [(ngModel)]="otherpaymentto" name="Otherpaymentto" 
+                        class="form-control" placeholder="Other Payment">
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{newPayment_PaymentTo}}<span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" id="txt_PaymentTo" [(ngModel)]="paymentto" name="paymentto" required
+                        class="form-control" placeholder="{{newPayment_PaymentTo}}">
+
+                        <span class="Validationlabels"
+                        *ngIf='paymentto==undefined && Isempty'>* Please
+                        Fill
+                        {{newPayment_PaymentTo}}</span>
+
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> {{newPayment_PaymentDate}}<span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <!-- <input type="date" required id="txt_paymentdate" class="form-control" placeholder="{{newPayment_PaymentDate}}"> -->
+                    <div class="form-group">
+                        <input name="date" class="form-control" placeholder="{{newPayment_PaymentDate}}" bsDatepicker
+                            #dp="bsDatepicker" [(ngModel)]="Date" (ngModelChange)="DateChange()" [maxDate]="minDate"
+                            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" >
+
+                            <span class="Validationlabels"
+                            *ngIf='Date==undefined && Isempty'>* Please
+                            Fill
+                            {{newPayment_PaymentDate}}</span>
+
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> {{newPayment_PaymentTime}}<span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="time" required [(ngModel)]="time" id="txt_PaymentTime" name="time" class="form-control"
+                        placeholder="{{newPayment_PaymentTime}}">
+                </div>
+            </div> -->
+            <br>
+            <div class="row "  *ngIf="paramID==null">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> {{newPayment_Building}} <span>*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select class="dropdown form-control" id="ddl_BuildingName" (change)="getbuildingID($event)"
+                        required>
+                        <option selected="selected">Select Building</option>
+                        <option *ngFor="let Build of Buildinglist" value="{{Build.id}}">{{Build.name}}</option>
+
+                    </select>
+
+                    <span class="Validationlabels"
+                    *ngIf='BuildingID==undefined && Isempty'>* Please
+                    Fill
+                    {{newPayment_Building}}</span>
+
+
+                </div>
+            </div>
+
+
+            <div class="row " *ngIf="paramID!=null">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> {{newPayment_Building}} <span>*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select class="dropdown form-control" id="ddl_BuildingName" (change)="getbuildingID($event)" [(ngModel)]="Building1"
+                        name="Building1" required>
+                        <option selected="selected">Select Building</option>
+                        <option *ngFor="let Build of Buildinglist" value="{{Build.id}}">{{Build.name}}</option>
+
+                    </select>
+
+                    <span class="Validationlabels"
+                    *ngIf='BuildingID==undefined && Isempty'>* Please
+                    Fill
+                    {{newPayment_Building}}</span>
+
+
+                </div>
+            </div>
+
+
+            <br>
+            <div class="row" *ngIf="paramID==null">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{newPayment_Address}}<span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" id="txt_Address" [(ngModel)]="BuildAddrress" name="buildaddress" required
+                        class="form-control" placeholder=" {{newPayment_Address}} ">
+
+                        <span class="Validationlabels"
+                        *ngIf='BuildAddrress==undefined && Isempty'>* Please
+                        Fill
+                        {{newPayment_Address}}</span>
+
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{newPayment_Bill}} <span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" id="txt_BillNo" [(ngModel)]="bill" name="bill" required class="form-control"
+                        placeholder=" {{newPayment_Bill}} ">
+
+                        <span class="Validationlabels"
+                        *ngIf='bill==undefined && Isempty'>* Please
+                        Fill
+                        {{newPayment_Bill}}</span>
+
+
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> {{newPayment_TotalAmount}} <span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" id="txt_TotalAmount" [(ngModel)]="totalamount" name="totalamount" required
+                        class="form-control" placeholder=" {{newPayment_TotalAmount}} " onkeypress='return (event.charCode > 47 && event.charCode < 58)'>
+
+                        <span class="Validationlabels"
+                        *ngIf='totalamount==undefined && Isempty'>* Please
+                        Fill
+                        {{newPayment_TotalAmount}}</span>
+
+                </div>
+               <div class="col-lg-2" *ngIf="paramID==null" >
+                    <select class="dropdown form-control" id="ddl_BuildingName" (change)="Getcurrencytype1($event)" required>
+                        <option selected="selected">{{Currency}}</option>
+                        <option *ngFor="let currency of Currencylist" value="{{currency.currency}}">{{currency.countrycurrency}}</option>
+
+                    </select>
+                    <span class="Validationlabels"
+                    *ngIf='currencytype==undefined && Isempty'>* Please
+                    Fill
+                    {{newPayment_TotalAmount}}</span>
+                </div>
+
+              
+                   
+
+            </div>       
+            <br>
+            <div class="row " *ngIf="paramID==null" >
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> {{newPayment_PaymentType}} <span>*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select class="dropdown form-control" required id="ddl_PaymentType"
+                        (change)="GetpaymenttypeID($event)">
+                        <option value="" class="" selected="selected">Select Payment Type</option>
+                        <option value="2" class="" >Online</option>
+                        <!-- <option *ngFor="let pay of paymenttype" value="{{pay.id}}">{{pay.short}}</option> -->
+                    </select>
+
+                    <span class="Validationlabels"
+                    *ngIf='paymenttypeID==undefined && Isempty'>* Please
+                    Fill
+                    {{newPayment_PaymentType}}</span>
+
+                </div>
+            </div>
+
+            <div class="row " *ngIf="paramID!=null" >
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> {{newPayment_PaymentType}} <span>*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select class="dropdown form-control" required id="ddl_PaymentType"
+                        (change)="GetpaymenttypeID($event)" [(ngModel)]="paytype" name=paytype>
+                        <option value="" class="" selected="selected">Select Payment Type</option>
+                        <option value="2" class="" >Online</option>
+                        <!-- <option *ngFor="let pay of paymenttype" value="{{pay.id}}">{{pay.short}}</option> -->
+                    </select>
+
+                    <span class="Validationlabels"
+                    *ngIf='paymenttypeID==undefined && Isempty'>* Please
+                    Fill
+                    {{newPayment_PaymentType}}</span>
+
+                </div>
+            </div>
+            <br>
+
+            <div class="row" *ngIf="paymenttypeID==2">
+                    <div class="col-lg-1"> </div>
+                    <div class="col-lg-2">
+                        <h5 class="formlabel"> TransactionID <span>*</span></h5>
+                    </div>
+                    <div class="col-lg-4">
+                        <input type="number" id="txt_ChequeNo" [(ngModel)]="Transaction" name="Transaction" 
+                            class="form-control" placeholder=" TransactionID ">
+                    </div>
+                   
+                </div>
+              
+
+            <div class="row" *ngIf="paymenttypeID==3">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> Cheque Number <span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" id="txt_ChequeNo" [(ngModel)]="Chequeno" name="ChequeNo" 
+                        class="form-control" placeholder=" Cheque Number " onkeypress='return (event.charCode > 47 && event.charCode < 58)'>
+                </div>
+            </div>
+            <br>
+
+            <div class="row" *ngIf="paymenttypeID==3 ||paymenttypeID==2 ">
+                    <div class="col-lg-1"> </div>
+                    <div class="col-lg-2">
+                        <h5 class="formlabel"> Date <span>*</span></h5>
+                    </div>
+                    <div class="col-lg-4">
+                            <div class="form-group">
+                                    <input name="date2" class="form-control" placeholder="{{addnewcommunityevent_Date}}" bsDatepicker
+                                        #dp="bsDatepicker" [(ngModel)]="Date2" (ngModelChange)="DateChange2()" [minDate]="minDate2"
+                                        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+                                </div>
+                    </div>
+                   
+                </div>
+              
+
+
+            <div class="row" *ngIf="paymenttypeID==3 || paymenttypeID==4 || paymenttypeID==5 || paymenttypeID==2">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> Bank Name <span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" id="txt_BankName" [(ngModel)]="bankname" name="bankname" 
+                        class="form-control" placeholder="Bank Name">
+                </div>
+
+               
+
+            </div>
+            <br>
+
+            <div class="row" *ngIf="paymenttypeID==4 || paymenttypeID==5">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> Card Number <span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="number" id="txt_CardNumber" [(ngModel)]="CNumber" name="CNumber" 
+                        class="form-control" placeholder="Last 4 Digits">
+                </div>
+            </div>
+            <br>
+            <div class="row " style="margin-bottom: 50px;" *ngIf="paymenttypeID==4 || paymenttypeID==5">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel"> Card Type <span>*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select class="dropdown form-control"  id="ddl_PaymentType" (change)="getcardttype($event)">
+                        <option value="" class="" selected="selected">CardType</option>
+                        <option value="Visa">Visa</option>
+                        <option value="Maestro">Maestro</option>
+                        <option value="Master Card">Master Card</option>
+                        <option value="Diners Club">Diners Club</option>
+                        <option value="American express">American express</option>
+                    </select>
+                </div>
+
+              
+                
+            </div>
+            <br>
+           
+           
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{newPayment_Comments}} </h5>
+                </div>
+                <div class="col-lg-4">
+                    <textarea rows="5" id="txt_newpaymentsComments" name="comments" [(ngModel)]="comments"
+                        class="form-control comments" placeholder="{{newPayment_Comments}} "></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="paramID==null"  >
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-2">
+                    <h5 class="formlabel">{{newPayment_Document}} <span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="file" class="form-control" placeholder="PhotoURL" (change)="handleFileSelect($event)">
+                    <!-- <textarea rows="5" class="form-control " placeholder="Document "></textarea> -->
+                    <span class="Validationlabels"
+                    *ngIf='FileType==undefined && Isempty'>* Please
+                    Fill
+                    {{newPayment_Document}}</span>
+                </div>
+            </div>
+            <br>
+            <div class="row" style="margin-bottom: 20px;" *ngIf="paramID==null">
+                <div class="col-lg-3"></div>
+                <div>
+                    <button type="submit" class="savebutton"  (click)="InsertBuildingPayments()"
+                        id="btn_newpaymentbutton">{{newPayment_Save}} </button>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom: 20px;" *ngIf="paramID!=null">
+                <div class="col-lg-3"></div>
+                <div>
+                    <button type="submit" class="savebutton"  (click)="updateBuildingPayments()"
+                        id="btn_newpaymentbutton">Update </button>
+                </div>
+            </div>
+       
+    </div>
+</form>
+</div>

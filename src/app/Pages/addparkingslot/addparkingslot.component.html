@@ -1,0 +1,122 @@
+<div class="container-fluid " style="background-color: #F0F3F4;">
+
+   
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header">{{addparkingTitle}}</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12 BreadChrumbProperties">
+                    <span> {{addparking_BreadChrumb}} </span> </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="shadow p-3 mb-5 bg-white rounded col-lg-12  maincard ">
+        <h6 class="paneltitle">{{pageMenuTitle}}</h6>
+        <hr>
+        <form #parking="ngForm">
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{addparkingBuilding}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control" id="ddl_BuildingName"  (change)="getbuildingID($event)" required>
+                        <option >Select Building</option>
+                        <option *ngFor="let Build of Buildinglist" value="{{Build.id}}" >{{Build.name}}</option>
+                       
+                    </select>
+
+                    <span class="Validationlabels"
+                    *ngIf='BuildingID==undefined && Isempty'>* Please
+                    Fill
+                    {{addparkingBuilding}}</span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{addparkingFloor}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control" id="ddl_BuildingName"  (change)="getfloorID($event)" required>
+                        <option>Select Floor</option>
+                        <option *ngFor="let floor of Floorlist" value="{{floor.id}}" >{{floor.floor}}</option>
+                       
+                    </select>
+
+                    <span class="Validationlabels"
+                    *ngIf='floorID==undefined && Isempty'>* Please
+                    Fill
+                    {{addparkingFloor}}</span>
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{addparkingFacing}} </p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown form-control" id="ddl_BuildingName"  (change)="getfacingID($event)" required>
+                        <option>Select Facing</option>
+                        <option *ngFor="let facing of facinglist" value="{{facing.id}}" >{{facing.facing}}</option>
+                    </select>
+
+                 
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2 ">
+                    <p style="padding:5px">{{addparking_ParkingSlots}} <span class="starspan">*</span></p>
+                </div>
+                <div class="col-lg-4">
+                    <input type="number" class="form-control" [(ngModel)]="noofslot" name="noofslot"  id="txt_NoofParkingSlots"
+                        placeholder="{{addparking_ParkingSlots}}">
+
+                        <span class="Validationlabels"
+                        *ngIf='noofslot==undefined && Isempty'>* Please
+                        Fill
+                        {{addparking_ParkingSlots}}</span>
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                </div>
+                <div class="col-lg-3">
+                    <button class="savebutton"  (click)="InsertParkingType()" type="submit">{{addParkingAllocate}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

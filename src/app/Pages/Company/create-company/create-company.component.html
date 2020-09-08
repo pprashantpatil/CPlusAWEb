@@ -1,0 +1,148 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="Pages_header">COMPANY</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <!-- <span class="CommercialWorkspace"> Create Company / Company</span> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card maincard" style="margin-right: 24px;
+    margin-top: 20px;">
+      <div class="row">
+        <div class="col-lg-8 reqriedspan">
+          <br>
+          <form #loginForm="ngForm">
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6>Company Name
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input type="text" class="form-control" [(ngModel)]="Name" name="Name" required id="txt_Name" placeholder="Company Name">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6>Address
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 form-group">
+                <textarea rows="5" class="form-control" [(ngModel)]="Address" id="textareaaddress" name="address"> 
+                </textarea>
+              </div>
+            </div>
+
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6>Phone No
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input type="number" class="form-control" [(ngModel)]="PhoneNo" name="PhoneNo" required id="txt_PhoneNo" placeholder="PhoneNo">
+              </div>
+            </div>
+
+
+
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6>EmailID
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input type="email" class="form-control" [(ngModel)]="EmailID" name="EmailID" required id="txt_EmailID" placeholder="EmailID">
+              </div>
+            </div>
+
+
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6>Contact Name
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input type="text" class="form-control" [(ngModel)]="ContactName" name="ContactName" required id="txt_ContactName" placeholder="Contact Name">
+              </div>
+            </div>
+
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6>No Of Users
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input type="number" class="form-control" [(ngModel)]="NoOfUsers" name="NoOfUsers" required id="txt_NoOfUsers" placeholder="No Of Users">
+              </div>
+            </div>
+
+
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6>User Name
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input type="text" class="form-control" [(ngModel)]="UserName" name="UserName" required id="txt_UserName" placeholder="User Name">
+              </div>
+            </div>
+
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6>Password
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input type="text" class="form-control" [(ngModel)]="Password" name="Password" required id="txt_Password" placeholder="Password">
+              </div>
+            </div>
+
+            <div>
+              <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-2 ">
+                  <button type="submit" style="margin-bottom: 100px" (click)="insertCompanyDetails()" class="btn btn-block btn-md savebutton">Save</button>
+                </div>
+              </div>
+            </div>
+
+            <br>
+            <div class="col-lg-4"></div>
+          </form>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+  </div>
+</div>

@@ -1,0 +1,198 @@
+.bgOpen{
+    background-color:#29b1f0;
+}
+
+.bgred{
+    background-color: red
+}
+
+.bggreen{
+    background-color: rgb(26, 206, 26)
+}
+
+.canvas3{
+  display: block;
+  height: 420px;
+  width: 1144px;
+}
+.CanvasCSS{
+  display: block;
+    height: 282px;
+    width: 564px;
+}
+@media (min-width: 768px){
+  .container {
+    width: 750px;
+}
+.CanvasCSS{
+  display: block;
+    height: 282px;
+    width: 433px;
+}
+}
+
+
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1280px) and (orientation:landscape) {
+  
+    .card{
+        width: 1030px;
+        margin-top: 55px;
+       
+      }
+      .canvas{
+        display: block;
+    height: 500px;
+    width: 1030px;
+      }
+      .canvas1{
+        display: block;
+    height: 520px;
+    width: 1030px;
+      }
+      .paneltitle{
+        font-weight: 400;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 15px;
+    margin-left: 12px;  
+      }
+      .timeline{
+    
+        margin-top: 40px;
+        width: 480px;
+      }
+      .regular{
+          margin-top: 20px;
+      }
+      .timeline1{
+        margin-top: 40px;
+        width: 535px;
+      }
+      .mainn{   
+        width: 1030px; 
+      }
+      .label1{
+        margin-left: 56px;
+        font-size: 26px;
+        font-weight: 800;margin-top: 30px;
+        font-family: inherit; 
+      }
+      .hr{
+          margin-top: -3px;
+      }
+      .ddd{
+        margin-left: 150px;
+      }
+      .smallcard{
+       width: 1030px;
+        height: 350px;
+    }
+    .bigcard{
+      width: 1030px;
+        height: 480px;
+        margin-bottom: 20px;
+        margin-left: -16px;
+    }
+    .card1{
+        box-shadow: 3px 1px 4px #00b5d7;    background: #00b5d7;
+        color: white;
+          height: 139px;
+           border-radius: 19px; 
+           margin-left: 65px;
+    }
+    .card2{
+        box-shadow: 3px 1px 4px #00b5d7;    background: #00b5d7;
+        color: white;
+          height: 139px;
+           border-radius: 19px; 
+           margin-left: 45px;
+    }
+    .card3{
+        box-shadow: 3px 1px 4px #00b5d7;    background: #00b5d7;
+        color: white;
+          height: 139px;
+           border-radius: 19px; 
+           margin-left: 45px;
+    }
+    .CanvasCSS{
+      display: block;
+      height: 515px;
+      width: 433px;
+    }
+     
+    }
+    @media screen and (min-width: 1400px) {
+     
+      .card{
+        margin-top: 55px;
+        margin-right: 15px;
+      }
+      .regular{
+        margin-top: 20px;
+    }
+      .hr{
+        margin-top: -3px;
+    }
+      .timeline{
+        margin-left: 1px;
+        margin-top: 40px;
+        width: 48%;
+      }
+      .timeline1{
+        margin-left: 1px;
+        margin-top: 40px;
+        width: 48%;
+      }
+      .label1{
+        margin-left: 56px;
+        font-size: 26px;
+        font-weight: 800;margin-top: 30px;
+        font-family: inherit; 
+      }
+      .ddd{
+        margin-left: 150px;
+      }
+      .smallcard{
+        margin-left: -14px;
+        height: 350px;
+    }
+    .bigcard{
+        margin-left: -14px;
+        height: 480px;
+        margin-bottom: 20px;
+    }
+    
+    .card1{
+        box-shadow: 3px 1px 4px #00b5d7;    background: #00b5d7;
+        color: white;
+          height: 139px;
+           border-radius: 19px; 
+           margin-left: 65px;
+          
+    }
+    .card2{
+        box-shadow: 3px 1px 4px #00b5d7;    background: #00b5d7;
+        color: white;
+          height: 139px;
+           border-radius: 19px; 
+           margin-left: 16px;
+          
+    }
+    .card3{
+        box-shadow: 3px 1px 4px #00b5d7;    background: #00b5d7;
+        color: white;
+          height: 139px;
+           border-radius: 19px; 
+           margin-left: 16px;
+    }
+    .CanvasCSS{
+      display: block;
+        height: 282px;
+        width: 433px;
+    }
+    
+   
+    }

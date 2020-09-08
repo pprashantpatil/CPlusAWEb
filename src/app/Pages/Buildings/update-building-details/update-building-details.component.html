@@ -1,0 +1,544 @@
+<div class="container-fluid Pages_background Backgroundforipad" style="padding-right: 55px">
+    <div>
+        <div class="row">
+            <div class="col-lg-3">
+                <h4 class="Pages_header">PROPERTY</h4>
+            </div>
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-3">
+                <div class="mainrow">
+                    <div class="col-lg-12">
+                        <!-- <span class="CommercialWorkspace"> Property/Update Property</span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card maincard PropertyTable">
+            <div class="row">
+                <div class="col-lg-8 reqriedspan">
+                    <br>
+                    <form #loginForm="ngForm">
+                        <div class="row ">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>Project Type
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="ProejectType" [(ngModel)]="ProejectType"
+                                    name="ProejectType" required>
+                                    <option value="0"> Select Project Type</option>
+                                    <option value="1">Construction</option>
+                                    <option value="2">Architectural & Design</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row ">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>Property Name
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" class="form-control" [disabled]="typeID==2"
+                                    [(ngModel)]="buildingname" name="buildingname" required id="txt_BuildingName"
+                                    placeholder="Property Name">
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>Property Address
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <textarea rows="3" [(ngModel)]="buildingaddress" [disabled]="typeID==2"
+                                    id="txt_BuildingAddress" name="buildingaddress" required class="form-control "
+                                    placeholder="Property Address" required></textarea>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row" *ngIf="paramid==null">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_Country}}
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="ddl_BillType" (change)="getcountryID($event)"
+                                    name="Country" required>
+                                    <option value="none"> Select Country</option>
+                                    <option value="{{country.id}}" *ngFor="let country of Countrylist">{{country.short}}
+                                    </option>
+                                </select>
+
+                                <span class="Validationlabels" *ngIf='countryID==undefined && Isempty'>* Please Fill
+                                    {{addOrUpdateBuilding_Country}}
+                                </span>
+
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row" *ngIf="paramid!=null">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_Country}}
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="ddl_BillType" [disabled]="typeID==2"
+                                    (change)="getcountryID($event)" [(ngModel)]="countryID1" name="Country" required>
+                                    <option value="none"> Select Country</option>
+                                    <option value="{{country.id}}" *ngFor="let country of Countrylist">{{country.short}}
+                                    </option>
+                                </select>
+
+                                <span class="Validationlabels" *ngIf='countryID1==undefined && Isempty'>* Please Fill
+                                    {{addOrUpdateBuilding_Country}}
+                                </span>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row" *ngIf="paramid==null&& countryID!=2">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_State}}
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="ddl_BillType" [disabled]="typeID==2"
+                                    (change)="getstateID($event)" name="stateID1">
+                                    <option value="none"> Select State</option>
+                                    <option value="{{state.id}}" *ngFor="let state of Statelist">{{state.short}}
+                                    </option>
+                                </select>
+                                <span class="Validationlabels" *ngIf='stateID==undefined && Isempty'>* Please Fill
+                                    {{addOrUpdateBuilding_State}}
+                                </span>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row" *ngIf="paramid!=null&& countryID!=2">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_State}}
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="ddl_BillType" [disabled]="typeID==2"
+                                    [(ngModel)]="stateID1" (change)="getstateID($event)" name="stateID1" required>
+                                    <option value="none"> Select State</option>
+                                    <option value="{{state.id}}" *ngFor="let state of Statelist">{{state.short}}
+                                    </option>
+                                </select>
+
+                                <span class="Validationlabels" *ngIf='stateID1==undefined && Isempty'>* Please Fill
+                                    {{addOrUpdateBuilding_State}}
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row" *ngIf="paramid==null">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_City}}
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+
+                                <select class="form-control" id="ddl_BillType" [disabled]="typeID==2"
+                                    (change)="getcityID($event)" name="cityID1">
+                                    <option value="none"> Select City</option>
+                                    <option value="{{city.id}}" *ngFor="let city of citylist">{{city.short}}</option>
+                                </select>
+                                <span class="Validationlabels" *ngIf='cityID==undefined && Isempty'>* Please Fill
+                                    {{addOrUpdateBuilding_City}}
+                                </span>
+
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row" *ngIf="paramid!=null">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_City}}
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+
+                                <select class="form-control" id="ddl_BillType" [disabled]="typeID==2"
+                                    [(ngModel)]="cityID1" name="cityID1" required>
+                                    <option value="none"> Select City</option>
+                                    <option value="{{city.id}}" *ngFor="let city of citylist">{{city.short}}</option>
+                                </select>
+                                <span class="Validationlabels" *ngIf='cityID1==undefined && Isempty'>* Please Fill
+                                    {{addOrUpdateBuilding_City}}
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_Phone_Number}}
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" class="form-control" [disabled]="typeID==2" [(ngModel)]="phonenumber"
+                                    name="phone" required id="txt_PhoneNumber" maxlength="10"
+                                    placeholder="{{addOrUpdateBuilding_Phone_Number}}"
+                                    onkeypress='return (event.charCode > 47 && event.charCode < 58)'>
+                                <span class="Validationlabels" *ngIf='Isempty &&(10>phonenumber.length) '>* Please Fill
+                                    {{addOrUpdateBuilding_Phone_Number}}
+                                </span>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row" *ngIf="paramid==null">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>Property Type
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="dropdown form-control" [disabled]="typeID==2" required
+                                    id="ddl_BuildinType" name="BuildingType" (change)="getbuildingtypeID($event)">
+                                    <option value="none" class="">Select Property Type</option>
+                                    <!-- <option label="Villa" value="1">Villa</option>
+                                    <option label="Apartment" value="2">Apartment</option> -->
+                                    <option label="Condominium" value="3">Condominium</option>
+                                    <option label="Independent House" value="4">Independent House</option>
+                                    <option label="Commercial Complex" value="5">Commercial Complex</option>
+                                </select>
+                                <span class="Validationlabels" *ngIf='buildingtypeID==undefined && Isempty'>* Please
+                                    Fill Property Type</span>
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="paramid!=null">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>Property Type
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="dropdown form-control" [disabled]="typeID==2" required
+                                    id="ddl_BuildinType" name="BuildingType" [(ngModel)]="buildingtypeID1" required>
+                                    <option value="none" class="">Select Property Type</option>
+                                    <option label="Villa" value="1">Villa</option>
+                                    <option label="Apartment" value="2">Apartment</option>
+                                    <option label="Corporate" value="3">Corporate</option>
+                                    <option label="Independent House" value="4">Independent House</option>
+                                    <option label="Commercial Complex" value="5">Commercial Complex</option>
+                                </select>
+
+                                <span class="Validationlabels" *ngIf='buildingtypeID1==undefined && Isempty'>* Please
+                                    Fill Property Type</span>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_Contact_Person_Name}}
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" class="form-control" [disabled]="typeID==2"
+                                    [(ngModel)]="contactperson" name="Contactperson" required id="txt_ContactPersonName"
+                                    placeholder="{{addOrUpdateBuilding_Contact_Person_Name}}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_Contact_Person_Phone}}
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" [disabled]="typeID==2" [(ngModel)]="contactphone" maxlength="10"
+                                    onkeypress='return (event.charCode > 47 && event.charCode < 58)' name="Contactphone"
+                                    required id="txt_ContactPersonPhone" class="form-control"
+                                    placeholder="{{addOrUpdateBuilding_Contact_Person_Phone}}">
+                                <span class="Validationlabels" *ngIf='Isempty &&(10>contactphone.length) '>* Please Fill
+                                    {{addOrUpdateBuilding_Contact_Person_Phone}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_Contact_Person_Email}} </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="email" class="form-control" [disabled]="typeID==2" name="ContactEmail"
+                                    [(ngModel)]="contactemail" id="txt_ContactPersonEmail">
+                                <span class="Validationlabels" *ngIf='EmailValid==false'>
+                                    Invalid Email
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_Number_of_Floors}}
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" id="txt_NumberofFloors" [disabled]="typeID==2 ||typeID==1"
+                                    name="Nooffloor" [(ngModel)]="nooffloor" required class="form-control "
+                                    placeholder="{{addOrUpdateBuilding_Number_of_Floors}}">
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="paramid==null">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{basement}}</h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <!-- <input type="text" id="txt_NumberofFloors" [disabled]="typeID==2 ||typeID==1" name="basement"
+                                    [(ngModel)]="NoOfbasement" required class="form-control "
+                                    placeholder="{{basement}}"> -->
+                                <input (change)="base($event,1)" [disabled]="typeID==2 ||typeID==1" [(ngModel)]="a"
+                                    value="" id="base1" name="NoOfbasement" type="checkbox" class="maincheckbox">
+                                Basement 1
+                                <input (change)="base($event,2)" [disabled]="typeID==2 ||typeID==1" [(ngModel)]="b"
+                                    value="" id="base2" name="NoOfbasement" type="checkbox" class="maincheckbox">
+                                Basement 2
+                                <input (change)="base($event,3)" [disabled]="typeID==2 ||typeID==1" [(ngModel)]="c"
+                                    value="" id="base3" name="NoOfbasement" type="checkbox" class="maincheckbox">
+                                Basement 3
+                                <input (change)="base($event,4)" [disabled]="typeID==2 ||typeID==1" [(ngModel)]="d"
+                                    value="" id="base4" name="NoOfbasement" type="checkbox" class="maincheckbox">
+                                Basement 4
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_Total_Number_of_Units}}
+
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="number" id="txt_TotalNumberofUnits" [disabled]="typeID==2||typeID==1 "
+                                    name="Noofunit" [(ngModel)]="noofunit" class="form-control"
+                                    placeholder="{{addOrUpdateBuilding_Total_Number_of_Units}}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_Number_of_Units_Per_Floor}}
+
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="number" id="txt_UnitsPerFloor" [disabled]="typeID==2 ||typeID==1 "
+                                    name="Unitperfloor" [(ngModel)]="unitperfloor" class="form-control"
+                                    placeholder="{{addOrUpdateBuilding_Number_of_Units_Per_Floor}}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>Total Property Area(sq ft)
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="number" id="txt_TotalBuildingArea" [disabled]="typeID==2" name="Buildarea"
+                                    [(ngModel)]="buildingarea" required class="form-control"
+                                    placeholder="Total Property Area(sq ft)">
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="ProejectType==1">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_Year_Built}}
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="number" id="txt_YearBuilt" [disabled]="typeID==2" name="Buildyear"
+                                    [(ngModel)]="buildyear" class="form-control" required
+                                    placeholder="{{addOrUpdateBuilding_Year_Built}}">
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="paramid==null">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_Photo}}
+                                    <span>*</span>
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <!-- <input type="file" class="form-control" [disabled]="typeID==2" placeholder="PhotoURL"
+                                    (change)="handleFileSelect($event)"> -->
+
+                                <input type="file" class="form-control" placeholder="Photo" accept="image/*" multiple
+                                    (change)="handleFileSelect1($event)">
+                                <span class="Validationlabels" *ngIf='FileType==undefined && Isempty'>* Please Add
+                                    {{addOrUpdateBuilding_Photo}}
+                                </span>
+                                <div class="row">
+                                    <p style="margin-top: 10px;margin-left: 15px;">
+                                        <b>Hold control button to select multiple photos</b>
+                                    </p>
+                                </div>
+
+                            </div>
+                            <!-- <div class="col-lg-1 form-group">
+                                <img src="{{attachment}}" style="width:100px;height:100px">
+                            </div> -->
+                        </div>
+                        <div class="row" *ngIf="paramid==null && ProejectType==1">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_Entrance}}
+
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="dropdown form-control" [disabled]="typeID==2" placeholder="Entrance"
+                                    (change)="getbuildingentrance($event)" id="ddl_Entrance" name="Entrance">
+                                    <option value="0" class="">Select</option>
+                                    <option label="East" value="1">East</option>
+                                    <option label="West" value="2">West</option>
+                                    <option label="North" value="3">North</option>
+                                    <option label="South" value="4">South</option>
+                                </select>
+
+                                <!-- <span class="Validationlabels" *ngIf='buildingentrance==undefined && Isempty'>* Please Fill {{addOrUpdateBuilding_Entrance}}
+                                </span> -->
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="paramid!=null && ProejectType==1">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>{{addOrUpdateBuilding_Entrance}}</h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="dropdown form-control" [disabled]="typeID==2" placeholder="Entrance"
+                                    [(ngModel)]="buildingentrance1" id="ddl_Entrance" name="Entrance">
+                                    <option value="0" class="">Select</option>
+                                    <option label="East" value="1">East</option>
+                                    <option label="West" value="2">West</option>
+                                    <option label="North" value="3">North</option>
+                                    <option label="South" value="4">South</option>
+                                </select>
+
+                                <!-- <span class="Validationlabels" *ngIf='buildingentrance1=="none" && Isempty'>* Please
+                                    Fill
+                                    {{addOrUpdateBuilding_Entrance}}</span> -->
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="ProejectType==2">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>Budget Hours
+                                </h6>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="number" id="Budgethours" name="Budgethours" [(ngModel)]="Budgethours"
+                                    class="form-control" placeholder="Budget Hours">
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="ProejectType==1">
+                            <div class=col-lg-1> </div>
+                            <div class="col-lg-2">
+                                <h6>Project ExecutedBy</h6>
+
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="dropdown form-control" placeholder="Project ExecutedBy"
+                                    [(ngModel)]="ProjectExecutedBy" id="ddl_ProjectExecutedBy" name="ProjectExecutedBy"
+                                    required>
+                                    <option value="none" class="">Select</option>
+                                    <option label="Contractor Team" value="Contractor Team">Contractor Team</option>
+                                    <option label="Internal Staff" value="Internal Staff">Internal Staff</option>
+
+                                </select>
+
+                                <!-- <span class="Validationlabels" *ngIf='buildingentrance1=="none" && Isempty'>* Please
+                                        Fill
+                                        {{addOrUpdateBuilding_Entrance}}</span> -->
+                            </div>
+                        </div>
+
+
+
+                        <div>
+                            <div class="row" *ngIf="paramid==null">
+                                <div class=col-lg-1> </div>
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-2 ">
+                                    <button type="submit" style="margin-bottom: 100px"
+                                        [disabled]="loginForm.form.invalid" (click)="insertbuilding()"
+                                        class="btn btn-block btn-md savebutton">{{addOrUpdateBuilding_Save}}</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="row" *ngIf="paramid!=null && typeID==2">
+                                <div class=col-lg-1> </div>
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-2 ">
+                                    <button type="submit" style="margin-bottom: 100px"
+                                        [disabled]="loginForm.form.invalid" (click)="Updatebuilding()"
+                                        class="btn btn-block btn-md savebutton">{{update}}</button>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-lg-4"></div>
+                    </form>
+                </div>
+
+                <div class="col-lg-4" *ngIf="typeID==2 || attachment!=null ">
+
+                    <img *ngIf="typeID==2 || attachment!=null " src="{{attachment}}"
+                        style="width: 100%; margin-top: 21px;">
+                    <p *ngIf="typeID==2 && attachment==null ">No Image</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- 
+    pattern="^[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_]+)*@[a-z0-9]+(\-[a-z0-9]+)*(\.[a-z0-9]+(\-[a-z0-9]+)*)*\.[a-z]{2,4}$"
+    placeholder="{{addOrUpdateBuilding_Contact_Person_Email}}" -->

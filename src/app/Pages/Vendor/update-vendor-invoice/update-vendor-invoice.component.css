@@ -1,0 +1,158 @@
+.header {
+    font-weight: 700;
+    color: #666666;
+    float: left;
+    width: auto;
+    margin: 0;
+    /* margin-left: 35px; */
+    padding: 0;
+    font-size: 24px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-top: 30px;
+}
+
+.building {
+    color: #00b5d7;
+    font-size: 18px;
+}
+
+.gridforlist {
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+
+.dashbutton {
+    border-radius: 10px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 30px;
+    margin-bottom: 12px;
+}
+
+.mainrow {
+    float: right;
+    margin-top: 26px;
+}
+
+.maincard {
+    float: initial;
+    background: white;
+}
+
+.paneltitle {
+    font-weight: 400;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: #666666;
+}
+
+i {
+    color: #00b5d7;
+}
+
+.maindropdown {
+    width: 350px;
+    margin-top: 11px;
+}
+
+.topdropdown {
+    width: 225px;
+    /* margin-top: 11px; */
+}
+
+.starspan {
+    color: red;
+}
+
+.savebutton {
+    width: 235px;
+    margin-top: 13px;
+    border-radius: 6px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    height: 36px;
+    margin-left: 25px;
+}
+
+.mainbg {
+    background-color: #F0F3F4;
+}
+
+.alllabels {
+    margin-top: 11px;
+}
+
+.scrollinput {
+    width: 167px;
+}
+
+.horizontal-scroll {
+    overflow-x: auto;
+    overflow-y: visible;
+}
+
+.tableheader td {
+    width: 80% !important;
+}
+
+
+
+.dropzone_vendorinvoice_1 {
+    height: 66px !important;
+    border: 2px solid #717386 !important;
+    width: 393px!important;
+}
+
+.updatevendorsave{
+    margin-left: 163px;
+}
+
+.updatevendor{
+    margin-bottom: 10px;
+    margin-left: 228px;
+}
+
+
+
+@media screen and (min-width: 1600px) {
+    .updatevendorsave{
+        margin-left: 163px;
+    }
+
+    .updatevendor{
+        margin-bottom: 10px;
+        margin-left: 228px;
+    }
+    
+    .topdropdown {
+        width: 225px;
+        /* margin-top: 11px; */
+    }
+  }
+  @media screen and (min-width: 1900px) {
+    .updatevendorsave{
+        margin-left: 400px;
+    }
+
+    .updatevendor{
+        margin-bottom: 10px;
+        margin-left: 476px;
+    }
+
+    .topdropdown {
+        width: 265px;
+        /* margin-top: 11px; */
+    }
+    
+    
+  }
+
+
+

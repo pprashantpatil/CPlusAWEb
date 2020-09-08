@@ -1,0 +1,457 @@
+<div class="container-fluid Pages_background ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">{{pageMenuTitle}}</h4>
+    </div>
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> {{eventPlaner_breadchrumb}} </span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-10">
+      <div class="col-lg-4">
+        <label class="switch">
+          <input type="checkbox" checked (change)="changeStatus($event)">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="col-lg-4">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <button type="button" routerLink="/UpdateEventPlanner" routerLinkActive="active-link" id="btn_button"
+            class="dashbutton">New Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+      Export To Excel
+    </button>
+  </div>
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div class="row">
+      <div class="col-lg-12" [hidden]="showorhidecontent">
+        <!-- <ngx-fullcalendar defaultView="month" [events]="events" [options]="options">
+        </ngx-fullcalendar> -->
+
+        <div class="row callendernavButtons">
+          <div class="col-lg-4">
+            <a (click)="previousmonth()"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+          </div>
+
+          <div class="col-lg-4">
+            <summary><strong>{{callenderMonth}}</strong> {{callenderyear}}</summary>
+          </div>
+          <div class="col-lg-4">
+            <a (click)="nextmonth()"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+          </div>
+
+        </div>
+        <div class="row callenderdiv">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-2 callenderboxes" *ngFor="let calday of callenderdaysdount;let i = index">
+                {{calday.date}} {{calday.day}}
+                <div *ngIf="calday.event">
+
+                  <div *ngIf="calday.Status=='Approved' && calday.iscontinuous==true" class="event_Approved eventcontinue" [innerHtml]='calday.eventhtml' ></div>
+
+                  <div *ngIf="calday.Status=='Approved' && !calday.iscontinuous" class="event_Approved" [innerHtml]='calday.eventhtml' ></div>
+
+                  <div *ngIf="calday.Status=='Rejected' && calday.iscontinuous==true" class="event_Rejected eventcontinue" [innerHtml]='calday.eventhtml' ></div>
+
+                  <div *ngIf="calday.Status=='Rejected' && !calday.iscontinuous" class="event_Rejected" [innerHtml]='calday.eventhtml' ></div>                  
+                  <div *ngIf="calday.Status=='Pending' && calday.iscontinuous==true" class="event_Pending eventcontinue" [innerHtml]='calday.eventhtml' ></div>
+                  
+                  <div  *ngIf="calday.Status=='Pending' && !calday.iscontinuous" class="event_Pending" [innerHtml]='calday.eventhtml' ></div>
+                
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-lg-12" [hidden]="!showorhidecontent">
+        <h6 class="paneltitle">{{eventPlaner_PageTitle}}
+        </h6>
+        <hr>
+        <div class="container-fluid  ">
+          <div class="row">
+            <div class="col-lg-3">
+              <ng-daterangepicker [options]="options1"></ng-daterangepicker>
+            </div>
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-3">
+              <input type="text" placeholder="search.." [(ngModel)]="Search" class="form-control"
+                id="txt_searchBuilding">
+            </div>
+            <div class="col-lg-3">
+              <select class="form-control" (change)="FilteredByBuildingName($event)">
+                <option value="none">Select Building</option>
+                <option value="{{build.name}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+              </select>
+            </div>
+            <div class="col-lg-3">
+              <select class="form-control" (change)="FilteredByStatus($event)">
+                <option value="none">Select Status</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Approved">Approved</option>
+                <option value="Pending">Pending</option>
+                <!-- <option value="{{Status.id}}" *ngFor="let Status of Statuslist">{{Status.short}}</option> -->
+              </select>
+            </div>
+          </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12  table-responsive">
+                <table class="table table-bordered table-hover table-condensed">
+                  <tbody>
+                    <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+                      <td>Event Name</td>
+                      <td>Building</td>
+                      <!-- <td>Resources</td> -->
+                      <td style="width: 92px;">Start Date </td>
+                      <td style="width: 92px;">End Date </td>
+                      <td>Location </td>
+                      <td>Start Time </td>
+                      <td>End Time </td>
+                      <td>Status</td>
+                      <td>Actions</td>
+                      <td>Approval Status
+                      </td>
+                    </tr>
+                    <tr *ngFor="let Event of FilteredEventPlannerList|filter:Search">
+                      <td>{{Event.eventName}}</td>
+                      <td>{{Event.buildingname}}</td>
+                      <!-- <td>{{Event.resourcename}} </td> -->
+                      <td>{{Event.startDate|date}}</td>
+                      <td>{{Event.endDate|date}}</td>
+                      <td>{{Event.unit}}</td>
+                      <td>{{Event.startTime}} </td>
+                      <td>{{Event.endTime}}</td>
+                      <td>{{Event.approvalStatus}}</td>
+                      <td>
+                        <div class="row" style="width: 119px;">
+                          <div class="col-lg-1">
+                            <i class="fa fa-paperclip" data-toggle="tooltip" title="Attachment"
+                              (click)="EventsAttachments(Event)" data-toggle="modal" data-target="#myModal"></i>
+                          </div>
+                          <div class="col-lg-1">
+                            <i class="far fa-trash-alt " data-toggle="tooltip" title="Delete"
+                              (click)="DeleteEvents(Event)"></i>
+                          </div>
+                          <div class="col-lg-1" *ngIf="Event.approvalStatus=='Pending'" (click)="UpdateEvents(Event)">
+                            <i class="fa fa-edit" data-toggle="tooltip" title="Edit"></i>
+                          </div>
+                          <div class="col-lg-1" *ngIf="Event.approvalStatus=='Pending'" data-toggle="tooltip"
+                            title="Approve">
+                            <i class=" i" data-toggle="modal" data-target="#myModalOne" (click)="EditEvents(Event)"
+                              style="margin-right: 22px;">A</i>
+                          </div>
+                          <div class="col-lg-1">
+                          </div>
+                          <div class="col-lg-1" *ngIf="Event.approvalStatus=='Approved'" data-toggle="tooltip"
+                            title="Cancel">
+                            <i class="far fa-copyright" style="margin-right: 22px;" data-toggle="modal"
+                              data-target="#CancelNotes" (click)="OnCancel(Event)"></i>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <i class="fas fa-check-square actionAcpt" data-toggle="tooltip" title="Approved"
+                          *ngIf="Event.approvalStatus=='Approved'" style="color: green;
+                          font-size: 26px;
+                          margin-top: 17px;
+                          margin-left: 19px;"></i>
+                        <i class="fa fa-window-close actionRej" data-toggle="tooltip" title="Rejected"
+                          *ngIf="Event.approvalStatus=='Rejected'" style="color: red;
+                          font-size: 24px;
+                          margin-left: 18px;
+                          margin-top: 15px;"></i>
+                        <i class="fa fa-question-circle" style="    font-size: 26px;
+                        margin-top: 18px;
+                        margin-left: 18px;" data-toggle="tooltip" title="Pending"
+                          *ngIf="Event.approvalStatus=='Pending'"></i>
+                      </td>
+                    </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal -->
+          <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content" style="margin-top: 102px;">
+                <div class="modal-header">
+                  <h4>Attachments</h4>
+                  <div data-toggle="tooltip" title="Add Attachments" data-dismiss="modal">
+                    <i class=" i" style="margin-left: 221px;
+                    margin-top: 10px;
+                    font-size: 16px;" data-toggle="modal" data-target="#AddAttachments">Add Attachments</i>
+                  </div>
+                  <button type="button" class="close " data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+
+                  <div class="row" *ngFor="let Attachments of Attachmentlist">
+                    <div class="col-lg-6">
+                      <img style="width: 100%; height: auto;" src="{{Attachments.attachment}}">
+                      <div class="row">
+                        <div class="col-4">
+                          <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal"
+                            data-toggle="modal" data-target="#myModalTwo"
+                            (click)="UpdateNewAttachments(Attachments)">Update</button>
+                        </div>
+                        <div class="col-4">
+                          <button type="button" class="btn btn-default popupUpdatebutton" data-dismiss="modal"
+                            (click)="DeleteOldAttachments(Attachments)">Delete</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" *ngIf="NoImagesAvail">
+                  <div class="col-lg-12">
+                    <img src="assets/Login/noimage.jpg" style="width: 60%;height:auto;" data-dismiss="modal">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Modal 2-->
+          <div id="myModalOne" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content " style="margin-top: -30px;">
+                <div class="modal-header">
+                  <h4>Event Approval</h4>
+                  <button type="button" class="close " data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <h5>Event Name</h5>
+                    </div>
+                    <div class="col-lg-8">
+                      <input type="text" value="{{eventName}}" name="eventName" id="txt_EventName"
+                        class="form-control ">
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <h5>Event Start Date</h5>
+                    </div>
+                    <div class="col-lg-8">
+                      <input type="date" value="{{startDate}}" name="eventDate" id="txt_EventDate"
+                        class="form-control ">
+                    </div>
+                  </div>
+                  <br>
+
+                  <!-- <div class="row">
+                    <div class="col-lg-4">
+                      <h5>Event End Date</h5>
+                    </div>
+                    <div class="col-lg-8">
+                      <input type="date" value="{{endDate}}" name="endDate" id="txt_EventEndDate"
+                        class="form-control ">
+                    </div>
+                  </div>
+                  <br> -->
+
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <h5>Location</h5>
+                    </div>
+                    <div class="col-lg-8">
+                      <input type="text" value="{{unit}}" name="unit" id="txt_Eventunit" class="form-control ">
+                    </div>
+                  </div>
+                  <br>
+
+
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <h5>Raised By</h5>
+                    </div>
+                    <div class="col-lg-8">
+                      <input type="text" value="Admin" name="eventBooked" id="txt_EventBooked" class="form-control ">
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <h5>Start Time
+                      </h5>
+                    </div>
+                    <div class="col-lg-8">
+                      <input type="text" value="{{startTime}}" name="eventStart" id="txt_EventStart"
+                        class="form-control ">
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <h5>End Time
+                      </h5>
+                    </div>
+                    <div class="col-lg-8">
+                      <input type="text" value="{{endTime}}" name="eventEnd" id="txt_EventEnd" class="form-control ">
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-4">
+                      <button type="button" (click)="Approve($event)" class="popupbuttonAcpt"
+                        data-dismiss="modal">Approve</button>
+                    </div>
+                    <div class="col-lg-4">
+                      <button type="button" (click)="Reject($event)" class="popupbuttonRej"
+                        data-dismiss="modal">Reject</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <!-- <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Modal 3-->
+          <div id="myModalTwo" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content " style="margin-top: -31px;">
+                <div class="modal-header">
+                  <button type="button" class="close " data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <h5>Update Attachment
+                      </h5>
+                    </div>
+                    <div class="col-lg-8">
+                      <ngx-dropzone class="dropzone_vendorinvoice" id="dropzone_assetphoto" [showPreviews]="true"
+                        name="Photos" (filesAdded)="onFilesAdded($event)"></ngx-dropzone>
+                      <button type="button" class="btn btn-default popupbuttonupdate" data-dismiss="modal"
+                        (click)="Upload()">Update </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+          <!--Cancel Notes-->
+
+          <div id="CancelNotes" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content " style="margin-top: -30px;">
+                <div class="modal-header">
+                  <h4>Reason For Cancel</h4>
+                  <button type="button" class="close " data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-lg-1">
+                    </div>
+                    <div class="col-lg-2 ">
+                      <p style="padding:5px">Reason
+                      </p>
+                    </div>
+                    <div class="col-lg-5 ">
+                      <textarea id="txt_Cancel" [(ngModel)]="ReasonForCancelEntity.CancelReason" placeholder="Reason"
+                        class="form-control maindropdown" rows="4"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <button type="button" style="margin-left: 77px;" class="btn btn-default popupbutton"
+                    data-dismiss="modal" (click)="CancelEvents()">Save</button>
+                </div>
+                <div class="modal-footer">
+                  <!-- <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="AddAttachments" class="modal fade" role="dialog" style=" margin-top: 10%;">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header" style="height: 73px;">
+                  <h4 class="modal-title">Add Attachment</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <ngx-dropzone [showPreviews]="true" #dropzoneEventAttachments
+                          (filesAdded)="onFilesAddedAttachments($event)" class="dropzone_vendorinvoice"
+                          id="dropzone_Attachment"></ngx-dropzone>
+                        <button class="close" (click)="dropzoneEventAttachments.reset()">Clear Files</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <button data-toggle="modal" data-dismiss="modal" (click)="AddAttachments()" class="savebutton"
+                          type="button">Add</button>
+                      </div>
+                      <!-- <div class="col-lg-3">
+                          <button class="savebutton" type="button">delete</button>
+                        </div> -->
+                    </div>
+                  </div>
+
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div> -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,332 @@
+<div class="container-fluid Pages_background">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="header"> {{pageMenuTitle}}</h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+            <div class="row mainrow">
+                <div class="col-lg-12">
+                    <!-- <span class="building"> {{inventory_PageTitle}} </span>  -->
+                </div>
+            </div>
+        </div>
+    </div><br>
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard ">
+        <div>
+            <h3 class="panel-title clearfix formlabel">{{inventory_BreadChrumb}}</h3>
+        </div>
+        <hr>
+        <form>
+            <div class="row ">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">{{inventory_Item}} <span>*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select class="dropdown form-control" [(ngModel)]="newinventoryEntity.Name" name="Name"
+                        id="ddl_ItemName" (change)="SlectedItem($event)" placeholder="Search">
+                        <option value="0">Select Item</option>
+                        <option value="{{Inventory.id}}" *ngFor="let Inventory of InventoryList">
+                            {{Inventory.itemName}}
+                        </option>
+                    </select>
+                    <h1>Available Qty:{{availcount}}</h1>
+
+                    <span class="Validationlabels" *ngIf='Isempty && newinventoryEntity.Name==0'>* Please
+                        Fill
+                        {{inventory_Item}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">{{inventory_UsedCount}}</h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" value="{{usedCount}}" id="txt_UsedCount" disabled="disabled"
+                        class="form-control">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">Category</h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" value="{{Category}}" [(ngModel)]="newinventoryEntity.Category" id="Category"
+                        name="Category" disabled="disabled" class="form-control">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">Type</h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" value="{{typename}}" [(ngModel)]="newinventoryEntity.ItemType" id="ItemType"
+                        name="ItemType" disabled="disabled" class="form-control">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">Property<span>*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select [(ngModel)]="newinventoryEntity.BuildingID" disabled name="BuildingID"
+                        class="dropdown form-control" (change)="GetBuildingAddress($event)" id="ddl_newinventory"
+                        required placeholder="Select Building">
+                        <option value="0">Select Property</option>
+                        <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                    </select>
+                    <span class="Validationlabels" *ngIf='newinventoryEntity.BuildingID==0 && Isempty'>* Please
+                        Select
+                        Property</span>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel" style="margin: 4px;">{{inventory_Address}}</h5>
+                </div>
+                <div class="col-lg-4">
+                    <input value="{{BuildingAddress}}" id="txt_newinventoryAddress" required class="form-control">
+                </div>
+            </div><br>
+            <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">{{inventory_Floor}}<span>*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select [(ngModel)]="newinventoryEntity.Floor" name="Floor" class="dropdown form-control"
+                        id="ddl_newinventoryFloor" placeholder="Select Floor" (change)="UnitByID($event)">
+                        <option value="0">Select Floor</option>
+                        <option value="{{floor.id}}" *ngFor="let floor of FloorList">{{floor.floor}}</option>
+                    </select>
+                    <span class="Validationlabels" *ngIf='newinventoryEntity.Floor==0 && Isempty'>* Please
+                        Select
+                        {{inventory_Floor}}</span>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">{{inventory_Unit}}<span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <select [(ngModel)]="newinventoryEntity.Unit" name="Unit" class="dropdown form-control"
+                        id="ddl_newinventoryUnit">
+                        <option value="0">Select Unit</option>
+                        <option value="{{Units.id}}" *ngFor="let Units of Unitslist">{{Units.unitID}}</option>
+                    </select>
+                    <span class="Validationlabels" *ngIf='newinventoryEntity.Unit==0 && Isempty'>* Please
+                        Select
+                        {{inventory_Unit}}</span>
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">Inventory Location</h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" [(ngModel)]="newinventoryEntity.Location" name="Location"
+                        id="txt_newinventoryLocation" class="form-control">
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">{{inventory_CurrentQty}}<span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="number" value="{{availcount}}" [(ngModel)]="newinventoryEntity.CurrentQty"
+                        name="CurrentQty" max="{{availcount}}" class="form-control" id="txt_Currentqty">
+                    <span class="Validationlabels" *ngIf='newinventoryEntity.CurrentQty==0 &&Isempty '>*
+                        Please
+                        Fill
+                        {{inventory_CurrentQty}}</span>
+
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">{{inventory_MinimumQty}}<span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="number" [(ngModel)]="newinventoryEntity.MinimumQty" name="MinimumQty"
+                        class="form-control" id="txt_maxQty" max="{{availcount}}">
+                    <span class="Validationlabels" *ngIf='newinventoryEntity.MinimumQty==0&&Isempty '>*
+                        Please
+                        Fill
+                        {{inventory_MinimumQty}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">Expiry Date<span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="date" [(ngModel)]="newinventoryEntity.WarrantyExpiryDate" name="WarrantyExpiryDate"
+                        class="form-control" id="WarrantyExpiryDate">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">{{inventory_AssignedTo}}<span>*</span></h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select [(ngModel)]="newinventoryEntity.AssignedTo" name="AssignedTo" (change)="Assignedto($event)"
+                        class="dropdown form-control" required id="ddl_AssignedTo" placeholder="Search">
+                        <option value="0">Select Type</option>
+                        <option value="{{Users.id}}" *ngFor="let Users of Userslist">{{Users.short}}</option>
+                    </select>
+
+                    <span class="Validationlabels" *ngIf='newinventoryEntity.AssignedTo==0 && Isempty'>* Please
+                        Select
+                        {{inventory_AssignedTo}}</span>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="AssignedTypeID==1">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">Name<span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <!-- <input type="text" [(ngModel)]="newinventoryEntity.AssignedToName" name="AssignedToName"
+                        class="form-control" id="txt_maxQty"> -->
+
+                    <select [(ngModel)]="newinventoryEntity.AssignedToName" name="AssignedToName"
+                        class="dropdown form-control " required id="ddl_AssignedTo">
+                        <option value="0">Select User</option>
+                        <option value="{{Users.name}}" *ngFor="let Users of Ulist">{{Users.name}}</option>
+                    </select>
+
+                    <span class="Validationlabels" *ngIf='newinventoryEntity.AssignedToName==0 && Isempty'>* Please
+                        Select
+                        Name</span>
+                </div>
+            </div>
+
+
+            <div class="row" *ngIf="AssignedTypeID==2">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">Name<span>*</span></h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" style="width: 286px!important;" [(ngModel)]="newinventoryEntity.AssignedToName"
+                        name="AssignedToName" class="form-control maindropdown" id="txt_maxQty">
+                    <span class="Validationlabels"
+                        *ngIf='newinventoryEntity.AssignedToName==""&&Isempty ||newinventoryEntity.AssignedToName=="none"'>*
+                        Please
+                        Fill
+                        Name</span>
+                </div>
+            </div>
+
+            <br>
+            <div class="row" *ngIf="AssignedTypeID==4">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">Vendor Type
+                    </h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select [(ngModel)]="newinventoryEntity.VendorType" name="VendorType" (change)="VendorType($event)"
+                        class="dropdown form-control" id="ddl_AssignedTo" placeholder="Search">
+                        <option value="0">Select Type</option>
+                        <option value="{{Vendor.id}}" *ngFor="let Vendor of vendorlist">{{Vendor.short}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="AssignedTypeID==4">
+                <div class=col-lg-1> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">Vendor
+                    </h5>
+                </div>
+                <div class="col-lg-4 ">
+                    <select (change)="Vendor($event)" style="margin-top: 6px;"
+                        [(ngModel)]="newinventoryEntity.AssignedToName" class="dropdown form-control"
+                        placeholder="Search">
+                        <option value="0">Select Type</option>
+                        <option value="{{VNames.id}}" *ngFor="let VNames of VendorNameslist">{{VNames.vendorName}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" *ngIf="AssignedTypeID==4">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">Phone No. </h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="number" style="margin-top: 6px;" [(ngModel)]="newinventoryEntity.AssignedToPhoneNo"
+                        name="AssignedToPhoneNo" class="form-control" id="txt_maxQty">
+                </div>
+            </div>
+
+            <div class="row" *ngIf="AssignedTypeID==4">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">EmailID</h5>
+                </div>
+                <div class="col-lg-4">
+                    <input type="email" style="margin-top: 6px;" [(ngModel)]="newinventoryEntity.AssignedToEmailID"
+                        name="AssignedToEmailID" class="form-control" id="txt_maxQty">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">{{inventory_Description}}</h5>
+                </div>
+                <div class="col-lg-4">
+                    <textarea rows="5" style="margin-top: 6px;" [(ngModel)]="newinventoryEntity.Description"
+                        name="Description" class="form-control" id="txt_Description"
+                        placeholder="Description"></textarea>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-lg-1"> </div>
+                <div class="col-lg-1">
+                    <h5 class="formlabel">{{inventory_Photo}}</h5>
+                </div>
+                <div class="col-lg-4">
+                    <ngx-dropzone class="dropzone_vendorinvoice" (filesAdded)="onFilesAddedPhoto($event)"
+                        [showPreviews]="true" name="Photo" [(ngModel)]="newinventoryEntity.Photo" name="Photo"
+                        id="dropzone_newinventoryphoto">
+                    </ngx-dropzone>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div>
+                    <button class="savebutton" (click)="InsertInventory()" type="submit"
+                        id="btn_newinventorybutton">{{inventory_Save}}</button>
+                </div>
+
+                <div *ngIf="">
+                    <button class="savebutton" (click)="UpdateInventory()" type="submit"
+                        id="btn_newinventorybutton">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

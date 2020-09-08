@@ -1,0 +1,107 @@
+<div class="container-fluid Pages_background">
+
+  <div class="row">
+    <div class="col-lg-9">
+      <h4 class="Pages_header">CONTRACTOR DOCUMENTS</h4>
+    </div>
+
+    <div class="col-lg-3">
+      <div class="mainrow">
+        <!-- <div class="col-lg-12 BreadChrumbProperties">
+          <span class="CommercialWorkspace"> Property / Contractor Documents</span>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card maincard" style="margin-left: -4px;">
+    <div class="row">
+      <div class="col-lg-8 reqriedspan" style="padding: 25px;">
+        <br>
+        <form #loginForm="ngForm">
+          <div class="row">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Contractor
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <select class="form-control" id="ddl_BillType" [(ngModel)]="ContractorID" name="Country" required>
+                <option value="none"> Select Contractor</option>
+                <option *ngFor="let vendor of vendorlist" value="{{vendor.id}}">{{vendor.company}}</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="row ">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Date
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <input type="date" class="form-control" [(ngModel)]="Date" name="Date" required id="txt_Date"
+                placeholder="Date">
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Document Name
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <input type="text" class="form-control" [(ngModel)]="DocumentName" name="Document" required
+                id="txt_Document" placeholder="Document Name">
+            </div>
+          </div>
+
+
+          <div class="row ">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6> Description
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <textarea rows="4" id="Descriptions" class="form-control" [(ngModel)]="DocumentsDescriptions"
+                name="Descriptions" placeholder="Description"></textarea>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Attactments
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <ngx-dropzone class="dropzone_vendorinvoice" [showPreviews]="true"
+                (filesAdded)="onFilesAddedPhoto($event)" name="Photo" id="dropzone_assetphoto">
+              </ngx-dropzone>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-2">
+              <button class="savebutton" (click)="Save()" type="submit">Save</button>
+            </div>
+          </div>
+          <br>
+          <br>
+          <br>
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+</div>

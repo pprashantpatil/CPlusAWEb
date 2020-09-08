@@ -1,0 +1,224 @@
+<div class="container-fluid Pages_background">
+    <div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h4 class="Pages_header">Supplier Invoice</h4>
+            </div>
+
+        </div>
+    </div>
+    <div>
+        <div class="row shadow p-3 mb-5 bg-white maincard" style="    margin-right: 4px;
+            margin-top: 33px;">
+            <div class="col-lg-3 ">
+                <h6>Select Supplier</h6>
+                <select class="dropdown form-control topdropdown" id="ddl_invoiceSearchVendor"
+                    (change)="GetVendorPOIDs($event)" required="">
+                    <option value="none"> Select Supplier</option>
+                    <option *ngFor="let vendor of vendorlist" value="{{vendor.id}}">{{vendor.name}}</option>
+                </select>
+            </div>
+            <div class="col-lg-3 " style="    margin-left: 38px;">
+                <h6>{{invoice_SearchPO}}</h6>
+                <select class="dropdown form-control topdropdown" (change)="getItemsByOPID($event.target.value)"
+                    required="" id="ddl_invoiceSearchPO">
+                    <option value="none"> Select Po No.</option>
+                    <option *ngFor="let vendorpoid of filteredvendorPoidList" value="{{vendorpoid.id}}">
+                        {{vendorpoid.id}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="shadow p-3 mb-5 bg-white rounded row maincard" style="    margin-right: 7px;">
+        <div>
+            <h6 class="paneltitle">{{invoice_Title}}</h6>
+            <hr>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h6>{{invoice_Date}}</h6>
+                    <input type="date" [(ngModel)]="purchaseitemDate" class="form-control topdropdown "
+                        id="txt_purchaseitemDate">
+                    <!-- <input [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
+                                <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time> -->
+                </div>
+                <div class="col-lg-3">
+                    <h6>{{invoice_InvoiceNumber}}</h6>
+                    <input type="text" [(ngModel)]="InvoiceNumber" placeholder="{{invoice_InvoiceNumber}}"
+                        class="form-control topdropdown" id="txt_usr">
+                </div>
+                <div class="col-lg-3">
+                    <h6> Supplier Contact</h6>
+                    <input type="text" [(ngModel)]="VendorContact" placeholder="Select Supplier"
+                        class="form-control topdropdown" value="{{VendorContactName}}" id="txt_usr">
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h6>{{invoice_Attchment}}</h6>
+                    <ngx-dropzone [multiple]="false" [showPreviews]="true" (filesAdded)="oninvoicedocUpload($event)"
+                        class="dropzone_vendorinvoice_1"></ngx-dropzone>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <button type="submit" class="savebutton " (click)="addFieldValue()">{{invoice_Button}}</button>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <div class="container-fluid" style="margin-top:1%;">
+            <div class="table-responsive">
+                <!--  <table class="table table-bordered">
+                        <thead>
+                            <tr class="tableheader">
+                                <td>{{invoice_ItemName}} </td>
+                                <td>{{invoice_Warranty}} </td>
+                                <td>{{invoice_MfName}} </td>
+                                <td>{{invoice_PartNo}} </td>
+                                <td>{{invoice_Required}} </td>
+                                <td>{{invoice_ActualQuantity}} </td>
+                                <td>{{invoice_MRP}} </td>
+                                <td>{{invoice_Total}}</td>
+                                <td>{{invoice_Disc}}</td>
+                                <td>{{invoice_DiscTotal}} </td>
+                                <td>{{invoice_NetTotal}} </td>
+                                <td>{{invoice_Comments}}</td>
+                                <td>{{invoice_Delete}}</td>
+                            </tr>
+                        </thead>
+                       <tbody>
+                            <tr *ngFor="let tablerow of tablerows; let i = index">
+                                <td>
+                                    <select class="dropdown form-control" [(ngModel)]="tablerow.poitemtypeid" (change)="getpoitemspurchasedetails($event)">
+                                           <option value="none" selected="selected">Select Item</option>
+                                           <option value="{{poitem.itemID}}" *ngFor="let poitem of poitems">{{poitem.item}}</option>
+                                    </select>
+                                </td>
+                                <td><input type="date" [(ngModel)]="tablerow.expdate" class="form-control"></td>
+                                <td><input type="text" [(ngModel)]="tablerow.mfName" placeholder="{{invoice_MfName}}" class="form-control"></td>
+                                <td><input type="text" [(ngModel)]="tablerow.PartNo" placeholder="{{invoice_PartNo}}" class="form-control"></td>
+                                <td><input type="number" [(ngModel)]="tablerow.requriedqty" class="form-control"></td>
+                                <td><input type="number" [(ngModel)]="tablerow.actualqty" class="form-control"></td>
+                                <td><input type="number" [(ngModel)]="tablerow.mrp" class="form-control"></td>
+                                <td><input type="number" [(ngModel)]="tablerow.Total" class="form-control"></td>
+                                <td><input type="number" [(ngModel)]="tablerow.discount" class="form-control"></td>
+                                <td><input type="number" [(ngModel)]="tablerow.totalDiscount" class="form-control"></td>
+                                <td><input type="number" [(ngModel)]="tablerow.nettotal" class="form-control"></td>
+                                <td><input type="text" [(ngModel)]="tablerow.comments" placeholder="{{invoice_Comments}}" class="form-control"></td>
+                                <td class="TableActions">
+                                    <a (click)="deleteFieldValue(i)">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+    
+    
+                                </td>
+    
+                            </tr>
+                        </tbody> 
+                    </table>-->
+
+
+                <div class="row" *ngFor="let tablerow of tablerows; let i = index">
+                    <div class="col-lg-1"></div>
+
+                    <div class="col-lg-10" style="margin-left: -40px;">
+
+                        <div class="row gridforlist" style="padding: 26px;">
+
+                            <div class="col-lg-3">
+                                <p>{{invoice_ItemName}}</p>
+                                <select class="dropdown form-control" [(ngModel)]="tablerow.poitemtypeid"
+                                    (change)="getpoitemspurchasedetails($event)">
+                                    <option value="none" selected="selected">Select Item</option>
+                                    <option value="{{poitem.itemID}}" *ngFor="let poitem of poitems">{{poitem.item}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3">
+                                <p>{{invoice_Warranty}}</p>
+                                <input type="date" [(ngModel)]="tablerow.expdate" class="form-control">
+                            </div>
+                            <div class="col-lg-3">
+                                <p>{{invoice_MfName}}</p>
+                                <input type="text" [(ngModel)]="tablerow.mfName" placeholder="{{invoice_MfName}}"
+                                    class="form-control">
+                            </div>
+                            <div class="col-lg-2">
+                                <p>{{invoice_PartNo}}</p>
+                                <input type="text" style="width: 153px;" [(ngModel)]="tablerow.PartNo"
+                                    placeholder="{{invoice_PartNo}}" class="form-control">
+                            </div>
+                            <div class="col-lg-1">
+                                <i class="fa fa-times" title="Remove" style="margin-left: 32px;"
+                                    (click)="deleteFieldValue(i)" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-lg-3">
+                                <p>{{invoice_Required}}</p>
+                                <input type="number" [(ngModel)]="tablerow.requriedqty" disabled class="form-control">
+                            </div>
+                            <div class="col-lg-3">
+                                <p>{{invoice_ActualQuantity}}</p>
+                                <input type="number" [(ngModel)]="tablerow.actualqty" class="form-control">
+                            </div>
+                            <div class="col-lg-3">
+                                <p>{{invoice_MRP}}</p>
+                                <input type="number" [(ngModel)]="tablerow.mrp"
+                                    (input)="getTotal($event.target.value,tablerow)" class="form-control">
+                            </div>
+                            <div class="col-lg-3">
+                                <p>{{invoice_Total}}</p>
+                                <input type="number" [(ngModel)]="tablerow.Total" disabled class="form-control">
+                            </div>
+                            <div class="col-lg-3">
+                                <p>{{invoice_Disc}} %</p>
+                                <input type="number" [(ngModel)]="tablerow.discount"
+                                    (input)="getpercentage($event.target.value,tablerow)" class="form-control">
+                            </div>
+
+                            <div class="col-lg-2">
+                                <p>{{invoice_DiscTotal}} </p>
+                                <input type="number" [(ngModel)]="tablerow.totalDiscount" disabled class="form-control">
+                            </div>
+                            <div class="col-lg-1">
+                                <p>GST(%) </p>
+                                <input type="number" value="18" disabled style="width: 59px;
+                                    margin-left: -11px;" class="form-control">
+                            </div>
+                            <div class="col-lg-3">
+                                <p>{{invoice_NetTotal}}</p>
+                                <input type="number" [(ngModel)]="tablerow.nettotal" disabled class="form-control">
+                            </div>
+                            <div class="col-lg-3">
+                                <p>{{invoice_Comments}}</p>
+                                <input type="text" [(ngModel)]="tablerow.comments" placeholder="{{invoice_Comments}}"
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-4">
+                <button type="submit" class="savebutton updatevendorsave" id="btn_saveinvoice"
+                    (click)="savePoinvoicedetails()">Save Invoice
+                </button>
+            </div>
+            <div class="col-lg-3">
+            </div>
+        </div>
+    </div>
+
+
+</div>

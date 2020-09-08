@@ -1,0 +1,162 @@
+<div class="container-fluid Pages_background Mobilecss">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 style="margin-bottom: -20px;" class="Pages_header">TRANSMITTALS</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+
+  </div>
+  <div>
+    <div class="card maincard" style="margin-top: 41px; ">
+      <div class="row">
+        <div class="col-lg-8 reqriedspan">
+
+          <form #loginForm="ngForm" style="margin-top: 20px;;">
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <p>Project
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <select name="ProjectID" class="dropdown form-control" disabled name="fhdhf" (change)="GetProjectID($event)" [(ngModel)]="ProjectID"
+                  required id="ddl_updateassetsBuilding">
+                  <option value="0" selected="selected"> Project</option>
+                  <option value="{{project.id}}" *ngFor="let project of projectlist">{{project.name}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <p>Subject
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <input type="text" id="Subject" name="Subject" [(ngModel)]="Subject" class="form-control">
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <p>From
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <!-- <input type="text" id="From" name="From" [(ngModel)]="From" class="form-control"> -->
+                <select name="StaffID" class="dropdown form-control " [(ngModel)]="From" required id="StaffID">
+                  <option value="0" selected="selected"> Select Staff</option>
+                  <option value="{{build.name}}" *ngFor="let build of memberlist">{{build.name}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <p>To
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <!-- <input type="text" id="To" name="To" [(ngModel)]="To" class="form-control"> -->
+                <select name="To" class="dropdown form-control " [(ngModel)]="To" required id="To">
+                  <option value="0" selected="selected"> Client Contact</option>
+                  <option value="{{project.firstName}}" *ngFor="let project of ClientContacts">{{project.firstName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <!-- <div class="row">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <p>CC
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7 form-group">
+                <input type="text" id="CC" name="CC" [(ngModel)]="CC" class="form-control">
+              </div>
+            </div> -->
+
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <p>Date
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <!-- <input [(ngModel)]="SentDate" name="JoiningDate" type="date" id="txt_JoiningDate" min="{{mindate}}" required class="form-control"> -->
+
+                <input type="date" [(ngModel)]="SentDate" name="SentDate" id="txt_SentDate" class="form-control " min="{{mindate}}">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <p>Description
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <textarea rows="3" id="Description" [(ngModel)]="Description" name="Description" class="form-control" placeholder="Description"
+                  required></textarea>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <p>Remarks
+                  <span>*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <textarea rows="3" id="Remarks" name="Remarks" [(ngModel)]="Remarks" class="form-control" placeholder="Remarks" required></textarea>
+              </div>
+            </div>
+            <br>
+            <div *ngIf="paramID==null" class="row">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-2">
+                <p style="padding:5px">Attachment
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7">
+                <input type="file" class="form-control" placeholder="Attachment" accept="image/x-png,image/gif,image/jpeg,application/pdf,.xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx"
+                  (change)="handleFileSelect2($event)" class="form-control">
+              </div>
+            </div>
+
+            <div class="row" *ngIf="this.paramID==null">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-4"></div>
+              <div class="col-lg-2 mobsavebtn">
+                <button type="submit" style="margin-bottom: 100px" (click)="Save()" class="btn btn-block btn-md savebutton">Save</button>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="this.paramID!=null">
+              <div class=col-lg-1> </div>
+              <div class="col-lg-4"></div>
+              <div class="col-lg-2 mobsavebtn">
+                <button type="submit" style="margin-bottom: 100px" (click)="Update()" class="btn btn-block btn-md savebutton">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

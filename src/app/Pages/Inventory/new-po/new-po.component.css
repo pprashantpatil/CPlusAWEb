@@ -1,0 +1,88 @@
+.al-breadcrumb {
+    background: none;
+    color: #666666;
+    padding: 0;
+    margin: 0;
+    float: right;
+    padding-top: 11px;
+}
+
+.mainrow {
+    float: right;
+    margin-top: 26px;
+}
+
+.maincard {
+    float: initial;
+    background: white;
+}
+
+.addnewItem {
+    width: 25%;
+}
+
+.savepo {
+    width: 100%;
+}
+
+.tablerowwidth{
+    width:63px;
+
+}
+
+
+.newpoddl{
+    width: 251px;
+margin-left: -19px;
+
+}
+
+.newpoddl1{
+    width: 260px;
+}
+
+
+
+@media screen and (min-width: 1600px) {
+    .newpoddl{
+        width: 251px;
+    margin-left: -19px;
+    
+    }
+   
+    
+  }
+  @media screen and (min-width: 1900px) {
+    .newpoddl{
+        width: 365px;
+        margin-left: 5px;
+    
+    }
+
+    .newpoddl1{
+        width: 260px;
+    }
+    
+  }
+
+  
+@media screen and (max-width: 1024px) {
+    .header{
+        margin-top: 60px;
+        margin-left: 15px;
+    }
+    .maincard{
+        margin-left: 10px;
+    }
+    .ddd{
+        margin-top: -26px;
+    }
+    
+  
+    }
+    @media screen and (min-width: 1400px) {
+      .ddd{
+          margin-top: -26px;
+      }
+      
+    }

@@ -1,0 +1,78 @@
+<div class="container-fluid Pages_background">
+    <div>
+        <div class="row">
+            <div class="col-lg-5">
+                <h4 class="Pages_header">{{paymentsTitle}}</h4>
+            </div>
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-5">
+                <div class="mainrow">
+                    <div class="col-lg-12 BreadChrumbProperties">
+                        <span> {{employeesalarydashboardLanguage_breadchrumb}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+            <div class="row  p-2">
+                <div class="col-lg-12 pannel">
+                    <h6 class="paneltitle">{{employeesalarydashboardLanguage_pageTitle}}</h6>
+                </div>
+            </div>
+
+            <div class="row p-4">
+                <div class="col-lg-4">
+                    <ng-daterangepicker [(ngModel)]="value" [options]="options" (ngModelChange)="selectedDate($event)">
+                    </ng-daterangepicker>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" id="txt_employeeSearch" [(ngModel)]="BuildingSearch" placeholder="search.."
+                        class="form-control">
+                </div>
+                <div class="col-lg-3">
+                    <select class="dropdown form-control" id="ddl_BuildingName" (change)="FilterBuilding($event)"
+                        required>
+                        <option value='' selected="selected">Select Building</option>
+                        <option *ngFor="let Build of Buildinglist" value="{{Build.name}}">{{Build.name}}</option>
+
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="header" style="font-size: 16px;">
+                        {{employeesalarydashboardLanguage_TotalSalary}}:{{total}}</h6>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12  table-responsive">
+                        <table class="table table-bordered table-hover table-condensed">
+                            <tbody>
+                                <tr class="tableheader tableheaderfont">
+                                    <td>{{employeesalarydashboardLanguage_Building}}</td>
+                                    <td>{{employeesalarydashboardLanguage_staffName}}</td>
+                                    <td>{{employeesalarydashboardLanguage_GrossSalary}}</td>
+                                    <td>{{employeesalarydashboardLanguage_Deductions}}</td>
+                                    <td>{{employeesalarydashboardLanguage_NetSalary}}</td>
+                                    <td>{{employeesalarydashboardLanguage_PaidDate}}</td>
+                                    <td>{{employeesalarydashboardLanguage_PaidFortheMonth}}</td>
+                                </tr>
+                                <tr *ngFor="let employeesal of employeesalList | filter:BuildingSearch">
+                                    <td>{{employeesal.building}}</td>
+                                    <td>{{employeesal.staffName}}</td>
+                                    <td>{{employeesal.grossSalary}}</td>
+                                    <td>{{employeesal.deductions}}</td>
+                                    <td>{{employeesal.netSalary}}</td>
+                                    <td>{{employeesal.month}}</td>
+                                    <td>{{employeesal.remarks}}</td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>

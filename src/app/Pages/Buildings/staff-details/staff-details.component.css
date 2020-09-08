@@ -1,0 +1,60 @@
+.maincard h3 {
+    padding: 1%;
+}
+
+.dropzone_vendorinvoice {
+    height: 66px;
+    border: 2px solid #717386;
+    width: 323px;
+}
+
+/* Start of Mobile CSS */
+
+.Mobilecss{
+    margin-left: 0px;
+}
+
+
+@media screen and (min-width: 320px) {
+    .Mobilecss{
+        margin-left: 14px;
+    }
+    
+  }
+
+  @media screen and (min-width: 1900px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1600px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1400px) {
+    .maincard{
+        margin-left: -14px;margin-top:20px;margin-right: 12px;
+    }
+  
+    
+  }
+  @media screen and (max-width: 1280px) {
+    .maincard{
+      margin-left: -30px;
+    margin-right: 18px;
+    margin-top: 20px;
+    }
+    .Pages_header{
+      margin-left: -23px;
+    }
+  
+    
+  }
+
+
+  /*End of Mobile CSS*/

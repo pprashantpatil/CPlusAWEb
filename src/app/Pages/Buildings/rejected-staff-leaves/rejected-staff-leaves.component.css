@@ -1,0 +1,52 @@
+.dashbutton {
+    border-radius: 10px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 30px;
+    margin-bottom: 12px;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .header{
+        margin-top: 60px;
+        margin-left: 15px;
+    }
+    .maincard{
+        margin-left: 10px;
+        margin-top: 0px;
+    }
+    .ddd{
+        margin-top: -26px;
+    }
+    .dashbutton{
+        margin-left: 20px;
+    }
+    
+  
+    }
+   
+    @media screen and (min-width: 1400px) {
+      
+        .label1{
+            margin-left: 1052px;
+        }
+        .maincard{
+            margin-top: 0px;
+        } 
+        .dashbutton{
+            margin-left: 102px;
+        }
+        
+      }
+      @media screen and (max-width: 1280px){
+    
+        
+        .label1{
+            margin-left: 863px;
+        }
+      
+    
+    }

@@ -1,0 +1,19 @@
+.markasread {
+    width: 100px;
+    margin-top: 13px;
+    border-radius: 6px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    height: 36px;
+    font-size: 12px;
+}
+
+.markAllasread {
+    width: 155px;
+    border-radius: 6px;
+    background-color: #00b5d7;
+    color: white;
+    border: none;
+    height: 36px;
+}

@@ -1,0 +1,231 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-5">
+      <h4 class="Pages_header">New Payrolls</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building" style="margin-left: 204px;"> Staff/ Payrolls</span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard ">
+    <div class="row subheader">
+      <div class="col-lg-12">
+        <h4 class="paneltitle">New Payrolls</h4>
+      </div>
+    </div>
+    <hr>
+    <form>
+      <!-- <div class="row">
+          <div class="col-lg-1">
+          </div>
+          <div class="col-lg-2">
+            <p style="padding:5px">Building Name<span style="color: red;">*</span> </p>
+          </div>
+          <div class="col-lg-5">
+            <select class="dropdown form-control" id="ddl_BuildingName" [(ngModel)]="BuildingID"
+              (change)="getbuildingID($event)" required>
+              <option selected="0">Select Building</option>
+              <option *ngFor="let Build of Buildinglist" value="{{Build.id}}">{{Build.name}}</option>
+            </select>
+          </div>
+        </div> -->
+
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+          <p style="padding:5px">
+            Staff Name<span style="color: red;">*</span> </p>
+        </div>
+        <div class="col-lg-5">
+          <select class="dropdown form-control" (change)="GetStaffID($event)" id="ddl_BuildingName"
+            [(ngModel)]="StaffEntity.StaffID" name="BuildingName" required>
+            <option selected="selected">Select Staff</option>
+            <option *ngFor="let staff of Stafflist" value="{{staff.id}}">{{staff.name}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Designation</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" [(ngModel)]="StaffEntity.Designation" name="Designation" id="Designation"
+            class="form-control" placeholder="Designation">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Department</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="text" [(ngModel)]="StaffEntity.Department" name="Department" id="Department" class="form-control"
+            placeholder="Department">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">MobileNo</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" [(ngModel)]="StaffEntity.MobileNo" name="MobileNo" id="MobileNo" class="form-control"
+            placeholder="MobileNo">
+        </div>
+      </div>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">EmailID</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="email" [(ngModel)]="StaffEntity.EmailID" name="EmailID" id="EmailID" class="form-control"
+            placeholder="EmailID">
+        </div>
+      </div>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Total Leaves Entitled</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" [(ngModel)]="Staffavailableleaves" name="TotalLeavesEntitled" id="TotalLeavesEntitled"
+            value="{{Staffavailableleaves}}" class="form-control" placeholder="Total Leaves">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Leaves/Month</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" [(ngModel)]="StaffEntity.LeavesthisMonth" name="LeavesthisMonth" id="LeavesthisMonth"
+            class="form-control" placeholder="Leaves/Month">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">LOP Days</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" [(ngModel)]="NoOfLeaves" name="LOP" id="LOPDays" class="form-control"
+            placeholder="LOPDays" value="{{NoOfLeaves}}">
+        </div>
+      </div>
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">LOP Amount</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" [(ngModel)]="LOPAmounts" name="LOPAmount" id="LOPAmount" class="form-control"
+            placeholder="LOPAmount" value="{{LOPAmounts}}">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Basic Salary </h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" name="BaseSalary" id="BaseSalary" value="{{BaseSalary}}" class="form-control"
+            placeholder="Gross Salary">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">SSS Rate</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" [(ngModel)]="StaffEntity.SSSRate" name="SSS" id="SSS"
+            class="form-control" placeholder="SSS Rate">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Pigibig Rate</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" [(ngModel)]="StaffEntity.PagibigRate" name="Pigibig" id="Pigibig" class="form-control"
+            placeholder="Pigibig Rate">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Philihealth</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" [(ngModel)]="StaffEntity.PhiliHealth" name="Tax" id="Philihealth" class="form-control"
+            placeholder="Philihealth">
+        </div>
+      </div>
+
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Withholding Tax</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" [(ngModel)]="StaffEntity.WithholdingTax" name="Withholding" id="Withholding"
+            class="form-control" placeholder="Withholding Tax">
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Gross Salary/Month</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" [(ngModel)]="StaffmonthlySalary" name="GrossSalaryMonthly" id="GrossSalaryMonthly"
+            value="{{StaffmonthlySalary}}" class="form-control" placeholder="Gross Salary">
+        </div>
+      </div>
+
+
+      <div class="row ">
+        <div class=col-lg-1> </div>
+        <div class="col-lg-2">
+          <h5 class="formlabel" style="padding: 5px">Net Pay / Month</h5>
+        </div>
+        <div class="col-lg-5">
+          <input type="number" name="NetPay" id="NetPay" [(ngModel)]="this.StaffEntity.NetPayMonthly "
+            class="form-control" placeholder="Net Pay Monthly">
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-2" *ngIf="PayrollsID==null">
+          <button class="savebutton" (click)="InsertPhiliPayrolls()" id="btn_savePayrolls" type="submit">Save</button>
+        </div>
+        <div class="col-lg-2" *ngIf="PayrollsID!=null">
+          <button class="savebutton" (click)="UpdateStaffDetails()" id="btn_savePayrolls" type="submit">Update</button>
+        </div>
+      </div>
+
+    </form>
+  </div>

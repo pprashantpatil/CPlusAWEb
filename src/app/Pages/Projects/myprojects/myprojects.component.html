@@ -1,0 +1,112 @@
+<div class="container-fluid Pages_background">
+    <div>
+      <div class="row">
+        <div class="col-lg-12">
+          <h4 class="Pages_header">My Projects</h4>
+        </div>
+      </div>
+    </div>
+  
+  
+    <div class="card maincard" style="margin-top: 41px;">
+  
+      <form #staffForm="ngForm" style="margin-top: 20px;">
+        <div class="row divForm">
+          <div class="col-lg-8 reqriedspan">
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-3 ">
+                <p style="padding:5px">Project Name
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7 ">
+                <input type="text" [(ngModel)]="ProjectName" name="ProjectName" required id="ProjectName" placeholder="Project Name" class="form-control">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-3">
+                <p style="padding:5px">Project Number
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7 ">
+                <input type="text" [(ngModel)]="ProjectNumber" name="ProjectNumber" required id="ProjectNumber" placeholder="Project Number"
+                  class="form-control">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-3 ">
+                <p style="padding:5px">Building
+                  <span class="starspan">*</span>
+                </p>
+              </div>
+              <div class="col-lg-7 ">
+                <select name="BuildingID" class="dropdown form-control " required id="ddl_updateassetsBuilding" [(ngModel)]="BuildingID" (click)="GetBuildingID($event)">
+                  <option value="0" selected="selected">Select Building</option>
+                  <option value="{{build.id}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6 style="font-size: 14px;">Project Manager
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7 ">
+                <select class="form-control" name="ProjectManagerId" [(ngModel)]="ProjectManagerId" (change)="GetStaffID($event)">
+                  <option value="" selected>Select Manger</option>
+                  <option *ngFor="let staff of stafflist" value={{staff.id}}>{{staff.name}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row ">
+              <div class=col-lg-2> </div>
+              <div class="col-lg-3">
+                <h6 style="font-size: 14px;"> Description
+                  <span>*</span>
+                </h6>
+              </div>
+              <div class="col-lg-7">
+                <textarea rows="4" cols="30" [(ngModel)]="description" required name="workdescription" class="form-control" placeholder="Description"> </textarea>
+              </div>
+            </div>
+            <br>
+  
+            <div *ngIf="paramID==null" class="row">
+              <div class="col-lg-5">
+              </div>
+              <div class="col-lg-2">
+                <button class="btn btn-block btn-md" style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);" (click)="Save()">Save</button>
+              </div>
+              <div class="col-lg-5">
+              </div>
+              <br>
+            </div>
+            <div *ngIf="paramID!=null"  class="row">
+              <div class="col-lg-5">
+              </div>
+              <div  class="col-lg-2">
+                <button class="btn btn-block btn-md" style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);" (click)="Update()">Update</button>
+              </div>
+              <div class="col-lg-5">
+              </div>
+              <br>
+            </div>
+            <br>
+          </div>
+        </div>
+      </form>
+    </div>
+    <br>

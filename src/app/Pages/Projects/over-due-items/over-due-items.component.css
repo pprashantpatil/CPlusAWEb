@@ -1,0 +1,57 @@
+/* Start of Mobile CSS */
+
+.Mobilecss{
+    margin-left: 0px;
+}
+
+label{
+  margin-right: 10px;
+}
+@media screen and (min-width: 320px) {
+    .Mobilecss{
+        margin-left: 15px;
+    }
+    
+  }
+
+  @media screen and (min-width: 1900px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1600px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1400px) {
+    .Mobilecss{
+        margin-left: -12px;
+    }
+    
+  }
+  @media screen and (max-width: 1024px) {
+   
+    .maincard{
+        width: 780px;
+    }
+    .btt{
+        margin-left: 55px;;
+    }
+  }
+  @media screen and (max-width: 1024px) {
+   
+    .maincard{
+        width: 780px;
+    }
+    .btt{
+        margin-left: 55px;;
+    }
+  }
+
+
+  /*End of Mobile CSS*/

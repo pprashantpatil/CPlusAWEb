@@ -1,0 +1,112 @@
+<div class="container-fluid Pages_background ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="header">Maintenance Reports</h4>
+    </div>
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-4">
+      <div class="row mainrow">
+        <div class="col-lg-12 BreadChrumbProperties">
+          <span class="purchasereport" style="margin-left: 71px;">Reports / Maintenance Reports </span></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12">
+          <!-- <button type="button" routerLink="/UpdateVendor" routerLinkActive="active-link" id="btn_button"
+                    class="dashbutton">New Vendor</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+      Export To Excel
+    </button> -->
+  </div>
+
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard ">
+    <div class="row">
+      <div class="col-lg-4">
+        <h6>{{vendorPaymentReport_SelectDate}}</h6>
+        <ng-daterangepicker [(ngModel)]="SelectedDateRange" (ngModelChange)="selectedDate($event)" [options]="options1">
+        </ng-daterangepicker>
+      </div>
+      <div class="col-lg-3">
+        <h6>{{vendorPaymentReport_SelectDate}}</h6>
+        <select class="form-control" id="ddl_paymentsBuilding" (change)="filterbuilding($event)">
+          <option value> Select Building</option>
+          <option value="{{build.name}}" *ngFor="let build of Buildinglist">{{build.name}}</option>
+        </select>
+      </div>
+      <div class="col-lg-1">
+          <h4 style="font-size: 16px;font-size: 20px;text-align: center;">Total:{{GrandTotal}}</h4>
+      </div>
+      <div class="col-lg-2">
+        <button type="button" id="btn_button" class="btn btn-success"
+          style="margin-left: 200px;background-color: #00b5d7;" (click)="captureScreen()">Export To Excel</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="shadow p-3 mb-5 bg-white rounded  maincard " style="font-size: 12px;">
+    <div>
+      <h6 class="paneltitle">{{vendorPaymentReport_Title}}
+      </h6>
+      <hr>
+      <div class="row" style="width:1037px;margin-left: 5px;">
+        <!-- <div class="col-lg-7"></div>
+        <div class="col-lg-3" style="background: antiquewhite;margin: 3px;border: #0000002e solid;">
+          <h4 style="font-size: 16px;font-size: 20px;text-align: center;">Grand Total:{{GrandTotal}}</h4>
+        </div> -->
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr class="tableheader">
+              <td>Date</td>
+              <td>Raised By</td>
+              <td>Building Name</td>
+              <td>Floor</td>
+              <td>Unit</td>
+              <td>Asset</td>
+              <td>Warranty Till</td>
+              <td>Complaint</td>
+              <td>Assigned Vendor</td>
+              <td>Internal Users</td>
+              <td>Status</td>
+              <td>Charges</td>
+              <td>Inventory Consumed</td>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Vendorpayments of FilteredVendorpaymentsList|filter:buildname">
+              <td>{{Vendorpayments.duedate|date}}</td>
+              <td>{{Vendorpayments.raisedby}}</td>
+              <td>{{Vendorpayments.buildingname}}</td>
+              <td>{{Vendorpayments.floor}}</td>
+              <td>{{Vendorpayments.unitID}}</td>
+              <td>{{Vendorpayments.equipmentname}} </td>
+              <td>{{Vendorpayments.warrantyTill|date}}</td>
+              <td>{{Vendorpayments.request}}</td>
+              <td>{{Vendorpayments.vendorName}}</td>
+              <td>{{Vendorpayments.userName}}</td>
+              <td>{{Vendorpayments.status}}</td>
+              <td>{{Vendorpayments.serviceCost}}</td>
+              <td>{{Vendorpayments.list_Output}}</td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

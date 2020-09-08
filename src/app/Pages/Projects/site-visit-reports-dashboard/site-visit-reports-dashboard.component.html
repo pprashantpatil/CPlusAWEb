@@ -1,0 +1,126 @@
+<div class="container-fluid Pages_background">
+    <div>
+        <div class="row">
+            <div class="col-lg-3">
+                <h4 class="Pages_header">Site Visit Reports</h4>
+            </div>
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-3">
+                <div class="mainrow">
+                    <div class="col-lg-12 BreadChrumbProperties">
+                        <span> Project /Site Visit Reports</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row breadCrumbHeadderProperties">
+            <div class="col-lg-12 dashbutton">
+                <button routerLink="/sitevisitreport" type="button" id="btn_button">Add SiteVisit Report </button>
+            </div>
+        </div>
+    </div>
+  
+    <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+        <div class="row  p-2">
+            <div class="col-lg-12 pannel">
+                <h6 class="paneltitle">Site Visit Report</h6>
+            </div>
+        </div>
+  
+        <div class="row p-4">
+          <div class="col-lg-4">
+              <ng-daterangepicker [(ngModel)]="value" [options]="options">
+              </ng-daterangepicker>
+          </div>
+          <div class="col-lg-3">
+              <select class="dropdown form-control" id="ddl_BuildingName" name="projectID" [(ngModel)]="projectID"
+                  (change)="GetProjectID($event)" required>
+                  <option value="0" selected="selected"> Select Project</option>
+                  <option value="{{build.id}}" *ngFor="let build of projectlist1">{{build.project}}</option>
+              </select>
+          </div>
+            <!-- <div class="col-lg-3">
+                <select class="dropdown form-control" id="ddl_BuildingName"  required>
+                    <option value="none" selected="selected">Select Project</option>
+                </select>
+            </div> -->
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12  table-responsive">
+                    <table class="table table-bordered table-hover table-condensed" style="text-align: center;">
+                        <tbody>
+                            <tr class="tableheader tableheaderfont" style="background-color:#00b5d7; color: white;">
+                                <td>Project Name</td>
+                                <td>Name</td>
+                                <td>Date</td>
+                                <td>Time</td> 
+                                <td>Observation</td>
+                                <td>Actions</td>
+                            </tr>
+                            <tr *ngFor="let project of projectlist">
+                                <td>{{project.project}}</td>
+                                <td>{{project.name}}</td>
+                                <td>{{project.date|date}}</td>
+                                <td>{{project.time}}</td>
+                                <td>{{project.observation}}</td>
+                                <td>
+                                  <i  class="fa fa-image" title="Attachements" aria-hidden="true"
+                                  data-toggle="modal" data-target="#myModalAttachments" title="Attachements"
+                                  (click)="Attachment(project)"></i>&nbsp;
+                                  <i class="fa fa-edit" title="Edit" [routerLink]="['/infoexchange',project.id]" ></i>&nbsp;
+                                    <i class="far fa-trash-alt" title="Delete" (click)="DeleteProject(project.id)"></i></td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModalAttachments" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content" style="margin-top: 100px;">
+              <div class="modal-header">
+                  <h4>Attachment</h4>
+                  <!-- <div data-toggle="tooltip" title="Add Attachment" data-dismiss="modal">
+                      <i class=" i" style="margin-left: 235px;
+                                margin-top: 10px;
+                                font-size: 16px; " data-toggle="modal" data-target="#AddAttachment">Add
+                          Attachment</i>
+                  </div> -->
+  
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <div class="row" *ngFor="let Attachment of Attachmentlist">
+                      <div class="col-lg-6">
+                          <img style="width: 100%; height: auto;" src="{{Attachment.attachments}}">
+                          <div class="row">
+                              <!-- <div class="col-4">
+                                  <button type="button" class="btn btn-default popupUpdatebutton"
+                                      data-dismiss="modal" data-toggle="modal" data-target="#AttachmentsUpdate"
+                                      (click)="UploadAttachments(Attachment)">Update</button>
+                              </div>
+                              <div class="col-4">
+                                  <button type="button" class="btn btn-default popupUpdatebutton"
+                                      data-dismiss="modal" (click)="DeleteAttachment(Attachment)">Delete</button>
+                              </div> -->
+                          </div>
+                      </div>
+                  </div>
+                  <!-- <div class="row" *ngIf="NoImagesAvail">
+                      <div class="col-lg-12">
+                          <img src="assets/Login/noimage.jpg" style="width: 60%;height:auto;"
+                              data-dismiss="modal">
+                      </div>
+                  </div> -->
+              </div>
+              <!-- <div class="modal-footer">
+                  <button type="button" class="btn btn-default popupUpdatebutton"
+                      data-dismiss="modal">Close</button>
+              </div> -->
+          </div>
+  
+      </div>
+  </div>

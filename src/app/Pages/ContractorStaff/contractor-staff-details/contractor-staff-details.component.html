@@ -1,0 +1,501 @@
+<div class="container-fluid Pages_background">
+  <div>
+      <div class="row">
+          <div class="col-lg-3">
+              <h4 class="Pages_header">{{staffDetailsTitle}}</h4>
+          </div>
+          <div class="col-lg-6">
+          </div>
+          <div class="col-lg-3">
+              <div class="mainrow">
+                  <div class="col-lg-12 BreadChrumbProperties">
+                      <span> Property /Add Staff</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+  <div class="card maincard">
+      <div class="row">
+          <div class="col-lg-12">
+              <h3 class="panel-title formlabel">{{pageMenuTitle}}</h3>
+          </div>
+
+      </div>
+      <hr>
+      <div class="row divForm">
+          <div class="col-lg-8 reqriedspan">
+              <form >
+                  <!-- <div class="row " *ngIf="paramID==null">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">{{staffDetails_Building}} <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7 ">
+                          <select class="dropdown form-control" id="ddl_BuildingName" (change)="getbuildingID($event)"
+                              required>
+                              <option selected="selected">Select Building</option>
+                              <option *ngFor="let Build of Buildinglist" value="{{Build.id}}">{{Build.name}}</option>
+
+                          </select>
+
+                          <span class="Validationlabels" *ngIf='BuildingID==undefined && Isempty'>* Please
+                              Fill
+                              {{staffDetails_Building}}</span>
+                      </div>
+                  </div>
+
+                  <div class="row" *ngIf="paramID!=null">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">{{staffDetails_Building}} <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7 ">
+                          <select class="dropdown form-control" id="ddl_BuildingName" [(ngModel)]="buildID"
+                              name="buildID" required>
+                              <option value="none">Select Building</option>
+                              <option *ngFor="let Build of Buildinglist" value="{{Build.id}}">{{Build.name}}</option>
+
+                          </select>
+
+                          <span class="Validationlabels" *ngIf='buildID=="none" && Isempty'>* Please
+                              Fill
+                              {{staffDetails_Building}}</span>
+
+                      </div>
+                  </div>
+
+                  <br> -->
+                  <div class="row ">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;"> {{staffDetails_Name}} <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" type="text" [(ngModel)]="name" name="name"
+                              id="txt_SatffDetails_name" required placeholder=" {{staffDetails_Name}}">
+
+
+                      </div>
+                  </div>
+                  <br>
+                  <div class="row ">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">{{staffDetails_Phone}}<span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" type="text" [(ngModel)]="phoneno"
+                              onkeypress='return (event.charCode > 47 && event.charCode < 58)' maxlength="10"
+                              name="phoneno" required placeholder=" {{staffDetails_Phone}}">
+                          <span class="Validationlabels" *ngIf='Isempty &&(10>phoneno.length) '>* Please
+                              Fill
+                              {{staffDetails_Phone}}</span>
+
+                      </div>
+                  </div>
+                  <br>
+                  <div class="row ">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;"> {{staffDetails_EmailID}} </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input type="email" class="form-control" [(ngModel)]="emailid" name="emailid" required
+                              id="txt_SatffDetails_email" placeholder="{{staffDetails_EmailID}} "
+                              pattern="^[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_]+)*@[a-z0-9]+(\-[a-z0-9]+)*(\.[a-z0-9]+(\-[a-z0-9]+)*)*\.[a-z]{2,4}$">
+                      </div>
+                  </div>
+                  <br>
+
+
+
+                  <div class="row " *ngIf="paramID==null">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">{{staffDetails_StaffType}} <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <select class="dropdown form-control" id="ddl_BuildingName"
+                              (change)="getStafftypeID($event)" required>
+                              <option selected="selected">Select Staff</option>
+                              <option *ngFor="let Staff of StaffTypelist" value="{{Staff.id}}">{{Staff.short}}
+                              </option>
+
+                          </select>
+
+                          <span class="Validationlabels" *ngIf='StafftypeID==undefined && Isempty'>* Please
+                              Fill
+                              {{staffDetails_StaffType}}</span>
+
+                      </div>
+                  </div>
+
+                  <div class="row " *ngIf="paramID!=null">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">{{staffDetails_StaffType}} <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <select class="dropdown form-control" id="ddl_BuildingName" [(ngModel)]="stafftypeID"
+                              name="stafftype" required>
+                              <option value="none">Select Staff</option>
+                              <option *ngFor="let Staff of StaffTypelist" value="{{Staff.id}}">{{Staff.short}}
+                              </option>
+                          </select>
+                          <span class="Validationlabels" *ngIf='stafftypeID=="none" && Isempty'>* Please
+                              Fill
+                              {{staffDetails_StaffType}}</span>
+                      </div>
+                  </div>
+                  <br>
+
+                  <div class="row" *ngIf="StafftypeID==6 || stafftypeID==6">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;"> Other Name <span></span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input type="text" id="txt_SatffDetails_othername" [(ngModel)]="othername" name="othername"
+                              class="form-control" required placeholder="Other Name">
+                      </div>
+                  </div>
+                  <br>
+
+                  <div class="row">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">{{staffDetails_Address}} <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <textarea rows="3" id="txt_SatffDetails_address" [(ngModel)]="address" name="address"
+                              class="form-control" placeholder="{{staffDetails_Address}}" required></textarea>
+                      </div>
+                  </div>
+
+                  <br>
+<!-- 
+                  <div class="row">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Select Supervisor<span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+
+
+
+                          <select class="dropdown form-control" id="dSupervisor" [(ngModel)]="Supervisor"
+                              name="Supervisor" required>
+                              <option value="none">Select Supervisor</option>
+                              <option *ngFor="let Super of SupervisorLists" value="{{Super.id}}">
+                                  {{Super.name}}
+                              </option>
+                          </select>
+                      </div>
+                  </div>
+                  <br> -->
+                  <div class="row">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">{{staffDetails_Joining}}<span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <!-- <input class="form-control" id="txt_SatffDetails_JoiningDate" required type="date"> -->
+
+                          <div class="form-group">
+                              <input name="date" class="form-control" placeholder="{{staffDetails_Joining}}"
+                                  bsDatepicker #dp="bsDatepicker" [(ngModel)]="Date" (ngModelChange)="DateChange()"
+                                  [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" [minDate]="minDate" required>
+                          </div>
+
+                      </div>
+                  </div>
+                  <br>
+                  <!-- <div class="row ">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6> {{staffDetails_MonthlySalary}} <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-9 ">
+                          <input type="text" id="txt_SatffDetails_MonthlySalary" [(ngModel)]="monsal" name="monsal" class="form-control" required placeholder="{{staffDetails_MonthlySalary}} ">
+                      </div>
+                  </div>
+                  <br> -->
+                  <div class="row ">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">{{staffDetails_Leaves}} <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" required [(ngModel)]="leaves" name="leaves"
+                              id="txt_SatffDetails_leavesperday" type="text" placeholder=" {{staffDetails_Leaves}} ">
+                      </div>
+                  </div>
+                  <br>
+                  <div class="row ">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">{{staffDetails_WorkTimings}} <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" [(ngModel)]="worktime" name="worktime"
+                              id="txt_SatffDetails_workingTimings" type="text"
+                              placeholder=" {{staffDetails_WorkTimings}}">
+                      </div>
+                  </div>
+                  <br>
+
+                  <div class="row ">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">DOB<span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" [(ngModel)]="DOB" name="DOB" id="txt_DOB" type="date"
+                              placeholder="DOB">
+                      </div>
+                  </div>
+                  <br>
+
+                  <div class="row ">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">TIN No<span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" [(ngModel)]="TINNo" name="TIN" id="txt_TIN" type="number"
+                              placeholder="TIN No">
+                      </div>
+                  </div>
+                  <br>
+
+                  <div class="row ">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Employee Status<span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <select name="Employee" [(ngModel)]="EmployeeStatus" class="dropdown form-control "
+                              id="ddl_rentRentMonth" placeholder="Select Month">
+                              <option value="" class="" selected="selected">Select Employee Status</option>
+                              <option value="Contract Based">Contract Based</option>
+                              <option value="Full Time Employemnt">Full Time Employemnt</option>
+
+                          </select>
+                      </div>
+                  </div>
+                  <br>
+
+                  <div class="row ">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Location<span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" [(ngModel)]="Location" name="Location" id="txt_Location"
+                              type="text" placeholder="Location">
+                      </div>
+                  </div>
+                  <br>
+
+                  <!-- <div class="row ">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Staff ID <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" [(ngModel)]="staffdetailsID" name="staffdetailsID" required
+                              type="text" id="txt_SatffDetails_emergencyContactNumber"  placeholder="Staff ID">
+                      </div>
+                  </div>
+                  <br> -->
+
+
+                  <div class="row ">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">{{staffDetails_EmergencyPhn}} <span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" [(ngModel)]="emeraphno" name="emeraphno"
+                              onkeypress='return (event.charCode > 47 && event.charCode < 58)' maxlength="10"
+                              type="text" id="txt_SatffDetails_emergencyContactNumber"
+                              placeholder="{{staffDetails_EmergencyPhn}}">
+                          <span class="Validationlabels" *ngIf='Isempty &&(10>emeraphno.length) '>* Please
+                              Fill
+                              {{staffDetails_EmergencyPhn}}</span>
+
+                      </div>
+                  </div>
+                  <br>
+                  <div class="row ">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Basic Salary</h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" [(ngModel)]="BaseSal"
+                              (ngModelChange)="BasicSalaryCalculation(BaseSal)" name="BaseSal"
+                              onkeypress='return (event.charCode > 47 && event.charCode < 58)' maxlength="10"
+                              type="text" id="txt_SatffDetails_emergencyContactNumber" placeholder="Base Salary">
+                      </div>
+                  </div>
+                  <br>
+
+
+                  <div class="row ">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">SSS Rate</h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" [(ngModel)]="SSSRate" name="SSSRate" value="SSSRate"
+                              onkeypress='return (event.charCode > 47 && event.charCode < 58)' maxlength="10"
+                              type="text" id="txt_SatffDetails_emergencyContactNumber" placeholder="SSS Rate">
+                      </div>
+                  </div>
+                  <br>
+
+                  <div class="row ">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Pagibig Rate</h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" [(ngModel)]="PagibigRate" name="Pagibig" id="Pagibig"
+                              onkeypress='return (event.charCode > 47 && event.charCode < 58)' maxlength="10"
+                              type="text" id="txt_SatffDetails_emergencyContactNumber" placeholder="Pagibig Rate">
+                      </div>
+                  </div>
+
+                  <br>
+
+                  <div class="row ">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Philhealth</h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" [(ngModel)]="philihealth" name="Philhealth" id="Philhealth"
+                              onkeypress='return (event.charCode > 47 && event.charCode < 58)' maxlength="10"
+                              type="text" id="txt_SatffDetails_emergencyContactNumber" placeholder="Philhealth">
+                      </div>
+                  </div>
+
+                  <br>
+
+                  <div class="row ">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Allowance</h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" value="{{Allowance}}"
+                              (ngModelChange)="Grosscalculation(Allowance)" [(ngModel)]="Allowance" name="Allowance"
+                              required type="number" id="txt_Allowance" placeholder="Allowance">
+                      </div>
+                  </div>
+                  <br>
+
+
+                  <div class="row ">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">Gross Salary </h6>
+                      </div>
+                      <div class="col-lg-7">
+                          <input class="form-control" value="{{Grossss}}" [(ngModel)]="GrossCalculations"
+                              name="Salary" id="Gross"
+                              onkeypress='return (event.charCode > 47 && event.charCode < 58)' maxlength="10"
+                              type="text" id="txt_SatffDetails_emergencyContactNumber" placeholder="Gross Salary">
+                      </div>
+                  </div>
+
+
+                  <br>
+
+                  <div class="row ">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">ID Attachment<span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+
+                          <!-- <ngx-dropzone class="dropzone_vendorinvoice" id="dropzone_SatffDetails_IDAttachment"></ngx-dropzone> -->
+
+                          <input type="file" class="form-control" placeholder="PhotoURL"
+                              (change)="handleFileSelect($event)">
+                          <img src="{{photo}}" style="width: 150px;">
+
+                          <span class="Validationlabels"
+                              *ngIf='FileType==undefined && Isempty && paramID==undefined'>* Please
+                              Fill
+                              ID Attachment</span>
+                      </div>
+
+                  </div>
+                  <br>
+
+                  <div class="row ">
+
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2">
+                          <h6 style="font-size: 14px;">{{staffphoto}}<span>*</span> </h6>
+                      </div>
+                      <div class="col-lg-7">
+
+                          <!-- <ngx-dropzone class="dropzone_vendorinvoice" id="dropzone_SatffDetails_IDAttachment"></ngx-dropzone> -->
+
+                          <input type="file" class="form-control" placeholder="StaffID"
+                              (change)="handleFileSelect1($event)">
+                          <img src="{{staffdetailsphotos}}" style="width: 150px;">
+
+                          <span class="Validationlabels"
+                              *ngIf='FileType1==undefined && Isempty && paramID==undefined'>* Please
+                              Fill
+                              {{staffphoto}}</span>
+
+                      </div>
+
+                  </div>
+                  <br>
+
+                  <div class="row" style="margin-bottom: 50%" *ngIf="paramID==undefined">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2"></div>
+                      <div class="col-lg-2"><button type="submit" (click)="InsertBuildingStaff();"
+                              class="btn btn-block savebutton">{{staffDetails_Save}}</button></div>
+                  </div>
+
+                  <div class="row" style="margin-bottom: 50%" *ngIf="paramID!=undefined">
+                      <div class=col-lg-1> </div>
+                      <div class="col-lg-2"></div>
+                      <div class="col-lg-2"><button type="submit" (click)="UpdateBuildingStaff();"
+                              class="btn btn-block savebutton">{{update}}</button>
+                      </div>
+                  </div>
+
+
+                  <br>
+              </form>
+
+          </div>
+          <div class="col-lg-4"></div>
+      </div>
+  </div>
+
+</div>

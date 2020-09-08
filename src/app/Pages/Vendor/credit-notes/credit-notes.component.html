@@ -1,0 +1,73 @@
+<div class="container-fluid Pages_background ">
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="header">{{pageMenuTitle}}</h4>
+            </div>
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-3">
+                <div class="row mainrow">
+                    <div class="col-lg-12">
+                        <!-- <span class="building"> {{vendor_BreadChrumb}} </span>  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-3">
+                <div class="row mainrow" style="margin-right: 2px;">
+                    <div class="col-lg-12">
+                        <button type="button" routerLink="/NewCreditNotes" routerLinkActive="active-link" id="btn_button"
+                            class="dashbutton">{{vendor_NewButton}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="    margin-right: -2px;"> 
+            <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+                {{vendor_Excel}}
+            </button>
+        </div>
+    
+        <div class="shadow p-3 mb-5 bg-white rounded  maincard " style="margin-right: 15px;">
+            <div>
+                <h6 class="paneltitle">{{vendor_PageTitle}}
+                </h6>
+                <hr>
+                <input type="text" placeholder="{{vendor_Search}}" [(ngModel)]="Search" class="form-control topdropdown"
+                    id="ddl_creditdashboardSearch">
+                <div class="row">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr class="tableheader">
+                                <!-- <td>Property</td> -->
+                                <td>{{vendor_Date}}</td>
+                                <td>Supplier Name</td>
+                           
+                                <td>{{vendor_InvoiceNumber}}</td>
+                                <td>PO NO</td>
+                                <td>{{vendor_Remarks}} </td>
+                                <td>Credit Notes Amount</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let Credits of CreditLists|filter:Search">
+                                <!-- <td>{{Credits.building}} </td> -->
+                                <td>{{Credits.date|date}}</td>
+                                <td>{{Credits.name}} </td>
+                           
+                                <td>{{Credits.invoiceNo}} </td>
+                                <td>{{Credits.id}} </td>
+                                <td>{{Credits.remarks}} </td>
+                                <td>{{Credits.amount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

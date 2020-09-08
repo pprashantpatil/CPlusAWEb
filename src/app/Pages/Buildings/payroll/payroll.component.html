@@ -1,0 +1,176 @@
+<div class="container-fluid Pages_background">
+  <div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h4 class="Pages_header">Payroll</h4>
+      </div>
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-3">
+        <div class="mainrow">
+          <div class="col-lg-12 BreadChrumbProperties">
+            <span class="CommercialWorkspace"> Staff / Payroll</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row breadCrumbHeadderProperties">
+      <div class="col-lg-12 dashbutton">
+        <button routerLink="/NewPayrolls" type="button" id="btn_button">New Payroll</button>
+      </div>
+    </div>
+    <!-- <div class="row breadCrumbHeadderProperties">
+              <div class="col-lg-12 dashbutton">
+                  <button (click)=export() type="button" id="btn_button">export</button>
+              </div>
+          </div> -->
+  </div>
+  <div class="container-fluid shadow p-3 mb-5 bg-white rounded maincard">
+    <div class="row  p-2">
+      <div class="col-lg-12 pannel">
+        <h6 class="paneltitle">Payroll</h6>
+      </div>
+    </div>
+    <div class="row p-4">
+      <div class="col-lg-3">
+        <input type="text" placeholder="search.." class="form-control" id="txt_searchBuilding">
+      </div>
+    </div>
+    <div class="table-responsive" style=" font-size: 10px;">
+      <table class="table table-bordered table-hover table-condensed">
+        <tbody>
+          <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+            <td>Staff Name</td>
+            <td>Designation</td>
+            <td>Department</td>
+            <td>Mobile Number</td>
+            <td>Email</td>
+            <td>Total Leaves</td>
+            <td>Leaves /Month</td>
+            <td>LOP Days</td>
+            <td>LOP Amount</td>
+            <td>Gross Salary </td>
+            <td>SSS Rate</td>
+            <td>Pagibig Rate</td>
+            <td>Philihealth</td>
+            <!-- <td>Deduction Insurance</td> -->
+            <td>Net Pay </td>
+            <td>Actions</td>
+          </tr>
+        </tbody>
+        <tr *ngFor="let Staff of StaffDetails">
+          <td>{{Staff.name}}</td>
+          <td>{{Staff.designation}}</td>
+          <td>{{Staff.department}}</td>
+          <td>{{Staff.mobileNo}}</td>
+          <td>{{Staff.emailID}}</td>
+          <td>{{Staff.totalLeavesEntitled}}</td>
+          <td>{{Staff.leavesthisMonth}}</td>
+          <td>{{Staff.lopDays}}</td>
+          <td>{{Staff.lopAmount}}</td>
+          <td>{{Staff.grossSalaryMonthly}}</td>
+          <td>{{Staff.deductionPF}}</td>
+          <td>{{Staff.deductionPT}}</td>
+          <td>{{Staff.deductionTax}}</td>
+          <!-- <td>{{Staff.deductionInsurance}}</td> -->
+          <td>{{Staff.netPayMonthly}}</td>
+          <td> <a (click)="EditPayrolls(Staff)" style="background-color: white; color: #00b5d7;"> <i class="fa fa-edit"
+                data-toggle="tooltip" title="edit"></i></a>
+
+            <a (click)="DeletePayrolls(Staff)" style="background-color: white; color: #00b5d7;"><i
+                class="far fa-trash-alt" data-toggle="tooltip" title="Delete"></i></a>
+
+            <a style="background-color: white ;margin-right: 70px;
+          font-size: 13px;  color: #00b5d7;" (click)="ViewPayrollsDetails(Staff)"><i class="fa fa-eye"
+                data-toggle="tooltip" title="View" data-toggle="modal" data-target="#ViewVendor"></i></a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="ViewVendor" class="modal fade" role="dialog" style=" margin-top: 10%;"
+      style="scroll-behavior: auto;margin-top: 112px;">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content " style=" width: 762px;
+        padding: 15px;
+        margin-top: -30px;
+        margin-left: -132px;
+        height: 500px;">
+          <div class="modal-header">
+            <h4 style="
+                font-size: 30px;">Payrolls Details</h4>
+            <button type="button" class="close " data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <table class="table table-bordered table-hover">
+                  <tbody>
+                    <tr>
+                      <td>STAFF NAME</td>
+                      <td>{{StaffName}}</td>
+                    </tr>
+                    <tr>
+                      <td>DESIGNATION</td>
+                      <td>{{Designation}}</td>
+                    </tr>
+                    <tr>
+                      <td>DEPARTMENT</td>
+                      <td>{{Department}}</td>
+                    </tr>
+                    <tr>
+                      <td>LOP DAYS </td>
+                      <td>{{LOPDays}}</td>
+                    </tr>
+                    <tr>
+                      <td>LOP AMOUNT</td>
+                      <td>{{LOPAmount}}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        GROSS SALARY </td>
+                      <td>{{GrossSalary}}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        BASIC SALARY </td>
+                      <td>{{BaseSalary}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-lg-6">
+                <h4>Deductions</h4>
+                <table class="table table-bordered table-hover">
+                  <tbody>
+                    <tr>
+                      <td>DEDUCTION PF</td>
+                      <td>{{DeductionPF}}</td>
+                    </tr>
+                    <tr>
+                      <td>DEDUCTION PT </td>
+                      <td>{{DeductionPT}}</td>
+                    </tr>
+                    <tr>
+                      <td>DEDUCTION TAX </td>
+                      <td>{{Deductiontax}}</td>
+                    </tr>
+                    <tr>
+                      <td>DEDUCTION INSURANCE </td>
+                      <td>{{DeductionInsurance}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h4 style="margin-left: 208px;">Net Pay: {{netPayMonthly}}</h4>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default popupbutton" data-dismiss="modal">Close</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

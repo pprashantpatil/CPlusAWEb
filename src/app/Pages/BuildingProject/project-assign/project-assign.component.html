@@ -1,0 +1,289 @@
+<div class="container-fluid Pages_background">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4 class="Pages_header">Contractor Assignments</h4>
+    </div>
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <!-- <div class="col-lg-12 BreadChrumbProperties">
+          <span class="building"> Project / Contractor Assignments</span>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <div class="row mainrow">
+        <div class="col-lg-12 dashbutton">
+          <button type="button" routerLink="/NewProject" *ngIf="LoginTypeID==2 || LoginTypeID==3 "
+            style="margin-left: 96px;" routerLinkActive="active-link" id="btn_button">
+            Add New
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- <button type="button" class="btn  btn-md excelbutton" (click)="exporttoexcel()">
+        Export To Excel
+      </button> -->
+  </div>
+
+
+  <div class="container-fluid shadow p-3 mb-5 bg-white  maincard" style="margin-left: -5px;">
+    <h4 class="paneltitle ">Contractor Assignments</h4>
+    <hr>
+    <div class="row">
+      <div class="col-lg-4">
+        <ng-daterangepicker [(ngModel)]="value" [options]="pickeroptions" (ngModelChange)="selectedDate($event)">
+        </ng-daterangepicker>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <input type="text" placeholder="Search" [(ngModel)]="Search" class="form-control topdropdown"
+          id="ddl_creditdashboardSearch" style="width: 248px;">
+      </div>
+      <div class="col-lg-3" *ngIf="LoginTypeID==3||LoginTypeID==9">
+        <select class="form-control" id="ContractorID" name="Contractorid" [(ngModel)]="Contractorid"
+          (change)="GetContractorID($event)">
+          <option value="0" selected="selected"> Select Contractor</option>
+          <option value="{{build.id}}" *ngFor="let build of Contractorlist">{{build.company}}</option>
+        </select>
+      </div>
+      <br>
+      <div class="col-lg-3" *ngIf="LoginTypeID==3">
+        <select class="form-control" id="StatusID" [(ngModel)]="StatusID" name="StatusID"
+          (change)="GetStatusID($event)">
+          <option value="none" selected="selected"> Select Status</option>
+          <option value="0"> Assigned</option>
+          <option value="1"> In Progress</option>
+          <option value="2"> Completed</option>
+          <option value="3"> Not Completed</option>
+        </select>
+      </div>
+    </div>
+
+
+
+    <div class="row p-2">
+      <div class="row table-responsive tableresposive tableresponsive" style="padding: 9px;
+        margin-left: 1px;">
+        <table class="table table-bordered table-hover table-condensed mainbuild" style="text-align: center;">
+          <tbody>
+            <tr class="tableheader tableheaderfont" style="background-color: #00b5d7; color: White;">
+              <td>Property</td>
+              <td>Floor</td>
+              <td>Units</td>
+              <!-- <td>Stage</td> -->
+              <td *ngIf="LoginTypeID==3||LoginTypeID==9">Contractor</td>
+              <td>Start Date</td>
+              <td>End Date </td>
+              <td>Comments </td>
+              <td>Status</td>
+              <!-- <td *ngIf="LoginTypeID==4">Action </td> -->
+            </tr>
+            <tr *ngFor="let Project of ProjectAssignedLists | filter:Search">
+              <td>{{Project.buildingName}}</td>
+              <td>{{Project.floor}}</td>
+              <td>{{Project.units}}</td>
+              <!-- <td>{{Project.milestone}}</td> -->
+              <td *ngIf="LoginTypeID==3||LoginTypeID==9">{{Project.vendorName}}</td>
+              <td>{{Project.startDate|date}}</td>
+              <td>{{Project.endDate|date}}</td>
+              <td>{{Project.comments}}</td>
+              <td>Assigned</td>
+              <!-- <td *ngIf="LoginTypeID==4">
+                <button class="btn btn-primary editable-table-button btn-xs" data-toggle="modal"
+                  data-target="#my1ModalAttachments" style="background-color: #00b5d7;"
+                  (click)="GetDetails(Project)">Upload
+                  Daily Work</button>&nbsp;
+                <button class="btn btn-primary editable-table-button btn-xs" data-toggle="modal"
+                  data-target="#my1ModalAttachments1" style="background-color: #00b5d7;"
+                  (click)="GetStageDetails(Project)">Complete
+                  Stage</button>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="my1ModalAttachments" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="margin-top: 100px;">
+        <div class="modal-header">
+          <h4>Add Work</h4>
+          <!-- <div data-toggle="tooltip" title="Add Attachment" data-dismiss="modal">
+                        <i class=" i" style="margin-left: 235px;
+                                  margin-top: 10px;
+                                  font-size: 16px; " data-toggle="modal" data-target="#AddAttachment">Add
+                            Attachment</i>
+                    </div> -->
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body col-lg-12">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-2">
+                  <p style="padding:3px">Date
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="date" class="form-control" placeholder="Date" name="WorkDate" [(ngModel)]="WorkDate">
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-2">
+                  <p style="padding:3px">Attachments
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="file" class="form-control" placeholder="Attachments" (change)="handleFileSelect1($event)"
+                    accept="image/*" multiple>
+                </div>
+                <p style="margin-top: -16px;
+                  margin-left: 136px;"><b>Hold control button to select
+                    multiple photos</b> </p>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-2">
+                  <p style="padding:3px">Comments
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <textarea rows="4" cols="100" required name="Comments" class="form-control" placeholder="Comments"
+                    [(ngModel)]="Comments"> </textarea>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-5">
+                </div>
+                <div class="col-lg-2">
+                  <button class="btn btn-block btn-md" data-dismiss="modal"
+                    style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);"
+                    (click)="Save()">Save</button>
+                </div>
+                <div class="col-lg-5">
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="my1ModalAttachments1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="margin-top: 100px; width: 705px;">
+        <div class="modal-header">
+          <h4>Add Work</h4>
+          <!-- <div data-toggle="tooltip" title="Add Attachment" data-dismiss="modal">
+                        <i class=" i" style="margin-left: 235px;
+                                  margin-top: 10px;
+                                  font-size: 16px; " data-toggle="modal" data-target="#AddAttachment">Add
+                            Attachment</i>
+                    </div> -->
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body col-lg-12">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-2">
+                  <p style="padding:3px">Date
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="date" class="form-control" placeholder="Date" name="WorkDate" [(ngModel)]="WorkDate">
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-2">
+                  <p style="padding:3px">Stage
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <select class="form-control" id="ddl_buildingplans" [(ngModel)]="StageID"
+                    (change)="GetStageID($event)">
+                    <option value="none" selected="selected"> Select Stage</option>
+                    <option value="{{build.id}}" *ngFor="let build of StageList">{{build.stageName}}</option>
+                  </select>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-2">
+                  <p style="padding:3px">Attachments
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <input type="file" class="form-control" placeholder="Attachments" (change)="handleFileSelect1($event)"
+                    accept="image/*" multiple>
+                </div>
+                <p style="margin-top: -16px;
+                  margin-left: 187px;"><b>Hold control button to select
+                    multiple photos</b> </p>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-2">
+                  <p style="padding:3px">Comments
+                    <span class="starspan">*</span>
+                  </p>
+                </div>
+                <div class="col-lg-7">
+                  <textarea rows="4" cols="100" required name="Comments" class="form-control" placeholder="Comments"
+                    [(ngModel)]="Comments"> </textarea>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-5">
+                </div>
+                <div class="col-lg-2">
+                  <button class="btn btn-block btn-md" data-dismiss="modal"
+                    style="background-color:#00b5d7;color:white;border-color: rgba(20, 21, 31, 0.20);"
+                    (click)="SaveStageDetails()">Save</button>
+                </div>
+                <div class="col-lg-5">
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

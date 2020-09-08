@@ -1,0 +1,157 @@
+<div class="container-fluid Pages_background">
+
+  <div class="row">
+    <div class="col-lg-9">
+      <h4 class="Pages_header">New PO</h4>
+    </div>
+
+    <div class="col-lg-3">
+      <div class="mainrow">
+        <div class="col-lg-12">
+          <!-- <span class="CommercialWorkspace"> PO / New PO</span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card maincard cardd" >
+
+    <div class="row">
+      <div class="col-lg-8 reqriedspan">
+        <br>
+        <form #loginForm="ngForm">
+          <div class="row">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Project
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <select class="form-control" id="Project" [(ngModel)]="ProjectID" name="ProjectID" required>
+                <option value="none"> Select Project</option>
+                <option value="{{Building.id}}" *ngFor="let Building of projectlist">{{Building.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Stages
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <!-- <select class="form-control" id="Stages" [(ngModel)]="StagesID" name="Stages" required>
+                <option value="none"> Select Stages</option>
+                <option *ngFor="let stage of stagesLists" value="{{stage.id}}">{{stage.milestone}}</option>
+              </select> -->
+
+              <ng-multiselect-dropdown [placeholder]="'Modules'" [data]="stagesLists" name='sel' [(ngModel)]="selecteditemsModule" [settings]="dropdownSettings"
+                (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelect)="onItemDeSelect($event)">
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Contractor
+                <span>*</span>
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <select class="form-control" id="Contractor" [(ngModel)]="Contractor" name="Contractor" required>
+                <option value="none"> Select Contractor</option>
+                <option *ngFor="let stage of SubContractorList" value="{{stage.id}}">{{stage.company}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>PO Amount
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <input type="number" class="form-control" [(ngModel)]="POAmount" name="POAmount" required id="POAmount" placeholder="PO Amount">
+            </div>
+          </div>
+
+
+          <div class="row ">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Date
+              </h6>
+            </div>
+            <div class="col-lg-5 form-group">
+              <input type="Date" class="form-control" [(ngModel)]="Date" name="Date" required id="Date" placeholder="Date">
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Descriptions
+              </h6>
+            </div>
+            <div class="col-lg-7 form-group">
+              <!-- <textarea type="Date" rows="5" class="form-control" [(ngModel)]="Description" name="Descriptions" required id="Descriptions"
+                placeholder="Descriptions">
+                  </textarea> -->
+
+
+              <angular-editor [placeholder]="'Enter text here...'" id="Description" name="Description" [(ngModel)]="Description"></angular-editor>
+            </div>
+          </div>
+
+
+          <div class="row ">
+            <div class=col-lg-2> </div>
+            <div class="col-lg-3">
+              <h6>Terms And Conditions
+              </h6>
+            </div>
+            <div class="col-lg-7 form-group">
+              <!-- <textarea type="Date" rows="5" class="form-control" [(ngModel)]="TermsAndConditions" name="TermsAndConditions" required id="TermsAndConditions"
+                placeholder="Terms And Conditions">
+                    </textarea> -->
+
+              <angular-editor [placeholder]="'Enter text here...'" id="TermsAndConditions" name="TermsAndConditions" [(ngModel)]="TermsAndConditions"></angular-editor>
+
+            </div>
+          </div>
+
+          <div *ngIf="paramID==null" class="row">
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-2 mobsavebtn">
+              <button class="savebutton" (click)="Save()" type="submit">Save</button>
+            </div>
+          </div>
+          <div *ngIf="paramID!=null" class="row">
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-2 mobsavebtn">
+              <button class="savebutton" (click)="Update()" type="submit">Update</button>
+            </div>
+          </div>
+
+
+          <br>
+          <br>
+          <br>
+          <br>
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>

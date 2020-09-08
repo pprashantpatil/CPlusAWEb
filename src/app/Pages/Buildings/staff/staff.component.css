@@ -1,0 +1,100 @@
+	/* You can add global styles to this file, and also import other style files */
+
+    .tableheader {
+        border: black;
+        background-color: #00b5d7;
+        ;
+        text-align: center;
+    }
+    
+    .mainrow {
+        float: right;
+        margin-top: 26px;
+    }
+    
+    i {
+        color: #00b5d7;
+    }
+    
+    .tableheaderfont {
+        color: white;
+    }
+    
+    .build {
+        padding-top: 13px;
+        padding-bottom: 27px;
+    }
+    
+    .buildingimage {
+        width: 40%;
+        height: auto;
+    }
+    
+    
+    /* .mainbuild{
+        width: 100%;
+        margin-left: 16px;
+    } */
+    
+    .maincard {
+        float: initial;
+        background: white;
+    }
+
+
+    /* Start of Mobile CSS */
+
+.Mobilecss{
+    margin-left: 0px;
+}
+
+
+@media screen and (min-width: 320px) {
+    .Mobilecss{
+        margin-left: 14px;
+    }
+    
+  }
+
+  @media screen and (min-width: 1900px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1600px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1400px) {
+    .Mobilecss{
+        margin-left: -8px;
+    }
+    .maincard{
+        margin-left: 0px;
+    }
+    .label1{
+        margin-left: 192px; 
+    }
+    
+  }
+  @media screen and (max-width: 1280px){
+    .Pages_header{
+        margin-top: 50px;
+    }
+    .maincard{
+        margin-left: -19px;
+    }
+    .label1{
+        margin-left: 133px; 
+    }
+  }
+
+ 
+
+
+  /*End of Mobile CSS*/

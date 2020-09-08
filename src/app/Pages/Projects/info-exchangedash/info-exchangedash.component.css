@@ -1,0 +1,51 @@
+/* Start of Mobile CSS */
+.Mobilecss{
+    margin-left: 0px;
+}
+.mobmain{
+    margin-left: -11px;
+margin-top: 20px;
+}
+.emailbtn{
+    margin-left: 1px;
+    margin-bottom: 25px;
+}
+.mobsavebtn{
+    margin-left: 140px;
+}
+
+
+
+
+  @media screen and (min-width: 1900px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1600px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1400px) {
+    .Mobilecss{
+        margin-left: -14px;
+    }
+    .mobsavebtn{
+        margin-left: 140px;
+    }
+    
+  }
+  @media screen and (max-width: 1280px){
+    
+    .Mobilecss{
+        margin-left: -16px;
+    }
+}
+
+
+  /*End of Mobile CSS*/

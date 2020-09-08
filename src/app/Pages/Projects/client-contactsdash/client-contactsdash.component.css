@@ -1,0 +1,60 @@
+/* Start of Mobile CSS */
+
+.Mobilecss{
+    margin-left: 1px !important;
+}
+
+
+@media screen and (min-width: 320px) {
+    .Mobilecss{
+        margin-left: 15px;
+    }
+    
+  }
+
+  @media screen and (min-width: 1900px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    
+  }
+
+  @media screen and (min-width: 1600px) {
+    .Mobilecss{
+        margin-left: 0;
+    }
+    .Pages_header{
+      margin-left: -14px;
+    }
+    .btn-xs{
+      margin-left: -14px;
+    }
+    .maincard{
+      margin-left: -14px;
+    }
+    
+  }
+
+  @media screen and (max-width: 1024px) {
+    .Pages_header{
+      margin-left: 0px;
+    }
+    .btn-xs{
+      margin-left: 0px;
+    }
+    .bttn{
+      display: inline-flex;
+    }
+    .maincard{
+      margin-left: 0px;
+    }
+
+    .Mobilecss{
+      margin-left: 17px;
+      margin-top: 17px;
+    }
+    
+  }
+
+
+  /*End of Mobile CSS*/
